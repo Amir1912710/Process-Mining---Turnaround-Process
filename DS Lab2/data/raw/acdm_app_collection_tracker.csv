@@ -1,0 +1,7 @@
+batch_id,segment_target,airline_target,airport_target,status_target,flights_target,flights_collected,notes
+B1,low_cost,Ryanair,EDDB,pre_departure,5,0,
+B1,full_service,Lufthansa,EDDB,pre_departure,5,0,
+B2,low_cost,easyJet,EDDB,startup_or_boarding,5,0,
+B2,full_service,British Airways,EDDB,startup_or_boarding,5,0,
+B3,low_cost,Wizz Air,EDDB,mixed,5,0,
+B3,full_service,Air France or KLM,EDDB,mixed,5,0,

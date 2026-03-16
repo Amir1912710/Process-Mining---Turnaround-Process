@@ -1,0 +1,9 @@
+airline_segment,route,flights
+full_service,EDDF -> KDFW,2
+full_service,EDDB -> EDDM,1
+full_service,EDDB -> EKCH,1
+full_service,EDDF -> CYUL,1
+full_service,EDDF -> EDDH,1
+low_cost,EDDB -> OLBA,1
+low_cost,EDDF -> LTAC,1
+low_cost,EDDL -> OMDW,1

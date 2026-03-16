@@ -1,0 +1,3 @@
+airline_segment,cases,unique_airlines,mean_turnaround_minutes,median_turnaround_minutes,p90_turnaround_minutes,unique_airports
+full_service,9253,96,95.6,88.12,147.81,599
+low_cost,3991,21,81.8,73.55,118.92,295

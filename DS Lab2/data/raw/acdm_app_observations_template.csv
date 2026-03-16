@@ -1,0 +1,2 @@
+snapshot_taken_local,observation_date_local,app_airport_icao,callsign,flight_number,origin_airport_icao,origin_airport_iata,destination_airport_icao,destination_airport_iata,aircraft_type,aircraft_registration,status,display_time_local,eobt_local,tobt_local,tsat_local,ctot_local,gate,position,runway,taxitime_minutes,sid,source_note
+,,,,,,,,,,,,,,,,,,,,,,

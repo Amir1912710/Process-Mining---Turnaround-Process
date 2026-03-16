@@ -1,0 +1,9 @@
+metric,value
+turnaround_case_count,28417.0
+event_log_case_count,27944.0
+event_row_count,111776.0
+median_events_per_case,4.0
+cases_with_unexpected_event_count,0.0
+cases_with_timestamp_order_failures,0.0
+missing_airline_rate,0.1697927297040504
+missing_aircraft_type_rate,0.20871309427455395

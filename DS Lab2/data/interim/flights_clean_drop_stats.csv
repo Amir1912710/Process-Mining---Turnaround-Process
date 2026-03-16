@@ -1,0 +1,9 @@
+reason,rows
+missing_icao24,0
+missing_departure_time,0
+missing_arrival_time,0
+missing_origin_airport,28150
+missing_destination_airport,14432
+invalid_airport_codes,38033
+non_positive_flight_duration,0
+duplicate_rows,0

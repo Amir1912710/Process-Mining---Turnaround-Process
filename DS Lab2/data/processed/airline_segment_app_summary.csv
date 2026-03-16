@@ -1,0 +1,3 @@
+airline_segment,flights,mean_taxitime_minutes,mean_tsat_minus_tobt_minutes,mean_ctot_minus_tsat_minutes,mean_eobt_minus_tobt_minutes
+full_service,27,14.52,1.33,14.17,-7.92
+low_cost,3,14.0,0.0,,0.0

@@ -1,0 +1,171 @@
+low_cost:
+  names:
+    - Ryanair
+    - easyJet
+    - Wizz Air
+    - Southwest Airlines
+    - SunExpress
+    - Vueling Airlines
+    - Jet2.com
+    - Spirit Airlines
+    - Frontier Airlines
+    - Pegasus Airlines
+    - Norwegian Air Shuttle
+    - Transavia Airlines
+    - Eurowings
+    - Volotea
+    - Flydubai
+    - Jetstar Airways
+  iata:
+    - FR
+    - U2
+    - W6
+    - WN
+    - XQ
+    - VY
+    - LS
+    - NK
+    - F9
+    - PC
+    - DY
+    - HV
+    - EW
+    - V7
+    - FZ
+    - JQ
+  icao:
+    - RYR
+    - EZY
+    - WZZ
+    - SWA
+    - SXS
+    - VLG
+    - EXS
+    - NKS
+    - FFT
+    - PGT
+    - NAX
+    - TRA
+    - EWG
+    - VOE
+    - FDB
+    - JST
+
+full_service:
+  names:
+    - Lufthansa
+    - Swiss International Air Lines
+    - Austrian Airlines
+    - Brussels Airlines
+    - ITA Airways
+    - Air France
+    - airBaltic
+    - Air Serbia
+    - Discover Airlines
+    - Sichuan Airlines
+    - KLM Royal Dutch Airlines
+    - British Airways
+    - Iberia
+    - SAS
+    - Finnair
+    - Turkish Airlines
+    - Qatar Airways
+    - Emirates
+    - Etihad Airways
+    - Singapore Airlines
+    - Cathay Pacific
+    - ANA
+    - Japan Airlines
+    - Delta Air Lines
+    - United Airlines
+    - American Airlines
+    - Alaska Airlines
+    - Air Canada
+    - TAP Portugal
+    - LOT Polish Airlines
+    - Croatia Airlines
+    - Aegean Airlines
+    - Royal Air Maroc
+    - El Al
+    - Condor
+    - Cape Air
+    - SkyWest
+    - Republic Airlines
+  iata:
+    - LH
+    - LX
+    - OS
+    - SN
+    - AZ
+    - AF
+    - BT
+    - JU
+    - 4Y
+    - 3U
+    - KL
+    - BA
+    - IB
+    - SK
+    - AY
+    - TK
+    - QR
+    - EK
+    - EY
+    - SQ
+    - CX
+    - NH
+    - JL
+    - DL
+    - UA
+    - AA
+    - AS
+    - AC
+    - TP
+    - LO
+    - OU
+    - A3
+    - AT
+    - LY
+    - DE
+    - 9K
+    - OO
+    - YX
+  icao:
+    - DLH
+    - SWR
+    - AUA
+    - BEL
+    - ITY
+    - AFR
+    - BTI
+    - ASL
+    - OCN
+    - CSC
+    - KLM
+    - BAW
+    - IBE
+    - SAS
+    - FIN
+    - THY
+    - QTR
+    - UAE
+    - ETD
+    - SIA
+    - CPA
+    - ANA
+    - JAL
+    - DAL
+    - UAL
+    - AAL
+    - ASA
+    - ACA
+    - TAP
+    - LOT
+    - CTN
+    - AEE
+    - RAM
+    - ELY
+    - CFG
+    - KAP
+    - SKW
+    - RPA

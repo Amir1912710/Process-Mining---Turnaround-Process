@@ -1,0 +1,44 @@
+paths:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+
+sources:
+  flights:
+    local_path: data/raw/sample_opensky_flights.csv
+    url: null
+    raw_filename: opensky_flights_raw.csv
+
+  aircraft_metadata:
+    local_path: null
+    url: https://opensky-network.org/datasets/metadata/aircraftDatabase.csv
+    raw_filename: opensky_aircraft_metadata.csv
+
+  ourairports:
+    local_path: null
+    url: https://ourairports.com/data/airports.csv
+    raw_filename: ourairports_airports.csv
+
+  openflights_airlines:
+    local_path: null
+    url: https://raw.githubusercontent.com/jpatokal/openflights/master/data/airlines.dat
+    raw_filename: openflights_airlines.dat
+
+  openflights_airports:
+    local_path: null
+    url: https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
+    raw_filename: openflights_airports.dat
+
+processing:
+  turnaround:
+    min_minutes: 15
+    max_minutes: 240
+
+  acdm:
+    taxi_in_minutes: 7
+    taxi_out_minutes: 12
+    include_ground_handling_markers: false
+    drop_invalid_milestones: true
+
+logging:
+  level: INFO
