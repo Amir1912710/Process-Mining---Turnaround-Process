@@ -26,6 +26,7 @@ Appendix B of the thesis refers to this folder.
 | `output/ocel_v3/` | Calibrated OCEL 2.0 logs, models, case tables and manifests | Sec. 6.5 |
 | `output/process_mining_v3/` | PM4Py discovery, flattening and conformance results | Sec. 6.5.4–6.5.5 |
 | `output/Promenade_Analysis/`, `promenade/` | Promenade exports and screenshots | Sec. 6.5.6 |
+| `output/*_v4/`, `output/v4_logs/` | **Baggage sensitivity run (v4).** Same design as v3, but narrow-body baggage unloading/loading use carrier-specific literature times (`baggage='carrier'`, function `bag_sec`) instead of the baseline `hold_sec`: calibration (`calibration_v4`), held-out validation (`validation_nov15_16_v4`), 41-day timing study (`study_v4`), what-if study (`whatif_v4`), OCEL logs (`ocel_v4`) and process mining (`process_mining_v4`). The thesis results are v3; v4 is reported as a sensitivity analysis | Sec. 4.3.6, 6.5.2 |
 | `tools/` | All collection, linkage, simulation and analysis scripts | Ch. 5, App. B |
 | `thesis_latex/` | LaTeX sources and figures of the thesis | – |
 
@@ -45,6 +46,7 @@ Appendix B of the thesis refers to this folder.
 | `run_v3_study.py`, `calibrate_v3.py`, `run_whatif_v3.py` | Timing study, calibration, what-if study |
 | `build_validation_days.py`, `validate_new_days.py`, `validate_nov8_refs.py` | Held-out validation |
 | `process_mining_v3.py` | Process mining with PM4Py |
+| `run_all_v4.py` | Runs the complete baggage sensitivity study (v4) in order: `calibrate_v4.py`, `validate_new_days_v4.py`, timing study, `run_whatif_v4.py`, analyses, `export_ocel_v4.py`, process mining |
 
 ## Requirements
 

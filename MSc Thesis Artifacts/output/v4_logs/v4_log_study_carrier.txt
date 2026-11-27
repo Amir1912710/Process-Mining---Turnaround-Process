@@ -1,0 +1,44 @@
+jobs 41
+{"n": 1, "of": 41, "date": "2026-09-30", "scenario": "carrier", "error": "", "mean_block": 46.45}
+{"n": 2, "of": 41, "date": "2026-10-03", "scenario": "carrier", "error": "", "mean_block": 47.95}
+{"n": 3, "of": 41, "date": "2026-10-06", "scenario": "carrier", "error": "", "mean_block": 48.11}
+{"n": 4, "of": 41, "date": "2026-10-04", "scenario": "carrier", "error": "", "mean_block": 48.93}
+{"n": 5, "of": 41, "date": "2026-10-05", "scenario": "carrier", "error": "", "mean_block": 48.2}
+{"n": 6, "of": 41, "date": "2026-10-02", "scenario": "carrier", "error": "", "mean_block": 48.69}
+{"n": 7, "of": 41, "date": "2026-10-07", "scenario": "carrier", "error": "", "mean_block": 49.25}
+{"n": 8, "of": 41, "date": "2026-10-01", "scenario": "carrier", "error": "", "mean_block": 48.1}
+{"n": 9, "of": 41, "date": "2026-10-10", "scenario": "carrier", "error": "", "mean_block": 49.06}
+{"n": 10, "of": 41, "date": "2026-10-08", "scenario": "carrier", "error": "", "mean_block": 48.21}
+{"n": 11, "of": 41, "date": "2026-10-11", "scenario": "carrier", "error": "", "mean_block": 49.19}
+{"n": 12, "of": 41, "date": "2026-10-09", "scenario": "carrier", "error": "", "mean_block": 48.67}
+{"n": 13, "of": 41, "date": "2026-10-14", "scenario": "carrier", "error": "", "mean_block": 48.36}
+{"n": 14, "of": 41, "date": "2026-10-13", "scenario": "carrier", "error": "", "mean_block": 48.99}
+{"n": 15, "of": 41, "date": "2026-10-12", "scenario": "carrier", "error": "", "mean_block": 48.86}
+{"n": 16, "of": 41, "date": "2026-10-15", "scenario": "carrier", "error": "", "mean_block": 48.11}
+{"n": 17, "of": 41, "date": "2026-10-17", "scenario": "carrier", "error": "", "mean_block": 48.58}
+{"n": 18, "of": 41, "date": "2026-10-16", "scenario": "carrier", "error": "", "mean_block": 48.57}
+{"n": 19, "of": 41, "date": "2026-10-20", "scenario": "carrier", "error": "", "mean_block": 48.93}
+{"n": 20, "of": 41, "date": "2026-10-18", "scenario": "carrier", "error": "", "mean_block": 50.01}
+{"n": 21, "of": 41, "date": "2026-10-19", "scenario": "carrier", "error": "", "mean_block": 48.38}
+{"n": 22, "of": 41, "date": "2026-10-21", "scenario": "carrier", "error": "", "mean_block": 49.11}
+{"n": 23, "of": 41, "date": "2026-10-24", "scenario": "carrier", "error": "", "mean_block": 47.95}
+{"n": 24, "of": 41, "date": "2026-10-22", "scenario": "carrier", "error": "", "mean_block": 47.93}
+{"n": 25, "of": 41, "date": "2026-10-27", "scenario": "carrier", "error": "", "mean_block": 48.33}
+{"n": 26, "of": 41, "date": "2026-10-25", "scenario": "carrier", "error": "", "mean_block": 56.07}
+{"n": 27, "of": 41, "date": "2026-10-28", "scenario": "carrier", "error": "", "mean_block": 50.57}
+{"n": 28, "of": 41, "date": "2026-10-26", "scenario": "carrier", "error": "", "mean_block": 49.96}
+{"n": 29, "of": 41, "date": "2026-10-23", "scenario": "carrier", "error": "", "mean_block": 49.04}
+{"n": 30, "of": 41, "date": "2026-11-03", "scenario": "carrier", "error": "", "mean_block": 51.92}
+{"n": 31, "of": 41, "date": "2026-10-29", "scenario": "carrier", "error": "", "mean_block": 52.4}
+{"n": 32, "of": 41, "date": "2026-10-31", "scenario": "carrier", "error": "", "mean_block": 104.7}
+{"n": 33, "of": 41, "date": "2026-11-02", "scenario": "carrier", "error": "", "mean_block": 47.5}
+{"n": 34, "of": 41, "date": "2026-11-04", "scenario": "carrier", "error": "", "mean_block": 115.6}
+{"n": 35, "of": 41, "date": "2026-10-30", "scenario": "carrier", "error": "", "mean_block": 51.15}
+{"n": 36, "of": 41, "date": "2026-11-01", "scenario": "carrier", "error": "", "mean_block": 70.0}
+{"n": 37, "of": 41, "date": "2026-11-07", "scenario": "carrier", "error": "", "mean_block": 129.23}
+{"n": 38, "of": 41, "date": "2026-11-05", "scenario": "carrier", "error": "", "mean_block": 67.54}
+{"n": 39, "of": 41, "date": "2026-11-06", "scenario": "carrier", "error": "", "mean_block": 49.77}
+{"n": 40, "of": 41, "date": "2026-11-09", "scenario": "carrier", "error": "", "mean_block": 49.3}
+{"n": 41, "of": 41, "date": "2026-11-08", "scenario": "carrier", "error": "", "mean_block": 73.75}
+errors 0
+

@@ -1,0 +1,6 @@
+scenario,bin,n,observed,simulated
+carrier,<=30,85,0.988,0.953
+carrier,30-45,87,0.54,0.667
+carrier,45-60,213,0.268,0.413
+carrier,60-90,154,0.227,0.11
+carrier,>90,50,0.1,0.02

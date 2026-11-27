@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-11",
+  "scenario": "buses_12",
+  "replication": 1,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v4\\models\\BER_MSc_2026-10-11_buses_12.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v4\\runs\\2026-10-11_buses_12",
+  "model_sha256": "5597e532943e48370bb6ef34073a11ee3897fb35f9f59ddaa3633ca4df643f99",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 13563,
+  "cases": 275,
+  "complete": true,
+  "elapsed_seconds": 44.5534711,
+  "mean_block_min": 53.420909090909106,
+  "median_block_min": 50.31666666666667,
+  "p90_block_min": 68.00333333333333,
+  "mean_fuel_wait_min": 2.34569696969697,
+  "p90_fuel_wait_min": 7.989999999999998,
+  "mean_clean_wait_min": 0,
+  "mean_tug_wait_min": 0,
+  "long_approval_cases": 1,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.7927272727272727
+}

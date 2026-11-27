@@ -1,0 +1,4 @@
+2026-11-01 ok BER_MSc_2026-11-01_calibrated.ocpn
+2026-11-05 ok BER_MSc_2026-11-05_calibrated.ocpn
+2026-11-08 ok BER_MSc_2026-11-08_calibrated.ocpn
+

@@ -95,6 +95,25 @@ CARRIER_ARCS = {
     'e129': 'delay_sec(drive_sec_between(bus.x, bus.y, tr.stand.x, tr.stand.y) + bus_sec(tr.dep.pax, bus.cap) + board_sec(tr.dep.aircraft.body, tr.dep.pax, false, tr.dep.carrierType))',
     'e164': 'delay_sec(fuel_sec(tr.upliftL, fu.rateLpm, tr.dep.aircraft.body, tr.dep.carrierType))',
 }
+# v4 (2026-11-27): carrier-specific narrow-body baggage unloading/loading, as parameterised in Tkacenko (2026)
+# (cpns/durations.py): full-service from Asadi (2024), low-cost from Luo et al. (2024, Schiphol).
+# Python gammavariate(shape, scale) -> cpnsim gamma(scale, shape). Wide-bodies keep the baseline hold_sec.
+BAGGAGE_FUNC = '''fn bag_sec(hold, pax, ulds, loading, body, carrier_type) {
+    if body == "narrow" {
+        let m = if loading {
+            if carrier_type == "low" { gamma(3.85, 0.83) + 1.95 } else { gamma(1.24, 12.49) }
+        } else {
+            if carrier_type == "low" { gamma(1.9, 2.61) + 0.99 } else { gamma(1.24, 8.95) }
+        };
+        if m < 1.0 { m = 1.0; }
+        return (m * 60.0 * svc_scale(carrier_type)).to_int();
+    }
+    hold_sec(hold, pax, ulds, loading)
+}'''
+BAGGAGE_ARCS = {
+    'e140': 'delay_sec(drive_sec_between(ldr.x, ldr.y, tr.stand.x, tr.stand.y) + bag_sec(tr.hold, tr.arr.pax, tr.nUlds, false, tr.arr.aircraft.body, tr.arr.carrierType))',
+    'e150': 'delay_sec(drive_sec_between(ldr.x, ldr.y, tr.stand.x, tr.stand.y) + bag_sec(tr.hold, tr.dep.pax, tr.nDepUlds, true, tr.dep.aircraft.body, tr.dep.carrierType))',
+}
 
 
 def det_load_factor(dt, carrier_type):
@@ -107,7 +126,7 @@ def det_load_factor(dt, carrier_type):
     return min(0.99, max(0.42, base + seasonal[dt.month] + weekday[(dt.weekday() + 1) % 7] + daily))
 
 
-def build(date=None, limit=None, suffix=None, load_factor=.85, cleaning_teams=9, service_scale=1.0, timing='literature', curfew='inherited', hydrant_dispensers=4, fuel_tankers=4, out_dir=None, schedule='none', utc_offset_hours=1, context='basic', weather='synthetic', scale_low=1.0, scale_full=1.0, leisure_profile='full', stand_policy='any', buses=None, loaders=None, board_scale=1.0, source=None):
+def build(date=None, limit=None, suffix=None, load_factor=.85, cleaning_teams=9, service_scale=1.0, timing='literature', curfew='inherited', hydrant_dispensers=4, fuel_tankers=4, out_dir=None, schedule='none', utc_offset_hours=1, context='basic', weather='synthetic', scale_low=1.0, scale_full=1.0, leisure_profile='full', stand_policy='any', buses=None, loaders=None, board_scale=1.0, source=None, baggage='baseline'):
     # v2.2 options (defaults reproduce v2.0/v2.1 builds exactly):
     #   curfew='ber_local'  -> 00:00-05:00 LOCAL night ban, applied only at pushback clearance (e191)
     #   schedule='std'      -> aircraft may not request start-up before its A-CDM STD (linked cases only)
@@ -264,6 +283,12 @@ def build(date=None, limit=None, suffix=None, load_factor=.85, cleaning_teams=9,
         for name,code in CARRIER_FUNCS.items(): funcs[name]['code']=code
         p['functions'].append({'id':'fn-svc_scale','name':'svc_scale','code':f'fn svc_scale(carrier_type) {{ if carrier_type == "low" {{ {float(scale_low)} }} else {{ {float(scale_full)} }} }}'})
         for aid,expr in CARRIER_ARCS.items(): arcs[aid]['delay']=expr
+        if baggage=='carrier':
+            p['functions'].append({'id':'fn-bag_sec','name':'bag_sec','code':BAGGAGE_FUNC})
+            for aid,expr in BAGGAGE_ARCS.items():
+                assert 'hold_sec(' in arcs[aid]['delay'], aid
+                arcs[aid]['delay']=expr
+    assert baggage in ('baseline','carrier')
     if timing=='carrier' and board_scale!=1.0:
         # Process change: faster boarding (e.g. improved boarding procedure), narrow-body only.
         funcs['board_sec']['code']=funcs['board_sec']['code'].replace('svc_scale(carrier_type)).to_int();','svc_scale(carrier_type) * '+str(float(board_scale))+').to_int();',1)
@@ -321,6 +346,7 @@ def build(date=None, limit=None, suffix=None, load_factor=.85, cleaning_teams=9,
         writer=csv.DictWriter(f,fieldnames=list(manifest[0]));writer.writeheader();writer.writerows(manifest)
     info={'model':target.name,'cases':len(rows),'aircraft':len(fleet),'epoch':epoch.isoformat(),'baseline_sha256':hashlib.sha256(BASE.read_bytes()).hexdigest(),'input_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),'model_sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'date_filter':date,'arrival_dates':[rows[0]['inbound_last_seen_berlin'][:10],rows[-1]['inbound_last_seen_berlin'][:10]],'supported_type_candidates':sum(x['type_supported_candidate'] for x in manifest),'assumed_load_factor':load_factor,'assumed_prm':0,'border_segregation':'disabled because route context incomplete','assumed_sector_minutes':120,'carrier_profile':'unknown; no budget/full-service multiplier','departure_outcomes_in_execution':False,'cleaning_teams':cleaning_teams,'service_scale':service_scale,'timing_model':timing,'random_seed_control':'not exposed by WASM runtime; repeat runs required'}
     info.update(curfew_scenario=curfew,hydrant_dispensers=hydrant_dispensers,fuel_tankers=fuel_tankers)
+    info.update(baggage_timing=baggage if timing=='carrier' else 'baseline')
     info.update(stand_policy=stand_policy,buses=buses,loaders=loaders,board_scale=board_scale,leisure_profile=leisure_profile,context=context,weather=weather,scale_low=scale_low,scale_full=scale_full,carrier_types={k:sum(1 for m in manifest if m['model_carrier_type']==k) for k in ('low','full','unknown')})
     info.update(schedule_binding=schedule,schedule_bound_cases=sum(1 for m in manifest if m['schedule_bound']),utc_offset_hours=utc_offset_hours if curfew=='ber_local' else None)
     (destination/(stem+'_manifest.json')).write_text(json.dumps(info,indent=2),encoding='utf-8')

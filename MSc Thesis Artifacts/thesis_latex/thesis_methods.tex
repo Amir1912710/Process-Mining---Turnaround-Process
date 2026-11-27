@@ -24,7 +24,7 @@ This chapter introduces the proposed approach for a data-driven object-centric t
 \node[db] (acdm) at (0,2.1) {BER\\A-CDM};
 \node[db] (osky) at (0,0.7) {OpenSky};
 \node[db] (wx) at (0,-0.7) {Weather};
-\node[db] (man) at (0,-2.1) {Feb--Apr\\turnarounds};
+\node[db] (man) at (0,-2.1) {Previous-work\\dataset};
 \node[dev] (link) at (3.3,1.2) {Linkage \&\\enrichment};
 \node[dev] (props) at (3.3,-1.0) {Properties \&\\early warning};
 \node[inp] (base) at (6.9,2.6) {Extended\\airport OCPN};
@@ -46,7 +46,7 @@ This chapter introduces the proposed approach for a data-driven object-centric t
 \draw[arr] (props) -- node[below]{targets} (exp);
 \draw[arr] (exp) -- (kpi);
 \end{tikzpicture}
-\caption{Data and execution flow of the proposed pipeline. Feb--Apr turnarounds: the manually recorded turnarounds of February to April 2026 (Section~\ref{sec:method-febapr}). Observations are linked, enriched and summarized into empirical properties; observed arrivals drive the simulation; the properties calibrate and evaluate its output, which is exported as OCEL~2.0 for process mining and used for what-if analysis.}
+\caption{Data and execution flow of the proposed pipeline. Previous-work dataset: turnarounds recorded manually in previous work, February to April 2026 (Section~\ref{sec:method-febapr}). Observations are linked, enriched and summarized into empirical properties; observed arrivals drive the simulation; the properties calibrate and evaluate its output, which is exported as OCEL~2.0 for process mining and used for what-if analysis.}
 \label{fig:pipeline}
 \end{figure}
 
@@ -83,15 +83,15 @@ In the running example, the OpenSky departure of ICAO24 \texttt{3c55c2} was firs
 Every candidate turnaround is enriched with four attributes.
 \begin{itemize}
 \item \textbf{Airline.} The ICAO designator is taken from the outbound callsign (available for 99\% of turnarounds).
-\item \textbf{Carrier class.} Airlines are classified as \emph{low-cost}, \emph{full-service} or \emph{leisure} (charter and holiday carriers). Where an airline appears in the February--April collection (Section~\ref{sec:method-febapr}), the class recorded there is used; the remaining airlines are classified by business model (Appendix~\ref{app:details}). Military flights, business aviation and cargo operators are excluded from the scope.
+\item \textbf{Carrier class.} Airlines are classified as \emph{low-cost}, \emph{full-service} or \emph{leisure} (charter and holiday carriers). Where an airline appears in the previous-work dataset (Section~\ref{sec:method-febapr}), the class recorded there is used; the remaining airlines are classified by business model (Appendix~\ref{app:details}). Military flights, business aviation and cargo operators are excluded from the scope.
 \item \textbf{Aircraft type.} The type is taken from the linked A-CDM record or, otherwise, from the OpenSky aircraft database (77\% coverage); unknown types fall back to an A320 configuration.
 \item \textbf{Weather.} Hourly observed weather at BER (temperature, precipitation, snowfall, wind speed and gusts, cloud cover) is retrieved from the Open-Meteo historical archive~\cite{openmeteo}, which is based on the ERA5 reanalysis~\cite{hersbach2020era5}, and joined to each turnaround by the hour of arrival.
 \end{itemize}
 After exclusion, 10,212 turnarounds are in scope: 4,963 low-cost, 3,993 full-service, 928 leisure and 328 other commercial turnarounds.
 
-\subsection{Second Dataset: February to April 2026}
+\subsection{Second Dataset: The Previous-Work Dataset}
 \label{sec:method-febapr}
-Before the A-CDM collector was available, turnarounds were recorded manually from the BER A-CDM application on twenty days: 21~February to 4~March and 17 to 24~April~2026. Each of the 2,070 records pairs an inbound and an outbound flight number of the same airline at the same gate. It contains the scheduled and actual landing time of the inbound flight, the scheduled and actual departure time of the outbound flight, the gate and an airline class (full-service or low-cost). Three records with an actual ground time below 15~minutes or a delay above 300~minutes are excluded as transcription errors, which leaves 2,067. In contrast to the linked November data, the inbound and outbound flights are paired by flight number rather than by aircraft identity.
+Before the A-CDM collector was available, turnarounds were recorded manually from the BER A-CDM application in previous work by the author. We refer to this collection as the \emph{previous-work dataset}. It covers twenty days: 21~February to 4~March and 17 to 24~April~2026. Each of the 2,070 records pairs an inbound and an outbound flight number of the same airline at the same gate. It contains the scheduled and actual landing time of the inbound flight, the scheduled and actual departure time of the outbound flight, the gate and an airline class (full-service or low-cost). Three records with an actual ground time below 15~minutes or a delay above 300~minutes are excluded as transcription errors, which leaves 2,067. In contrast to the linked November data, the inbound and outbound flights are paired by flight number rather than by aircraft identity.
 
 \section{Empirical Turnaround Properties and Early Warning}
 \label{sec:method-targets}
@@ -111,7 +111,7 @@ For every departure we count the other departures whose TSAT lies within $\pm15$
 When the same aircraft departs BER twice on one day, we relate the departure delay $\mathrm{ATOT}-\mathrm{STD}$ of the first departure to that of the second.
 
 \paragraph{Delay drivers.}
-On the February--April data, the outbound delay is related to the inbound delay, the carrier class, the time of day and the weather at landing (precipitation $\ge0.1$~mm/h, gusts $\ge40$~km/h, temperature $\le1\,^{\circ}$C), both as a linear model of the delay in minutes and as a logistic model of a delay above 15~minutes. Turnarounds of the same day are not independent observations: weather and traffic change during a day, but turnarounds close in time experience similar conditions, and a disruption affects many turnarounds of the same day. Confidence intervals are therefore obtained by resampling whole days rather than individual turnarounds, which keeps any dependence within a day intact.
+On the previous-work dataset, the outbound delay is related to the inbound delay, the carrier class, the time of day and the weather at landing (precipitation $\ge0.1$~mm/h, gusts $\ge40$~km/h, temperature $\le1\,^{\circ}$C), both as a linear model of the delay in minutes and as a logistic model of a delay above 15~minutes. Turnarounds of the same day are not independent observations: weather and traffic change during a day, but turnarounds close in time experience similar conditions, and a disruption affects many turnarounds of the same day. Confidence intervals are therefore obtained by resampling whole days rather than individual turnarounds, which keeps any dependence within a day intact.
 
 \paragraph{Held-out delay-transfer model.}
 To test P1 on independent data, we fit a reactionary-delay model on the February--March records and evaluate it on the April records. For a turnaround $i$ with inbound delay $\delta^{\mathrm{in}}_i$, scheduled ground time $S_i$ and an unknown minimum turnaround time $\mathrm{MTT}$, only the part of the inbound delay that exceeds the slack $S_i-\mathrm{MTT}$ should be transferred:
@@ -122,7 +122,7 @@ To test P1 on independent data, we fit a reactionary-delay model on the February
 MTT is estimated per airline class by a grid search, and the model is compared on the test period with full transfer and with a constant prediction.
 
 \paragraph{Early warning.}
-To detect delays early, we train classifiers that use only information available when the inbound aircraft lands: the scheduled buffer, carrier class, aircraft size, hour, the number of arrivals within $\pm60$~minutes and the weather. On the linked November data, the target is a late TOBT ($\Delta^{\mathrm{TOBT}}>5$~minutes) and the evaluation is leave-one-day-out; on the February--April data, the target is an outbound delay above 15~minutes, trained on February--March and tested on April. We compare logistic regression with gradient-boosted trees~\cite{pedregosa2011sklearn} and report the AUC and the precision when as many turnarounds are flagged as are actually late.
+To detect delays early, we train classifiers that use only information available when the inbound aircraft lands: the scheduled buffer, carrier class, aircraft size, hour, the number of arrivals within $\pm60$~minutes and the weather. On the linked November data, the target is a late TOBT ($\Delta^{\mathrm{TOBT}}>5$~minutes) and the evaluation is leave-one-day-out; on the previous-work dataset, the target is an outbound delay above 15~minutes, trained on February--March and tested on April. We compare logistic regression with gradient-boosted trees~\cite{pedregosa2011sklearn} and report the AUC and the precision when as many turnarounds are flagged as are actually late.
 
 \paragraph{Disruption screening.}
 To detect operational disruptions such as strikes, holiday peaks or weather events, daily indicators of the 10,940 OpenSky turnarounds (number of turnarounds, median ground time of short stays) are compared with a baseline for the same weekday and flight-schedule season. Days whose robust $z$-score exceeds 3 are flagged and checked against observed weather and public information.
@@ -141,7 +141,7 @@ The baseline generates synthetic flights continuously. We replace this generator
 Aircraft are persistent objects. The arrival and the departure of a turnaround require the same aircraft token, which becomes available again only after the simulated takeoff. If the next turnaround of that aircraft is released while the aircraft is still in the model, it waits; delay can therefore propagate along an aircraft's rotations inside the simulation.
 
 \subsection{Carrier-Specific Service Times}
-For narrow-body aircraft, the service times of deboarding, cleaning, catering, fueling and boarding are replaced with carrier-specific distributions from the literature (Table~\ref{tab:servicetimes}). Full-service distributions are taken from Schultz et al.~\cite{schultz2012dynamic} and Asadi~\cite{asadi2024robust}; low-cost distributions were measured at Amsterdam Schiphol by Luo et al.~\cite{luo2024digitaltwin}. Both sets are used as parameterized in Tkacenko's implementation~\cite{tkacenko2026}. For low-cost cleaning, the fixed five-minute part of the full clean is omitted, following the baseline model's distinction between a crew tidy and a full cabin clean. Leisure carriers use the full-service profile (Section~\ref{sec:eval-rq1}). Two multipliers $s_{\mathrm{LCC}}$ and $s_{\mathrm{FSC}}$ scale all five service times of the respective class; they are calibrated in Section~\ref{sec:method-calibration}.
+For narrow-body aircraft, the service times of deboarding, cleaning, catering, fueling and boarding are replaced with carrier-specific distributions from the literature (Table~\ref{tab:servicetimes}). Full-service distributions are taken from Schultz et al.~\cite{schultz2012dynamic} and Asadi~\cite{asadi2024robust}; low-cost distributions were measured at Amsterdam Schiphol by Luo et al.~\cite{luo2024digitaltwin}. Both sets are used as parameterized in Tkacenko's implementation~\cite{tkacenko2026}. For low-cost cleaning, the fixed five-minute part of the full clean is omitted, following the baseline model's distinction between a crew tidy and a full cabin clean. Leisure carriers use the full-service profile (Section~\ref{sec:eval-rq1}). Two multipliers $s_{\mathrm{LCC}}$ and $s_{\mathrm{FSC}}$ scale all five service times of the respective class; they are calibrated in Section~\ref{sec:method-calibration}. Baggage unloading and loading keep the timing of the baseline model, which depends on the hold type and the number of bags or containers but not on the carrier class. Section~\ref{sec:eval-promenade} reports a sensitivity run with carrier-specific baggage times.
 
 \begin{table}[htbp]\centering\footnotesize
 \begin{tabular}{lp{3.6cm}p{3.6cm}}\hline
@@ -156,6 +156,11 @@ Boarding & $\Gamma(k{=}11.0,\theta{=}1.45)$; mean 16.0 & $\Gamma(30.7,0.63)-10.6
 \label{tab:servicetimes}
 \end{table}
 
+\paragraph{Why low-cost deboarding is slower.}
+Table~\ref{tab:servicetimes} contains one apparent anomaly. Low-cost turnarounds are faster in every service except deboarding, where their mean (5.2~minutes) exceeds the full-service mean (4.0~minutes). Two explanations apply. The first concerns the data: the two distributions come from different studies, measured at different airports, on different aircraft and possibly with different definitions of the start and end of the activity. Part of the difference therefore reflects the measurement setup rather than the carrier. The second concerns operations. Low-cost carriers shorten the turnaround by reducing the scope of a service, which is possible for cleaning, catering and fueling but not for deboarding, whose duration depends on how many passengers and cabin bags leave the aircraft. Low-cost flights tend to carry more of both: their cabins are denser, their load factors are higher (the baseline model assumes 90.5\% against 82.0\%), and because checked baggage is typically charged separately, passengers bring more hand luggage.
+
+The shape of the two distributions adds a second observation. The full-service distribution is wide (standard deviation 2.4~minutes, coefficient of variation 0.61), whereas the low-cost distribution is narrow (1.5~minutes, 0.29). Low-cost deboarding is thus slower on average but more predictable, which is consistent with standardized low-cost operations. A comparison of means alone would hide this difference. For the simulation, the spread matters as much as the mean, because the readiness of an aircraft is determined by the branch that finishes last, and a wide distribution produces more late finishes. The effect on the whole turnaround is small: the difference of about one minute is outweighed by the shorter low-cost cleaning, catering and boarding times, and the calibration multipliers (Section~\ref{sec:method-calibration}) absorb any remaining systematic offset between the literature and BER.
+
 We compare three timing configurations on the same demand: \emph{original} (the baseline's functions), \emph{literature} (carrier-agnostic narrow-body functions from Schultz et al.~\cite{schultz2012dynamic,schultz2018boarding}) and \emph{carrier} (Table~\ref{tab:servicetimes}).
 
 \subsection{Observed Weather}
@@ -163,6 +168,29 @@ The baseline generates temperature and precipitation synthetically and triggers 
 
 \subsection{Operational Policy and Schedule Binding}
 The baseline's night curfew helper evaluates the hour in UTC and also delays cabin preparation. We replace it with the BER core night restriction from 00:00 to 05:00 \emph{local} time~\cite{ber_night}, applied only at the movement boundary (pushback clearance). In addition, an aircraft that is ready before its scheduled departure waits on stand until its STD before requesting start-up; this applies to turnarounds whose departure is linked to an A-CDM record. Observed actual departure times are never used inside the model.
+
+\subsection{Summary: Original Model and BER Extension}
+\label{sec:method-extsummary}
+Table~\ref{tab:extensions} summarizes, component by component, what the original \emph{Airport Ground Handling (Extended)} model does and what this thesis changes. The process structure, the resource logic and the stand and resource layout are taken over unchanged; the extension concerns the inputs of the model, its timing and its operational rules.
+
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{p{2.4cm}p{4.7cm}p{5.4cm}}\hline
+Component & Original model (OCPN Studio) & BER extension (this thesis)\\\hline
+Arrival demand & Synthetic flights generated continuously & Finite list of the observed arrivals of one day (OpenSky landing proxy) with airline, carrier class and aircraft type\\\hline
+Aircraft & Fixed fleet of fictional aircraft and airlines, drawn for the synthetic flights & The real aircraft of the observed day (ICAO24 address); the same aircraft serves its later rotations\\\hline
+Carrier classes & Low-cost and full-service differ only in cleaning time and passenger load factor & Carrier class derived from the airline; leisure carriers use the full-service profile\\\hline
+Deboarding, cleaning, catering, fueling, boarding & Generic service-time functions & Carrier-specific literature distributions (Table~\ref{tab:servicetimes}), scaled by calibrated multipliers ($s_{\mathrm{LCC}}=1.3$, $s_{\mathrm{FSC}}=1.1$)\\\hline
+Baggage unloading and loading & Time from hold type and number of bags or containers & Unchanged; carrier-specific literature times tested as a sensitivity run (Section~\ref{sec:eval-promenade})\\\hline
+Weather & Synthetic temperature and precipitation & Observed hourly BER weather (Open-Meteo)\\\hline
+Night restriction & Curfew evaluated in UTC; also delays cabin preparation & BER restriction 00:00--05:00 local time, applied only at pushback clearance\\\hline
+Departure timing & Aircraft leaves as soon as it is ready & Linked departures wait until their scheduled time (STD)\\\hline
+Schengen stand segregation & Active & Disabled, because route context is incomplete\\\hline
+Stands and resource fleets & 25 stands and generic fleets & Unchanged; changed only in the what-if scenarios\\\hline
+Execution and output & Interactive simulation in OCPN Studio & Headless runs per day with CPNsim and OCEL~2.0 export (Chapter~\ref{ch:implementation})\\\hline
+\end{tabular}
+\caption{Original airport ground-handling model and the changes made for BER in this thesis.}
+\label{tab:extensions}
+\end{table}
 
 \paragraph{Running example in the model.}
 In the calibrated model, the A320neo of EWG43J is released at its landing proxy and reaches in-block after 6.7~minutes on a remote stand. Deplaning by bus, catering, water service, baggage unloading and the fuel tanker start together 1~minute later. Cleaning starts when deplaning ends (24.3~minutes after landing) and boarding by bus when cleaning ends (35.9~minutes); fueling ends at 37.3~minutes and boarding at 59.8~minutes. Boarding is the last service; the aircraft is ready after 62.1~minutes and takes off after 78.6~minutes. Compared with the observation, the simulated ready time is 4.7~minutes later than the target turnaround time of 57.4~minutes. The same aircraft object also appears in two other simulated turnarounds that day, at 11:01 and 21:10~UTC, which shows how the aircraft carries its state from rotation to rotation.
