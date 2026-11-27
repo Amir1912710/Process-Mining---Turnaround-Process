@@ -10,30 +10,43 @@ This thesis addresses this gap with a \emph{data-driven object-centric simulatio
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-  node distance=6mm and 6mm,
-  inp/.style={draw, rectangle, minimum width=25mm, minimum height=8mm, align=center, font=\footnotesize},
-  dev/.style={draw, rectangle, fill=blue!12, minimum height=26mm, minimum width=30mm, align=center, font=\footnotesize},
-  outp/.style={draw, rectangle, fill=blue!12, minimum width=20mm, minimum height=10mm, align=center, font=\footnotesize},
-  tgt/.style={draw, dashed, rectangle, minimum width=22mm, minimum height=10mm, align=center, font=\footnotesize},
-  arr/.style={-{Latex[length=2mm]}}]
-\node[dev] (pipe) {Data-driven\\object-centric\\simulation pipeline};
-\node[inp, left=of pipe, yshift=10mm] (acdm) {BER A-CDM\\milestones};
-\node[inp, left=of pipe] (osky) {OpenSky\\movements};
-\node[inp, left=of pipe, yshift=-10mm] (model) {Extended airport\\OCPN model};
-\node[outp, right=of pipe] (ocel) {Synthetic\\OCEL 2.0};
-\node[tgt, right=of ocel] (pm) {Object-centric\\process mining};
-\node[outp, below=of ocel] (kpi) {Validated\\what-if KPIs};
-\draw[arr] (acdm.east) -- (pipe.west |- acdm.east);
-\draw[arr] (osky) -- (pipe);
-\draw[arr] (model.east) -- (pipe.west |- model.east);
-\draw[arr] (pipe) -- (ocel);
-\draw[arr] (ocel) -- (pm);
-\draw[arr] (pipe.south east) |- (kpi);
+  pen/.style={decorate, decoration={random steps, segment length=3pt, amplitude=0.55pt}},
+  note/.style={draw, thick, pen, fill=yellow!18, align=center, font=\sffamily\footnotesize, text width=27mm, minimum height=12mm},
+  core/.style={draw, very thick, pen, fill=blue!7, align=center, font=\sffamily, text width=31mm, minimum height=31mm},
+  outbox/.style={draw, thick, pen, fill=green!12, align=center, font=\sffamily\footnotesize, text width=27mm, minimum height=13mm},
+  harr/.style={thick, -{Stealth[length=2.6mm]}, decorate, decoration={random steps, segment length=4pt, amplitude=0.5pt, pre length=3pt, post length=4pt}},
+  hand/.style={font=\sffamily\small\itshape, text=black!70, align=center}]
+\pgfmathsetseed{11}
+% inputs: what we can observe
+\node[note, rotate=2.5]  (acdm)  at (0, 2.0) {\textbf{BER A-CDM}\\milestones\\{\scriptsize STD, TOBT, ATOT}};
+\node[note, rotate=-2]   (osky)  at (0, 0)    {\textbf{OpenSky}\\flights\\{\scriptsize landing, takeoff}};
+\node[note, rotate=1.5]  (model) at (0,-2.0) {\textbf{Airport OCPN}\\model\\{\scriptsize OCPN Studio}};
+% the simulation
+\node[core] (sim) at (4.6,0) {Data-driven\\\textbf{object-centric}\\simulation\\[2pt]{\footnotesize calibrated for BER}};
+% outputs: what the simulation adds
+\node[outbox, rotate=-1.5] (ocel) at (9.2, 1.0) {\textbf{OCEL 2.0} logs\\{\scriptsize $\to$ process mining}};
+\node[outbox, rotate=2]    (kpi)  at (9.2,-1.0) {\textbf{What-if} KPIs\\{\scriptsize boarding, fuel, stands}};
+% arrows
+\draw[harr] (acdm.east)  to[out=0,  in=165] ([yshift=9mm]sim.west);
+\draw[harr] (osky.east)  -- (sim.west);
+\draw[harr] (model.east) to[out=0,  in=195] ([yshift=-9mm]sim.west);
+\draw[harr] ([yshift=7mm]sim.east)  to[out=10,  in=180] (ocel.west);
+\draw[harr] ([yshift=-7mm]sim.east) to[out=-10, in=180] (kpi.west);
+% handwritten notes
+\node[hand] at (0, 3.15) {observed: \emph{when}};
+\node[hand] at (9.2, 2.1) {simulated: \emph{why} and \emph{what if}};
+% a small aircraft sketch above the simulation
+\begin{scope}[shift={(4.6,2.45)}, scale=0.3, rotate=6, line width=0.7pt]
+  \draw[fill=black!12, line join=round] (-1.6,0.13) -- (1.2,0.13) .. controls (1.6,0.13) .. (1.75,0) .. controls (1.6,-0.13) .. (1.2,-0.13) -- (-1.6,-0.13) -- cycle;
+  \draw[fill=black!12, line join=round] (0.25,0.13) -- (-0.5,1.35) -- (-0.85,1.35) -- (-0.35,0.13);
+  \draw[fill=black!12, line join=round] (0.25,-0.13) -- (-0.5,-1.35) -- (-0.85,-1.35) -- (-0.35,-0.13);
+  \draw[fill=black!12, line join=round] (-1.25,0.13) -- (-1.6,0.6) -- (-1.8,0.6) -- (-1.6,0.13);
+  \draw[fill=black!12, line join=round] (-1.25,-0.13) -- (-1.6,-0.6) -- (-1.8,-0.6) -- (-1.6,-0.13);
+\end{scope}
 \end{tikzpicture}
 \caption{Conceptual input--output view of the approach. Sparse operational milestones calibrate and evaluate an object-centric simulation, which produces OCEL~2.0 for process mining and key performance indicators (KPIs) for resource what-if analysis.}
 \label{fig:inputoutput}
 \end{figure}
-\todo[inline]{Fig.~1.1: replace with a hand-drawn version (supervisor comment).}
 
 \section{Motivation}
 \label{sec:motivation}
