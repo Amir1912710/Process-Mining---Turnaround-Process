@@ -1,0 +1,160 @@
+\chapter{Auxiliary OpenSky-Demand Simulation Method}
+\label{app:auxmethods}
+\noindent\textbf{Historical exploratory pilot.} This appendix preserves the earlier OpenSky-derived demand method. It is separate from the A-CDM primary analysis and is not an A-CDM-only calibration. The numerical inputs and results remain unchanged.
+
+This chapter describes how the available observations are converted into simulation inputs. We first define the data sources and the daily cohorts. We then explain the changes to the supplied model, the service-time assumptions and the OCEL export. Finally, we present the controlled experiment, its metrics and the technical checks. The procedure keeps observed values, literature inputs and generated events separate.
+
+\section{Data provenance and cohort construction}
+The prepared OpenSky movement table contains 22,635 records: 11,316 arrivals and 11,319 departures. Candidate BER ground intervals link an observed arrival to the following observed BER departure of the same ICAO24 identifier. The prepared core cohort contains 10,940 interval rows: 8,951 in the 15-minute to six-hour band and 1,989 in the six-to-24-hour band. Each row represents a candidate aircraft-linked interval, not a certified aircraft rotation.
+
+The intended collection begins on 1 October 2026. The core file also includes 54 arrivals on 30 September paired to departures entering the requested period. Arrival observations in the file extend through 9 November. Accordingly, this version does not claim complete data coverage through 13 November. Temporal coverage, API availability and filtering must be distinguished from the number of interval rows retained.
+
+We use the term boundary proxy for the interval between the last observation of the inbound flight and the first observation of the outbound flight. For case $i$, this interval is defined as
+\begin{equation}
+G_i^{\mathrm{proxy}}=t_{i,\mathrm{outbound\ firstSeen}}-t_{i,\mathrm{inbound\ lastSeen}}.
+\end{equation}
+Both timestamps are observation boundaries, as described by the OpenSky API \cite{opensky_rest}. The interval may include unobserved approach/taxi segments, parking and timetable buffers. It is not measured actual in-block time (AIBT) to actual off-block time (AOBT). Source identifiers, pairing basis, review flags and timezone-aware UTC/Berlin representations are retained.
+
+A-CDM reference records provide candidate aircraft/airline/stand context and departure-time cross-checks where a candidate match exists. Their naive timestamps are retained alongside the UTC timezone hypothesis used during reconciliation. They are references rather than complete service-event ground truth. Credentials and API secrets are not included in the thesis or its analysis artifacts.
+
+\section{Daily experimental inputs}
+The daily models use 271 cases and 235 distinct aircraft on 1 November, and 238 cases and 212 aircraft on 8 November. Supported candidate aircraft types exist for 216 and 180 input rows, respectively. This row-level coverage does not mean every final aircraft configuration is observed: the first case establishes a persistent model configuration, and missing or unsupported types fall back to an assumed A320 configuration. Later conflicting candidates have not been reconciled.
+
+The two cohorts include 39 and 44 intervals longer than six hours. A long interval may include parking or a timetable buffer rather than continuous ground handling. In addition, movements without an accepted pair are excluded. The simulated queues therefore describe competition within the selected cohort. They cannot be interpreted as queues caused by all BER traffic.
+
+\section{Baseline attribution and study modifications}
+The supervisor's original extended model is preserved unchanged. Its six parallel handling threads, resource interaction logic, vehicle positions, fuel supply mechanisms and process dependencies are inherited contributions. A same-demand original-timing comparator retains the original service functions within the adapted demand model; it is not the untouched example.
+
+We replace the original continuous generation of synthetic flights with a finite set of timed arrivals. Each case is released using its observed arrival boundary proxy. The paired arrival and departure require the same aircraft identity, which becomes available again after simulated takeoff. If a later case requires that aircraft while it is still in the model, the case must wait. Synthetic outstation travel and the inherited inbound curfew/extra approach delay are bypassed; landing roll, runway contention and taxi-in remain simulated. Observed outbound times are retained outside the model as evaluation references and do not force simulated departures.
+
+Schengen stand segregation is disabled because route context is incomplete; physical size compatibility remains. Departure-planning steps are labeled as assumptions rather than observed TOBT/TSAT values. Simulated weather, remaining durations and illustrative geometry are retained as assumptions.
+
+\section{Service-time assumptions}
+For narrowbody aircraft, the transferred reference functions, in minutes, are \cite{schultz2012dynamic}:
+\begin{align}
+D_{\mathrm{clean}} &=5+\mathrm{Weibull}(\mathrm{shape}=2.16,\mathrm{scale}=6.76),\\
+D_{\mathrm{fuel}} &=2+\mathrm{Gamma}(\mathrm{shape}=1.64,\mathrm{scale}=9.12),\\
+D_{\mathrm{board}} &=2.3+0.075P,
+\end{align}
+where $P$ is the assumed passenger count. Boarding uses a deterministic mean reference, not a full distribution. Vehicle travel/access time is additional where specified by the inherited model. The order of distribution arguments is checked against the runtime implementation. Its functions take scale before shape, so the calls are \texttt{weibull(6.76,2.16)} and \texttt{gamma(9.12,1.64)} before converting minutes to milliseconds. Other aircraft-size categories retain inherited timing functions.
+
+Passenger counts are assumed at 85\% of scenario seating capacity, PRM demand is zero, and sector duration is 120 minutes. Carrier class remains unknown. No measured passenger load or justified budget/full-service timing coefficient is available. The original timing comparator's unknown-carrier branch also needs to be considered when interpreting the comparison.
+
+The inherited 25-stand geometry, runway dimensions, resource capacities, taxi assumptions and optional-service probabilities are not verified BER infrastructure. Models begin each daily run with free stands and resources, without calibrated overnight occupancy or a warm-up history. These choices restrict interpretation of queues and resource experiments.
+
+\section{OCEL export and Promenade procedure}
+Exports use Studio's object decomposition and relationship logic, then normalize primitive CPN types to OCEL types. Integrity checks cover identifier uniqueness, case coverage, typed values and non-dangling event--object/object--object links. These custom checks are not an official OCEL JSON-schema validation or empirical process conformance test.
+
+Three completed pilot logs were imported into Promenade: 1 November literature timings (10,288 events, 1,247 objects), 8 November literature timings (9,046 events, 1,123 objects), and the 1 November original-timing comparator (10,298 events, 1,255 objects). Views include Overview, Cases and variants, Turnaround-restricted Performance Spectrum and Object Dynamics/Activity Timing. In-block/off-block statistics use next-after one-to-one pairs within the same Turnaround object and were checked independently against exported events.
+
+These three logs precede the controlled experiment below. The 60 later replications were analyzed headlessly; they have not all been imported into Promenade. The all-core model containing 10,940 cases was load-tested but not fully executed, so no full-period simulation log is claimed.
+
+\section{Controlled experiment}
+Six scenarios are run on each date, with five independent replications per cell: 60 runs across 12 date/scenario cells. Four scenarios cross literature/original timing with inherited/disabled curfew. Two further scenarios use literature timings and disabled curfew, reducing cleaning teams from nine to six or increasing fuel units from four hydrants plus four tankers to six plus six. Demand and remaining assumptions are held fixed within each date.
+
+The earlier exploratory analysis informed this design. We fixed the scenario settings before executing the new runs, but the study was not independently preregistered. The installed WebAssembly API does not expose seed control; replications use fresh runtime randomness and comparisons are unpaired. All 15,270 turnaround executions reuse 509 empirical cases across scenarios and replications. They are not 15,270 independent observed flights.
+
+For each metric $m$, we first calculate a mean within each simulation run, denoted by $\bar m_r$. We then use the five run means to calculate the scenario mean and its Student-$t$ 95\% confidence interval. Thus, the statistical unit is a simulation replication rather than an individual flight. Differences use independent-run Welch 95\% intervals. No multiplicity correction is applied; comparisons are exploratory. These intervals quantify simulation sampling variation conditional on fixed inputs, not uncertainty in load factors, capacities, transferred distributions or model structure.
+
+\section{Metrics and verification}
+Simulated block turnaround is pushback start/off-block minus in-block. Fuel waiting is handling start to fuel dispatch, excluding subsequent travel; cleaning waiting is deplaning completion to cleaning start; tug waiting is aircraft-ready to tug allocation. These definitions are retained when comparing scenarios.
+
+For each turnaround, we record when the output of each of the six handling branches becomes available at the join. These times include delays on the arcs after transitions. The branch arriving last determines when this part of the process can synchronize in that run. A high last-ready frequency is descriptive evidence, however; it does not alone show how much the overall turnaround would improve if that branch changed. We therefore also test changes in resource counts.
+
+Technical verification requires all expected cases to depart, the timed-demand queue to be empty, aircraft to return to their availability pool, relevant resources to return and metrics to be finite/nonnegative. All 60 runs pass these checks, including model-hash and unique-case coverage audits. Technical completion does not establish predictive accuracy.
+
+
+\section{Summary}
+The method combines observed demand with a model whose missing service inputs are stated explicitly. The daily cohorts allow timing and resource assumptions to be compared under the same arrival demand. Completion and resource-return checks verify the executed runs, while empirical accuracy remains a separate question. The next chapter presents the generated outputs and the scenario comparisons.
+
+
+\chapter{Auxiliary Simulation and Promenade Results}
+\label{app:auxresults}
+\noindent\textbf{Historical exploratory pilot.} The following results describe generated behavior under OpenSky-derived demand and literature/inherited assumptions. They are not new A-CDM-only results.
+
+This chapter presents the completed analyses in two stages. First, we examine the three initial logs in Promenade to identify waiting, synchronization and interpretation issues. We then report the repeated timing, policy and resource experiments. The initial logs and the controlled replications are kept separate because a single run and a mean across repeated runs provide different evidence.
+
+\section{Exploratory Promenade results}
+Table~\ref{tab:promenade} summarizes block durations in the three initial logs. The literature-timing models use the November 1 and November 8 demand. The comparator uses November 1 demand with the original service functions. Each column describes one stochastic run, rather than a repeated-run estimate.
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lrrr}\hline
+Metric (minutes) & Nov. 1 literature & Nov. 8 literature & Nov. 1 original\\\hline
+Cases & 271 & 238 & 271\\
+Mean block duration & 62.33 & 59.59 & 84.95\\
+Median & 55.62 & 57.34 & 64.37\\
+90th percentile & 72.48 & 72.83 & 80.12\\
+Maximum & 434.83 & 116.70 & 421.95\\\hline
+\end{tabular}
+\caption{Paired simulated in-block/off-block durations checked in Promenade. Original denotes original service functions inside the same demand adapter.}\label{tab:promenade}
+\end{table}
+
+All in-block starts have a corresponding off-block event under the selected pairing rule. The differences show that the simulated duration changes when the service assumptions change. They do not establish which assumptions better represent BER. The long tails also require further examination because the inherited policy can delay departures. Figure~\ref{fig:promenade} shows the corresponding Promenade timing view.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_promenade_timing.jpg}
+\caption{Promenade Object Dynamics/Activity Timing view of the 1 November literature-timing log. The data are generated simulation events.}\label{fig:promenade}
+\end{figure}
+
+\section{Resource queues and handling dependencies}
+In the individual literature-timing runs, mean fuel-dispatch waiting is 3.785 minutes on 1 November and 1.255 minutes on 8 November. Cleaning-team waiting is 0.018 and approximately zero minutes; tug-allocation waiting is 0.033 and approximately zero. The 1 November 90th-percentile fuel waiting time is 14.20 minutes, with a maximum of 38.28 minutes.
+
+Nevertheless, the cabin/boarding branch is last ready in 230 of 271 turnarounds (84.9\%) and 192 of 238 (80.7\%). Fuel is last in only 21 and 10 cases; baggage handling is last in 20 and 36. This result distinguishes local waiting from final readiness. An aircraft can wait for fuel while cabin work continues. Reducing that wait may therefore leave the final completion time almost unchanged. The branch counts describe what happened at the join in these runs; a controlled change is needed to assess its effect on overall duration.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_last_ready.png}
+\caption{Last-ready handling branch in the original three simulation logs, calculated from output-token availability at the join. This supplementary Python figure uses exported events; it is not a Promenade-generated chart.}\label{fig:lastready}
+\end{figure}
+
+These observations partially address RQ2 by exposing parallel dependencies and resource contention within the simulation. They do not establish real terminal-versus-remote stand differences or quantify empirical inter-flight delay propagation. Workload counts per shared resource must also not be called time utilization without occupancy-duration calculations.
+
+\section{Case-definition diagnostic}
+The 1 November Promenade overview has two connected object components, with 94\% of objects in the largest. Reusable resources connect many rotations; a connected-component case definition would therefore merge most of the day. A leading Turnaround extraction returns 271 executions and 271 variants at the selected settings, but expanded executions can include shared-resource events. One expanded execution displays approximately 16.7 hours, which is not that turnaround's paired block duration. The analysis therefore uses direct paired milestones for duration statistics. A SQL-discovered object-centric directly-follows graph was produced; the separate metro-map layout was canceled after stalling and is not a completed result.
+
+\section{Observed proxy discrepancies}
+The first 1 November literature run has a simulated planned-arrival-to-takeoff proxy median of 79.63 minutes, close to the observed boundary-proxy median of 79.12. However, their means are 85.63 versus 156.17 minutes, with mean bias $-70.55$ minutes and mean absolute discrepancy 92.09 minutes. On 8 November, mean bias is $-101.60$ minutes and mean absolute discrepancy 116.00 minutes.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_proxy_comparison.png}
+\caption{Exploratory comparison with observed boundary proxies for the initial logs. These are not errors against measured AIBT--AOBT. Long stays and differing timestamp semantics limit interpretation.}\label{fig:proxy}
+\end{figure}
+
+The similar medians are therefore insufficient to demonstrate agreement. The much larger observed mean indicates a different distribution, particularly for long intervals. The simulator begins handling after arrival and departs when ready, whereas the observations can also contain parking and schedule buffers. Before fitting durations, we need to review the pairings, separate short and long stays, and represent departure scheduling where justified. Increasing cleaning or fueling time simply to match the total interval would not resolve these differences.
+
+\section{Repeated timing and policy comparisons}
+All 60 controlled runs complete and pass integrity checks. Table~\ref{tab:controlled} gives the mean of five replication means per date/scenario. Figure~\ref{fig:timing} shows the individual run means and intervals.
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lrr}\hline
+Scenario & Nov. 1 mean [95\% CI] & Nov. 8 mean [95\% CI]\\\hline
+Original, inherited policy & 86.91 [84.83,89.00] & 72.73 [69.30,76.17]\\
+Literature, inherited policy & 61.91 [59.82,64.01] & 59.22 [58.91,59.52]\\
+Original, disabled curfew & 66.73 [66.14,67.32] & 66.07 [65.78,66.37]\\
+Literature, disabled curfew & 59.20 [58.59,59.81] & 59.03 [58.45,59.61]\\
+Six cleaning teams, disabled & 59.26 [58.39,60.13] & 59.20 [58.33,60.06]\\
+Six+six fuel units, disabled & 58.58 [58.34,58.81] & 58.81 [58.56,59.06]\\\hline
+\end{tabular}
+\caption{Mean simulated block duration in minutes. Resource variants use literature timings; the reference has nine cleaning teams and four+four fuel units. Intervals quantify between-run simulation variability only.}\label{tab:controlled}
+\end{table}
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_timing_policy.png}
+\caption{Timing/policy comparisons: five independent run means per scenario, with Student-$t$ 95\% intervals. Disabled curfew is a diagnostic assumption sensitivity.}\label{fig:timing}
+\end{figure}
+
+With curfew disabled, literature-minus-original timing differences are $-7.53$ minutes on 1 November (Welch 95\% CI $[-8.24,-6.82]$) and $-7.04$ on 8 November ($[-7.62,-6.47]$). Under inherited policy the differences increase to $-25.00$ ($[-27.45,-22.54]$) and $-13.52$ ($[-16.94,-10.09]$). The timing difference is therefore substantially larger when the inherited policy is active. This shows that timing and policy interact in the model. It does not show that the transferred service durations are more accurate than the original functions.
+
+An additional exploratory interaction contrast, added while inspecting the pilot, subtracts the disabled-curfew timing difference from the inherited-policy timing difference. Estimates are $-17.46$ minutes ($[-19.96,-14.97]$) and $-6.48$ ($[-9.88,-3.08]$). This is a conditional model finding, not a preregistered confirmatory result or a causal statement about airport regulations.
+
+\section{Repeated resource sensitivity}
+Under literature timings and disabled curfew, increasing fueling capacity from eight to twelve units reduces mean dispatch waiting from 3.042 to 0.168 minutes on 1 November and from 2.040 to 0.066 on 8 November. Final block-duration differences are much smaller: $-0.62$ minutes (95\% CI $[-1.23,-0.02]$) and $-0.22$ ($[-0.79,0.35]$). The November 8 interval includes zero, so this pilot does not clearly resolve the direction of that overall difference. Taken together, the results show a large reduction in the local fuel queue and a much smaller change in final turnaround. These are different outcomes and should be reported separately.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_resource_sensitivity.png}
+\caption{Resource sensitivity: overall turnaround and fuel-dispatch waiting respond differently. Counts are assumed model capacities, not verified BER staffing.}\label{fig:resource}
+\end{figure}
+
+Reducing cleaning teams from nine to six produces estimated block-duration increases of 0.07 minutes ($[-0.84,0.97]$) and 0.17 ($[-0.72,1.05]$). Both intervals include zero. The experiment therefore does not provide a clear direction for the change in block duration. This result does not prove that six and nine teams are equivalent, and it does not provide a basis for reducing staffing at BER.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{study_contrasts.png}
+\caption{Exploratory independent-run Welch 95\% intervals for block-duration differences with curfew disabled. No multiplicity adjustment is applied.}\label{fig:contrasts}
+\end{figure}
+
+For RQ3, these scenarios demonstrate a functioning evaluation method and conditional trade-offs. They do not establish a cost-optimal configuration, compare alternative dispatch priorities, or optimize real BER resource allocation.
+
+
+\section{Summary}
+The initial analysis identifies fuel-dispatch queues, frequent last-ready cabin branches and important limitations in the interpretation of extracted executions. The repeated experiment then shows that policy logic changes the apparent effect of service timings. Increasing fuel capacity greatly reduces dispatch waiting, but its effect on final turnaround is much smaller. These findings support conditional analysis of the modeled system; they do not yet establish empirical calibration or an optimal resource configuration.

@@ -1,0 +1,36 @@
+\chapter{Discussion and threats to validity}
+\label{ch:discussion}
+
+\section{Answers supported by the current evidence}
+\subsection{RQ1: data-informed calibration}
+The available observations support finite arrival demand, candidate aircraft pairing and selected contextual checks. They do not identify cleaning, fueling or boarding durations: multiple services and waiting can occur within one observed boundary interval. Transferred distributions and explicit assumptions make an executable model possible, but must not be described as fitted BER service-time estimates. Additional service start/end observations, passenger counts and reliable block timestamps would strengthen activity-level calibration.
+
+\subsection{RQ2: dependencies, queues and propagation}
+Object-linked logs show how shared resource availability and parallel branches contribute to simulated waiting and readiness. Fuel dispatch has the clearest local queue in the initial runs, yet cabin/boarding is usually the final handling branch. The capacity intervention supports the interpretation that removing fuel waiting can have limited effect on final completion because work overlaps.
+
+This is a partial answer. Persistent aircraft and reusable resources permit contention in the model, but the current experiments do not quantify how an exogenous delay propagates across flights. Nor do they provide a controlled terminal-versus-remote comparison: stand context and bus/access assumptions are not empirically calibrated. Such claims require stratified metrics and interventions with consistent definitions of stand type, demand and resource state.
+
+\subsection{RQ3: conditional resource evaluation}
+Repeated capacity comparisons demonstrate how to evaluate local queues alongside overall turnaround and uncertainty. The findings favor reporting both levels rather than selecting a configuration using queue length alone. However, only two capacity alternatives were tested, with assumed resources and no cost objective. The current evidence cannot establish an optimal resource configuration or real staffing recommendation.
+
+\section{Policy and clock semantics}
+BER's official guidance describes a core night-flight restriction from 00:00 to 05:00 and constraints in the adjacent 23:00--24:00 and 05:00--06:00 windows \cite{ber_night}. The inherited model instead applies its helper before pre-boarding and pushback clearance. Those applications do not constitute a complete operational movement-eligibility model.
+
+The installed CPNsim runtime was probed at epoch \texttt{2026-11-01T00:00:00Z}: its hour helper returns zero, while Berlin local hour is one. Engine source also uses UTC \cite{cpnsim}. Thus the inherited 00:00--05:00 condition corresponds to 01:00--06:00 local time on both study dates. This mismatch is confirmed, rather than a possible explanation inferred solely from plotted tails.
+
+The controlled experiment deliberately retains the inherited implementation in its policy cells and disables the entire helper in the diagnostic cells. Neither is presented as a verified BER replacement. A subsequent version must use Europe/Berlin time, including daylight-saving changes across the full collection, and distinguish movement restrictions, shoulder windows, exceptions and independent cabin work. The present analysis does not make a legal-compliance determination.
+
+\section{Data and construct validity}
+ICAO24 adjacency provides candidate rotations rather than certified ground movements. Missing flights, airport-estimation errors or identifier issues may affect pairing. OpenSky observation boundaries and simulated block milestones are different constructs. A-CDM reference matches and a timezone hypothesis do not remove these differences. The observed-proxy discrepancies should therefore be reported without calling them block-time prediction errors.
+
+Long stays, planned departure buffers and overnight parking are not modeled. The selected cohort also omits competing traffic, and every daily run begins with free resources. These choices can materially alter queues. Fictitious geometry, passenger load, PRM demand, carrier class, optional services and non-narrowbody functions further restrict transfer to real BER operations.
+
+\section{Statistical and analytical validity}
+Five replications per cell provide pilot uncertainty conditional on a fixed model. They do not propagate input or structural uncertainty. Runs are unpaired, random seeds are unavailable, and exact stochastic reruns cannot be promised. Multiple exploratory contrasts are reported without correction. Intervals crossing zero do not prove no effect, and a barely excluding interval is not strong operational evidence.
+
+The timing comparison changes three services together; it cannot assign the result to cleaning, fueling or boarding separately, or distinguish changes in mean from variability. November 8 is a later-date scenario with no outcome-based tuning in this pilot, but is not a completed held-out predictive validation. Formal empirical conformance, contact/remote stratification, resource time utilization, cost analysis and external replication remain incomplete.
+
+Promenade extraction scope is another source of analytical error. Shared resources connect rotations, and expanded executions can contain events outside the focal block interval. The chosen one-to-one milestone pairs and explicit metric definitions avoid treating such expanded durations as aircraft turnaround observations.
+
+\section{Remaining work before stronger conclusions}
+The next model version should correct local-time movement policy, resolve aircraft-type candidates and distinguish operational turnarounds from long stays. Evaluation should then use independently selected dates and matching observable quantities, without forcing observed departures. RQ2 additionally requires terminal/remote stratification and controlled delay-propagation experiments. RQ3 needs broader input/capacity sensitivity and a declared operational or cost objective. These tasks should precede claims of validated calibration or optimal allocation.

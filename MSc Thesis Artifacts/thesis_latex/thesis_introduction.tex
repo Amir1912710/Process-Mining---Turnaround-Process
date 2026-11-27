@@ -1,0 +1,91 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+The punctuality of an air transport network depends to a large extent on what happens on the ground between two flights~\cite{schultz2012dynamic,evler2021recovery}. The aircraft turnaround (TA) is the period between an aircraft's arrival at its parking position (in-block) and its departure from that position (off-block)~\cite{eurocontrol_acdm}. During this period, several independent teams unload baggage, clean the cabin, refuel the aircraft, load catering and board passengers. Some of these activities run in parallel, while others may start only after a preceding activity has finished~\cite{schultz2012dynamic,sng2019petri}. In addition, aircraft compete for shared stands, vehicles and ground crews~\cite{padron2019scheduling}. A delay in one turnaround can therefore spread to other turnarounds through shared resources, and to later flights through the same aircraft~\cite{evler2021recovery}.
+
+Despite its importance, the turnaround remains an operational black box for most analysts. Airport Collaborative Decision Making (A-CDM) shares selected milestones among airport partners, such as the target off-block time (TOBT) and the actual takeoff time (ATOT)~\cite{eurocontrol_acdm}. These milestones show \emph{when} an aircraft was planned to be ready and \emph{when} it left. They do not show \emph{why}: whether the aircraft waited for a fuel truck, whether boarding was the last activity to finish, or whether a late inbound flight consumed the planned ground time. Process mining (PM) could answer such questions, but it requires detailed event logs that are rarely available for ground handling~\cite{tkacenko2026}.
+
+This thesis addresses this gap with a \emph{data-driven object-centric simulation}, sketched in Figure~\ref{fig:inputoutput}. On the input side, we use operational observations from Berlin Brandenburg Airport (BER): the departure milestones that the airport publishes in its A-CDM application, and flight observations from the OpenSky Network~\cite{opensky_rest}. We link both sources through the aircraft and derive from them properties of the turnaround that the milestones reveal. These properties serve as calibration targets for an executable object-centric Petri net (OCPN) model of airport ground handling, and the observed arrivals of each day drive the simulation. On the output side, the simulation produces two results. First, it exports object-centric event logs in the OCEL~2.0 format~\cite{koren2024ocel2,ocel2}, in which the interactions between aircraft, stands and resources can be analyzed with object-centric process mining. Second, it yields key performance indicators (KPIs) for what-if scenarios, for example additional fuel trucks or faster boarding.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=6mm and 6mm,
+  inp/.style={draw, rectangle, minimum width=25mm, minimum height=8mm, align=center, font=\footnotesize},
+  dev/.style={draw, rectangle, fill=blue!12, minimum height=26mm, minimum width=30mm, align=center, font=\footnotesize},
+  outp/.style={draw, rectangle, fill=blue!12, minimum width=20mm, minimum height=10mm, align=center, font=\footnotesize},
+  tgt/.style={draw, dashed, rectangle, minimum width=22mm, minimum height=10mm, align=center, font=\footnotesize},
+  arr/.style={-{Latex[length=2mm]}}]
+\node[dev] (pipe) {Data-driven\\object-centric\\simulation pipeline};
+\node[inp, left=of pipe, yshift=10mm] (acdm) {BER A-CDM\\milestones};
+\node[inp, left=of pipe] (osky) {OpenSky\\movements};
+\node[inp, left=of pipe, yshift=-10mm] (model) {Extended airport\\OCPN model};
+\node[outp, right=of pipe] (ocel) {Synthetic\\OCEL 2.0};
+\node[tgt, right=of ocel] (pm) {Object-centric\\process mining};
+\node[outp, below=of ocel] (kpi) {Validated\\what-if KPIs};
+\draw[arr] (acdm.east) -- (pipe.west |- acdm.east);
+\draw[arr] (osky) -- (pipe);
+\draw[arr] (model.east) -- (pipe.west |- model.east);
+\draw[arr] (pipe) -- (ocel);
+\draw[arr] (ocel) -- (pm);
+\draw[arr] (pipe.south east) |- (kpi);
+\end{tikzpicture}
+\caption{Conceptual input--output view of the approach. Sparse operational milestones calibrate and evaluate an object-centric simulation, which produces OCEL~2.0 for process mining and key performance indicators (KPIs) for resource what-if analysis.}
+\label{fig:inputoutput}
+\end{figure}
+\todo[inline]{Fig.~1.1: replace with a hand-drawn version (supervisor comment).}
+
+\section{Motivation}
+\label{sec:motivation}
+
+The aircraft turnaround has been identified as one of the major contributors to airline delay, in particular through reactionary delay, that is, delay passed on from an earlier flight~\cite{evler2021recovery}. The turnaround is the point at which this transfer happens: if the inbound aircraft lands late and the scheduled ground time contains too little buffer, the outbound flight inherits the delay. Whether it does depends on how far the turnaround can be compressed, and this in turn depends on parallel activities and on the availability of shared resources. Delay propagation is therefore an object-centric phenomenon. It involves the aircraft, the turnaround, the stand and the resources that serve several aircraft in sequence.
+
+Existing simulation studies represent these dependencies well, for example with timed Petri nets~\cite{sng2019petri,cui2024ttpn} or discrete-event models~\cite{tang2024covid,purohit2026intact}. However, they are usually calibrated with recorded activity durations, which are rarely shared outside an airline or ground handler. Studies that rely only on public data, on the other hand, can describe milestones but not the processes between them~\cite{schultz2021adsb}. A recent bachelor thesis reconstructs turnaround traces at Frankfurt Airport from in-block and off-block boundaries and exports them as OCEL~2.0~\cite{tkacenko2026}. It shows that agreement with the total turnaround duration does not guarantee agreement for the individual activities. Its durations are taken from the literature, candidate traces are selected by Monte Carlo rejection sampling, and it evaluates thirteen reference turnarounds.
+
+This thesis takes the next step. Instead of assuming durations and filtering simulated traces to match observations, we first ask which properties of the turnaround the available milestones \emph{do} reveal, use them to calibrate carrier-specific service times, and simulate every observed day once instead of sampling many random candidates. Consider a short example. On 1 November 2026, Eurowings flight EWG43J was scheduled to leave BER only 27 minutes after its inbound aircraft was last observed on approach. The airline set the TOBT 30 minutes after the scheduled time. The A-CDM record alone cannot tell us which activity caused this. A calibrated object-centric simulation can show which resource the aircraft waited for, which branch finished last, and how the result would change with faster boarding or an additional fuel truck. This example is followed throughout Chapter~\ref{ch:methods}.
+
+\section{Problem Statement}
+\label{sec:problem}
+
+Detailed event logs of aircraft turnarounds are not available at BER, as at most airports. What is available are two kinds of sparse observations. First, BER operates an A-CDM application, a live departure board for airport partners that lists the A-CDM milestones of every departing flight (scheduled, target and actual times, stand and runway). Second, the OpenSky Network provides surveillance-based flight observations from a community receiver network. Neither source records the start and end of ground services. At the same time, an existing object-centric Petri net of airport ground handling, published with OCPN Studio~\cite{ocpn_studio}, represents the relevant services and resources in detail, but its timing parameters are not derived from BER observations.
+
+The problem addressed in this thesis is to connect these two worlds: to determine which turnaround properties can be measured from sparse milestones, to use them to calibrate and validate an object-centric simulation, and to use the resulting model to analyze waiting, delay propagation and resource allocation. The generated events must remain clearly separated from the observations, so that the simulation can support analysis without being mistaken for measured data.
+
+\section{Research Questions}
+\label{sec:rq}
+
+Building on this problem, we define the following research questions (RQ):
+\begin{description}
+\item[RQ1:] To what extent can A-CDM departure milestones, linked to the arrival of the same aircraft, be used to calibrate the service times of an OCPN turnaround simulation, and how well does the calibrated model reproduce turnaround times on days not used for calibration?
+\item[RQ2:] How do dependencies between aircraft, stands and shared ground-service resources contribute to waiting times and delay propagation at terminal and remote stands in an OCPN simulation?
+\item[RQ3:] How can the calibrated simulation be used to evaluate resource-allocation strategies and identify configurations that reduce turnaround delays and resource contention?
+\end{description}
+Together, these questions lead from the data to the model (RQ1), from the model to an explanation of observed delay patterns (RQ2) and from the explanation to operational decisions (RQ3).
+
+\section{Research Goals}
+\label{sec:goals}
+
+To answer the research questions systematically, we establish the following research goals:
+\begin{enumerate}
+\item Build an auditable BER dataset that links A-CDM departure milestones with OpenSky observations of the same aircraft, and enrich it with carrier class, aircraft type and observed weather.
+\item Derive empirical turnaround properties, delay drivers and early-warning classifiers from these observations, and test them on held-out data.
+\item Extend the airport ground-handling OCPN of OCPN Studio~\cite{ocpn_studio} with carrier-specific service times, observed weather, the BER night regulation and schedule-bound departures, and calibrate it against the observed targets.
+\item Simulate all observed days, analyze the generated OCEL~2.0 logs with object-centric process mining, and evaluate process, capacity and allocation scenarios.
+\end{enumerate}
+
+\section{Contributions}
+\label{sec:contrib}
+
+Addressing these goals yields empirical findings, models and software artifacts. The main contributions are:
+\begin{itemize}
+\item A linked and enriched BER dataset: 1,322 A-CDM departure records cross-checked against OpenSky (97.7\% unique correspondence, median absolute difference eight seconds), 610 turnarounds linked to their inbound flight, and 10,212 in-scope turnarounds over 41 days with carrier class, aircraft type and hourly weather. A second dataset of 2,067 manually recorded turnarounds from February to April 2026 is used for held-out evaluation.
+\item Empirical turnaround properties (buffer-dependent delay transfer, target turnaround times by carrier class, runway contention, rotation carry-over), estimates of the drivers of departure delay, and an early-warning classifier that flags late departure targets at landing with an AUC of about 0.8.
+\item A carrier-specific extension of the airport ground-handling OCPN with observed weather, the BER night regulation and schedule binding, calibrated against A-CDM targets with a 36--72\% reduction of the error on three held-out days.
+\item An evaluation in which each scenario is simulated on all 41 observed days, an object-centric process-mining analysis of the generated logs (discovery, conformance, performance spectrum, friction analysis), and a paired evaluation of process, capacity and stand-allocation scenarios.
+\end{itemize}
+The process structure and resource logic of the airport model are taken from previous work~\cite{ocpn_studio}; this thesis contributes the BER adaptation, the calibration and the analyses.
+
+\section{Thesis Structure}
+\label{sec:structure}
+
+The remainder of this thesis is organized as follows. Chapter~\ref{ch:prelim} introduces the formal foundations: OCEL~2.0, object-centric Petri nets, A-CDM milestones, object-centric discovery and conformance, and the statistical methods used. Chapter~\ref{ch:related} reviews related work. Chapter~\ref{ch:methods} presents the proposed pipeline, from data linkage to calibration targets, simulation and event-log export, followed by its implementation in Chapter~\ref{ch:implementation}. Chapter~\ref{ch:evaluation} evaluates the approach, and Chapter~\ref{ch:discussion} discusses the findings, their practical value and their limitations. Finally, Chapter~\ref{ch:conclusion} summarizes the contributions and outlines future work.

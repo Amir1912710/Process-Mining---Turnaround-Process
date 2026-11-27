@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "airport": "BER",
+  "next_day": "2026-11-27",
+  "direction": "forward",
+  "status": "ready",
+  "completed_days": [
+    {
+      "date": "2026-11-01",
+      "rows": 289,
+      "path": "data\\acdm\\days\\2026-11-01",
+      "collected_at_utc": "2026-11-01T23:25:07.092237+00:00"
+    },
+    {
+      "date": "2026-11-05",
+      "rows": 257,
+      "path": "data\\acdm\\days\\2026-11-05",
+      "collected_at_utc": "2026-11-05T23:53:09.818504+00:00"
+    },
+    {
+      "date": "2026-11-08",
+      "rows": 264,
+      "path": "data\\acdm\\days\\2026-11-08",
+      "collected_at_utc": "2026-11-08T23:18:04.077208+00:00"
+    },
+    {
+      "date": "2026-11-15",
+      "rows": 254,
+      "path": "data\\acdm\\days\\2026-11-15",
+      "collected_at_utc": "2026-11-15T23:13:24.335364+00:00"
+    },
+    {
+      "date": "2026-11-16",
+      "rows": 258,
+      "path": "data\\acdm\\days\\2026-11-16",
+      "collected_at_utc": "2026-11-16T23:15:45.952943+00:00"
+    },
+    {
+      "date": "2026-11-20",
+      "rows": 279,
+      "path": "data\\acdm\\days\\2026-11-20",
+      "collected_at_utc": "2026-11-20T23:12:07.783788+00:00"
+    },
+    {
+      "date": "2026-11-23",
+      "rows": 270,
+      "path": "data\\acdm\\days\\2026-11-23",
+      "collected_at_utc": "2026-11-23T23:17:44.093473+00:00"
+    },
+    {
+      "date": "2026-11-25",
+      "rows": 221,
+      "path": "data\\acdm\\days\\2026-11-25",
+      "collected_at_utc": "2026-11-25T23:17:04.217613+00:00"
+    },
+    {
+      "date": "2026-11-26",
+      "rows": 264,
+      "path": "data\\acdm\\days\\2026-11-26",
+      "collected_at_utc": "2026-11-26T23:18:29.811750+00:00"
+    }
+  ],
+  "last_attempt_utc": "2026-11-26T23:18:26.989645+00:00",
+  "last_success_utc": "2026-11-26T23:18:29.811750+00:00",
+  "last_error": null,
+  "collection_mode": "end_of_day",
+  "schedule_timezone": "Europe/Berlin",
+  "schedule_local_time": "00:15",
+  "one_snapshot_per_date": true
+}

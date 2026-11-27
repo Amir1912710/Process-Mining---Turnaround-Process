@@ -1,0 +1,16 @@
+{
+  "events": 1257,
+  "objects": 2236,
+  "object_counts": {
+    "Departure": 1257,
+    "Aircraft": 893,
+    "Stand": 86
+  },
+  "event_types": [
+    "ActualTakeoff"
+  ],
+  "source": "A-CDM only for event data",
+  "timestamp_basis": "explicitUTC hypothesis",
+  "all_relationships_resolve": true,
+  "formal_schema_validation": false
+}

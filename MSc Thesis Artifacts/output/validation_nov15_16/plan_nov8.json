@@ -1,0 +1,19 @@
+{
+  "max_steps": 60000,
+  "jobs": [
+    {
+      "date": "2026-11-08",
+      "scenario": "literature",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16\\models\\BER_MSc_2026-11-08_literature.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16\\runs\\2026-11-08_literature"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16\\models\\BER_MSc_2026-11-08_original.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16\\runs\\2026-11-08_original"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "events": 8914,
+  "objects": 1104,
+  "e2o": 52701,
+  "o2o": 1598,
+  "object_types": [
+    "Aircraft",
+    "Flight",
+    "Stand",
+    "Runway",
+    "Turnaround",
+    "TaxiSegment",
+    "Loader",
+    "RampTeam",
+    "ServiceTruck",
+    "Fueller",
+    "CleaningTeam",
+    "CateringTruck",
+    "Bus",
+    "ULD",
+    "PushbackTug"
+  ],
+  "activities": 47
+}

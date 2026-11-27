@@ -1,0 +1,75 @@
+\documentclass[
+	%parspace, % Add vertical space between paragraphs
+	%noindent, % No indentation of first lines in each paragraph
+	%nohyp, % No hyphenation of words
+	%twoside, % Double sided format
+	%draft, % Quicker draft compilation without rendering images
+	%final, % Set final to hide todos
+]{elteikthesis}[2024/04/26]
+
+% The minted package is also supported for source highlighting
+% See elteikthesis_minted.tex for example
+%\usepackage[newfloat]{minted}
+
+% Document's metadata
+\title{Data-Driven Object-Centric Simulation for Airport Turnaround Analysis and Resource Optimization} % title
+\date{2026} % year of defense
+
+% Author's metadata
+\author{Amir Abdelsayed}
+\degree{Data Science MSc}
+
+% Superivsor(s)' metadata
+\supervisor{István Koren} % internal supervisor's name
+\affiliation{Head of Department} % internal supervisor's affiliation
+%\extsupervisor{Jane Doe} % external supervisor's name
+%\extaffiliation{Senior Developer} % external supervisor's affiliation
+
+% University's metadata
+\university{Eötvös Loránd University} % university's name
+\faculty{Faculty of Informatics} % faculty's name
+\department{Dept. of Software Technology and Methodology} % department's name
+\city{Budapest} % city
+\logo{elte_cimer_szines} % logo
+
+% Add bibliography file
+\addbibresource{study_references.bib}
+
+% The document
+
+\begin{document}
+\documentlang{english}
+\maketitle
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Detailed records of airport ground services are often unavailable, although turnaround performance depends on their timing and shared resources. This thesis investigates how limited Berlin Brandenburg Airport observations can support an object-centric turnaround simulation. We adapt an existing OCPN airport model, prepare aircraft-linked demand and export generated events for analysis in Promenade. Observed inputs are kept separate from literature-based service timings and other assumptions. The analysis examines resource waiting, parallel completion and the interpretation of object-centric executions. A controlled pilot compares six scenarios on two dates, with five independent runs per scenario and date. All 60 runs complete, producing 15,270 simulated executions from 509 reused empirical interval cases. With inherited curfew disabled, literature timing assumptions reduce mean simulated block duration by 7.53 and 7.04 minutes compared with the original service functions. Increasing fuel capacity substantially reduces dispatch waiting, while its effect on final turnaround is much smaller. The results also reveal an interaction between service timing and inherited policy, including a confirmed UTC/local-time mismatch. These findings support conditional analysis of the adapted model. Missing internal service observations, long stays and assumed operational context limit conclusions about actual BER performance. Further empirical evaluation is required before claiming validated calibration or optimal resource allocation.
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\input{thesis_introduction.tex}
+\cleardoublepage
+\input{thesis_related.tex}
+\cleardoublepage
+\input{thesis_methods.tex}
+\cleardoublepage
+\input{thesis_results.tex}
+\cleardoublepage
+\input{thesis_discussion.tex}
+\cleardoublepage
+\input{thesis_conclusion.tex}
+\cleardoublepage
+\chapter*{\acklabel}
+\addcontentsline{toc}{chapter}{\acklabel}
+I thank my supervisor, Istv\'an Koren, for providing the original extended airport model and guiding the research direction. The distinction between that baseline and the study modifications is maintained throughout this thesis.
+\cleardoublepage
+\appendix
+\input{thesis_reproducibility.tex}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\biblabel}
+\printbibliography[title=\biblabel]
+\cleardoublepage
+\listoffigures
+\cleardoublepage
+\listoftables
+\end{document}

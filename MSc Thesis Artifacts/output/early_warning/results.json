@@ -1,0 +1,263 @@
+{
+  "A": {
+    "logistic": {
+      "auc": 0.537,
+      "brier": 0.286,
+      "precision_at_base_rate": 0.379,
+      "recall_at_base_rate": 0.379,
+      "importance": {
+        "wx_wind": 0.029,
+        "inb": 0.0112,
+        "wx_gust": 0.0085,
+        "wx_cloud": 0.0075,
+        "sta": 0.0008,
+        "gate_area": 0.0001,
+        "wx_freezing": 0.0,
+        "arrivals_pm60": -0.0001,
+        "hour": -0.0003,
+        "wx_temp": -0.0008,
+        "remaining_buffer": -0.0009,
+        "wx_precip": -0.0039,
+        "weekday": -0.0058,
+        "low_cost": -0.0166
+      }
+    },
+    "gradient_boosting": {
+      "auc": 0.525,
+      "brier": 0.347,
+      "precision_at_base_rate": 0.417,
+      "recall_at_base_rate": 0.417,
+      "importance": {
+        "wx_wind": 0.0269,
+        "inb": 0.0071,
+        "wx_gust": 0.006,
+        "wx_cloud": 0.005,
+        "gate_area": 0.0042,
+        "wx_temp": 0.0017,
+        "hour": 0.0007,
+        "wx_freezing": 0.0,
+        "sta": -0.0009,
+        "wx_precip": -0.0018,
+        "remaining_buffer": -0.0025,
+        "arrivals_pm60": -0.0031,
+        "weekday": -0.0119,
+        "low_cost": -0.02
+      }
+    },
+    "base_rate_test": 0.353,
+    "n_train": 1484,
+    "n_test": 583,
+    "median_lead_time_min": 110.0,
+    "delay_by_condition": [
+      {
+        "condition": "dry/calm",
+        "n": 1649,
+        "median_outbound": 14.0,
+        "late15": 0.454
+      },
+      {
+        "condition": "gusts>=50 km/h",
+        "n": 8,
+        "median_outbound": 36.0,
+        "late15": 1.0
+      },
+      {
+        "condition": "precipitation",
+        "n": 410,
+        "median_outbound": 18.0,
+        "late15": 0.563
+      }
+    ],
+    "delay_by_class": [
+      {
+        "type": "full",
+        "n": 1399,
+        "median_inbound": 14.0,
+        "median_outbound": 16.0,
+        "late15": 0.508
+      },
+      {
+        "type": "low-cost",
+        "n": 668,
+        "median_inbound": 8.0,
+        "median_outbound": 10.0,
+        "late15": 0.413
+      }
+    ]
+  },
+  "B": {
+    "2026-11-01": {
+      "logistic": {
+        "auc": 0.796,
+        "brier": 0.186,
+        "precision_at_base_rate": 0.701,
+        "recall_at_base_rate": 0.701,
+        "importance": {
+          "buffer": 0.2934,
+          "wind_gusts_10m": 0.0346,
+          "narrow": 0.0109,
+          "temperature_2m": 0.0049,
+          "hour": 0.0007,
+          "precipitation": 0.0,
+          "arrivals_pm60": -0.0001,
+          "low_cost": -0.0035
+        }
+      },
+      "gradient_boosting": {
+        "auc": 0.814,
+        "brier": 0.184,
+        "precision_at_base_rate": 0.701,
+        "recall_at_base_rate": 0.701,
+        "importance": {
+          "buffer": 0.3131,
+          "narrow": 0.0107,
+          "low_cost": 0.0088,
+          "temperature_2m": 0.007,
+          "hour": 0.0051,
+          "wind_gusts_10m": 0.0037,
+          "precipitation": 0.0,
+          "arrivals_pm60": -0.0015
+        }
+      },
+      "base_rate_test": 0.476,
+      "n_train": 364,
+      "n_test": 225
+    },
+    "2026-11-05": {
+      "logistic": {
+        "auc": 0.823,
+        "brier": 0.182,
+        "precision_at_base_rate": 0.638,
+        "recall_at_base_rate": 0.638,
+        "importance": {
+          "buffer": 0.2757,
+          "temperature_2m": 0.0705,
+          "narrow": 0.0142,
+          "hour": 0.0039,
+          "arrivals_pm60": 0.0001,
+          "precipitation": 0.0,
+          "wind_gusts_10m": -0.0052,
+          "low_cost": -0.009
+        }
+      },
+      "gradient_boosting": {
+        "auc": 0.764,
+        "brier": 0.176,
+        "precision_at_base_rate": 0.586,
+        "recall_at_base_rate": 0.586,
+        "importance": {
+          "buffer": 0.2638,
+          "temperature_2m": 0.0378,
+          "narrow": 0.0107,
+          "hour": 0.0101,
+          "low_cost": 0.0069,
+          "precipitation": 0.0,
+          "arrivals_pm60": -0.0036,
+          "wind_gusts_10m": -0.0236
+        }
+      },
+      "base_rate_test": 0.33,
+      "n_train": 413,
+      "n_test": 176
+    },
+    "2026-11-08": {
+      "logistic": {
+        "auc": 0.79,
+        "brier": 0.156,
+        "precision_at_base_rate": 0.619,
+        "recall_at_base_rate": 0.619,
+        "importance": {
+          "buffer": 0.2741,
+          "temperature_2m": 0.0108,
+          "hour": 0.0085,
+          "narrow": 0.0051,
+          "arrivals_pm60": 0.0014,
+          "wind_gusts_10m": 0.001,
+          "precipitation": 0.0,
+          "low_cost": -0.0005
+        }
+      },
+      "gradient_boosting": {
+        "auc": 0.798,
+        "brier": 0.144,
+        "precision_at_base_rate": 0.651,
+        "recall_at_base_rate": 0.651,
+        "importance": {
+          "buffer": 0.2591,
+          "temperature_2m": 0.0232,
+          "hour": 0.0171,
+          "low_cost": 0.0057,
+          "narrow": 0.003,
+          "precipitation": 0.0,
+          "wind_gusts_10m": -0.0048,
+          "arrivals_pm60": -0.0128
+        }
+      },
+      "base_rate_test": 0.335,
+      "n_train": 401,
+      "n_test": 188
+    },
+    "mean_auc_gb": 0.792
+  },
+  "C": {
+    "flagged": [
+      {
+        "day": "2026-10-17",
+        "turnarounds": 244,
+        "median_ground_short": 81.07,
+        "share_long_stay": 0.17,
+        "median_ground_low-cost": 75.22,
+        "median_ground_full-service": 80.68,
+        "temp_mean": 10.52,
+        "precip_sum": 2.1,
+        "gust_max": 28.4,
+        "snow_hours": 0,
+        "z_turnarounds": -0.57,
+        "z_median_ground_short": 3.06,
+        "flag": true
+      },
+      {
+        "day": "2026-11-07",
+        "turnarounds": 180,
+        "median_ground_short": 76.38,
+        "share_long_stay": 0.23,
+        "median_ground_low-cost": 77.12,
+        "median_ground_full-service": 75.0,
+        "temp_mean": 2.64,
+        "precip_sum": 0.0,
+        "gust_max": 25.9,
+        "snow_hours": 0,
+        "z_turnarounds": -3.19,
+        "z_median_ground_short": 1.73,
+        "flag": true
+      }
+    ],
+    "spearman": {
+      "median_ground_short": {
+        "median_ground_short": 1.0,
+        "precip_sum": 0.06,
+        "gust_max": 0.03,
+        "temp_mean": 0.04
+      },
+      "precip_sum": {
+        "median_ground_short": 0.06,
+        "precip_sum": 1.0,
+        "gust_max": 0.56,
+        "temp_mean": 0.3
+      },
+      "gust_max": {
+        "median_ground_short": 0.03,
+        "precip_sum": 0.56,
+        "gust_max": 1.0,
+        "temp_mean": 0.22
+      },
+      "temp_mean": {
+        "median_ground_short": 0.04,
+        "precip_sum": 0.3,
+        "gust_max": 0.22,
+        "temp_mean": 1.0
+      }
+    },
+    "n_days": 40
+  }
+}

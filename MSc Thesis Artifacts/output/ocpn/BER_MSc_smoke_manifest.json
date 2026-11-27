@@ -1,0 +1,21 @@
+{
+  "model": "BER_MSc_smoke.ocpn",
+  "cases": 3,
+  "aircraft": 3,
+  "epoch": "2026-11-01T00:00:00+00:00",
+  "baseline_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2",
+  "input_sha256": "eb2e29630933f76bad51b86b40d628cc8662b9a7c4a3dda85d942b5675df6a2b",
+  "model_sha256": "e8ce332bd17e2526cd15b397891c81136472a0fa5a1ea17d23bceda2080d8118",
+  "date_filter": "2026-11-01",
+  "arrival_dates": [
+    "2026-11-01",
+    "2026-11-01"
+  ],
+  "supported_type_candidates": 3,
+  "assumed_load_factor": 0.85,
+  "assumed_prm": 0,
+  "assumed_schengen": false,
+  "assumed_sector_minutes": 120,
+  "carrier_profile": "unknown; no budget/full-service multiplier",
+  "departure_outcomes_in_execution": false
+}

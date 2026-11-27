@@ -1,0 +1,38 @@
+\chapter{Related Work and Methodological Background}
+\label{ch:related}
+
+This chapter introduces the work used to guide the study. We first consider turnaround timing and the available operational observations. We then discuss object-centric simulation and a closely related trace-reconstruction thesis. The final section explains the position of the present work.
+
+\section{Turnaround Dependencies and Activity Timing}
+Schultz et al. describe stochastic turnaround processes and discuss how disturbances on a critical path can affect later operations \cite{schultz2012dynamic}. Their work supports a model in which concurrent services must synchronize before the aircraft can proceed. It also provides reference assumptions used here for narrowbody cleaning, fueling and boarding.
+
+Transferring a reference distribution does not establish that it describes BER operations. In this study, the distributions are used as stated model inputs. We do not estimate them from the Berlin boundary intervals or derive a universal timing difference between low-cost and full-service airlines.
+
+Schultz later presents a calibrated stochastic boarding model and evaluates boarding scenarios \cite{schultz2018boarding}. This work shows the importance of considering passenger boarding in turnaround analysis. Our implementation uses a passenger-dependent mean reference, rather than reproducing that detailed stochastic model or its validation.
+
+\section{Operational Observations and the Data Gap}
+EUROCONTROL describes A-CDM as an approach for sharing operational information among airport operators, aircraft operators, ground handlers, air traffic control and the Network Manager \cite{eurocontrol_acdm}. This provides the operational context for milestone analysis. Whether a particular collection contains enough detail for activity-level calibration must still be checked separately.
+
+The OpenSky REST API provides aircraft identifiers, first and last observation timestamps, and estimated airports for flight records \cite{opensky_rest}. These fields support candidate aircraft pairing. However, they do not directly measure arrival at or departure from a stand. Accordingly, the observed boundary interval and the simulated block duration are treated as different quantities throughout this thesis.
+
+\section{Object-Centric Simulation and Event Logs}
+OCEL 2.0 represents events, objects, attributes and their relationships \cite{ocel2}. We use this representation to retain the links between generated turnaround events and reusable resources. Promenade provides exploratory views of these logs and their temporal behavior \cite{promenade}. These views help explain the simulation output, but cannot independently confirm that its input assumptions are realistic.
+
+OCPN Studio provides the modeling environment and the extended airport example \cite{ocpn_studio}. The official CPNsim runtime executes colored Petri nets \cite{cpnsim}. Our runs use its installed WebAssembly version 0.6.2. These software references document the implementation environment; they are not empirical evidence about airport operations.
+
+\section{Turnaround Trace Reconstruction from Sparse Data}
+Tkacenko's bachelor thesis investigates the generation of detailed turnaround traces when only limited observations are available \cite{tkacenko2026}. The study models narrowbody operations at Frankfurt Airport in \texttt{cpn-py}, combines domain knowledge with duration assumptions and exports simulated traces as OCEL 2.0. Candidate traces are filtered using observed in-block and off-block boundaries. The evaluation distinguishes model completion properties, empirical activity-duration agreement and relational checks on the exported data.
+
+This work is relevant because it makes a distinction that also matters here: agreement with a total turnaround duration does not establish that the internal activity durations are correct \cite[Sections~6.2 and~7.4]{tkacenko2026}. The accepted traces in that study show different levels of agreement across activities. This supports the need to report the limits of reconstruction from sparse observations.
+
+The earlier auxiliary pilot follows a different evaluation procedure: it releases demand using OpenSky observation boundaries and retains A-CDM records as references. The current primary empirical analysis instead starts with A-CDM departure rows and uses OpenSky solely for external correspondence checks. We do not filter simulation runs to make them fit observed off-block times. Instead, we compare timing, policy and capacity assumptions under the same daily demand. The resulting differences describe the behavior of the adapted model. They do not establish that the missing Berlin service events have been accurately reconstructed.
+
+The uncertainty measures also serve different purposes. Tkacenko compares individual ground-truth activity durations with central empirical intervals of simulated durations. Our controlled experiment calculates confidence intervals for differences between replication-level means. An interval describing activity variation is therefore not interchangeable with an interval describing uncertainty in a mean comparison.
+
+\section{Position of the Present Study}
+The contribution of this work is the connection of a traceable Berlin demand cohort to the supplied extended model, followed by object-centric analysis and repeated scenario comparisons. We attribute the original airport process model to the supervisor and cite Tkacenko's thesis as related methodological work. The two implementations are not assumed to be identical.
+
+The completed study does not include a JFK evaluation, a replication of a particular LAX study, a trained machine-learning duration predictor or empirical conformance checking. These remain outside the results reported here.
+
+\section{Summary}
+The reviewed work provides a basis for modeling parallel services and analyzing synthetic object-centric logs. It also shows why sparse operational timestamps cannot by themselves validate internal activities. The following chapter explains how these considerations guide our input preparation and experimental design.

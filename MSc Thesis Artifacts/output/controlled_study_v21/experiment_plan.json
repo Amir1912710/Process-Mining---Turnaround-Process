@@ -1,0 +1,433 @@
+{
+  "design": "Pilot fixed before new simulation results; two dates, six scenarios, five independent replications per cell. No parameter fitting.",
+  "dates": [
+    "2026-11-01",
+    "2026-11-08"
+  ],
+  "replications": 5,
+  "max_steps": 18000,
+  "randomization": "Runtime RNG; seeds not exposed; independent unpaired replications, not common random numbers.",
+  "interpretation": "Disabled curfew is a policy sensitivity, not verified BER law. Capacities and passenger loads are assumed.",
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_inherited_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_inherited",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_inherited_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_inherited",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_inherited_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_inherited",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_inherited_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_inherited",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_inherited_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_inherited_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_inherited",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_inherited_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_inherited",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_inherited_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_inherited",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_inherited_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_inherited",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_inherited_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "literature_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_literature_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "original_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_original_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_fuel_6plus6_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_fuel_6plus6_no_curfew_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_fuel_6plus6_no_curfew_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_fuel_6plus6_no_curfew_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_fuel_6plus6_no_curfew_r05"
+    }
+  ]
+}

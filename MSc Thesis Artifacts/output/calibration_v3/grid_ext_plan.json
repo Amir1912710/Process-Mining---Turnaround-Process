@@ -1,0 +1,167 @@
+{
+  "max_steps": 60000,
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.4_full1.0",
+      "sl": 1.4,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.4_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.4_full1.0"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.4_full1.1",
+      "sl": 1.4,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.4_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.4_full1.1"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.4_full1.2",
+      "sl": 1.4,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.4_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.4_full1.2"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.5_full1.0",
+      "sl": 1.5,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.5_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.5_full1.0"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.5_full1.1",
+      "sl": 1.5,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.5_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.5_full1.1"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.5_full1.2",
+      "sl": 1.5,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.5_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.5_full1.2"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.6_full1.0",
+      "sl": 1.6,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.6_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.6_full1.0"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.6_full1.1",
+      "sl": 1.6,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.6_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.6_full1.1"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "2026-11-01_low1.6_full1.2",
+      "sl": 1.6,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-01_low1.6_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-01_low1.6_full1.2"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.4_full1.0",
+      "sl": 1.4,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.4_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.4_full1.0"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.4_full1.1",
+      "sl": 1.4,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.4_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.4_full1.1"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.4_full1.2",
+      "sl": 1.4,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.4_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.4_full1.2"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.5_full1.0",
+      "sl": 1.5,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.5_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.5_full1.0"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.5_full1.1",
+      "sl": 1.5,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.5_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.5_full1.1"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.5_full1.2",
+      "sl": 1.5,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.5_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.5_full1.2"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.6_full1.0",
+      "sl": 1.6,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.6_full1.0.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.6_full1.0"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.6_full1.1",
+      "sl": 1.6,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.6_full1.1.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.6_full1.1"
+    },
+    {
+      "date": "2026-11-05",
+      "scenario": "2026-11-05_low1.6_full1.2",
+      "sl": 1.6,
+      "sf": 1.2,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-05_low1.6_full1.2.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-05_low1.6_full1.2"
+    }
+  ]
+}

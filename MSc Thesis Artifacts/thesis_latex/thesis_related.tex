@@ -1,0 +1,59 @@
+\chapter{Related Work: Turnaround Models, Milestone Data and Process Mining}
+\label{ch:related}
+
+This chapter places the proposed approach in the context of existing research on turnaround modeling, operational milestone data and process mining in aviation.
+
+\section{Modeling and Simulating Aircraft Turnarounds}
+
+Schultz et al.\ describe the turnaround as a set of stochastic processes that must synchronize before departure, and show how disturbances on the critical path affect later operations~\cite{schultz2012dynamic}. They provide reference distributions for narrowbody cleaning, fueling and boarding, which we use as service-time inputs. Schultz later presents a calibrated stochastic boarding model and shows that reliable boarding is a key to fast turnarounds~\cite{schultz2018boarding}; a related study discusses turnaround requirements after the pandemic~\cite{schultz2020postpandemic}.
+
+Petri nets have been used repeatedly to represent the synchronization constraints of the turnaround. Liu and Qin model ground operations as a timed Petri net and identify the critical routing by simulation~\cite{liu2006timedpetri}. Sng and Hansman construct Petri nets for narrowbody and widebody turnarounds, calibrate them with empirical data from Singapore Changi Airport and evaluate procedural modifications with Monte Carlo simulation and critical-path analysis~\cite{sng2019petri}. Cui et al.\ combine a time transition Petri net with Bayesian updating to predict turnaround time from historical activity data~\cite{cui2024ttpn}. At a finer scale, P{\l}anda and Skorupski model boarding as a hierarchical timed colored Petri net and show that disturbances can change the ranking of boarding strategies~\cite{planda2025boarding}. Discrete-event simulation has also been used to compare turnaround scenarios, for example pandemic-related process changes~\cite{tang2024covid} and new turnaround technologies~\cite{purohit2026intact}.
+
+Activity durations differ between airline business models. Oreschko et al.\ show significant turnaround process variations due to airport characteristics~\cite{oreschko2010variations}, Asadi studies robust turnaround management under uncertainty and provides stochastic duration models for ground operations~\cite{asadi2024robust}, and Luo et al.\ record low-cost turnaround activities at Amsterdam Schiphol for an agent-based digital twin and use simulated ground times to train machine-learning predictors~\cite{luo2024digitaltwin,luo2021agent}. Tkacenko combines these sources into carrier-specific distributions~\cite{tkacenko2026}, which we adopt and calibrate for BER.
+
+These studies demonstrate that Petri nets and simulation capture concurrency, synchronization and stochastic durations well. Their calibration, however, relies on recorded durations of individual activities, which are rarely available outside an airline or ground handler. Our approach keeps the same structural idea, but calibrates against properties that can be derived from publicly shared milestones.
+
+\section{Resource Allocation and Delay Propagation}
+
+Ground-handling resources are commonly studied as a scheduling or allocation problem. Padr\'on and Guimarans schedule interrelated ground-handling operations across several turnarounds~\cite{padron2019scheduling}, and C\'ile\v{c}ek et al.\ formulate staffing with substitutable personnel as a mathematical program~\cite{cilecek2024staffing}. Chen et al.\ combine task allocation and path planning for automated ground support equipment in a multi-agent system~\cite{chen2023multiagent}. Simulation-based studies are closest to our experimental design: Saha and Tomasella compare static and dynamic operational policies for allocating turnaround teams~\cite{saha2021policies}, and Saggar and Tomasella examine the planning and real-time allocation of ground support equipment~\cite{saggar2021gse}. El Asri et al.\ provide an overview of the field~\cite{elasri2018review}.
+
+Delays that arise during a turnaround can propagate to later flights. Evler et al.\ integrate turnaround decisions into aircraft recovery to mitigate this propagation in airline networks~\cite{evler2021recovery}. Rodr\'iguez-Sanz et al.\ link inbound and outbound flights through A-CDM milestones in a Bayesian network built from about 34{,}000 turnarounds at Madrid-Barajas~\cite{rodriguezsanz2018uncertainty}. Purohit shows on 2.5 million US turnarounds that the availability of inbound status information matters more than its precision for predicting departure delay~\cite{purohit2026availability}. These works motivate our empirical properties P1 and P4, which measure delay transfer through the turnaround and along aircraft rotations.
+
+\section{Operational Milestones: A-CDM and Surveillance Data}
+
+EUROCONTROL describes A-CDM as an approach for sharing operational information among airport operators, aircraft operators, ground handlers, air traffic control and the Network Manager~\cite{eurocontrol_acdm}. Several studies use its milestones directly. Z\'u\~niga and Boosten derive capacity indicators from the milestone approach at Amsterdam Schiphol~\cite{zuniga2020cdm}, Li et al.\ evaluate multi-flight ground-handling performance from shared milestone information~\cite{li2022multiflight}, and Parente et al.\ describe the variation of TOBT and TSAT at S\~ao Paulo Guarulhos~\cite{parente2024guarulhos}. The TOBT itself is updated during the turnaround: Verkerk reports that many updates occur in the final minutes before off-block~\cite{verkerk2018tobt}, and Volt et al.\ show that TOBT predictions improve as ground-handling milestones become available~\cite{volt2026tobt}.
+
+Surveillance data offer a complementary source. Schultz et al.\ derive operational milestones from ADS-B messages to support airports without a full A-CDM implementation~\cite{schultz2019acdmlite,schultz2021adsb}. The OpenSky Network provides such observations through a public API~\cite{opensky_rest}. We combine both sources: OpenSky identifies the physical aircraft and its arrival, and A-CDM provides the operator's target and the actual takeoff.
+
+\section{Process Mining in Aviation}
+
+Process mining has been applied to aviation operations mainly with case-centric event logs. Gunnarsson et al.\ apply predictive process monitoring to operational logistics in aviation~\cite{gunnarsson2019ppm}. Predictive process monitoring forecasts the remaining behavior of running cases, and object-centric logs have been shown to improve such predictions~\cite{fioretto2025ppm}. Our early-warning classifier follows this idea with the milestones available at landing. Rott et al.\ analyze the turnaround process at Munich Airport with process mining on A-CDM milestone data, and report that manually recorded timestamps can produce implausible sequences~\cite{rott2023processmining}. In both cases, the flight or turnaround is the case, and the resources shared between turnarounds are not represented as objects of their own.
+
+Tkacenko addresses the missing data with simulation~\cite{tkacenko2026}. The study models narrowbody turnarounds at Frankfurt Airport as a timed CPN in \texttt{cpn-py}, generates candidate traces by Monte Carlo simulation and exports them as OCEL~2.0. Candidates are accepted if their simulated off-block time falls within a window around the observed one, and the accepted traces are compared with 13 reference turnarounds recorded by computer vision. The study shows that agreement with the total turnaround duration does not imply agreement for the individual activities, and demonstrates a what-if analysis with an additional baggage loader.
+
+\section{Object-Centric Process Mining}
+
+Object-centric process mining relaxes the single-case assumption, so that an event can refer to several objects of different types~\cite{berti2023ocpmreview}. OCEL~2.0 adds explicit object-to-object relations, relationship qualifiers and evolving object attributes~\cite{koren2024ocel2,ocel2}, and object-centric Petri nets provide a matching process model~\cite{vanderaalst2020ocpn}. A recent community manifesto aligns terminology and research challenges for object-centric process management~\cite{seidel2026manifesto}. Tools such as Promenade support the exploration of object-centric logs~\cite{promenade}. Berti et al.\ note that adoption in real-world analyses is still limited~\cite{berti2023ocpmreview}.
+
+\section{Positioning of this Thesis}
+
+Table~\ref{tab:positioning} compares this thesis with the three studies that are closest to it: a Petri-net simulation calibrated with recorded activity data~\cite{sng2019petri}, a process-mining analysis of A-CDM milestones~\cite{rott2023processmining}, and a simulation that generates OCEL~2.0 logs for turnarounds~\cite{tkacenko2026}. The rows of the table follow the steps that every data-driven turnaround study has to take, and that structure the method of this thesis (Chapter~\ref{ch:methods}): the airport studied, the data used, the formalism of the model, the type of event log, how the model is calibrated, how it is validated, and which what-if questions it answers. The distinguishing features of this thesis are the combination of an object-centric simulation with empirical properties derived from public milestones of a real airport, a held-out evaluation, and what-if experiments on 41 observed days.
+
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{p{2.1cm}p{2.2cm}p{2.2cm}p{2.4cm}p{2.7cm}}\hline
+& Sng \& Hansman~\cite{sng2019petri} & Rott et al.~\cite{rott2023processmining} & Tkacenko~\cite{tkacenko2026} & This thesis\\\hline
+Airport & Changi & Munich & Frankfurt & Berlin Brandenburg\\\hline
+Data & Activity records & A-CDM milestones & IBT/OBT, 13 CV traces & A-CDM, OpenSky, weather, Feb--Apr records\\\hline
+Formalism & Petri net & Process mining & Timed CPN & Object-centric Petri net\\\hline
+Event log & -- & Case-centric & OCEL~2.0 & OCEL~2.0\\\hline
+Calibration & Activity durations & -- & Literature, rejection sampling & Carrier-specific, grid calibration on A-CDM targets\\\hline
+Validation & Empirical calibration data & -- & 13 reference turnarounds & Held-out days, 41 days, second season\\\hline
+What-if & Procedures & -- & 1 vs.\ 2 loaders & Boarding, fuel, buses, loaders, stand allocation (41 days)\\\hline
+\end{tabular}
+\caption{Positioning of this thesis relative to the closest related studies. The rows are the steps of a data-driven turnaround study, from the data source to the what-if analysis. IBT/OBT: in-block and off-block times; CV: computer vision.}
+\label{tab:positioning}
+\end{table}
+
+\section{Summary}
+
+The literature establishes Petri nets and simulation as suitable means to represent turnaround dependencies, and shows the value of A-CDM milestones and process mining for analyzing recorded operations. It also shows that detailed activity data, needed for calibration, are rarely available. Building on these foundations, this thesis connects an object-centric turnaround simulation with empirical properties that can be derived from public milestones. The next chapter describes how.

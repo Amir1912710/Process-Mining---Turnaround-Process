@@ -1,0 +1,32 @@
+[
+  {
+    "scenario": "Nov 1 / literature",
+    "n": 271,
+    "remote_cases": 100,
+    "release_delayed_gt1min": 0,
+    "approval_to_offblock_gt30min": 3,
+    "clean_end_to_board_start_gt30min": 0,
+    "proxy_mae_min": 92.09169739483394,
+    "proxy_bias_min": -70.54889299630996
+  },
+  {
+    "scenario": "Nov 8 / literature",
+    "n": 238,
+    "remote_cases": 91,
+    "release_delayed_gt1min": 0,
+    "approval_to_offblock_gt30min": 0,
+    "clean_end_to_board_start_gt30min": 0,
+    "proxy_mae_min": 115.99719890196077,
+    "proxy_bias_min": -101.60490195798319
+  },
+  {
+    "scenario": "Nov 1 / original timings",
+    "n": 271,
+    "remote_cases": 104,
+    "release_delayed_gt1min": 0,
+    "approval_to_offblock_gt30min": 8,
+    "clean_end_to_board_start_gt30min": 8,
+    "proxy_mae_min": 94.22121770479704,
+    "proxy_bias_min": -25.360824115621156
+  }
+]

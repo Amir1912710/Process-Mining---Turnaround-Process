@@ -1,0 +1,8 @@
+{
+  "source": "data\\acdm\\raw\\2026-11-01",
+  "collected_at_utc": "2026-11-01T23:25:07.092237+00:00",
+  "kind": "advance_board_snapshot",
+  "target_day": "2026-11-02",
+  "rows": 279,
+  "completed_day": false
+}

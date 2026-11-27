@@ -1,0 +1,71 @@
+{
+  "requested_day": "2026-11-25",
+  "airport": "BER",
+  "source": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber",
+  "collection_kind": "api_snapshot",
+  "collection_mode": "end_of_day",
+  "schedule_timezone": "Europe/Berlin",
+  "filter_atot": 0,
+  "historical_archive_access_verified": false,
+  "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained",
+  "collection_started_utc": "2026-11-25T23:17:01.165224+00:00",
+  "collection_finished_utc": "2026-11-25T23:17:04.217613+00:00",
+  "day_selection": "Exact calendar-date prefix of raw API std; timestamp timezone unverified",
+  "query_lower_bound_utc": "2026-11-24T00:00:00+00:00",
+  "api_total_items": 564,
+  "api_pages": 6,
+  "observed_std_dates": [
+    "2026-11-25",
+    "2026-11-26",
+    "2026-11-27"
+  ],
+  "requested_day_records": 221,
+  "synthetic_records_added": 0,
+  "raw_pages": [
+    {
+      "page": 1,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_001.json",
+      "sha256": "6e802671d4e22c1c8ca4fa25c0ad9cc397fe0309b9037d85a5ea19cad0724c48",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=1&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:02.288043+00:00"
+    },
+    {
+      "page": 2,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_002.json",
+      "sha256": "9364f31cb35c76858692fe65bb170e75293687a60ed5a45c51af51f555c70ac3",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=2&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:02.711482+00:00"
+    },
+    {
+      "page": 3,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_003.json",
+      "sha256": "2df75c4127df3f6dce904852f9d3a3861867d59a44c6ec377c473d87d6870826",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=3&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:03.117849+00:00"
+    },
+    {
+      "page": 4,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_004.json",
+      "sha256": "27281708008bf66a59dbc76c55a9ebf9cf26a113a4157aeab4028fbfe066e1d5",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=4&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:03.490019+00:00"
+    },
+    {
+      "page": 5,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_005.json",
+      "sha256": "f186a50d796f1daffc07c65bfa2cc771d29a8c6b76cc4db70775b63bf9d8bc0b",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=5&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:03.878683+00:00"
+    },
+    {
+      "page": 6,
+      "path": "data\\acdm\\raw\\2026-11-25\\page_006.json",
+      "sha256": "1a571afa16dacafcbc5ed9033fe983576712e3469c653e39135c3eff23be38f8",
+      "url": "https://commercial-api.berlin-airport.de/api/v1/cdm-app/en/flights/ber?page=6&itemsPerPage=100&filterAtot=0&dateFrom=2026-11-24+00%3A00%3A00",
+      "fetched_at_utc": "2026-11-25T23:17:04.216572+00:00"
+    }
+  ],
+  "status": "collected_snapshot",
+  "std_min": "2026-11-25 05:00:00",
+  "std_max": "2026-11-25 22:00:00"
+}

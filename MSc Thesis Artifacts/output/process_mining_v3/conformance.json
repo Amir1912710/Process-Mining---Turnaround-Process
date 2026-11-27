@@ -1,0 +1,22 @@
+{
+  "model_full__log_full": {
+    "fitness": 0.9905,
+    "perc_fit_traces": 61.36,
+    "precision": 0.2912
+  },
+  "model_full__log_low": {
+    "fitness": 0.9841,
+    "perc_fit_traces": 46.67,
+    "precision": 0.2841
+  },
+  "model_low__log_full": {
+    "fitness": 0.9926,
+    "perc_fit_traces": 65.54,
+    "precision": 0.2581
+  },
+  "model_low__log_low": {
+    "fitness": 0.9969,
+    "perc_fit_traces": 82.73,
+    "precision": 0.2585
+  }
+}

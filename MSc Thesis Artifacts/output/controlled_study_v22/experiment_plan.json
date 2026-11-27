@@ -1,0 +1,713 @@
+{
+  "design": "v2.2 frozen 2026-11-20 before execution: BER 00:00-05:00 local night ban at pushback only; schedule binding to A-CDM STD for linked cases; ten independent replications per cell.",
+  "dates": [
+    "2026-11-01",
+    "2026-11-08"
+  ],
+  "replications": 10,
+  "max_steps": 30000,
+  "randomization": "Runtime RNG; seeds not exposed; independent unpaired replications.",
+  "baseline_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2",
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r06"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r07"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r08"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r09"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_free_r10"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r06"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r07"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r08"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r09"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_r10"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r06"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r07"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r08"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r09"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "orig_berlocal_std",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_orig_berlocal_std_r10"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r06"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r07"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r08"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r09"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_fuel6plus6_r10"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r02"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r03"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r04"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r05"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r06"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r07"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r08"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r09"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r10"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r06"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r07"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r08"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r09"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_free",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_free_r10"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r06"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r07"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r08"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r09"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_r10"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r06"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r07"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r08"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r09"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "orig_berlocal_std",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_orig_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_orig_berlocal_std_r10"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r06"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r07"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r08"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r09"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_fuel6plus6",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_fuel6plus6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_fuel6plus6_r10"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r01"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 2,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r02"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 3,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r03"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 4,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r04"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 5,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r05"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 6,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r06"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 7,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r07"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 8,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r08"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 9,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r09"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "lit_berlocal_std_clean6",
+      "replication": 10,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-08_lit_berlocal_std_clean6.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-08_lit_berlocal_std_clean6_r10"
+    }
+  ]
+}

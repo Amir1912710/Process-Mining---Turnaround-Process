@@ -1,0 +1,172 @@
+{
+  "as_of": "2026-11-19",
+  "primary_source": "BER A-CDM application finalized daily snapshots",
+  "primary_unit": "one BER departure record, not an arrival-departure turnaround pair",
+  "primary_records": 1322,
+  "primary_cohorts": {
+    "usable_actual_takeoff": 1286,
+    "usable_target_takeoff_pairs": 1283,
+    "usable_nonnegative_target_sequence": 1261
+  },
+  "status_counts": {
+    "OFF": 1286,
+    "XLD": 15,
+    "SKD": 17,
+    "COM": 4
+  },
+  "days": [
+    {
+      "date": "2026-11-01",
+      "records": 289,
+      "eligible_atot": 283,
+      "complete_target_triples": 283,
+      "unique_opensky_candidates": 280,
+      "median_signed_proxy_delta_min": -0.166667
+    },
+    {
+      "date": "2026-11-05",
+      "records": 257,
+      "eligible_atot": 251,
+      "complete_target_triples": 250,
+      "unique_opensky_candidates": 244,
+      "median_signed_proxy_delta_min": -0.133333
+    },
+    {
+      "date": "2026-11-08",
+      "records": 264,
+      "eligible_atot": 250,
+      "complete_target_triples": 249,
+      "unique_opensky_candidates": 243,
+      "median_signed_proxy_delta_min": -0.133333
+    },
+    {
+      "date": "2026-11-15",
+      "records": 254,
+      "eligible_atot": 249,
+      "complete_target_triples": 249,
+      "unique_opensky_candidates": 242,
+      "median_signed_proxy_delta_min": -0.116667
+    },
+    {
+      "date": "2026-11-16",
+      "records": 258,
+      "eligible_atot": 253,
+      "complete_target_triples": 252,
+      "unique_opensky_candidates": 248,
+      "median_signed_proxy_delta_min": -0.033333
+    }
+  ],
+  "crosscheck_status": {
+    "unique_callsign_time_candidate_not_identity_verification": 1257,
+    "no_eligible_actual_takeoff": 36,
+    "no_correspondence_within_30min": 29
+  },
+  "timezone_hypotheses": {
+    "ACDM_is_UTC": 1257
+  },
+  "unique_candidate_delta_min": {
+    "n": 1257,
+    "mean": -0.16951735958631664,
+    "median": -0.116667,
+    "min": -3.116667,
+    "max": 4.0
+  },
+  "unique_candidate_absolute_delta_min": {
+    "n": 1257,
+    "mean": 0.2244630063643596,
+    "median": 0.133333,
+    "min": 0.0,
+    "max": 4.0
+  },
+  "unique_matches_within_minutes": {
+    "1": 1237,
+    "5": 1257,
+    "15": 1257,
+    "30": 1257
+  },
+  "target_metrics_complete_triples": {
+    "tsat_minus_tobt_min": {
+      "n": 1283,
+      "mean": 1.3009223164458301,
+      "median": 0.0,
+      "min": -0.416667,
+      "max": 57.0
+    },
+    "atot_minus_tsat_min": {
+      "n": 1283,
+      "mean": 12.581644574434918,
+      "median": 12.116667,
+      "min": -22.383333,
+      "max": 44.816667
+    },
+    "atot_minus_tobt_min": {
+      "n": 1283,
+      "mean": 13.882566890880748,
+      "median": 12.933333,
+      "min": -22.383333,
+      "max": 63.616667
+    },
+    "tobt_minus_std_min": {
+      "n": 1283,
+      "mean": 8.488633412314886,
+      "median": 0.0,
+      "min": -145.0,
+      "max": 235.0
+    },
+    "atot_minus_ctot_min": {
+      "n": 254,
+      "mean": 1.203215220472441,
+      "median": 0.6416665,
+      "min": -5.283333,
+      "max": 10.25
+    }
+  },
+  "missing": {
+    "id": 0,
+    "flight_id": 0,
+    "dep_airport_iata": 0,
+    "dep_airport_icao": 0,
+    "std": 0,
+    "flight_number": 0,
+    "flight_number_trim": 0,
+    "callsign": 0,
+    "aircraft_reg": 14,
+    "dest_iata": 3,
+    "dest_icao": 0,
+    "eobt": 32,
+    "ctot": 1068,
+    "tobt": 38,
+    "tsat": 38,
+    "atot": 36,
+    "parking_pos": 19,
+    "taxitime": 0,
+    "runway": 24,
+    "flight_status": 0,
+    "gates": 71,
+    "airline_iata": 83,
+    "airline_icao": 15,
+    "aircraft_iata": 1,
+    "aircraft_icao": 0,
+    "deicing_request": 1297,
+    "eczt": 1322,
+    "edit": 0,
+    "deicing_pos": 1298,
+    "sid": 23,
+    "verified": 0,
+    "updated_from_import_income": 0,
+    "updated_at": 0,
+    "flight_status_label": 0,
+    "deicing_request_label": 1297
+  },
+  "auxiliary_opensky_core_pairs": 10940,
+  "auxiliary_pairs_with_acdm_candidate": 826,
+  "acdm_measured_full_turnaround_pairs": 0,
+  "cautions": [
+    "Unique callsign/time correspondence does not independently verify aircraft identity.",
+    "OpenSky firstSeen is an observation proxy, not independently measured exact ATOT.",
+    "Delta statistics are conditional on matches within30 minutes.",
+    "Timezone hypothesis is empirical correspondence, not provider documentation.",
+    "No source AIBT/AOBT or service start/end timestamps are available.",
+    "No claim of continuous full-day coverage or improved predictive accuracy."
+  ]
+}

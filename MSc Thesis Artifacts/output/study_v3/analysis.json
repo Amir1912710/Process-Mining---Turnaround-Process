@@ -1,0 +1,842 @@
+{
+  "n_cases_per_scenario": {
+    "carrier": 10212,
+    "literature": 10212,
+    "original": 10212
+  },
+  "tta_vs_ready": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 259,
+      "obs_p5_25_50_75": [
+        45.9,
+        52.6,
+        59.1,
+        70.1
+      ],
+      "sim_p5_25_50_75": [
+        38.0,
+        46.9,
+        57.9,
+        70.6
+      ],
+      "mae_quantiles": 3.83
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 52,
+      "obs_p5_25_50_75": [
+        47.9,
+        67.1,
+        79.8,
+        87.3
+      ],
+      "sim_p5_25_50_75": [
+        33.5,
+        37.9,
+        44.4,
+        55.6
+      ],
+      "mae_quantiles": 27.67
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 266,
+      "obs_p5_25_50_75": [
+        36.1,
+        44.5,
+        52.7,
+        65.1
+      ],
+      "sim_p5_25_50_75": [
+        33.1,
+        37.0,
+        48.3,
+        56.7
+      ],
+      "mae_quantiles": 5.82
+    },
+    {
+      "scenario": "literature",
+      "cls": "full-service",
+      "n": 259,
+      "obs_p5_25_50_75": [
+        45.9,
+        52.6,
+        59.1,
+        70.1
+      ],
+      "sim_p5_25_50_75": [
+        42.9,
+        52.1,
+        65.9,
+        77.9
+      ],
+      "mae_quantiles": 4.53
+    },
+    {
+      "scenario": "literature",
+      "cls": "leisure",
+      "n": 52,
+      "obs_p5_25_50_75": [
+        47.9,
+        67.1,
+        79.8,
+        87.3
+      ],
+      "sim_p5_25_50_75": [
+        46.2,
+        48.9,
+        60.0,
+        72.0
+      ],
+      "mae_quantiles": 13.75
+    },
+    {
+      "scenario": "literature",
+      "cls": "low-cost",
+      "n": 266,
+      "obs_p5_25_50_75": [
+        36.1,
+        44.5,
+        52.7,
+        65.1
+      ],
+      "sim_p5_25_50_75": [
+        44.7,
+        53.6,
+        65.4,
+        77.1
+      ],
+      "mae_quantiles": 10.6
+    },
+    {
+      "scenario": "original",
+      "cls": "full-service",
+      "n": 259,
+      "obs_p5_25_50_75": [
+        45.9,
+        52.6,
+        59.1,
+        70.1
+      ],
+      "sim_p5_25_50_75": [
+        51.3,
+        61.0,
+        73.3,
+        85.4
+      ],
+      "mae_quantiles": 10.83
+    },
+    {
+      "scenario": "original",
+      "cls": "leisure",
+      "n": 52,
+      "obs_p5_25_50_75": [
+        47.9,
+        67.1,
+        79.8,
+        87.3
+      ],
+      "sim_p5_25_50_75": [
+        47.2,
+        53.8,
+        66.7,
+        103.2
+      ],
+      "mae_quantiles": 10.75
+    },
+    {
+      "scenario": "original",
+      "cls": "low-cost",
+      "n": 266,
+      "obs_p5_25_50_75": [
+        36.1,
+        44.5,
+        52.7,
+        65.1
+      ],
+      "sim_p5_25_50_75": [
+        48.9,
+        54.4,
+        66.3,
+        82.7
+      ],
+      "mae_quantiles": 13.47
+    }
+  ],
+  "p1": [
+    {
+      "scenario": "carrier",
+      "bin": "<=30",
+      "n": 85,
+      "observed": 0.988,
+      "simulated": 1.0
+    },
+    {
+      "scenario": "carrier",
+      "bin": "30-45",
+      "n": 87,
+      "observed": 0.54,
+      "simulated": 0.782
+    },
+    {
+      "scenario": "carrier",
+      "bin": "45-60",
+      "n": 213,
+      "observed": 0.268,
+      "simulated": 0.385
+    },
+    {
+      "scenario": "carrier",
+      "bin": "60-90",
+      "n": 154,
+      "observed": 0.227,
+      "simulated": 0.149
+    },
+    {
+      "scenario": "carrier",
+      "bin": ">90",
+      "n": 50,
+      "observed": 0.1,
+      "simulated": 0.02
+    },
+    {
+      "scenario": "literature",
+      "bin": "<=30",
+      "n": 85,
+      "observed": 0.988,
+      "simulated": 1.0
+    },
+    {
+      "scenario": "literature",
+      "bin": "30-45",
+      "n": 87,
+      "observed": 0.54,
+      "simulated": 0.931
+    },
+    {
+      "scenario": "literature",
+      "bin": "45-60",
+      "n": 213,
+      "observed": 0.268,
+      "simulated": 0.676
+    },
+    {
+      "scenario": "literature",
+      "bin": "60-90",
+      "n": 154,
+      "observed": 0.227,
+      "simulated": 0.286
+    },
+    {
+      "scenario": "literature",
+      "bin": ">90",
+      "n": 50,
+      "observed": 0.1,
+      "simulated": 0.0
+    },
+    {
+      "scenario": "original",
+      "bin": "<=30",
+      "n": 85,
+      "observed": 0.988,
+      "simulated": 1.0
+    },
+    {
+      "scenario": "original",
+      "bin": "30-45",
+      "n": 87,
+      "observed": 0.54,
+      "simulated": 0.989
+    },
+    {
+      "scenario": "original",
+      "bin": "45-60",
+      "n": 213,
+      "observed": 0.268,
+      "simulated": 0.732
+    },
+    {
+      "scenario": "original",
+      "bin": "60-90",
+      "n": 154,
+      "observed": 0.227,
+      "simulated": 0.383
+    },
+    {
+      "scenario": "original",
+      "bin": ">90",
+      "n": 50,
+      "observed": 0.1,
+      "simulated": 0.08
+    }
+  ],
+  "ground": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 3426,
+      "obs_ground_q": [
+        55.4,
+        64.2,
+        71.6,
+        83.8
+      ],
+      "sim_ground_q": [
+        53.8,
+        60.9,
+        70.6,
+        82.8
+      ],
+      "sim_block_q": [
+        40.0,
+        46.2,
+        54.2,
+        65.5
+      ],
+      "sim_ready_q": [
+        37.3,
+        43.7,
+        52.0,
+        64.2
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 789,
+      "obs_ground_q": [
+        68.5,
+        80.6,
+        89.5,
+        103.9
+      ],
+      "sim_ground_q": [
+        47.7,
+        51.8,
+        57.5,
+        69.7
+      ],
+      "sim_block_q": [
+        34.4,
+        37.7,
+        41.9,
+        52.7
+      ],
+      "sim_ready_q": [
+        32.0,
+        34.9,
+        39.0,
+        50.5
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 4017,
+      "obs_ground_q": [
+        48.6,
+        57.2,
+        66.6,
+        82.6
+      ],
+      "sim_ground_q": [
+        48.1,
+        52.0,
+        57.3,
+        69.0
+      ],
+      "sim_block_q": [
+        34.5,
+        37.9,
+        41.6,
+        51.7
+      ],
+      "sim_ready_q": [
+        32.4,
+        35.1,
+        38.9,
+        50.5
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "other",
+      "n": 230,
+      "obs_ground_q": [
+        31.6,
+        53.1,
+        71.2,
+        110.1
+      ],
+      "sim_ground_q": [
+        52.5,
+        59.5,
+        68.6,
+        80.5
+      ],
+      "sim_block_q": [
+        38.8,
+        45.0,
+        53.3,
+        62.4
+      ],
+      "sim_ready_q": [
+        36.6,
+        42.1,
+        51.0,
+        60.8
+      ]
+    },
+    {
+      "scenario": "literature",
+      "cls": "full-service",
+      "n": 3426,
+      "obs_ground_q": [
+        55.4,
+        64.2,
+        71.6,
+        83.8
+      ],
+      "sim_ground_q": [
+        57.9,
+        65.0,
+        77.1,
+        87.2
+      ],
+      "sim_block_q": [
+        43.6,
+        48.7,
+        55.6,
+        66.1
+      ],
+      "sim_ready_q": [
+        41.7,
+        47.5,
+        59.3,
+        68.6
+      ]
+    },
+    {
+      "scenario": "literature",
+      "cls": "leisure",
+      "n": 789,
+      "obs_ground_q": [
+        68.5,
+        80.6,
+        89.5,
+        103.9
+      ],
+      "sim_ground_q": [
+        60.4,
+        65.5,
+        76.0,
+        85.7
+      ],
+      "sim_block_q": [
+        46.3,
+        50.3,
+        54.7,
+        66.5
+      ],
+      "sim_ready_q": [
+        44.4,
+        48.2,
+        57.2,
+        66.9
+      ]
+    },
+    {
+      "scenario": "literature",
+      "cls": "low-cost",
+      "n": 4017,
+      "obs_ground_q": [
+        48.6,
+        57.2,
+        66.6,
+        82.6
+      ],
+      "sim_ground_q": [
+        59.7,
+        65.6,
+        76.5,
+        86.7
+      ],
+      "sim_block_q": [
+        45.6,
+        50.1,
+        55.3,
+        66.1
+      ],
+      "sim_ready_q": [
+        43.8,
+        48.6,
+        58.9,
+        68.2
+      ]
+    },
+    {
+      "scenario": "literature",
+      "cls": "other",
+      "n": 230,
+      "obs_ground_q": [
+        31.6,
+        53.1,
+        71.2,
+        110.1
+      ],
+      "sim_ground_q": [
+        57.1,
+        63.9,
+        75.2,
+        83.9
+      ],
+      "sim_block_q": [
+        42.2,
+        48.3,
+        55.0,
+        64.3
+      ],
+      "sim_ready_q": [
+        40.1,
+        47.1,
+        58.1,
+        65.3
+      ]
+    },
+    {
+      "scenario": "original",
+      "cls": "full-service",
+      "n": 3426,
+      "obs_ground_q": [
+        55.4,
+        64.2,
+        71.6,
+        83.8
+      ],
+      "sim_ground_q": [
+        66.6,
+        74.3,
+        85.9,
+        97.2
+      ],
+      "sim_block_q": [
+        51.3,
+        57.3,
+        62.5,
+        72.7
+      ],
+      "sim_ready_q": [
+        50.2,
+        57.3,
+        68.0,
+        78.4
+      ]
+    },
+    {
+      "scenario": "original",
+      "cls": "leisure",
+      "n": 789,
+      "obs_ground_q": [
+        68.5,
+        80.6,
+        89.5,
+        103.9
+      ],
+      "sim_ground_q": [
+        63.2,
+        68.3,
+        80.3,
+        88.3
+      ],
+      "sim_block_q": [
+        49.3,
+        52.8,
+        55.6,
+        66.5
+      ],
+      "sim_ready_q": [
+        47.8,
+        51.0,
+        62.3,
+        69.0
+      ]
+    },
+    {
+      "scenario": "original",
+      "cls": "low-cost",
+      "n": 4017,
+      "obs_ground_q": [
+        48.6,
+        57.2,
+        66.6,
+        82.6
+      ],
+      "sim_ground_q": [
+        62.9,
+        68.4,
+        80.1,
+        89.8
+      ],
+      "sim_block_q": [
+        48.8,
+        52.1,
+        55.6,
+        66.2
+      ],
+      "sim_ready_q": [
+        47.1,
+        51.1,
+        62.9,
+        71.2
+      ]
+    },
+    {
+      "scenario": "original",
+      "cls": "other",
+      "n": 230,
+      "obs_ground_q": [
+        31.6,
+        53.1,
+        71.2,
+        110.1
+      ],
+      "sim_ground_q": [
+        69.1,
+        74.6,
+        85.1,
+        94.9
+      ],
+      "sim_block_q": [
+        54.1,
+        57.8,
+        61.2,
+        72.1
+      ],
+      "sim_ready_q": [
+        52.2,
+        56.9,
+        66.6,
+        74.8
+      ]
+    }
+  ],
+  "mechanism": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 3993,
+      "mean_block": 60.4,
+      "median_block": 54.05,
+      "fuel_wait": 1.18,
+      "clean_wait": 0.0,
+      "tug_wait": 3.08,
+      "last_ready": {
+        "Cabin / boarding": 0.857,
+        "Fuel": 0.065,
+        "Baggage hold": 0.062,
+        "Catering": 0.009,
+        "Water / lavatory": 0.006
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 928,
+      "mean_block": 52.05,
+      "median_block": 41.72,
+      "fuel_wait": 0.93,
+      "clean_wait": 0.0,
+      "tug_wait": 7.61,
+      "last_ready": {
+        "Cabin / boarding": 0.561,
+        "Baggage hold": 0.333,
+        "Water / lavatory": 0.088,
+        "Fuel": 0.016,
+        "Cabin / boarding + Baggage hold": 0.001
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 4963,
+      "mean_block": 50.92,
+      "median_block": 41.67,
+      "fuel_wait": 1.09,
+      "clean_wait": 0.0,
+      "tug_wait": 5.58,
+      "last_ready": {
+        "Cabin / boarding": 0.541,
+        "Baggage hold": 0.35,
+        "Water / lavatory": 0.089,
+        "Fuel": 0.018,
+        "Cabin / boarding + Baggage hold": 0.001,
+        "Baggage hold + Water / lavatory": 0.001,
+        "Cabin / boarding + Water / lavatory": 0.0,
+        "Water / lavatory + Baggage hold": 0.0
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "other",
+      "n": 328,
+      "mean_block": 66.89,
+      "median_block": 53.88,
+      "fuel_wait": 1.51,
+      "clean_wait": 0.0,
+      "tug_wait": 8.76,
+      "last_ready": {
+        "Cabin / boarding": 0.814,
+        "Fuel": 0.095,
+        "Baggage hold": 0.082,
+        "Catering": 0.006,
+        "Water / lavatory": 0.003
+      }
+    },
+    {
+      "scenario": "literature",
+      "cls": "full-service",
+      "n": 3993,
+      "mean_block": 63.18,
+      "median_block": 55.65,
+      "fuel_wait": 2.52,
+      "clean_wait": 0.0,
+      "tug_wait": 2.98,
+      "last_ready": {
+        "Cabin / boarding": 0.925,
+        "Fuel": 0.064,
+        "Baggage hold": 0.01,
+        "Cabin / boarding + Fuel": 0.001,
+        "Water / lavatory": 0.0
+      }
+    },
+    {
+      "scenario": "literature",
+      "cls": "leisure",
+      "n": 928,
+      "mean_block": 65.81,
+      "median_block": 54.68,
+      "fuel_wait": 2.37,
+      "clean_wait": 0.0,
+      "tug_wait": 7.17,
+      "last_ready": {
+        "Cabin / boarding": 0.927,
+        "Fuel": 0.073
+      }
+    },
+    {
+      "scenario": "literature",
+      "cls": "low-cost",
+      "n": 4963,
+      "mean_block": 67.42,
+      "median_block": 55.48,
+      "fuel_wait": 2.51,
+      "clean_wait": 0.0,
+      "tug_wait": 6.25,
+      "last_ready": {
+        "Cabin / boarding": 0.93,
+        "Fuel": 0.07,
+        "Cabin / boarding + Fuel": 0.0
+      }
+    },
+    {
+      "scenario": "literature",
+      "cls": "other",
+      "n": 328,
+      "mean_block": 68.63,
+      "median_block": 55.47,
+      "fuel_wait": 2.34,
+      "clean_wait": 0.0,
+      "tug_wait": 8.63,
+      "last_ready": {
+        "Cabin / boarding": 0.905,
+        "Fuel": 0.088,
+        "Baggage hold": 0.003,
+        "Water / lavatory": 0.003
+      }
+    },
+    {
+      "scenario": "original",
+      "cls": "full-service",
+      "n": 3993,
+      "mean_block": 73.78,
+      "median_block": 62.88,
+      "fuel_wait": 0.57,
+      "clean_wait": 0.04,
+      "tug_wait": 4.31,
+      "last_ready": {
+        "Cabin / boarding": 0.995,
+        "Baggage hold": 0.005
+      }
+    },
+    {
+      "scenario": "original",
+      "cls": "leisure",
+      "n": 928,
+      "mean_block": 66.52,
+      "median_block": 55.62,
+      "fuel_wait": 0.57,
+      "clean_wait": 0.04,
+      "tug_wait": 7.05,
+      "last_ready": {
+        "Cabin / boarding": 1.0
+      }
+    },
+    {
+      "scenario": "original",
+      "cls": "low-cost",
+      "n": 4963,
+      "mean_block": 71.32,
+      "median_block": 55.9,
+      "fuel_wait": 0.54,
+      "clean_wait": 0.02,
+      "tug_wait": 7.66,
+      "last_ready": {
+        "Cabin / boarding": 1.0
+      }
+    },
+    {
+      "scenario": "original",
+      "cls": "other",
+      "n": 328,
+      "mean_block": 77.09,
+      "median_block": 61.41,
+      "fuel_wait": 0.72,
+      "clean_wait": 0.06,
+      "tug_wait": 9.43,
+      "last_ready": {
+        "Cabin / boarding": 1.0
+      }
+    }
+  ],
+  "daily_corr": {
+    "carrier": {
+      "mean_block": 1.0,
+      "fuel_wait": -0.15,
+      "cases": -0.38,
+      "temp_min": -0.35,
+      "precip": -0.04,
+      "gust_max": -0.24
+    },
+    "literature": {
+      "mean_block": 1.0,
+      "fuel_wait": -0.25,
+      "cases": -0.03,
+      "temp_min": -0.24,
+      "precip": 0.1,
+      "gust_max": -0.04
+    },
+    "original": {
+      "mean_block": 1.0,
+      "fuel_wait": -0.31,
+      "cases": 0.07,
+      "temp_min": -0.27,
+      "precip": 0.11,
+      "gust_max": -0.06
+    }
+  }
+}

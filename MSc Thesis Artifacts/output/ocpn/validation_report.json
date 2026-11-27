@@ -1,0 +1,56 @@
+[
+  {
+    "model": "BER_MSc_2026-11-01.ocpn",
+    "cases": 271,
+    "structure": "pass",
+    "execution": "completed",
+    "firings": 13305,
+    "departures": 271,
+    "resource_return": "pass",
+    "ocel_events": 10288,
+    "ocel_objects": 1247,
+    "ocel_integrity": "pass; typed attributes, timestamps and relationships"
+  },
+  {
+    "model": "BER_MSc_2026-11-08.ocpn",
+    "cases": 238,
+    "structure": "pass",
+    "execution": "completed",
+    "firings": 11688,
+    "departures": 238,
+    "resource_return": "pass",
+    "ocel_events": 9046,
+    "ocel_objects": 1123,
+    "ocel_integrity": "pass; typed attributes, timestamps and relationships"
+  },
+  {
+    "model": "BER_MSc_all_core.ocpn",
+    "cases": 10940,
+    "structure": "pass",
+    "execution": "load-only; all demand tokens present"
+  },
+  {
+    "model": "BER_MSc_timing_baseline.ocpn",
+    "cases": 271,
+    "structure": "pass",
+    "execution": "completed",
+    "firings": 13304,
+    "departures": 271,
+    "resource_return": "pass",
+    "ocel_events": 10298,
+    "ocel_objects": 1255,
+    "ocel_integrity": "pass; typed attributes, timestamps and relationships"
+  },
+  {
+    "model": "BER_MSc_validation20.ocpn",
+    "cases": 20,
+    "structure": "pass",
+    "execution": "completed",
+    "firings": 976,
+    "departures": 20,
+    "resource_return": "pass",
+    "ocel_events": 752,
+    "ocel_objects": 223,
+    "ocel_integrity": "pass; typed attributes, timestamps and relationships"
+  }
+]

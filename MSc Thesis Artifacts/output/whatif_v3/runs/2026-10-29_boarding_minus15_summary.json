@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-29",
+  "scenario": "boarding_minus15",
+  "replication": 1,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v3\\models\\BER_MSc_2026-10-29_boarding_minus15.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v3\\runs\\2026-10-29_boarding_minus15",
+  "model_sha256": "b7951b33c02a35ac28970fd1d0b23e1ec1e7d25e96bd0e87844004ab3efcf4da",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 12720,
+  "cases": 258,
+  "complete": true,
+  "elapsed_seconds": 33.797709499999996,
+  "mean_block_min": 56.82538759689921,
+  "median_block_min": 51.25,
+  "p90_block_min": 68.21166666666667,
+  "mean_fuel_wait_min": 2.653811369509043,
+  "p90_fuel_wait_min": 8.825000000000001,
+  "mean_clean_wait_min": 0.00006459948320413436,
+  "mean_tug_wait_min": 0.05303617571059432,
+  "long_approval_cases": 4,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.7325581395348837
+}

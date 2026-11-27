@@ -1,0 +1,15 @@
+{
+  "source_sha256": "697cd23b651b667ca8cb8f6813f0db82397acc8a3415298736b2db37270e7bda",
+  "source_departures": 810,
+  "complete_landing_to_takeoff_turnarounds": 0,
+  "complete_inblock_to_offblock_turnarounds": 0,
+  "missing_registration": 11,
+  "with_registration_and_actual_takeoff": 784,
+  "linkage_status_counts": {
+    "arrival_observation_missing": 784,
+    "arrival_observation_missing;aircraft_registration_missing;actual_takeoff_missing;departure_canceled": 11,
+    "arrival_observation_missing;actual_takeoff_missing": 15
+  },
+  "arrival_fields_imputed": 0,
+  "matching_rule": "No arrival source exists in collected A-CDM pages; no joins performed."
+}

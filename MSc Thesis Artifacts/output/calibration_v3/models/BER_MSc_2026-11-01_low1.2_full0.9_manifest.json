@@ -1,0 +1,41 @@
+{
+  "model": "BER_MSc_2026-11-01_low1.2_full0.9.ocpn",
+  "cases": 263,
+  "aircraft": 229,
+  "epoch": "2026-11-01T00:00:00+00:00",
+  "baseline_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2",
+  "input_sha256": "eb2e29630933f76bad51b86b40d628cc8662b9a7c4a3dda85d942b5675df6a2b",
+  "model_sha256": "dc4357942e68020f11120bd996fcfdcb4f61a4763c324ab09d6671009bf35873",
+  "date_filter": "2026-11-01",
+  "arrival_dates": [
+    "2026-11-01",
+    "2026-11-01"
+  ],
+  "supported_type_candidates": 249,
+  "assumed_load_factor": 0.85,
+  "assumed_prm": 0,
+  "border_segregation": "disabled because route context incomplete",
+  "assumed_sector_minutes": 120,
+  "carrier_profile": "unknown; no budget/full-service multiplier",
+  "departure_outcomes_in_execution": false,
+  "cleaning_teams": 9,
+  "service_scale": 1.0,
+  "timing_model": "carrier",
+  "random_seed_control": "not exposed by WASM runtime; repeat runs required",
+  "curfew_scenario": "ber_local",
+  "hydrant_dispensers": 4,
+  "fuel_tankers": 4,
+  "leisure_profile": "full",
+  "context": "enriched",
+  "weather": "observed",
+  "scale_low": 1.2,
+  "scale_full": 0.9,
+  "carrier_types": {
+    "low": 122,
+    "full": 141,
+    "unknown": 0
+  },
+  "schedule_binding": "std",
+  "schedule_bound_cases": 225,
+  "utc_offset_hours": 1
+}

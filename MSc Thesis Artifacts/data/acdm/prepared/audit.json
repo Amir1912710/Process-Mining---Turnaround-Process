@@ -1,0 +1,124 @@
+{
+  "sources": [
+    {
+      "date": "2026-11-01",
+      "rows": 289,
+      "csv_sha256": "0813ac9c128598850cda33e118c2f0a82ad0f32294b455b6f8368f70b0298b58",
+      "json_sha256": "beb8096b5bfa17c456ed4ae68de99ddc0ee8f8f8df9ead0ac110d69f665f66cd",
+      "manifest_sha256": "2e74cde37540bde71ea2f9c89a05bc960761486d91c1d14165f3eeb28dbd9d8a",
+      "collection_finished_utc": "2026-11-01T23:25:07.092237+00:00",
+      "full_day_completeness": "unverified; a successful paginated live-board response does not prove complete historical coverage"
+    },
+    {
+      "date": "2026-11-05",
+      "rows": 257,
+      "csv_sha256": "70c654d828ae381dfe14f6ac9991eac0f3c21916d96f50258cf74210a48d2b62",
+      "json_sha256": "8cac4ba82a7d40d05edd6d21d1c2047feb31ba89d6dffe9b25493c64918fbd6c",
+      "manifest_sha256": "85605415014a2f5d3a322a7c66b1b12e5edd946b9450c48fa388a7f8628d9737",
+      "collection_finished_utc": "2026-11-05T23:53:09.818504+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    },
+    {
+      "date": "2026-11-08",
+      "rows": 264,
+      "csv_sha256": "33f54def3bfab9d8bb815bebd329f3f7cada3e3db8ab6b4b3bcd93e2be606848",
+      "json_sha256": "c26c02d5237c4f5d197a2236ac6a7703dd7c2e200222f17f5f994b1d46d847d9",
+      "manifest_sha256": "6fb4bc6368dc6123b6d206e3ae0efe145b14af8062367f95f33d7569be911c52",
+      "collection_finished_utc": "2026-11-08T23:18:04.077208+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    }
+  ],
+  "input_records": 810,
+  "prepared_records": 810,
+  "cohorts": {
+    "usable_actual_takeoff": 784,
+    "usable_target_takeoff_pairs": 782,
+    "usable_nonnegative_target_sequence": 774
+  },
+  "flags": {
+    "missing_tobt": 27,
+    "missing_tsat": 27,
+    "missing_atot": 26,
+    "missing_aircraft_reg": 11,
+    "missing_parking_pos": 13,
+    "missing_runway": 21,
+    "canceled": 11,
+    "no_actual_takeoff": 15,
+    "negative_tsat_minus_tobt_min": 7,
+    "negative_atot_minus_tsat_min": 1,
+    "negative_atot_minus_tobt_min": 1
+  },
+  "status_counts": {
+    "OFF": 784,
+    "XLD": 11,
+    "SKD": 13,
+    "COM": 2
+  },
+  "missing": {
+    "id": 0,
+    "flight_id": 0,
+    "dep_airport_iata": 0,
+    "dep_airport_icao": 0,
+    "std": 0,
+    "flight_number": 0,
+    "flight_number_trim": 0,
+    "callsign": 0,
+    "aircraft_reg": 11,
+    "dest_iata": 3,
+    "dest_icao": 0,
+    "eobt": 23,
+    "ctot": 644,
+    "tobt": 27,
+    "tsat": 27,
+    "atot": 26,
+    "parking_pos": 13,
+    "taxitime": 0,
+    "runway": 21,
+    "flight_status": 0,
+    "gates": 50,
+    "airline_iata": 47,
+    "airline_icao": 13,
+    "aircraft_iata": 1,
+    "aircraft_icao": 0,
+    "deicing_request": 809,
+    "eczt": 810,
+    "edit": 0,
+    "deicing_pos": 809,
+    "sid": 19,
+    "verified": 0,
+    "updated_from_import_income": 0,
+    "updated_at": 0,
+    "flight_status_label": 0,
+    "deicing_request_label": 809
+  },
+  "script_sha256": "d78aa621c2683fd6e520ae74930fba328a9f9e5c6758ab9c4c8f5ece3c6b42c0",
+  "timezone": "Unverified; no timezone assigned or conversion performed",
+  "partition": "Latest available source date held out; suggestion only, not fitted or evaluated",
+  "metrics": {
+    "tsat_minus_tobt_min": {
+      "n": 783,
+      "mean": 1.3474457215836526,
+      "median": 0.0
+    },
+    "atot_minus_tsat_min": {
+      "n": 782,
+      "mean": 12.966517480818414,
+      "median": 12.683333
+    },
+    "atot_minus_tobt_min": {
+      "n": 782,
+      "mean": 14.315686277493606,
+      "median": 13.458333499999998
+    },
+    "tobt_minus_std_min": {
+      "n": 783,
+      "mean": 9.656385696040868,
+      "median": 0.0
+    },
+    "atot_minus_ctot_min": {
+      "n": 166,
+      "mean": 1.4689758975903615,
+      "median": 0.975
+    }
+  }
+}

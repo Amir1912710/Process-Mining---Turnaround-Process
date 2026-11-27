@@ -1,0 +1,44 @@
+\chapter{A-CDM Data and Evaluation Method}
+\label{ch:methods}
+This chapter defines the primary empirical dataset and the role of the independent cross-check. Every primary row comes from the BER A-CDM application. OpenSky contributes comparison observations only. The earlier turnaround reconstruction and its simulation experiments are documented separately in the appendices.
+
+\section{Primary Source and Unit of Analysis}
+The primary collection contains 1,322 departure records from five finalized snapshots of the BER A-CDM application. The source dates are 1, 5, 8, 15 and 16 November 2026, contributing 289, 257, 264, 254 and 258 records, respectively. These are separated snapshots, not continuous observations from October to November. Pagination captures the records returned for the requested scheduled-departure date; it does not independently establish complete airport coverage.
+
+Each row represents one departure record. The source provides callsign, aircraft registration/type, selected stand/runway attributes and departure fields including TOBT, TSAT and ATOT. It does not provide the inbound landing time, AIBT, AOBT or internal cleaning, fueling and boarding timestamps required for a measured full-turnaround case. We therefore do not label these rows as complete landing-to-next-takeoff intervals.
+
+The preparation procedure preserves canceled and incomplete records in the master table. It verifies CSV/JSON agreement, manifest row counts and the hashes of saved raw responses. Source keys, dates and review flags remain available for each row. No missing milestones or service durations are synthesized.
+
+\section{Inclusion Rules and Timestamp Meanings}
+There are 1,286 records with eligible ATOT and valid source identifiers/date/airport fields. The remaining 36 records include 15 canceled departures and 21 other records without an eligible actual takeoff. A complete TOBT/TSAT/ATOT triple exists for 1,283 eligible departures. A sensitivity subset of 1,261 also requires nonnegative differences for the target sequence; the master table retains all records. Negative differences require interpretation rather than automatic correction.
+
+TOBT is a target off-block value and TSAT is a target start-up approval value. Their source timestamps describe planned targets, not the times those targets were issued and not actual execution of a service. ATOT is the source actual-takeoff field. The precise source mapping of STD and the meaning of \texttt{taxitime} still require confirmation. We retain the original naive timestamps and keep timezone hypotheses explicit.
+
+For complete eligible triples, we describe
+\begin{align}
+\Delta_{\mathrm{target}}&=\mathrm{TSAT}-\mathrm{TOBT},\\
+\Delta_{\mathrm{ATOT,TSAT}}&=\mathrm{ATOT}-\mathrm{TSAT},\\
+\Delta_{\mathrm{ATOT,TOBT}}&=\mathrm{ATOT}-\mathrm{TOBT}.
+\end{align}
+These differences characterize departure targets and their relation to takeoff. They are not measured cleaning time, taxi time, resource queueing or AIBT--AOBT duration. End-of-day target values cannot automatically be treated as information available to an earlier prediction.
+
+\section{OpenSky as an External Departure Cross-Check}
+We compare A-CDM ATOT with OpenSky's first observation of the outbound flight. OpenSky remains the external comparison source in this primary analysis and does not create primary A-CDM rows. Its flight boundaries are surveillance-derived proxies \cite{opensky_rest}.
+
+The matching procedure normalizes callsigns and tests two explicit interpretations of each naive A-CDM ATOT: UTC and Europe/Berlin. A candidate must agree in callsign and fall within 30 minutes of the interpreted ATOT. We retain a unique candidate only when no other A-CDM row reuses its OpenSky flight. Missing and ambiguous matches remain visible. Data retrieved for 15 and 16 November extend this cross-check beyond the earlier saved dates; earlier simulation inputs remain frozen.
+
+For a unique candidate, the signed difference is
+\begin{equation}
+\delta_i=t^{\mathrm{OpenSky}}_{i,\mathrm{firstSeen}}-t^{\mathrm{A\mbox{-}CDM}}_{i,\mathrm{ATOT}}.
+\end{equation}
+We report the signed and absolute differences together with match coverage. Agreement supports temporal correspondence, but does not certify aircraft identity, independently document the provider's timezone contract or establish completeness. The difference statistics are conditional on the matching rule. A departure cross-check does not validate arrival or internal service events.
+
+\section{Observed Object-Centric Departure Log}
+The new empirical OCEL contains one ActualTakeoff event for each of the 1,257 uniquely matched records. Every event timestamp and its source fields originate in A-CDM. The export uses the empirically supported UTC hypothesis and retains the original naive ATOT plus an explicit timestamp-basis attribute. This is an assumption for exploratory import, not a claim of a verified API timezone contract.
+
+Departure, Aircraft and Stand objects retain available source identities. Missing aircraft or stand values do not create invented identities. TOBT and TSAT remain attributes of the takeoff event; they are not converted into observed boarding or start-up events. This log can support inspection of departures and object relationships in Promenade, but cannot yield a measured turnaround duration from a single observed milestone per flight.
+
+\section{Scope of the OCPN Work}
+The supplied extended airport model remains the supervisor's baseline. The completed OCPN/Promenade pilot uses a different, auxiliary OpenSky-derived demand cohort. Its details and unchanged numerical results appear in the appendices. The new A-CDM-primary analysis does not relabel those runs or treat them as A-CDM-only calibration.
+
+No complete A-CDM-only turnaround model is claimed at this stage. Initializing and evaluating one requires arrival/block milestones or additional assumptions that would need independent justification. Source-label updates to copies of the pilot models preserve their process structure and analyzed inputs. They do not constitute new simulations.

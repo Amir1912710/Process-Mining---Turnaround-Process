@@ -1,0 +1,169 @@
+{
+  "packaged_on": "2026-11-19",
+  "primary_rows": 10940,
+  "primary_columns": 41,
+  "primary_candidate_acdm_matches": 826,
+  "all_candidates": 11203,
+  "daily_acdm_snapshots": [
+    {
+      "source_day": "2026-11-01",
+      "records": 289
+    },
+    {
+      "source_day": "2026-11-05",
+      "records": 257
+    },
+    {
+      "source_day": "2026-11-08",
+      "records": 264
+    },
+    {
+      "source_day": "2026-11-15",
+      "records": 254
+    },
+    {
+      "source_day": "2026-11-16",
+      "records": 258
+    }
+  ],
+  "exact_measured_landing_to_takeoff_rows": 0,
+  "paired_table_updated_with_newer_snapshots": false,
+  "files": {
+    "BER_All_Candidate_Pairs_With_Review_Flags.csv": {
+      "bytes": 6021862,
+      "sha256": "5fc72959bb8362d9dc740cb2614b03f141f512267cdeaa951d3906b68c57ea10"
+    },
+    "BER_Combined_Turnaround_Pairs.csv": {
+      "bytes": 5867352,
+      "sha256": "eb2e29630933f76bad51b86b40d628cc8662b9a7c4a3dda85d942b5675df6a2b"
+    },
+    "README.md": {
+      "bytes": 5432,
+      "sha256": "ea69be0786e84dc260a4db53d11c08884562fea96365725068bb550abe8e13c3"
+    },
+    "ACDM_supplemental_reference/manifest.json": {
+      "bytes": 1129,
+      "sha256": "84e9ada2339dbd1d9733df3df0fcab6b8a9ae868384e8f6ac1cc095c9b483365"
+    },
+    "ACDM_supplemental_reference/page_001.json": {
+      "bytes": 69310,
+      "sha256": "1382538bbb0b96f04fb71f627f7518bc53d5f44ff2f9ad3f9440961a46b5dbfd"
+    },
+    "ACDM_supplemental_reference/page_002.json": {
+      "bytes": 68242,
+      "sha256": "bd3b004659274cbbca7007a7d708079da1213417c87e38fd105c45450bc151b7"
+    },
+    "ACDM_supplemental_reference/page_003.json": {
+      "bytes": 67217,
+      "sha256": "3c354f3b0a6fa9fe62811ad812edb9d12d186abe48e0259a52b10d5bfe722025"
+    },
+    "ACDM_supplemental_reference/page_004.json": {
+      "bytes": 61563,
+      "sha256": "bf61f05c10ec822bf63f653ad36f7b2cb3551f8d2c2fe01f5aff486591c6df0e"
+    },
+    "ACDM_supplemental_reference/page_005.json": {
+      "bytes": 67174,
+      "sha256": "13e480109edd324af633464ef3385bf6bcc86b3b96daff3ab9e86de4c9d3fdc5"
+    },
+    "ACDM_supplemental_reference/page_006.json": {
+      "bytes": 53700,
+      "sha256": "bab88d515f76a37ad5a5883cd682b7693b435d3a871a25c07538f36088b84612"
+    },
+    "supporting_prepared_data/acdm_crosscheck_candidates.csv": {
+      "bytes": 318822,
+      "sha256": "4e77a73d8aaf19180bfe7c4877017c12a4c8fa9ec5e5d311d9e9ed37a60f6dfe"
+    },
+    "supporting_prepared_data/audit.json": {
+      "bytes": 1751,
+      "sha256": "b7945ac618276afee67fc86194fa319f6c68dda3f58a73bc1ebb9cb6f4ffc821"
+    },
+    "supporting_prepared_data/ber_acdm_observed_takeoffs.csv": {
+      "bytes": 204644,
+      "sha256": "ca4c9630b20136395502cdfdd63f0289d0bf084d744bee95a12c11be5dfbeeb1"
+    },
+    "supporting_prepared_data/ber_movements_opensky.csv": {
+      "bytes": 7831216,
+      "sha256": "6eabb2a21625e8bbfcdd6b50e7190e46a317bc538cbe2860abce62780c302d9e"
+    },
+    "supporting_prepared_data/daily_coverage.csv": {
+      "bytes": 4203,
+      "sha256": "0a880c59ee81c3fe0ebb220b054f4f81c37435f8996e64f37fbe66dcecdc875e"
+    },
+    "supporting_prepared_data/historical_preparation_method.md": {
+      "bytes": 8978,
+      "sha256": "440f05452d5eb30ac29f4eae409236bc36af86571cb267889ceb050cd125cd20"
+    },
+    "supporting_prepared_data/movement_records_for_review.csv": {
+      "bytes": 42,
+      "sha256": "b0f6c3bb80761b4cdeced360a288c18b0136fd02f697bbf3475b2e43044c06fc"
+    },
+    "supporting_prepared_data/unpaired_departures.csv": {
+      "bytes": 40747,
+      "sha256": "be37263ecb1bd5986600fea8dc1efd16a62920c2f9939c784e48f4cb71b4e2c2"
+    },
+    "supporting_prepared_data/verification.json": {
+      "bytes": 288,
+      "sha256": "8f3c4c904f9ef555f9a117891563f4343d93cac039d21c1c5cf618d2bff8adbd"
+    },
+    "ACDM_daily_snapshots/2026-11-01/flights.csv": {
+      "bytes": 75613,
+      "sha256": "0813ac9c128598850cda33e118c2f0a82ad0f32294b455b6f8368f70b0298b58"
+    },
+    "ACDM_daily_snapshots/2026-11-01/flights.json": {
+      "bytes": 288701,
+      "sha256": "beb8096b5bfa17c456ed4ae68de99ddc0ee8f8f8df9ead0ac110d69f665f66cd"
+    },
+    "ACDM_daily_snapshots/2026-11-01/manifest.json": {
+      "bytes": 3780,
+      "sha256": "2e74cde37540bde71ea2f9c89a05bc960761486d91c1d14165f3eeb28dbd9d8a"
+    },
+    "ACDM_daily_snapshots/2026-11-05/flights.csv": {
+      "bytes": 66532,
+      "sha256": "70c654d828ae381dfe14f6ac9991eac0f3c21916d96f50258cf74210a48d2b62"
+    },
+    "ACDM_daily_snapshots/2026-11-05/flights.json": {
+      "bytes": 255843,
+      "sha256": "8cac4ba82a7d40d05edd6d21d1c2047feb31ba89d6dffe9b25493c64918fbd6c"
+    },
+    "ACDM_daily_snapshots/2026-11-05/manifest.json": {
+      "bytes": 3841,
+      "sha256": "85605415014a2f5d3a322a7c66b1b12e5edd946b9450c48fa388a7f8628d9737"
+    },
+    "ACDM_daily_snapshots/2026-11-08/flights.csv": {
+      "bytes": 67971,
+      "sha256": "33f54def3bfab9d8bb815bebd329f3f7cada3e3db8ab6b4b3bcd93e2be606848"
+    },
+    "ACDM_daily_snapshots/2026-11-08/flights.json": {
+      "bytes": 262708,
+      "sha256": "c26c02d5237c4f5d197a2236ac6a7703dd7c2e200222f17f5f994b1d46d847d9"
+    },
+    "ACDM_daily_snapshots/2026-11-08/manifest.json": {
+      "bytes": 3841,
+      "sha256": "6fb4bc6368dc6123b6d206e3ae0efe145b14af8062367f95f33d7569be911c52"
+    },
+    "ACDM_daily_snapshots/2026-11-15/flights.csv": {
+      "bytes": 66331,
+      "sha256": "66326d5b6b591f7333e86aa7409d020e42fecddbed3900ceb621699f338c7075"
+    },
+    "ACDM_daily_snapshots/2026-11-15/flights.json": {
+      "bytes": 254150,
+      "sha256": "c38f5aeba4f9d7c592ab4a129a35e16f5c6d8b199a8676e4d0c7d87e4d104e16"
+    },
+    "ACDM_daily_snapshots/2026-11-15/manifest.json": {
+      "bytes": 3841,
+      "sha256": "a6274ce5abdc73dffb4ad9cdd87dbf277df1e59f01dd1216ba13978f1942b26f"
+    },
+    "ACDM_daily_snapshots/2026-11-16/flights.csv": {
+      "bytes": 67214,
+      "sha256": "c104be2153ec6f65b8c786836ea65755cc49854a49625c4333bffd0331c32e4c"
+    },
+    "ACDM_daily_snapshots/2026-11-16/flights.json": {
+      "bytes": 257207,
+      "sha256": "f3ca4b8c8abc416ce2314ed5288234e1e91b3217b438e87fecf94f9329c7c4ff"
+    },
+    "ACDM_daily_snapshots/2026-11-16/manifest.json": {
+      "bytes": 3444,
+      "sha256": "15904526ac8d7e3d83d13a35ccb237995b4ff95df2930e63249bfec483f7c7f5"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+Aircraft turnaround involves concurrent activities and shared resources, but the available observations describe only part of this process. This thesis examines how those observations can support an object-centric simulation while keeping missing information explicit. We adapt the supplied extended airport model, prepare daily Berlin inputs and analyze the generated logs in Promenade.
+
+For RQ1, the work demonstrates how to construct finite demand from candidate aircraft-linked intervals and retain the source and meaning of each input. It also identifies the limit of the available data: internal service durations cannot be recovered from the current boundary proxies alone. Literature-based timing functions therefore remain assumptions rather than fitted BER estimates.
+
+For RQ2, the analysis shows how local waiting and parallel completion can lead to different conclusions. Fuel dispatch has a visible queue, while cabin and boarding work are usually last ready at the handling join. Shared-resource relationships also show why an expanded object-centric execution should not automatically be treated as one turnaround interval. A controlled terminal-versus-remote comparison and a quantified delay-propagation experiment remain incomplete.
+
+For RQ3, the controlled pilot compares six scenarios on two dates with five runs per scenario and date. All 60 runs complete, producing 15,270 simulated executions from 509 reused empirical interval cases. With the inherited curfew helper disabled, literature timings shorten mean simulated block duration by 7.53 and 7.04 minutes. Increasing fuel capacity greatly reduces dispatch waiting, while the corresponding overall changes are only 0.62 and 0.22 minutes. These results demonstrate a method for conditional resource evaluation, rather than an optimal actual staffing configuration.
+
+The policy comparison also reveals a confirmed UTC/local-time mismatch and a strong interaction between timing assumptions and inherited policy. This finding limits the interpretation of earlier differences and identifies a concrete requirement for the next model version.
+
+\section{Future Work}
+The next steps are to correct the local-time movement policy, separate operational turnarounds from long stays and resolve conflicting aircraft-type candidates. Empirical evaluation should then compare quantities with matching timestamp definitions on independently selected dates. Stand-specific and delay-propagation experiments are needed to complete RQ2, while broader uncertainty analysis and a declared allocation objective are needed for stronger RQ3 conclusions.
+
+The completed work provides a traceable simulation and analysis procedure under limited observations. Its findings are useful for examining the modeled system and identifying assumptions that require further investigation. They do not yet establish a validated representation of BER ground handling.

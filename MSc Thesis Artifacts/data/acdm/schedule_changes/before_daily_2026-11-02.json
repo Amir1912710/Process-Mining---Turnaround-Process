@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "airport": "BER",
+  "next_day": "2026-10-31",
+  "direction": "backwards",
+  "minimum_interval_seconds": 3600,
+  "status": "ready",
+  "completed_days": [
+    {
+      "date": "2026-11-01",
+      "rows": 289,
+      "path": "data\\acdm\\days\\2026-11-01",
+      "collected_at_utc": "2026-11-01T23:25:07.092237+00:00"
+    }
+  ],
+  "last_attempt_utc": "2026-11-01T23:25:05.109027+00:00",
+  "last_success_utc": "2026-11-01T23:25:07.092237+00:00",
+  "last_error": null
+}

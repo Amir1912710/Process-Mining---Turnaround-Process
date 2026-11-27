@@ -1,0 +1,781 @@
+scenario,turnaround,last_ready_branch,ready_at_ms
+Nov 1 / literature,TA-BER-00001,Cabin / boarding,19963000
+Nov 1 / literature,TA-BER-00002,Cabin / boarding,22141000
+Nov 1 / literature,TA-BER-00003,Cabin / boarding,22443000
+Nov 1 / literature,TA-BER-00004,Cabin / boarding,26314000
+Nov 1 / literature,TA-BER-00005,Cabin / boarding,24085000
+Nov 1 / literature,TA-BER-00006,Cabin / boarding,25145000
+Nov 1 / literature,TA-BER-00007,Cabin / boarding,26355000
+Nov 1 / literature,TA-BER-00008,Cabin / boarding,26421000
+Nov 1 / literature,TA-BER-00009,Cabin / boarding,26700000
+Nov 1 / literature,TA-BER-00010,Cabin / boarding,28213000
+Nov 1 / literature,TA-BER-00011,Cabin / boarding,28414000
+Nov 1 / literature,TA-BER-00012,Cabin / boarding,26939000
+Nov 1 / literature,TA-BER-00013,Cabin / boarding,27359000
+Nov 1 / literature,TA-BER-00014,Cabin / boarding,28676000
+Nov 1 / literature,TA-BER-00015,Cabin / boarding,28096000
+Nov 1 / literature,TA-BER-00016,Cabin / boarding,28639000
+Nov 1 / literature,TA-BER-00018,Cabin / boarding,30890000
+Nov 1 / literature,TA-BER-00017,Cabin / boarding,30080000
+Nov 1 / literature,TA-BER-00020,Cabin / boarding,30327000
+Nov 1 / literature,TA-BER-00019,Cabin / boarding,30204000
+Nov 1 / literature,TA-BER-00021,Cabin / boarding,34018000
+Nov 1 / literature,TA-BER-00022,Cabin / boarding,32072000
+Nov 1 / literature,TA-BER-00024,Fuel,31725000
+Nov 1 / literature,TA-BER-00023,Cabin / boarding,32226000
+Nov 1 / literature,TA-BER-00025,Cabin / boarding,31273000
+Nov 1 / literature,TA-BER-00026,Cabin / boarding,31803000
+Nov 1 / literature,TA-BER-00027,Cabin / boarding,31055000
+Nov 1 / literature,TA-BER-00029,Cabin / boarding,31917000
+Nov 1 / literature,TA-BER-00028,Cabin / boarding,32928000
+Nov 1 / literature,TA-BER-00030,Fuel,32324000
+Nov 1 / literature,TA-BER-00031,Cabin / boarding,32250000
+Nov 1 / literature,TA-BER-00033,Cabin / boarding,33694000
+Nov 1 / literature,TA-BER-00034,Cabin / boarding,34150000
+Nov 1 / literature,TA-BER-00032,Fuel,34484000
+Nov 1 / literature,TA-BER-00036,Cabin / boarding,33581000
+Nov 1 / literature,TA-BER-00037,Cabin / boarding,33666000
+Nov 1 / literature,TA-BER-00039,Cabin / boarding,33873000
+Nov 1 / literature,TA-BER-00038,Cabin / boarding,34843000
+Nov 1 / literature,TA-BER-00035,Cabin / boarding,34515000
+Nov 1 / literature,TA-BER-00041,Cabin / boarding,35502000
+Nov 1 / literature,TA-BER-00042,Cabin / boarding,34420000
+Nov 1 / literature,TA-BER-00040,Cabin / boarding,34481000
+Nov 1 / literature,TA-BER-00045,Cabin / boarding,35025000
+Nov 1 / literature,TA-BER-00043,Cabin / boarding,35330000
+Nov 1 / literature,TA-BER-00046,Fuel,36118000
+Nov 1 / literature,TA-BER-00047,Fuel,36590000
+Nov 1 / literature,TA-BER-00044,Cabin / boarding,36901000
+Nov 1 / literature,TA-BER-00048,Fuel,37298000
+Nov 1 / literature,TA-BER-00049,Cabin / boarding,37391000
+Nov 1 / literature,TA-BER-00050,Cabin / boarding,37526000
+Nov 1 / literature,TA-BER-00052,Cabin / boarding,37303000
+Nov 1 / literature,TA-BER-00054,Cabin / boarding,37566000
+Nov 1 / literature,TA-BER-00051,Cabin / boarding,38299000
+Nov 1 / literature,TA-BER-00053,Cabin / boarding,37696000
+Nov 1 / literature,TA-BER-00057,Cabin / boarding,39025000
+Nov 1 / literature,TA-BER-00055,Baggage hold,38145000
+Nov 1 / literature,TA-BER-00058,Cabin / boarding,38247000
+Nov 1 / literature,TA-BER-00059,Fuel,39067000
+Nov 1 / literature,TA-BER-00056,Cabin / boarding,39020000
+Nov 1 / literature,TA-BER-00061,Fuel,39084000
+Nov 1 / literature,TA-BER-00062,Cabin / boarding,39183000
+Nov 1 / literature,TA-BER-00060,Cabin / boarding,39414000
+Nov 1 / literature,TA-BER-00063,Cabin / boarding,40515000
+Nov 1 / literature,TA-BER-00064,Baggage hold,39452000
+Nov 1 / literature,TA-BER-00065,Fuel,42518000
+Nov 1 / literature,TA-BER-00066,Cabin / boarding,41379000
+Nov 1 / literature,TA-BER-00067,Fuel,41678000
+Nov 1 / literature,TA-BER-00068,Cabin / boarding,41230000
+Nov 1 / literature,TA-BER-00069,Cabin / boarding,41489000
+Nov 1 / literature,TA-BER-00071,Cabin / boarding,41861000
+Nov 1 / literature,TA-BER-00072,Fuel,43352000
+Nov 1 / literature,TA-BER-00070,Cabin / boarding,42748000
+Nov 1 / literature,TA-BER-00073,Cabin / boarding,43793000
+Nov 1 / literature,TA-BER-00074,Fuel,42704000
+Nov 1 / literature,TA-BER-00075,Cabin / boarding,42129000
+Nov 1 / literature,TA-BER-00076,Cabin / boarding,42639000
+Nov 1 / literature,TA-BER-00077,Cabin / boarding,44353000
+Nov 1 / literature,TA-BER-00078,Cabin / boarding,44141000
+Nov 1 / literature,TA-BER-00079,Cabin / boarding,43377000
+Nov 1 / literature,TA-BER-00080,Cabin / boarding,43895000
+Nov 1 / literature,TA-BER-00081,Cabin / boarding,44579000
+Nov 1 / literature,TA-BER-00082,Cabin / boarding,43941000
+Nov 1 / literature,TA-BER-00083,Cabin / boarding,45258000
+Nov 1 / literature,TA-BER-00087,Cabin / boarding,44326000
+Nov 1 / literature,TA-BER-00086,Cabin / boarding,45701000
+Nov 1 / literature,TA-BER-00088,Cabin / boarding,44826000
+Nov 1 / literature,TA-BER-00090,Cabin / boarding,45287000
+Nov 1 / literature,TA-BER-00091,Cabin / boarding,45668000
+Nov 1 / literature,TA-BER-00085,Fuel,46298000
+Nov 1 / literature,TA-BER-00089,Cabin / boarding,46347000
+Nov 1 / literature,TA-BER-00093,Cabin / boarding,46290000
+Nov 1 / literature,TA-BER-00084,Cabin / boarding,47180000
+Nov 1 / literature,TA-BER-00092,Cabin / boarding,46352000
+Nov 1 / literature,TA-BER-00094,Cabin / boarding,47976000
+Nov 1 / literature,TA-BER-00095,Cabin / boarding,46960000
+Nov 1 / literature,TA-BER-00096,Fuel,48024000
+Nov 1 / literature,TA-BER-00097,Fuel,47859000
+Nov 1 / literature,TA-BER-00098,Cabin / boarding,48626000
+Nov 1 / literature,TA-BER-00100,Cabin / boarding,47787000
+Nov 1 / literature,TA-BER-00099,Cabin / boarding,48968000
+Nov 1 / literature,TA-BER-00101,Cabin / boarding,49316000
+Nov 1 / literature,TA-BER-00103,Cabin / boarding,48451000
+Nov 1 / literature,TA-BER-00104,Cabin / boarding,49654000
+Nov 1 / literature,TA-BER-00102,Baggage hold,49824000
+Nov 1 / literature,TA-BER-00105,Cabin / boarding,49367000
+Nov 1 / literature,TA-BER-00107,Fuel,49725000
+Nov 1 / literature,TA-BER-00106,Cabin / boarding,49695000
+Nov 1 / literature,TA-BER-00109,Cabin / boarding,50473000
+Nov 1 / literature,TA-BER-00110,Cabin / boarding,49777000
+Nov 1 / literature,TA-BER-00112,Cabin / boarding,50092000
+Nov 1 / literature,TA-BER-00111,Cabin / boarding,50235000
+Nov 1 / literature,TA-BER-00108,Fuel,51316000
+Nov 1 / literature,TA-BER-00115,Cabin / boarding,50358000
+Nov 1 / literature,TA-BER-00113,Cabin / boarding,51868000
+Nov 1 / literature,TA-BER-00118,Cabin / boarding,51253000
+Nov 1 / literature,TA-BER-00116,Cabin / boarding,52887000
+Nov 1 / literature,TA-BER-00119,Cabin / boarding,51642000
+Nov 1 / literature,TA-BER-00121,Cabin / boarding,52028000
+Nov 1 / literature,TA-BER-00117,Cabin / boarding,51975000
+Nov 1 / literature,TA-BER-00114,Cabin / boarding,53831000
+Nov 1 / literature,TA-BER-00122,Cabin / boarding,52588000
+Nov 1 / literature,TA-BER-00125,Cabin / boarding,53582000
+Nov 1 / literature,TA-BER-00120,Cabin / boarding,54224000
+Nov 1 / literature,TA-BER-00123,Cabin / boarding,54658000
+Nov 1 / literature,TA-BER-00124,Cabin / boarding,53543000
+Nov 1 / literature,TA-BER-00126,Cabin / boarding,54078000
+Nov 1 / literature,TA-BER-00127,Cabin / boarding,53564000
+Nov 1 / literature,TA-BER-00128,Cabin / boarding,53590000
+Nov 1 / literature,TA-BER-00129,Cabin / boarding,54356000
+Nov 1 / literature,TA-BER-00130,Cabin / boarding,54673000
+Nov 1 / literature,TA-BER-00132,Cabin / boarding,54886000
+Nov 1 / literature,TA-BER-00131,Cabin / boarding,55696000
+Nov 1 / literature,TA-BER-00133,Cabin / boarding,54877000
+Nov 1 / literature,TA-BER-00134,Cabin / boarding,54981000
+Nov 1 / literature,TA-BER-00135,Cabin / boarding,57059000
+Nov 1 / literature,TA-BER-00137,Cabin / boarding,55336000
+Nov 1 / literature,TA-BER-00136,Cabin / boarding,55440000
+Nov 1 / literature,TA-BER-00138,Cabin / boarding,56163000
+Nov 1 / literature,TA-BER-00140,Cabin / boarding,57562000
+Nov 1 / literature,TA-BER-00143,Cabin / boarding,57002000
+Nov 1 / literature,TA-BER-00144,Cabin / boarding,56955000
+Nov 1 / literature,TA-BER-00142,Cabin / boarding,56532000
+Nov 1 / literature,TA-BER-00139,Cabin / boarding,58297000
+Nov 1 / literature,TA-BER-00145,Cabin / boarding,58370000
+Nov 1 / literature,TA-BER-00141,Cabin / boarding,58729000
+Nov 1 / literature,TA-BER-00146,Cabin / boarding,59074000
+Nov 1 / literature,TA-BER-00147,Cabin / boarding,57799000
+Nov 1 / literature,TA-BER-00149,Cabin / boarding,58001000
+Nov 1 / literature,TA-BER-00148,Cabin / boarding,59267000
+Nov 1 / literature,TA-BER-00150,Cabin / boarding,58237000
+Nov 1 / literature,TA-BER-00152,Cabin / boarding,58654000
+Nov 1 / literature,TA-BER-00151,Cabin / boarding,58517000
+Nov 1 / literature,TA-BER-00153,Cabin / boarding,58760000
+Nov 1 / literature,TA-BER-00154,Cabin / boarding,60332000
+Nov 1 / literature,TA-BER-00155,Cabin / boarding,60208000
+Nov 1 / literature,TA-BER-00156,Cabin / boarding,60800000
+Nov 1 / literature,TA-BER-00157,Cabin / boarding,61814000
+Nov 1 / literature,TA-BER-00159,Cabin / boarding,63128000
+Nov 1 / literature,TA-BER-00158,Cabin / boarding,63382000
+Nov 1 / literature,TA-BER-00160,Cabin / boarding,62517000
+Nov 1 / literature,TA-BER-00161,Cabin / boarding,63260000
+Nov 1 / literature,TA-BER-00162,Cabin / boarding,63854000
+Nov 1 / literature,TA-BER-00164,Cabin / boarding,62989000
+Nov 1 / literature,TA-BER-00166,Cabin / boarding,63094000
+Nov 1 / literature,TA-BER-00163,Cabin / boarding,63929000
+Nov 1 / literature,TA-BER-00167,Cabin / boarding,64541000
+Nov 1 / literature,TA-BER-00168,Cabin / boarding,63771000
+Nov 1 / literature,TA-BER-00169,Cabin / boarding,63570000
+Nov 1 / literature,TA-BER-00165,Baggage hold,63489000
+Nov 1 / literature,TA-BER-00170,Cabin / boarding,64709000
+Nov 1 / literature,TA-BER-00171,Cabin / boarding,64991000
+Nov 1 / literature,TA-BER-00172,Cabin / boarding,63549000
+Nov 1 / literature,TA-BER-00173,Cabin / boarding,63752000
+Nov 1 / literature,TA-BER-00175,Cabin / boarding,63889000
+Nov 1 / literature,TA-BER-00174,Fuel,64497000
+Nov 1 / literature,TA-BER-00179,Cabin / boarding,65917000
+Nov 1 / literature,TA-BER-00178,Cabin / boarding,66242000
+Nov 1 / literature,TA-BER-00186,Cabin / boarding,66897000
+Nov 1 / literature,TA-BER-00181,Cabin / boarding,67179000
+Nov 1 / literature,TA-BER-00182,Cabin / boarding,67196000
+Nov 1 / literature,TA-BER-00176,Cabin / boarding,67976000
+Nov 1 / literature,TA-BER-00185,Cabin / boarding,67543000
+Nov 1 / literature,TA-BER-00183,Cabin / boarding,67511000
+Nov 1 / literature,TA-BER-00189,Cabin / boarding,67588000
+Nov 1 / literature,TA-BER-00177,Cabin / boarding,68091000
+Nov 1 / literature,TA-BER-00180,Baggage hold,67019000
+Nov 1 / literature,TA-BER-00187,Cabin / boarding,67172000
+Nov 1 / literature,TA-BER-00190,Cabin / boarding,68385000
+Nov 1 / literature,TA-BER-00184,Cabin / boarding,68595000
+Nov 1 / literature,TA-BER-00193,Cabin / boarding,67828000
+Nov 1 / literature,TA-BER-00191,Cabin / boarding,69627000
+Nov 1 / literature,TA-BER-00192,Cabin / boarding,69602000
+Nov 1 / literature,TA-BER-00197,Cabin / boarding,69230000
+Nov 1 / literature,TA-BER-00188,Cabin / boarding,69428000
+Nov 1 / literature,TA-BER-00204,Cabin / boarding,69407000
+Nov 1 / literature,TA-BER-00202,Cabin / boarding,69929000
+Nov 1 / literature,TA-BER-00201,Cabin / boarding,70834000
+Nov 1 / literature,TA-BER-00195,Cabin / boarding,70606000
+Nov 1 / literature,TA-BER-00196,Cabin / boarding,70667000
+Nov 1 / literature,TA-BER-00207,Baggage hold,72048000
+Nov 1 / literature,TA-BER-00199,Cabin / boarding,71013000
+Nov 1 / literature,TA-BER-00205,Cabin / boarding,70932000
+Nov 1 / literature,TA-BER-00200,Fuel,71363000
+Nov 1 / literature,TA-BER-00198,Fuel,71766000
+Nov 1 / literature,TA-BER-00208,Cabin / boarding,71266000
+Nov 1 / literature,TA-BER-00203,Cabin / boarding,72649000
+Nov 1 / literature,TA-BER-00211,Cabin / boarding,72690000
+Nov 1 / literature,TA-BER-00206,Cabin / boarding,71755000
+Nov 1 / literature,TA-BER-00194,Cabin / boarding,72690000
+Nov 1 / literature,TA-BER-00210,Cabin / boarding,72682000
+Nov 1 / literature,TA-BER-00213,Cabin / boarding,73563000
+Nov 1 / literature,TA-BER-00215,Cabin / boarding,72920000
+Nov 1 / literature,TA-BER-00212,Cabin / boarding,74221000
+Nov 1 / literature,TA-BER-00209,Cabin / boarding,73907000
+Nov 1 / literature,TA-BER-00216,Cabin / boarding,73288000
+Nov 1 / literature,TA-BER-00214,Cabin / boarding,74123000
+Nov 1 / literature,TA-BER-00217,Cabin / boarding,73615000
+Nov 1 / literature,TA-BER-00220,Cabin / boarding,74320000
+Nov 1 / literature,TA-BER-00221,Cabin / boarding,74114000
+Nov 1 / literature,TA-BER-00224,Cabin / boarding,74360000
+Nov 1 / literature,TA-BER-00218,Cabin / boarding,74608000
+Nov 1 / literature,TA-BER-00223,Cabin / boarding,74494000
+Nov 1 / literature,TA-BER-00222,Cabin / boarding,74983000
+Nov 1 / literature,TA-BER-00227,Fuel,75658000
+Nov 1 / literature,TA-BER-00219,Cabin / boarding,75410000
+Nov 1 / literature,TA-BER-00232,Cabin / boarding,77182000
+Nov 1 / literature,TA-BER-00229,Cabin / boarding,77637000
+Nov 1 / literature,TA-BER-00225,Cabin / boarding,77541000
+Nov 1 / literature,TA-BER-00235,Cabin / boarding,76849000
+Nov 1 / literature,TA-BER-00228,Cabin / boarding,77282000
+Nov 1 / literature,TA-BER-00226,Cabin / boarding,76536000
+Nov 1 / literature,TA-BER-00237,Cabin / boarding,78113000
+Nov 1 / literature,TA-BER-00236,Cabin / boarding,77032000
+Nov 1 / literature,TA-BER-00239,Cabin / boarding,78441000
+Nov 1 / literature,TA-BER-00238,Cabin / boarding,77266000
+Nov 1 / literature,TA-BER-00230,Cabin / boarding,78714000
+Nov 1 / literature,TA-BER-00231,Cabin / boarding,79096000
+Nov 1 / literature,TA-BER-00240,Cabin / boarding,78072000
+Nov 1 / literature,TA-BER-00234,Cabin / boarding,77765000
+Nov 1 / literature,TA-BER-00233,Cabin / boarding,77977000
+Nov 1 / literature,TA-BER-00242,Cabin / boarding,78608000
+Nov 1 / literature,TA-BER-00241,Cabin / boarding,78193000
+Nov 1 / literature,TA-BER-00244,Cabin / boarding,79014000
+Nov 1 / literature,TA-BER-00246,Cabin / boarding,79096000
+Nov 1 / literature,TA-BER-00248,Cabin / boarding,80053000
+Nov 1 / literature,TA-BER-00247,Cabin / boarding,80166000
+Nov 1 / literature,TA-BER-00250,Cabin / boarding,80579000
+Nov 1 / literature,TA-BER-00252,Cabin / boarding,80695000
+Nov 1 / literature,TA-BER-00245,Cabin / boarding,81698000
+Nov 1 / literature,TA-BER-00253,Cabin / boarding,81685000
+Nov 1 / literature,TA-BER-00243,Baggage hold,82295000
+Nov 1 / literature,TA-BER-00256,Cabin / boarding,82193000
+Nov 1 / literature,TA-BER-00254,Baggage hold,81507000
+Nov 1 / literature,TA-BER-00249,Baggage hold,81707000
+Nov 1 / literature,TA-BER-00259,Baggage hold,83412000
+Nov 1 / literature,TA-BER-00251,Baggage hold,85178000
+Nov 1 / literature,TA-BER-00255,Cabin / boarding,82696000
+Nov 1 / literature,TA-BER-00262,Baggage hold,83790000
+Nov 1 / literature,TA-BER-00257,Baggage hold,84793000
+Nov 1 / literature,TA-BER-00264,Baggage hold,84420000
+Nov 1 / literature,TA-BER-00263,Cabin / boarding,83373000
+Nov 1 / literature,TA-BER-00258,Cabin / boarding,83858000
+Nov 1 / literature,TA-BER-00260,Baggage hold,86321000
+Nov 1 / literature,TA-BER-00265,Baggage hold,85428000
+Nov 1 / literature,TA-BER-00270,Cabin / boarding,83897000
+Nov 1 / literature,TA-BER-00261,Baggage hold,84599000
+Nov 1 / literature,TA-BER-00268,Cabin / boarding,84196000
+Nov 1 / literature,TA-BER-00269,Baggage hold,85376000
+Nov 1 / literature,TA-BER-00266,Baggage hold,85623000
+Nov 1 / literature,TA-BER-00267,Baggage hold,86706000
+Nov 1 / literature,TA-BER-00271,Cabin / boarding,86102000
+Nov 8 / literature,TA-BER-00001,Cabin / boarding,21514000
+Nov 8 / literature,TA-BER-00002,Baggage hold,23543000
+Nov 8 / literature,TA-BER-00004,Cabin / boarding,25574000
+Nov 8 / literature,TA-BER-00003,Cabin / boarding,24335000
+Nov 8 / literature,TA-BER-00005,Cabin / boarding,25177000
+Nov 8 / literature,TA-BER-00006,Cabin / boarding,26922000
+Nov 8 / literature,TA-BER-00007,Cabin / boarding,25923000
+Nov 8 / literature,TA-BER-00009,Cabin / boarding,27631000
+Nov 8 / literature,TA-BER-00010,Cabin / boarding,26692000
+Nov 8 / literature,TA-BER-00008,Cabin / boarding,27464000
+Nov 8 / literature,TA-BER-00011,Cabin / boarding,27547000
+Nov 8 / literature,TA-BER-00012,Cabin / boarding,27764000
+Nov 8 / literature,TA-BER-00013,Cabin / boarding,29229000
+Nov 8 / literature,TA-BER-00014,Cabin / boarding,29156000
+Nov 8 / literature,TA-BER-00015,Cabin / boarding,29985000
+Nov 8 / literature,TA-BER-00016,Cabin / boarding,29933000
+Nov 8 / literature,TA-BER-00017,Cabin / boarding,30908000
+Nov 8 / literature,TA-BER-00018,Cabin / boarding,30797000
+Nov 8 / literature,TA-BER-00019,Cabin / boarding,30878000
+Nov 8 / literature,TA-BER-00020,Cabin / boarding,31900000
+Nov 8 / literature,TA-BER-00021,Cabin / boarding,32434000
+Nov 8 / literature,TA-BER-00022,Cabin / boarding,32491000
+Nov 8 / literature,TA-BER-00023,Cabin / boarding,32245000
+Nov 8 / literature,TA-BER-00024,Cabin / boarding,31990000
+Nov 8 / literature,TA-BER-00026,Cabin / boarding,32737000
+Nov 8 / literature,TA-BER-00025,Cabin / boarding,32110000
+Nov 8 / literature,TA-BER-00027,Cabin / boarding,33844000
+Nov 8 / literature,TA-BER-00028,Cabin / boarding,33251000
+Nov 8 / literature,TA-BER-00029,Cabin / boarding,32853000
+Nov 8 / literature,TA-BER-00030,Cabin / boarding,34197000
+Nov 8 / literature,TA-BER-00032,Cabin / boarding,34503000
+Nov 8 / literature,TA-BER-00031,Cabin / boarding,33592000
+Nov 8 / literature,TA-BER-00033,Cabin / boarding,33829000
+Nov 8 / literature,TA-BER-00034,Cabin / boarding,35188000
+Nov 8 / literature,TA-BER-00035,Cabin / boarding,34572000
+Nov 8 / literature,TA-BER-00037,Cabin / boarding,35435000
+Nov 8 / literature,TA-BER-00038,Cabin / boarding,35023000
+Nov 8 / literature,TA-BER-00036,Fuel,35749000
+Nov 8 / literature,TA-BER-00039,Cabin / boarding,34900000
+Nov 8 / literature,TA-BER-00040,Cabin / boarding,36564000
+Nov 8 / literature,TA-BER-00041,Cabin / boarding,37638000
+Nov 8 / literature,TA-BER-00042,Cabin / boarding,36426000
+Nov 8 / literature,TA-BER-00043,Cabin / boarding,36617000
+Nov 8 / literature,TA-BER-00044,Cabin / boarding,37063000
+Nov 8 / literature,TA-BER-00045,Cabin / boarding,37312000
+Nov 8 / literature,TA-BER-00046,Cabin / boarding,38777000
+Nov 8 / literature,TA-BER-00047,Cabin / boarding,38809000
+Nov 8 / literature,TA-BER-00048,Cabin / boarding,39535000
+Nov 8 / literature,TA-BER-00049,Cabin / boarding,39707000
+Nov 8 / literature,TA-BER-00050,Cabin / boarding,40476000
+Nov 8 / literature,TA-BER-00051,Cabin / boarding,41146000
+Nov 8 / literature,TA-BER-00052,Cabin / boarding,40295000
+Nov 8 / literature,TA-BER-00053,Cabin / boarding,40717000
+Nov 8 / literature,TA-BER-00054,Cabin / boarding,40764000
+Nov 8 / literature,TA-BER-00055,Cabin / boarding,41327000
+Nov 8 / literature,TA-BER-00057,Baggage hold,43410000
+Nov 8 / literature,TA-BER-00056,Baggage hold,41635000
+Nov 8 / literature,TA-BER-00058,Cabin / boarding,41974000
+Nov 8 / literature,TA-BER-00059,Cabin / boarding,42937000
+Nov 8 / literature,TA-BER-00060,Baggage hold,43468000
+Nov 8 / literature,TA-BER-00061,Cabin / boarding,43185000
+Nov 8 / literature,TA-BER-00063,Baggage hold,44319000
+Nov 8 / literature,TA-BER-00062,Cabin / boarding,43968000
+Nov 8 / literature,TA-BER-00064,Cabin / boarding,43157000
+Nov 8 / literature,TA-BER-00067,Cabin / boarding,43505000
+Nov 8 / literature,TA-BER-00068,Cabin / boarding,44730000
+Nov 8 / literature,TA-BER-00066,Fuel,44903000
+Nov 8 / literature,TA-BER-00065,Cabin / boarding,44132000
+Nov 8 / literature,TA-BER-00069,Baggage hold,45107000
+Nov 8 / literature,TA-BER-00070,Baggage hold,44865000
+Nov 8 / literature,TA-BER-00071,Cabin / boarding,44898000
+Nov 8 / literature,TA-BER-00072,Cabin / boarding,44327000
+Nov 8 / literature,TA-BER-00073,Cabin / boarding,45798000
+Nov 8 / literature,TA-BER-00074,Cabin / boarding,45054000
+Nov 8 / literature,TA-BER-00075,Cabin / boarding,45709000
+Nov 8 / literature,TA-BER-00076,Cabin / boarding,45773000
+Nov 8 / literature,TA-BER-00077,Cabin / boarding,46680000
+Nov 8 / literature,TA-BER-00078,Cabin / boarding,46690000
+Nov 8 / literature,TA-BER-00079,Cabin / boarding,47346000
+Nov 8 / literature,TA-BER-00080,Cabin / boarding,47728000
+Nov 8 / literature,TA-BER-00081,Cabin / boarding,51407000
+Nov 8 / literature,TA-BER-00082,Cabin / boarding,49289000
+Nov 8 / literature,TA-BER-00083,Cabin / boarding,49350000
+Nov 8 / literature,TA-BER-00084,Cabin / boarding,49653000
+Nov 8 / literature,TA-BER-00085,Cabin / boarding,48304000
+Nov 8 / literature,TA-BER-00086,Cabin / boarding,50051000
+Nov 8 / literature,TA-BER-00087,Cabin / boarding,50167000
+Nov 8 / literature,TA-BER-00088,Cabin / boarding,49325000
+Nov 8 / literature,TA-BER-00089,Cabin / boarding,49845000
+Nov 8 / literature,TA-BER-00090,Cabin / boarding,50999000
+Nov 8 / literature,TA-BER-00092,Cabin / boarding,50042000
+Nov 8 / literature,TA-BER-00093,Cabin / boarding,50035000
+Nov 8 / literature,TA-BER-00094,Cabin / boarding,51201000
+Nov 8 / literature,TA-BER-00095,Cabin / boarding,50788000
+Nov 8 / literature,TA-BER-00091,Cabin / boarding,49889000
+Nov 8 / literature,TA-BER-00096,Cabin / boarding,50852000
+Nov 8 / literature,TA-BER-00097,Cabin / boarding,51113000
+Nov 8 / literature,TA-BER-00098,Cabin / boarding,51317000
+Nov 8 / literature,TA-BER-00100,Cabin / boarding,53480000
+Nov 8 / literature,TA-BER-00099,Cabin / boarding,51753000
+Nov 8 / literature,TA-BER-00101,Cabin / boarding,52533000
+Nov 8 / literature,TA-BER-00102,Cabin / boarding,54176000
+Nov 8 / literature,TA-BER-00103,Cabin / boarding,53441000
+Nov 8 / literature,TA-BER-00104,Cabin / boarding,53881000
+Nov 8 / literature,TA-BER-00106,Cabin / boarding,55407000
+Nov 8 / literature,TA-BER-00105,Cabin / boarding,55176000
+Nov 8 / literature,TA-BER-00107,Cabin / boarding,54758000
+Nov 8 / literature,TA-BER-00110,Cabin / boarding,55247000
+Nov 8 / literature,TA-BER-00109,Cabin / boarding,55020000
+Nov 8 / literature,TA-BER-00108,Cabin / boarding,55734000
+Nov 8 / literature,TA-BER-00111,Cabin / boarding,55361000
+Nov 8 / literature,TA-BER-00112,Cabin / boarding,55258000
+Nov 8 / literature,TA-BER-00113,Cabin / boarding,56704000
+Nov 8 / literature,TA-BER-00114,Cabin / boarding,56690000
+Nov 8 / literature,TA-BER-00116,Cabin / boarding,56176000
+Nov 8 / literature,TA-BER-00115,Cabin / boarding,56191000
+Nov 8 / literature,TA-BER-00117,Cabin / boarding,57298000
+Nov 8 / literature,TA-BER-00118,Cabin / boarding,57409000
+Nov 8 / literature,TA-BER-00119,Cabin / boarding,57605000
+Nov 8 / literature,TA-BER-00121,Cabin / boarding,58129000
+Nov 8 / literature,TA-BER-00120,Cabin / boarding,58858000
+Nov 8 / literature,TA-BER-00122,Cabin / boarding,58101000
+Nov 8 / literature,TA-BER-00124,Cabin / boarding,58508000
+Nov 8 / literature,TA-BER-00125,Cabin / boarding,58883000
+Nov 8 / literature,TA-BER-00123,Cabin / boarding,59284000
+Nov 8 / literature,TA-BER-00127,Cabin / boarding,59407000
+Nov 8 / literature,TA-BER-00128,Cabin / boarding,59180000
+Nov 8 / literature,TA-BER-00126,Cabin / boarding,59190000
+Nov 8 / literature,TA-BER-00130,Cabin / boarding,60908000
+Nov 8 / literature,TA-BER-00129,Cabin / boarding,60928000
+Nov 8 / literature,TA-BER-00131,Fuel,60196000
+Nov 8 / literature,TA-BER-00132,Fuel,60712000
+Nov 8 / literature,TA-BER-00133,Cabin / boarding,61435000
+Nov 8 / literature,TA-BER-00134,Cabin / boarding,61570000
+Nov 8 / literature,TA-BER-00135,Cabin / boarding,61268000
+Nov 8 / literature,TA-BER-00136,Cabin / boarding,61575000
+Nov 8 / literature,TA-BER-00137,Cabin / boarding,62809000
+Nov 8 / literature,TA-BER-00138,Cabin / boarding,62944000
+Nov 8 / literature,TA-BER-00139,Fuel,62379000
+Nov 8 / literature,TA-BER-00140,Cabin / boarding,62520000
+Nov 8 / literature,TA-BER-00141,Cabin / boarding,63031000
+Nov 8 / literature,TA-BER-00142,Cabin / boarding,63981000
+Nov 8 / literature,TA-BER-00143,Cabin / boarding,63719000
+Nov 8 / literature,TA-BER-00144,Cabin / boarding,63258000
+Nov 8 / literature,TA-BER-00145,Cabin / boarding,62935000
+Nov 8 / literature,TA-BER-00146,Cabin / boarding,63226000
+Nov 8 / literature,TA-BER-00148,Fuel,63801000
+Nov 8 / literature,TA-BER-00150,Cabin / boarding,64462000
+Nov 8 / literature,TA-BER-00147,Cabin / boarding,63931000
+Nov 8 / literature,TA-BER-00149,Cabin / boarding,65401000
+Nov 8 / literature,TA-BER-00151,Cabin / boarding,65382000
+Nov 8 / literature,TA-BER-00154,Cabin / boarding,64875000
+Nov 8 / literature,TA-BER-00153,Cabin / boarding,66248000
+Nov 8 / literature,TA-BER-00152,Cabin / boarding,65147000
+Nov 8 / literature,TA-BER-00155,Cabin / boarding,66028000
+Nov 8 / literature,TA-BER-00156,Cabin / boarding,65988000
+Nov 8 / literature,TA-BER-00157,Cabin / boarding,65785000
+Nov 8 / literature,TA-BER-00160,Cabin / boarding,67465000
+Nov 8 / literature,TA-BER-00158,Baggage hold,66925000
+Nov 8 / literature,TA-BER-00161,Baggage hold,66928000
+Nov 8 / literature,TA-BER-00163,Baggage hold,67391000
+Nov 8 / literature,TA-BER-00159,Baggage hold,67813000
+Nov 8 / literature,TA-BER-00164,Baggage hold,66860000
+Nov 8 / literature,TA-BER-00162,Cabin / boarding,68125000
+Nov 8 / literature,TA-BER-00167,Baggage hold,70874000
+Nov 8 / literature,TA-BER-00165,Baggage hold,68866000
+Nov 8 / literature,TA-BER-00166,Cabin / boarding,67930000
+Nov 8 / literature,TA-BER-00168,Baggage hold,68840000
+Nov 8 / literature,TA-BER-00172,Cabin / boarding,68491000
+Nov 8 / literature,TA-BER-00169,Baggage hold,69896000
+Nov 8 / literature,TA-BER-00174,Cabin / boarding,70246000
+Nov 8 / literature,TA-BER-00173,Baggage hold,70233000
+Nov 8 / literature,TA-BER-00171,Cabin / boarding,69284000
+Nov 8 / literature,TA-BER-00175,Cabin / boarding,70641000
+Nov 8 / literature,TA-BER-00170,Baggage hold,70819000
+Nov 8 / literature,TA-BER-00176,Baggage hold,71177000
+Nov 8 / literature,TA-BER-00178,Cabin / boarding,70355000
+Nov 8 / literature,TA-BER-00177,Baggage hold,70489000
+Nov 8 / literature,TA-BER-00179,Cabin / boarding,70434000
+Nov 8 / literature,TA-BER-00180,Cabin / boarding,70719000
+Nov 8 / literature,TA-BER-00181,Cabin / boarding,71843000
+Nov 8 / literature,TA-BER-00185,Fuel,71922000
+Nov 8 / literature,TA-BER-00182,Cabin / boarding,72644000
+Nov 8 / literature,TA-BER-00186,Cabin / boarding,71535000
+Nov 8 / literature,TA-BER-00184,Cabin / boarding,72385000
+Nov 8 / literature,TA-BER-00187,Cabin / boarding,72522000
+Nov 8 / literature,TA-BER-00188,Cabin / boarding,73580000
+Nov 8 / literature,TA-BER-00183,Cabin / boarding,72700000
+Nov 8 / literature,TA-BER-00195,Cabin / boarding,74499000
+Nov 8 / literature,TA-BER-00190,Cabin / boarding,73826000
+Nov 8 / literature,TA-BER-00192,Fuel,74691000
+Nov 8 / literature,TA-BER-00191,Cabin / boarding,74848000
+Nov 8 / literature,TA-BER-00189,Cabin / boarding,73823000
+Nov 8 / literature,TA-BER-00196,Cabin / boarding,74202000
+Nov 8 / literature,TA-BER-00193,Cabin / boarding,75106000
+Nov 8 / literature,TA-BER-00194,Cabin / boarding,74241000
+Nov 8 / literature,TA-BER-00197,Cabin / boarding,74072000
+Nov 8 / literature,TA-BER-00199,Cabin / boarding,74595000
+Nov 8 / literature,TA-BER-00198,Cabin / boarding,75825000
+Nov 8 / literature,TA-BER-00201,Cabin / boarding,75175000
+Nov 8 / literature,TA-BER-00202,Cabin / boarding,76232000
+Nov 8 / literature,TA-BER-00206,Cabin / boarding,76979000
+Nov 8 / literature,TA-BER-00200,Cabin / boarding,75742000
+Nov 8 / literature,TA-BER-00207,Cabin / boarding,77377000
+Nov 8 / literature,TA-BER-00204,Cabin / boarding,76484000
+Nov 8 / literature,TA-BER-00205,Cabin / boarding,75906000
+Nov 8 / literature,TA-BER-00211,Cabin / boarding,77991000
+Nov 8 / literature,TA-BER-00203,Cabin / boarding,77120000
+Nov 8 / literature,TA-BER-00208,Cabin / boarding,77606000
+Nov 8 / literature,TA-BER-00209,Baggage hold,77793000
+Nov 8 / literature,TA-BER-00210,Cabin / boarding,77404000
+Nov 8 / literature,TA-BER-00214,Baggage hold,80228000
+Nov 8 / literature,TA-BER-00212,Cabin / boarding,77592000
+Nov 8 / literature,TA-BER-00213,Cabin / boarding,78736000
+Nov 8 / literature,TA-BER-00215,Cabin / boarding,78445000
+Nov 8 / literature,TA-BER-00217,Baggage hold,80255000
+Nov 8 / literature,TA-BER-00218,Baggage hold,82567000
+Nov 8 / literature,TA-BER-00216,Cabin / boarding,79612000
+Nov 8 / literature,TA-BER-00219,Cabin / boarding,79973000
+Nov 8 / literature,TA-BER-00220,Baggage hold,79658000
+Nov 8 / literature,TA-BER-00222,Baggage hold,80729000
+Nov 8 / literature,TA-BER-00221,Cabin / boarding,79470000
+Nov 8 / literature,TA-BER-00224,Baggage hold,81507000
+Nov 8 / literature,TA-BER-00223,Fuel,81930000
+Nov 8 / literature,TA-BER-00228,Cabin / boarding,80493000
+Nov 8 / literature,TA-BER-00227,Baggage hold,83082000
+Nov 8 / literature,TA-BER-00225,Baggage hold,82413000
+Nov 8 / literature,TA-BER-00226,Baggage hold,84726000
+Nov 8 / literature,TA-BER-00229,Baggage hold,84139000
+Nov 8 / literature,TA-BER-00232,Baggage hold,82515000
+Nov 8 / literature,TA-BER-00230,Baggage hold,83684000
+Nov 8 / literature,TA-BER-00231,Fuel,82072000
+Nov 8 / literature,TA-BER-00233,Baggage hold,84482000
+Nov 8 / literature,TA-BER-00236,Baggage hold,84972000
+Nov 8 / literature,TA-BER-00234,Cabin / boarding,84083000
+Nov 8 / literature,TA-BER-00237,Cabin / boarding,84279000
+Nov 8 / literature,TA-BER-00235,Cabin / boarding,82876000
+Nov 8 / literature,TA-BER-00238,Baggage hold,85755000
+Nov 1 / original timings,TA-BER-00001,Cabin / boarding,20329000
+Nov 1 / original timings,TA-BER-00002,Cabin / boarding,23802000
+Nov 1 / original timings,TA-BER-00003,Cabin / boarding,23325000
+Nov 1 / original timings,TA-BER-00004,Baggage hold,25080000
+Nov 1 / original timings,TA-BER-00005,Cabin / boarding,24092000
+Nov 1 / original timings,TA-BER-00006,Cabin / boarding,25551000
+Nov 1 / original timings,TA-BER-00007,Cabin / boarding,27022000
+Nov 1 / original timings,TA-BER-00008,Cabin / boarding,27559000
+Nov 1 / original timings,TA-BER-00009,Cabin / boarding,27316000
+Nov 1 / original timings,TA-BER-00010,Cabin / boarding,27582000
+Nov 1 / original timings,TA-BER-00012,Cabin / boarding,27427000
+Nov 1 / original timings,TA-BER-00011,Cabin / boarding,28600000
+Nov 1 / original timings,TA-BER-00013,Cabin / boarding,29181000
+Nov 1 / original timings,TA-BER-00014,Cabin / boarding,27982000
+Nov 1 / original timings,TA-BER-00015,Cabin / boarding,28615000
+Nov 1 / original timings,TA-BER-00016,Cabin / boarding,30593000
+Nov 1 / original timings,TA-BER-00017,Cabin / boarding,29798000
+Nov 1 / original timings,TA-BER-00018,Cabin / boarding,30129000
+Nov 1 / original timings,TA-BER-00019,Cabin / boarding,31643000
+Nov 1 / original timings,TA-BER-00020,Cabin / boarding,32075000
+Nov 1 / original timings,TA-BER-00021,Cabin / boarding,34036000
+Nov 1 / original timings,TA-BER-00022,Cabin / boarding,31597000
+Nov 1 / original timings,TA-BER-00025,Cabin / boarding,32190000
+Nov 1 / original timings,TA-BER-00024,Cabin / boarding,31855000
+Nov 1 / original timings,TA-BER-00026,Cabin / boarding,32369000
+Nov 1 / original timings,TA-BER-00023,Cabin / boarding,31530000
+Nov 1 / original timings,TA-BER-00027,Cabin / boarding,32817000
+Nov 1 / original timings,TA-BER-00028,Cabin / boarding,33784000
+Nov 1 / original timings,TA-BER-00029,Cabin / boarding,32659000
+Nov 1 / original timings,TA-BER-00030,Cabin / boarding,33755000
+Nov 1 / original timings,TA-BER-00031,Cabin / boarding,32773000
+Nov 1 / original timings,TA-BER-00032,Cabin / boarding,34348000
+Nov 1 / original timings,TA-BER-00033,Cabin / boarding,33296000
+Nov 1 / original timings,TA-BER-00034,Cabin / boarding,34559000
+Nov 1 / original timings,TA-BER-00035,Cabin / boarding,33838000
+Nov 1 / original timings,TA-BER-00036,Cabin / boarding,34319000
+Nov 1 / original timings,TA-BER-00037,Cabin / boarding,34550000
+Nov 1 / original timings,TA-BER-00038,Cabin / boarding,35576000
+Nov 1 / original timings,TA-BER-00043,Cabin / boarding,35423000
+Nov 1 / original timings,TA-BER-00044,Cabin / boarding,36561000
+Nov 1 / original timings,TA-BER-00040,Cabin / boarding,36728000
+Nov 1 / original timings,TA-BER-00039,Cabin / boarding,36126000
+Nov 1 / original timings,TA-BER-00041,Cabin / boarding,35660000
+Nov 1 / original timings,TA-BER-00042,Cabin / boarding,36310000
+Nov 1 / original timings,TA-BER-00048,Cabin / boarding,36918000
+Nov 1 / original timings,TA-BER-00045,Cabin / boarding,37144000
+Nov 1 / original timings,TA-BER-00049,Cabin / boarding,38048000
+Nov 1 / original timings,TA-BER-00046,Cabin / boarding,36925000
+Nov 1 / original timings,TA-BER-00050,Cabin / boarding,37685000
+Nov 1 / original timings,TA-BER-00047,Cabin / boarding,38464000
+Nov 1 / original timings,TA-BER-00053,Cabin / boarding,38663000
+Nov 1 / original timings,TA-BER-00052,Cabin / boarding,37843000
+Nov 1 / original timings,TA-BER-00057,Cabin / boarding,39473000
+Nov 1 / original timings,TA-BER-00056,Cabin / boarding,38716000
+Nov 1 / original timings,TA-BER-00054,Cabin / boarding,39655000
+Nov 1 / original timings,TA-BER-00055,Cabin / boarding,38614000
+Nov 1 / original timings,TA-BER-00062,Cabin / boarding,39798000
+Nov 1 / original timings,TA-BER-00060,Cabin / boarding,40788000
+Nov 1 / original timings,TA-BER-00051,Cabin / boarding,40056000
+Nov 1 / original timings,TA-BER-00058,Cabin / boarding,40486000
+Nov 1 / original timings,TA-BER-00064,Cabin / boarding,40267000
+Nov 1 / original timings,TA-BER-00063,Cabin / boarding,41305000
+Nov 1 / original timings,TA-BER-00065,Cabin / boarding,40760000
+Nov 1 / original timings,TA-BER-00061,Cabin / boarding,40950000
+Nov 1 / original timings,TA-BER-00059,Cabin / boarding,41307000
+Nov 1 / original timings,TA-BER-00066,Cabin / boarding,42387000
+Nov 1 / original timings,TA-BER-00067,Cabin / boarding,41854000
+Nov 1 / original timings,TA-BER-00068,Cabin / boarding,41702000
+Nov 1 / original timings,TA-BER-00069,Cabin / boarding,42990000
+Nov 1 / original timings,TA-BER-00070,Cabin / boarding,43498000
+Nov 1 / original timings,TA-BER-00071,Cabin / boarding,43763000
+Nov 1 / original timings,TA-BER-00073,Cabin / boarding,43058000
+Nov 1 / original timings,TA-BER-00072,Cabin / boarding,42966000
+Nov 1 / original timings,TA-BER-00076,Cabin / boarding,44555000
+Nov 1 / original timings,TA-BER-00074,Cabin / boarding,44369000
+Nov 1 / original timings,TA-BER-00077,Cabin / boarding,43928000
+Nov 1 / original timings,TA-BER-00075,Cabin / boarding,44180000
+Nov 1 / original timings,TA-BER-00080,Cabin / boarding,44344000
+Nov 1 / original timings,TA-BER-00078,Cabin / boarding,44607000
+Nov 1 / original timings,TA-BER-00081,Cabin / boarding,44897000
+Nov 1 / original timings,TA-BER-00085,Cabin / boarding,44903000
+Nov 1 / original timings,TA-BER-00084,Cabin / boarding,45631000
+Nov 1 / original timings,TA-BER-00086,Cabin / boarding,46226000
+Nov 1 / original timings,TA-BER-00088,Cabin / boarding,45482000
+Nov 1 / original timings,TA-BER-00087,Cabin / boarding,45669000
+Nov 1 / original timings,TA-BER-00090,Cabin / boarding,45963000
+Nov 1 / original timings,TA-BER-00079,Cabin / boarding,47613000
+Nov 1 / original timings,TA-BER-00082,Cabin / boarding,46705000
+Nov 1 / original timings,TA-BER-00093,Cabin / boarding,47683000
+Nov 1 / original timings,TA-BER-00089,Cabin / boarding,47166000
+Nov 1 / original timings,TA-BER-00096,Cabin / boarding,48136000
+Nov 1 / original timings,TA-BER-00095,Cabin / boarding,49038000
+Nov 1 / original timings,TA-BER-00092,Cabin / boarding,48576000
+Nov 1 / original timings,TA-BER-00098,Cabin / boarding,48467000
+Nov 1 / original timings,TA-BER-00097,Cabin / boarding,49360000
+Nov 1 / original timings,TA-BER-00091,Cabin / boarding,48450000
+Nov 1 / original timings,TA-BER-00100,Cabin / boarding,49803000
+Nov 1 / original timings,TA-BER-00094,Cabin / boarding,49241000
+Nov 1 / original timings,TA-BER-00083,Cabin / boarding,48238000
+Nov 1 / original timings,TA-BER-00099,Cabin / boarding,48675000
+Nov 1 / original timings,TA-BER-00102,Cabin / boarding,51479000
+Nov 1 / original timings,TA-BER-00104,Cabin / boarding,49768000
+Nov 1 / original timings,TA-BER-00106,Cabin / boarding,50827000
+Nov 1 / original timings,TA-BER-00108,Cabin / boarding,50231000
+Nov 1 / original timings,TA-BER-00107,Cabin / boarding,49949000
+Nov 1 / original timings,TA-BER-00103,Cabin / boarding,51012000
+Nov 1 / original timings,TA-BER-00113,Cabin / boarding,51048000
+Nov 1 / original timings,TA-BER-00109,Cabin / boarding,51414000
+Nov 1 / original timings,TA-BER-00116,Cabin / boarding,52512000
+Nov 1 / original timings,TA-BER-00117,Cabin / boarding,53093000
+Nov 1 / original timings,TA-BER-00101,Cabin / boarding,52083000
+Nov 1 / original timings,TA-BER-00114,Cabin / boarding,52394000
+Nov 1 / original timings,TA-BER-00122,Cabin / boarding,52544000
+Nov 1 / original timings,TA-BER-00111,Cabin / boarding,53008000
+Nov 1 / original timings,TA-BER-00120,Cabin / boarding,53858000
+Nov 1 / original timings,TA-BER-00110,Cabin / boarding,52867000
+Nov 1 / original timings,TA-BER-00118,Cabin / boarding,54321000
+Nov 1 / original timings,TA-BER-00121,Cabin / boarding,53141000
+Nov 1 / original timings,TA-BER-00119,Cabin / boarding,54468000
+Nov 1 / original timings,TA-BER-00124,Cabin / boarding,53930000
+Nov 1 / original timings,TA-BER-00112,Cabin / boarding,54037000
+Nov 1 / original timings,TA-BER-00115,Cabin / boarding,54990000
+Nov 1 / original timings,TA-BER-00123,Cabin / boarding,54718000
+Nov 1 / original timings,TA-BER-00127,Cabin / boarding,55705000
+Nov 1 / original timings,TA-BER-00128,Cabin / boarding,56403000
+Nov 1 / original timings,TA-BER-00126,Cabin / boarding,55683000
+Nov 1 / original timings,TA-BER-00129,Cabin / boarding,55872000
+Nov 1 / original timings,TA-BER-00134,Cabin / boarding,56063000
+Nov 1 / original timings,TA-BER-00131,Cabin / boarding,56404000
+Nov 1 / original timings,TA-BER-00139,Cabin / boarding,56344000
+Nov 1 / original timings,TA-BER-00125,Cabin / boarding,57483000
+Nov 1 / original timings,TA-BER-00133,Cabin / boarding,57210000
+Nov 1 / original timings,TA-BER-00130,Cabin / boarding,58234000
+Nov 1 / original timings,TA-BER-00135,Cabin / boarding,57524000
+Nov 1 / original timings,TA-BER-00138,Cabin / boarding,57537000
+Nov 1 / original timings,TA-BER-00140,Cabin / boarding,58703000
+Nov 1 / original timings,TA-BER-00142,Cabin / boarding,57886000
+Nov 1 / original timings,TA-BER-00141,Cabin / boarding,58162000
+Nov 1 / original timings,TA-BER-00145,Cabin / boarding,59261000
+Nov 1 / original timings,TA-BER-00147,Cabin / boarding,59395000
+Nov 1 / original timings,TA-BER-00149,Cabin / boarding,58724000
+Nov 1 / original timings,TA-BER-00136,Cabin / boarding,59815000
+Nov 1 / original timings,TA-BER-00132,Cabin / boarding,60452000
+Nov 1 / original timings,TA-BER-00150,Cabin / boarding,59739000
+Nov 1 / original timings,TA-BER-00152,Cabin / boarding,60106000
+Nov 1 / original timings,TA-BER-00143,Cabin / boarding,60529000
+Nov 1 / original timings,TA-BER-00153,Cabin / boarding,60766000
+Nov 1 / original timings,TA-BER-00137,Cabin / boarding,60629000
+Nov 1 / original timings,TA-BER-00146,Cabin / boarding,60974000
+Nov 1 / original timings,TA-BER-00148,Cabin / boarding,61329000
+Nov 1 / original timings,TA-BER-00144,Cabin / boarding,62395000
+Nov 1 / original timings,TA-BER-00155,Cabin / boarding,60947000
+Nov 1 / original timings,TA-BER-00105,Cabin / boarding,62337000
+Nov 1 / original timings,TA-BER-00156,Cabin / boarding,62182000
+Nov 1 / original timings,TA-BER-00154,Cabin / boarding,61830000
+Nov 1 / original timings,TA-BER-00157,Cabin / boarding,63408000
+Nov 1 / original timings,TA-BER-00158,Cabin / boarding,63862000
+Nov 1 / original timings,TA-BER-00159,Cabin / boarding,62960000
+Nov 1 / original timings,TA-BER-00151,Cabin / boarding,64185000
+Nov 1 / original timings,TA-BER-00161,Cabin / boarding,64582000
+Nov 1 / original timings,TA-BER-00164,Cabin / boarding,63832000
+Nov 1 / original timings,TA-BER-00162,Cabin / boarding,64693000
+Nov 1 / original timings,TA-BER-00165,Cabin / boarding,64049000
+Nov 1 / original timings,TA-BER-00171,Cabin / boarding,65725000
+Nov 1 / original timings,TA-BER-00170,Cabin / boarding,64912000
+Nov 1 / original timings,TA-BER-00166,Cabin / boarding,64563000
+Nov 1 / original timings,TA-BER-00172,Cabin / boarding,65098000
+Nov 1 / original timings,TA-BER-00167,Cabin / boarding,64829000
+Nov 1 / original timings,TA-BER-00173,Cabin / boarding,66258000
+Nov 1 / original timings,TA-BER-00179,Cabin / boarding,65452000
+Nov 1 / original timings,TA-BER-00174,Cabin / boarding,66222000
+Nov 1 / original timings,TA-BER-00160,Cabin / boarding,65569000
+Nov 1 / original timings,TA-BER-00181,Cabin / boarding,66588000
+Nov 1 / original timings,TA-BER-00185,Cabin / boarding,67805000
+Nov 1 / original timings,TA-BER-00183,Cabin / boarding,66680000
+Nov 1 / original timings,TA-BER-00189,Cabin / boarding,68346000
+Nov 1 / original timings,TA-BER-00176,Cabin / boarding,68848000
+Nov 1 / original timings,TA-BER-00180,Cabin / boarding,68186000
+Nov 1 / original timings,TA-BER-00191,Cabin / boarding,68460000
+Nov 1 / original timings,TA-BER-00188,Cabin / boarding,69224000
+Nov 1 / original timings,TA-BER-00168,Cabin / boarding,68468000
+Nov 1 / original timings,TA-BER-00169,Cabin / boarding,68855000
+Nov 1 / original timings,TA-BER-00186,Cabin / boarding,69703000
+Nov 1 / original timings,TA-BER-00192,Cabin / boarding,69651000
+Nov 1 / original timings,TA-BER-00175,Cabin / boarding,70040000
+Nov 1 / original timings,TA-BER-00193,Cabin / boarding,69360000
+Nov 1 / original timings,TA-BER-00199,Cabin / boarding,69085000
+Nov 1 / original timings,TA-BER-00163,Cabin / boarding,69763000
+Nov 1 / original timings,TA-BER-00182,Cabin / boarding,70970000
+Nov 1 / original timings,TA-BER-00190,Cabin / boarding,71466000
+Nov 1 / original timings,TA-BER-00202,Cabin / boarding,70171000
+Nov 1 / original timings,TA-BER-00194,Cabin / boarding,70782000
+Nov 1 / original timings,TA-BER-00178,Cabin / boarding,71155000
+Nov 1 / original timings,TA-BER-00207,Cabin / boarding,74070000
+Nov 1 / original timings,TA-BER-00201,Cabin / boarding,72974000
+Nov 1 / original timings,TA-BER-00208,Cabin / boarding,72458000
+Nov 1 / original timings,TA-BER-00212,Cabin / boarding,72331000
+Nov 1 / original timings,TA-BER-00210,Cabin / boarding,73164000
+Nov 1 / original timings,TA-BER-00196,Cabin / boarding,73158000
+Nov 1 / original timings,TA-BER-00205,Cabin / boarding,73988000
+Nov 1 / original timings,TA-BER-00184,Cabin / boarding,73290000
+Nov 1 / original timings,TA-BER-00215,Cabin / boarding,73512000
+Nov 1 / original timings,TA-BER-00206,Cabin / boarding,74704000
+Nov 1 / original timings,TA-BER-00200,Cabin / boarding,73871000
+Nov 1 / original timings,TA-BER-00197,Cabin / boarding,73406000
+Nov 1 / original timings,TA-BER-00203,Cabin / boarding,73989000
+Nov 1 / original timings,TA-BER-00217,Cabin / boarding,74534000
+Nov 1 / original timings,TA-BER-00214,Cabin / boarding,75229000
+Nov 1 / original timings,TA-BER-00213,Cabin / boarding,74899000
+Nov 1 / original timings,TA-BER-00211,Cabin / boarding,74675000
+Nov 1 / original timings,TA-BER-00218,Cabin / boarding,75905000
+Nov 1 / original timings,TA-BER-00219,Cabin / boarding,76361000
+Nov 1 / original timings,TA-BER-00209,Cabin / boarding,75203000
+Nov 1 / original timings,TA-BER-00223,Cabin / boarding,76536000
+Nov 1 / original timings,TA-BER-00230,Cabin / boarding,76558000
+Nov 1 / original timings,TA-BER-00187,Cabin / boarding,77112000
+Nov 1 / original timings,TA-BER-00232,Cabin / boarding,77677000
+Nov 1 / original timings,TA-BER-00195,Cabin / boarding,78385000
+Nov 1 / original timings,TA-BER-00236,Cabin / boarding,77738000
+Nov 1 / original timings,TA-BER-00216,Cabin / boarding,77138000
+Nov 1 / original timings,TA-BER-00228,Cabin / boarding,78249000
+Nov 1 / original timings,TA-BER-00221,Cabin / boarding,78105000
+Nov 1 / original timings,TA-BER-00225,Cabin / boarding,79449000
+Nov 1 / original timings,TA-BER-00227,Cabin / boarding,77781000
+Nov 1 / original timings,TA-BER-00229,Cabin / boarding,78938000
+Nov 1 / original timings,TA-BER-00222,Cabin / boarding,79651000
+Nov 1 / original timings,TA-BER-00238,Cabin / boarding,78403000
+Nov 1 / original timings,TA-BER-00235,Cabin / boarding,79866000
+Nov 1 / original timings,TA-BER-00240,Cabin / boarding,79258000
+Nov 1 / original timings,TA-BER-00239,Cabin / boarding,80231000
+Nov 1 / original timings,TA-BER-00226,Cabin / boarding,80859000
+Nov 1 / original timings,TA-BER-00234,Cabin / boarding,80608000
+Nov 1 / original timings,TA-BER-00233,Cabin / boarding,80645000
+Nov 1 / original timings,TA-BER-00177,Cabin / boarding,81351000
+Nov 1 / original timings,TA-BER-00204,Cabin / boarding,80994000
+Nov 1 / original timings,TA-BER-00253,Cabin / boarding,81091000
+Nov 1 / original timings,TA-BER-00249,Cabin / boarding,82374000
+Nov 1 / original timings,TA-BER-00241,Cabin / boarding,81900000
+Nov 1 / original timings,TA-BER-00244,Cabin / boarding,81855000
+Nov 1 / original timings,TA-BER-00243,Cabin / boarding,82301000
+Nov 1 / original timings,TA-BER-00259,Cabin / boarding,82853000
+Nov 1 / original timings,TA-BER-00242,Cabin / boarding,82185000
+Nov 1 / original timings,TA-BER-00247,Cabin / boarding,83586000
+Nov 1 / original timings,TA-BER-00258,Cabin / boarding,83477000
+Nov 1 / original timings,TA-BER-00261,Cabin / boarding,84600000
+Nov 1 / original timings,TA-BER-00264,Cabin / boarding,83615000
+Nov 1 / original timings,TA-BER-00265,Cabin / boarding,84744000
+Nov 1 / original timings,TA-BER-00231,Cabin / boarding,85118000
+Nov 1 / original timings,TA-BER-00250,Cabin / boarding,85678000
+Nov 1 / original timings,TA-BER-00254,Cabin / boarding,84555000
+Nov 1 / original timings,TA-BER-00224,Cabin / boarding,85259000
+Nov 1 / original timings,TA-BER-00263,Cabin / boarding,86139000
+Nov 1 / original timings,TA-BER-00268,Cabin / boarding,84896000
+Nov 1 / original timings,TA-BER-00260,Cabin / boarding,85486000
+Nov 1 / original timings,TA-BER-00245,Cabin / boarding,86498000
+Nov 1 / original timings,TA-BER-00246,Cabin / boarding,85724000
+Nov 1 / original timings,TA-BER-00198,Baggage hold,86580000
+Nov 1 / original timings,TA-BER-00248,Baggage hold,86390000
+Nov 1 / original timings,TA-BER-00256,Cabin / boarding,87112000
+Nov 1 / original timings,TA-BER-00266,Cabin / boarding,86011000
+Nov 1 / original timings,TA-BER-00252,Baggage hold,88165000
+Nov 1 / original timings,TA-BER-00271,Cabin / boarding,106821000
+Nov 1 / original timings,TA-BER-00255,Cabin / boarding,87532000
+Nov 1 / original timings,TA-BER-00257,Cabin / boarding,87254000
+Nov 1 / original timings,TA-BER-00237,Cabin / boarding,109454000
+Nov 1 / original timings,TA-BER-00269,Cabin / boarding,108849000
+Nov 1 / original timings,TA-BER-00220,Cabin / boarding,109503000
+Nov 1 / original timings,TA-BER-00270,Cabin / boarding,106268000
+Nov 1 / original timings,TA-BER-00262,Cabin / boarding,107316000
+Nov 1 / original timings,TA-BER-00251,Cabin / boarding,109086000
+Nov 1 / original timings,TA-BER-00267,Cabin / boarding,105595000

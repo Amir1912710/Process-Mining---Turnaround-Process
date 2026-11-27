@@ -1,0 +1,87 @@
+\documentclass[
+	%parspace, % Add vertical space between paragraphs
+	%noindent, % No indentation of first lines in each paragraph
+	%nohyp, % No hyphenation of words
+	%twoside, % Double sided format
+	%draft, % Quicker draft compilation without rendering images
+	%final, % Set final to hide todos
+]{elteikthesis}[2024/04/26]
+
+% The minted package is also supported for source highlighting
+% See elteikthesis_minted.tex for example
+%\usepackage[newfloat]{minted}
+
+% Figures drawn in LaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Document's metadata
+\title{Data-Driven Object-Centric Simulation for Airport Turnaround Analysis and Resource Optimization} % title
+\date{2026} % year of defense
+
+% Author's metadata
+\author{Amir Abdelsayed}
+\degree{Data Science MSc}
+
+% Superivsor(s)' metadata
+\supervisor{István Koren} % internal supervisor's name
+\affiliation{Head of Department} % internal supervisor's affiliation
+%\extsupervisor{Jane Doe} % external supervisor's name
+%\extaffiliation{Senior Developer} % external supervisor's affiliation
+
+% University's metadata
+\university{Eötvös Loránd University} % university's name
+\faculty{Faculty of Informatics} % faculty's name
+\department{Dept. of Software Technology and Methodology} % department's name
+\city{Budapest} % city
+\logo{elte_cimer_szines} % logo
+
+% Add bibliography file
+\addbibresource{study_references.bib}
+
+% The document
+
+\begin{document}
+\documentlang{english}
+\maketitle
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Aircraft turnarounds decide whether delay is absorbed on the ground or passed on to the next flight. Process mining could explain how ground services and shared resources interact, but airports share only milestones, not the services between them. This thesis proposes a data-driven object-centric simulation for Berlin Brandenburg Airport (BER). We link 1,322 departure records from the BER A-CDM application with OpenSky observations of the same aircraft and enrich 10,212 turnarounds over 41 days with carrier class, aircraft type and observed weather. The linked data show that inbound delay is passed on when the scheduled buffer falls below about 45 minutes and that delay travels along aircraft rotations; a classifier using only information available at landing flags late departure targets with an AUC of about 0.8. We extend an object-centric Petri net of airport ground handling with carrier-specific service times for cleaning, catering, boarding, deboarding and fueling, observed weather, the local night regulation and schedule-bound departures, and simulate every observed day once. Carrier-specific timing reproduces observed target turnaround times far better than the original functions, and a two-parameter calibration reduces the error on three held-out days by 36--72\%. Object-centric process mining of the generated OCEL~2.0 logs with PM4Py and Promenade shows that the cabin branch determines readiness for most turnarounds, that the baggage hold becomes critical for low-cost carriers, and that remote stands add almost 20 minutes. Faster boarding is the most effective tested lever. Public milestones, once linked through the aircraft, thus suffice to calibrate an object-centric turnaround simulation at the level of carrier classes.
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\input{thesis_introduction.tex}
+\cleardoublepage
+\input{thesis_preliminaries.tex}
+\cleardoublepage
+\input{thesis_related.tex}
+\cleardoublepage
+\input{thesis_methods.tex}
+\cleardoublepage
+\input{thesis_implementation.tex}
+\cleardoublepage
+\input{thesis_results.tex}
+\cleardoublepage
+\input{thesis_discussion.tex}
+\cleardoublepage
+\input{thesis_conclusion.tex}
+\cleardoublepage
+\chapter*{\acklabel}
+\addcontentsline{toc}{chapter}{\acklabel}
+I thank my supervisor, Istv\'an Koren, for providing the extended airport model and for guiding the research direction. The distinction between that baseline and the modifications made in this thesis is maintained throughout.
+\cleardoublepage
+\appendix
+\input{thesis_auxiliary_pilot.tex}
+\cleardoublepage
+\input{thesis_reproducibility.tex}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\biblabel}
+\printbibliography[title=\biblabel]
+\cleardoublepage
+\listoffigures
+\cleardoublepage
+\listoftables
+\end{document}

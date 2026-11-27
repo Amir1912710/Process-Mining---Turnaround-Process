@@ -1,0 +1,14 @@
+\chapter{Reproducibility and artifact inventory}
+\label{app:repro}
+The original model is retained as \texttt{airport-extended.ocpn}; its SHA-256 is
+\begin{quote}\footnotesize\texttt{b83e78fbdaa2289c406e359cffc080935b}\\
+\texttt{d3ba586bae2f6a1858c77fa8f379d2}.\end{quote}
+The two displayed lines form one continuous hash. The source attribution and MIT license accompanying the Studio-derived material are retained with the model package.
+
+The prepared core input is \texttt{ber\_ground\_intervals\_core\_proxy.csv}. Daily case CSVs and manifests retain source keys and model assumptions. Version 2.0 daily OCEL exports and Promenade analysis are separate from version 2.1 controlled replications.
+
+The controlled-study archive contains twelve built models, case CSVs/manifests, a frozen experiment plan, sixty per-case result files and corresponding summaries, replication metrics, scenario summaries, contrasts, validation results and three figures. Scripts implement model building, official-runtime execution and replication-level aggregation. Python dependencies are NumPy, pandas, SciPy and Matplotlib. Node.js and \texttt{@rwth-pads/cpnsim} 0.6.2 provide simulation execution. The runtime and full upstream raw collection are not bundled in that archive; absolute plan paths require adjustment after relocation.
+
+The Promenade folder contains actual application captures/exports and supplementary Python figures, identified separately in captions. It also contains paired case metrics and analysis notes. The controlled replications are headless results, not sixty additional completed Promenade imports.
+
+All reported controlled runs passed completion, case uniqueness, aircraft/resource-return and model-hash checks. These are technical integrity checks, distinct from official OCEL schema validation, process conformance or empirical accuracy. The 10,940-case model is load-tested only. Random-seed control is unavailable, so repeating the procedure will produce new stochastic outputs.

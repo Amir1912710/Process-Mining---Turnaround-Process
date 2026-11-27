@@ -1,0 +1,142 @@
+{
+  "sources": [
+    {
+      "date": "2026-11-01",
+      "rows": 289,
+      "csv_sha256": "0813ac9c128598850cda33e118c2f0a82ad0f32294b455b6f8368f70b0298b58",
+      "json_sha256": "beb8096b5bfa17c456ed4ae68de99ddc0ee8f8f8df9ead0ac110d69f665f66cd",
+      "manifest_sha256": "2e74cde37540bde71ea2f9c89a05bc960761486d91c1d14165f3eeb28dbd9d8a",
+      "collection_finished_utc": "2026-11-01T23:25:07.092237+00:00",
+      "full_day_completeness": "unverified; a successful paginated live-board response does not prove complete historical coverage"
+    },
+    {
+      "date": "2026-11-05",
+      "rows": 257,
+      "csv_sha256": "70c654d828ae381dfe14f6ac9991eac0f3c21916d96f50258cf74210a48d2b62",
+      "json_sha256": "8cac4ba82a7d40d05edd6d21d1c2047feb31ba89d6dffe9b25493c64918fbd6c",
+      "manifest_sha256": "85605415014a2f5d3a322a7c66b1b12e5edd946b9450c48fa388a7f8628d9737",
+      "collection_finished_utc": "2026-11-05T23:53:09.818504+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    },
+    {
+      "date": "2026-11-08",
+      "rows": 264,
+      "csv_sha256": "33f54def3bfab9d8bb815bebd329f3f7cada3e3db8ab6b4b3bcd93e2be606848",
+      "json_sha256": "c26c02d5237c4f5d197a2236ac6a7703dd7c2e200222f17f5f994b1d46d847d9",
+      "manifest_sha256": "6fb4bc6368dc6123b6d206e3ae0efe145b14af8062367f95f33d7569be911c52",
+      "collection_finished_utc": "2026-11-08T23:18:04.077208+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    },
+    {
+      "date": "2026-11-15",
+      "rows": 254,
+      "csv_sha256": "66326d5b6b591f7333e86aa7409d020e42fecddbed3900ceb621699f338c7075",
+      "json_sha256": "c38f5aeba4f9d7c592ab4a129a35e16f5c6d8b199a8676e4d0c7d87e4d104e16",
+      "manifest_sha256": "a6274ce5abdc73dffb4ad9cdd87dbf277df1e59f01dd1216ba13978f1942b26f",
+      "collection_finished_utc": "2026-11-15T23:13:24.335364+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    },
+    {
+      "date": "2026-11-16",
+      "rows": 258,
+      "csv_sha256": "c104be2153ec6f65b8c786836ea65755cc49854a49625c4333bffd0331c32e4c",
+      "json_sha256": "f3ca4b8c8abc416ce2314ed5288234e1e91b3217b438e87fecf94f9329c7c4ff",
+      "manifest_sha256": "15904526ac8d7e3d83d13a35ccb237995b4ff95df2930e63249bfec483f7c7f5",
+      "collection_finished_utc": "2026-11-16T23:15:45.952943+00:00",
+      "full_day_completeness": "unverified; all paginated records returned for the requested STD date are retained"
+    }
+  ],
+  "input_records": 1322,
+  "prepared_records": 1322,
+  "cohorts": {
+    "usable_actual_takeoff": 1286,
+    "usable_target_takeoff_pairs": 1283,
+    "usable_nonnegative_target_sequence": 1261
+  },
+  "flags": {
+    "missing_tobt": 38,
+    "missing_tsat": 38,
+    "missing_atot": 36,
+    "missing_aircraft_reg": 14,
+    "missing_parking_pos": 19,
+    "missing_runway": 24,
+    "canceled": 15,
+    "no_actual_takeoff": 21,
+    "negative_tsat_minus_tobt_min": 21,
+    "negative_atot_minus_tsat_min": 1,
+    "negative_atot_minus_tobt_min": 1
+  },
+  "status_counts": {
+    "OFF": 1286,
+    "XLD": 15,
+    "SKD": 17,
+    "COM": 4
+  },
+  "missing": {
+    "id": 0,
+    "flight_id": 0,
+    "dep_airport_iata": 0,
+    "dep_airport_icao": 0,
+    "std": 0,
+    "flight_number": 0,
+    "flight_number_trim": 0,
+    "callsign": 0,
+    "aircraft_reg": 14,
+    "dest_iata": 3,
+    "dest_icao": 0,
+    "eobt": 32,
+    "ctot": 1068,
+    "tobt": 38,
+    "tsat": 38,
+    "atot": 36,
+    "parking_pos": 19,
+    "taxitime": 0,
+    "runway": 24,
+    "flight_status": 0,
+    "gates": 71,
+    "airline_iata": 83,
+    "airline_icao": 15,
+    "aircraft_iata": 1,
+    "aircraft_icao": 0,
+    "deicing_request": 1297,
+    "eczt": 1322,
+    "edit": 0,
+    "deicing_pos": 1298,
+    "sid": 23,
+    "verified": 0,
+    "updated_from_import_income": 0,
+    "updated_at": 0,
+    "flight_status_label": 0,
+    "deicing_request_label": 1297
+  },
+  "script_sha256": "d78aa621c2683fd6e520ae74930fba328a9f9e5c6758ab9c4c8f5ece3c6b42c0",
+  "timezone": "Unverified; no timezone assigned or conversion performed",
+  "partition": "Latest available source date held out; suggestion only, not fitted or evaluated",
+  "metrics": {
+    "tsat_minus_tobt_min": {
+      "n": 1284,
+      "mean": 1.2999091370716511,
+      "median": 0.0
+    },
+    "atot_minus_tsat_min": {
+      "n": 1283,
+      "mean": 12.581644574434918,
+      "median": 12.116667
+    },
+    "atot_minus_tobt_min": {
+      "n": 1283,
+      "mean": 13.882566890880748,
+      "median": 12.933333
+    },
+    "tobt_minus_std_min": {
+      "n": 1284,
+      "mean": 8.559903947040498,
+      "median": 0.0
+    },
+    "atot_minus_ctot_min": {
+      "n": 254,
+      "mean": 1.203215220472441,
+      "median": 0.6416665
+    }
+  }
+}

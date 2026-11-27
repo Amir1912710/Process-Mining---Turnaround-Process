@@ -1,0 +1,1975 @@
+The present work was submitted to:
+Chair of Process and Data Science
+RWTH Aachen University
+Bridging the Data Gap in Aviation by
+Reconstructing Turnaround Traces with
+Colored Petri Nets
+Bachelor Thesis
+presented by
+Elisabeth Tkacenko
+434198
+First Examiner: Prof. Dr. Wil M. P. van der Aalst
+Second Examiner: Prof. Dr. Sandra Geisler
+Advisor: Dr. Istv ´an Koren
+Aachen, September 10, 2026
+
+
+
+Acknowledgments
+Special thanks to Fraport AG for providing valuable data and insights.
+Above all, I thank my family for their continuous support and for enabling me to pursue
+the life I aspire to lead.
+i
+
+
+
+Abstract
+Increasing air traffic places growing pressure on airlines and airports to operate efficiently,
+with delayed turnarounds representing a major cost factor. While process mining can
+support the analysis and improvement of business processes, aircraft turnarounds lack
+the detailed event logs required for such analysis. Existing studies frequently rely on
+aggregated, case-centric milestones that do not capture the interactions among the op-
+erational resources involved in the process. To bridge this operational data gap, we
+generate synthetic event logs through simulation. We combine domain knowledge and
+limited empirical data in a colored Petri net model of the turnaround process. The
+model represents process dependencies and interactions among multiple objects. Monte
+Carlo simulation generates candidate traces, which are exported as object-centric event
+logs (OCEL) 2.0. Evaluation against a limited ground-truth dataset shows partial agree-
+ment in internal activity durations. Although obtaining sufficient valid traces requires
+numerous simulation iterations, fusing domain knowledge with limited empirical data
+successfully yields synthetic OCEL 2.0, providing a foundation for object-centric process
+mining.
+iii
+
+
+
+Contents
+1 Introduction 1
+1.1 Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.2 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.3 Research Questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.4 Research Goals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.5 Contributions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.6 Thesis Structure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2 Preliminaries and Background 5
+2.1 OCEL 2.0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.2 Timed Colored Petri Nets . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+2.3 Mapping OCEL 2.0 Concepts to CPN Semantics . . . . . . . . . . . . . . 8
+2.4 Monte Carlo Simulation . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+2.5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3 Related Work 9
+3.1 Modeling and Simulating Aircraft TAs . . . . . . . . . . . . . . . . . . . . 9
+3.2 Process Mining in Aviation and the Data Gap . . . . . . . . . . . . . . . . 9
+3.3 Object-Centric Paradigms . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.4 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+4 Method 13
+4.1 Formalizing the TA in a CPN . . . . . . . . . . . . . . . . . . . . . . . . . 14
+4.1.1 Hierarchical Architecture . . . . . . . . . . . . . . . . . . . . . . . 14
+4.1.2 Token Architecture and Initialization . . . . . . . . . . . . . . . . . 15
+4.1.3 Business Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+4.1.4 Stochastic Timing . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+4.2 Stochastic Execution via Monte Carlo . . . . . . . . . . . . . . . . . . . . 19
+4.3 OCEL 2.0 Extraction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+4.3.1 Identifying Core Entities . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.3.2 Establishing Relational Links . . . . . . . . . . . . . . . . . . . . . 21
+4.3.3 Tracking State Changes . . . . . . . . . . . . . . . . . . . . . . . . 23
+4.4 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+5 Implementation 25
+5.1 Implementation Framework and Adaptability . . . . . . . . . . . . . . . . 25
+5.1.1 Implementation Framework . . . . . . . . . . . . . . . . . . . . . . 25
+v
+
+Contents
+5.1.2 Adaptability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+5.2 Performance Optimization incpn-py. . . . . . . . . . . . . . . . . . . . . 26
+5.2.1 Execution Optimization . . . . . . . . . . . . . . . . . . . . . . . . 26
+5.2.2 Early Pruning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+5.3 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+6 Evaluation 31
+6.1 State-Space-Based Verification . . . . . . . . . . . . . . . . . . . . . . . . 31
+6.1.1 Experimental Setup . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+6.1.2 Verification Criteria . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+6.1.3 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+6.2 Empirical Validity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.2.1 Experimental Setup . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+6.2.2 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+6.3 OCEL 2.0 Conformity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+6.4 Object-Centric What-if Analysis . . . . . . . . . . . . . . . . . . . . . . . 37
+6.4.1 Experimental Setup . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+6.4.2 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+6.5 Threats to Validity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+6.6 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+7 Discussion 41
+7.1 Methodological Design Choices . . . . . . . . . . . . . . . . . . . . . . . . 41
+7.2 Practical Applicability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+7.3 Extensibility and Generalizability . . . . . . . . . . . . . . . . . . . . . . . 43
+7.3.1 Extensibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+7.3.2 Generalizability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+7.4 Limitations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+7.5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+8 Conclusion 47
+8.1 Future Work . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+A Expert Interview Transcript 51
+vi
+
+List of Figures
+1.1 Conceptual Input–Output View of the Approach . . . . . . . . . . . . . . 2
+4.1 Architecture of the Trace Reconstruction Pipeline . . . . . . . . . . . . . . 13
+4.2 Top-level CPN of the TA Process . . . . . . . . . . . . . . . . . . . . . . . 15
+4.3 Boarding Subprocess in the CPN . . . . . . . . . . . . . . . . . . . . . . . 17
+4.4 Relational mapping of an event. . . . . . . . . . . . . . . . . . . . . . . . . 21
+4.5 Mapping of Event-to-Object Relations . . . . . . . . . . . . . . . . . . . . 22
+4.6 Mapping of Object-to-Object Relations . . . . . . . . . . . . . . . . . . . . 23
+5.1 Synchronization at the Silent Merge Transition . . . . . . . . . . . . . . . 28
+6.1 Activity Duration Classifications . . . . . . . . . . . . . . . . . . . . . . . 36
+6.2 Baggage Loader Assignments by Scenario . . . . . . . . . . . . . . . . . . 39
+vii
+
+
+
+List of Tables
+5.1 Performance Optimizations in cpn-py . . . . . . . . . . . . . . . . . . . . . 27
+6.1 Empirical Evaluation Parameters . . . . . . . . . . . . . . . . . . . . . . . 34
+6.2 Probabilities for Unknown Flight Attributes . . . . . . . . . . . . . . . . . 34
+6.3 Trace Acceptance and Temporal Deviation . . . . . . . . . . . . . . . . . . 35
+6.4 Impact of Baggage Loader Capacity on Timing . . . . . . . . . . . . . . . 38
+ix
+
+
+
+1 Introduction
+Within Europe alone, the aviation industry registered 11.1 million flights in 2025, with
+traffic continuing to rise [26]. As air traffic grows, delays incur significant losses by
+decreasing aircraft usability and creating extra costs such as non-productive fuel con-
+sumption, labor costs, and passenger compensation [35]. Up to 70% of these delays are
+related to turnaround (TA) processes [35]. The TA is defined as the critical period be-
+tween an aircraft’s arrival at the gate (in-block) and its subsequent departure (off-block).
+It involves a complex sequence of parallel and sequential processes, including refueling,
+catering, and boarding. While airlines and airports face pressure to optimize TA dura-
+tions, the process remains an operational black box. Since TAs are complex business
+processes, formal process modeling is required to understand the underlying resource
+interactions. Process mining (PM) has proven powerful in creating such operational
+transparency [29] but its application is hindered by a fundamental lack of data. Because
+of the manual and fragmented nature of ground operations, detailed event logs are not
+readily available to enable standard PM techniques. Such event logs are, however, essen-
+tial to develop targeted algorithms capable of systematically improving operations and
+handling error-prone data from diverse sources.
+For bridging this data gap, we propose a simulation-based approach for reconstruct-
+ing process traces using colored Petri nets (CPNs) to extract object-centric event logs
+(OCEL) 2.0. Unlike related methods relying on traditional case-centric paradigms,
+OCEL 2.0 explicitly captures object-to-object relationships, relationship qualifiers, and
+evolving attribute values [9]. This enables an explicit representation of resource lifecycles
+and their interactions with TA instances. Our CPN model is built incpn-py[8], a scal-
+able, Python-based framework that offers a low entrance barrier and seamless integration
+with modern PM environments.
+To capture the inherent variability of ground operations, we generate candidate traces
+through Monte Carlo simulation. The evaluation examines completion and routing prop-
+erties of selected model configurations, compares simulated activity durations with lim-
+ited ground-truth observations, and assesses the OCEL 2.0 against relational validation
+checks.
+The remainder of this chapter is structured as follows. Section 1.1 motivates the need
+for object-centric TA simulations, followed by the problem statement in Section 1.2.
+Section 1.3 and Section 1.4 define the overarching research questions and specific goals.
+Finally, Section 1.5 lists the main contributions of this thesis.
+1
+
+1 Introduction
+Figure 1.1: The proposed pipeline synthesizes qualitative domain knowledge with quan-
+titative temporal boundaries to generate synthetic OCEL 2.0 for subsequent
+process mining applications.
+1.1 Motivation
+The aviation industry faces high average delays, causing costs of approximately€1.5
+billion in 2019 [13]. Up to 45% of these delays are reactive and caused by delay propa-
+gation [33]. A large proportion of these delays originate at hub airports like Frankfurt
+Airport (FRA) [35], which function as critical transit points. To optimize the TA and
+thereby reduce delays, a detailed analysis of the as-is state is required to identify dis-
+ruptions and bottlenecks.
+Existing PM approaches often rely on airport collaborative decision making (A-CDM)
+data. While A-CDM provides high-level timestamps (e.g., in-block and boarding start),
+they are partly recorded manually, which yields impossible process variants and related
+analytical shortcomings [29]. Our approach prevents this by utilizing a CPN simula-
+tion, whose structural constraints restrict generated traces to behavior permitted by the
+modeled control-flow and resource constraints.
+While some existing approaches utilize Petri Nets to model the TA, they do not
+provide event logs to enable PM. Furthermore, if one were to apply PM to these models,
+they would be limited by a case-centric paradigm. Traditional PM treats a single flight
+as the isolated moving part. The TA, however, is an interdependent process involving
+multiple distinct resources, such as ground support equipment and specialized crews.
+For instance, consider a catering truck and a cleaning crew that must coordinate access
+to the cabin. In a traditional case-centric event log, the independent lifecycle of the
+cleaning crew, which serves multiple different aircraft across the apron, is lost. This
+leads to convergence and divergence issues, where a single event is related to different
+cases, or multiple instances of the same activity occur within a single case [6]. This
+motivates an representation that links TA instances and resources.
+To solve this, our method generates object-centric event data by extracting OCEL 2.0
+from a CPN simulation. OCEL 2.0 captures object-to-object relationships, relationship
+qualifiers, and evolving object attributes. Returning to the previous example, our ap-
+proach models both the aircraft and the catering truck as independent objects, explicitly
+representing their modeled interactions and resource dependencies. By combining CPN
+simulation with object-centric process mining (OCPM), we reconstruct missing process
+traces, transforming the black-box process into a transparent, analyzable event log.
+2
+
+1.2 Problem Statement
+1.2 Problem Statement
+High-quality, detailed event logs for aircraft TAs are currently unavailable due to the
+decentralized and manual nature of the ground handling processes. Existing simulation
+approaches can represent shared-resource dependencies. The challenge addressed here
+is to expose these modeled interactions as structured object-centric event data for sub-
+sequent analysis. Thus, a method is missing to reconstruct realistic, OCEL 2.0 based
+on limited available real-world data required for a comprehensive, data-driven process
+analysis.
+1.3 Research Questions
+Building on these challenges, we define the following Research Questions (RQ) to guide
+our approach:
+RQ1: How can aircraft TA activities and their complex resource dependencies be formally
+reconstructed based on sparse real-world data and domain knowledge?
+RQ2: How can simulation techniques be applied to this model to create OCEL 2.0?
+RQ3: How can the quality of these reconstructed event logs be validated against limited
+ground truth data?
+Together, these questions formulate a comprehensive methodology to synthesize, recon-
+struct, and evaluate object-centric event logs.
+1.4 Research Goals
+Reconstructing TA traces from sparse observations requires a synthesis of formal model-
+ing and process simulation. Therefore, to systematically address the previously defined
+research questions, the following research goals are established:
+1. Systematically capture and formalize aircraft TA processes and their complex re-
+source dependencies into an executable CPN.
+2. Develop a Monte Carlo simulation approach to approximate missing TA activities
+by generating plausible process traces as valid OCEL 2.0.
+3. Validate the generated OCEL 2.0 against limited ground truth data.
+Achieving these goals yields synthetic event logs whose temporal plausibility is assessed
+against limited empirical data. This allows advanced process mining techniques to sys-
+tematically optimize aircraft TA operations.
+3
+
+1 Introduction
+1.5 Contributions
+Addressing the established research goals yields both theoretical methodologies and prac-
+tical software artifacts. Specifically, the following main contributions are provided:
+•A configurable CPN model of the aircraft TA incpn-py.
+•A technical extension ofcpn-py, introducing capabilities for extracting OCEL 2.0
+from CPN.
+•A validation study assessing the generated event logs against real-world ground
+truth data.
+Collectively, these contributions provide a feasible solution to the operational data gap in
+aviation. They provide the necessary data foundation for advanced operational analysis.
+1.6 Thesis Structure
+The remainder of this thesis is organized as follows. Chapter 2 establishes the foun-
+dations for this work, while Chapter 3 reviews related research. Chapter 4 presents
+the proposed method for process trace reconstruction, followed by its implementation
+in Chapter 5. Chapter 6 evaluates the approach, and Chapter 7 discusses the findings,
+their implications, and the limitations of the study. Finally, Chapter 8 summarizes the
+contributions and outlines directions for future work.
+4
+
+2 Preliminaries and Background
+This section introduces the foundational concepts used throughout this thesis. We first
+formalize the structure of object-centric event data and subsequently define the semantics
+of timed CPNs, which serve as our modeling and execution language.
+2.1 OCEL 2.0
+To represent processes involving multiple interrelated objects and dynamic attribute
+changes, we utilize OCEL 2.0 [9].
+Definition 2.1.1(Universes).LetU Σ be the universe of strings. We define the following
+pairwise disjoint universes:
+•U ev⊆UΣ is the universe of events.
+•U etype⊆UΣ is the universe of event types.
+•U obj⊆UΣ is the universe of objects.
+•U otype⊆UΣ is the universe of object types.
+•U attr⊆UΣ is the universe of attribute names.
+•U val is the universe of attribute values.
+•U time is the universe of timestamps. We useτ∈Utime to denote a specific times-
+tamp.
+•U qual⊆UΣ is the universe of qualifiers.
+Definition 2.1.2(OCEL).An OCEL is a tuple
+L= (E,O,EA,OA,evtype,time,objtype,eatype,oatype,eaval,oaval,E2O,O2O)
+with:
+•E⊆Uev is the set of events.
+•O⊆Uobj is the set of objects.
+•evtype∈E→Uetype assigns types to events.
+•time∈E→Utime assigns timestamps to events.
+5
+
+2 Preliminaries and Background
+•EA⊆Uattr is the set of event attributes.
+•eatype∈EA→Uetype assigns event types to event attributes.
+•eaval∈(E×EA)→Uval assigns values to event attributes.
+•objtype∈O→Uotype assigns types to objects.
+•OA⊆Uattr is the set of object attributes.
+•oatype∈OA→Uotype assigns object types to object attributes.
+•oaval∈(O×OA×Utime)→Uval assigns values to object attributes.
+•E2O⊆E×Uqual×Oare the qualified event-to-object relations.
+•O2O⊆O×Uqual×Oare the qualified object-to-object relations.
+such that:
+•dom(eaval)⊆ {(e,ea)∈E×EA|evtype(e) =eatype(ea)}ensures that only
+existing event attributes can have values.
+•dom(oaval)⊆{(o,oa,τ)∈O×OA×Utime|objtype(o) =oatype(oa)}ensures that
+only existing object attributes can have values.
+In order to facilitate examples and explanations, we introduce the following notations
+given an OCELL:
+•ET(L) ={evtype(e)|e∈E}is the set of event types.
+•OT(L) ={objtype(o)|o∈O}is the set of object types.
+•For any evente∈Eand event attributeea∈U attr:
+–eaval ea(e) =eaval(e,ea) if (e,ea)∈dom(eaval).
+–eaval ea(e) =⊥if (e,ea)/∈dom(eaval).
+•For any objecto∈O, object attributeoa∈Uattr and timeτ∈Utime:
+–oaval τ
+oa(o) =oaval(o,oa,τ′) if there exists aτ′∈Utime such thatτ′≤τand
+(o,oa,τ′)∈dom(oaval) such that there is noτ′′∈Utime such thatτ′<τ′′≤τ
+and (o,oa,τ′′)∈dom(oaval).
+–If no suchτ′exists, thenoaval τ
+oa(o) =⊥.
+Hence,oaval τ
+oa(o) provides us with the latest object attribute value at timeτ.
+•oaval oa(o) =oaval∞
+oa(o) is the final value for the object attribute in the event log.
+6
+
+2.2 Timed Colored Petri Nets
+2.2 Timed Colored Petri Nets
+We model the operational behavior and the manipulation of object states using timed
+CPNs [16], hereafter referred to as CPNs. To do so, we first define essential concepts.
+Definition 2.2.1(Multisets and Timed Multisets).LetB(S) be the set of all multisets
+over a setS. Given the universe of timestampsU time introduced in Definition 2.1.1, a
+timed multiset overSis a multiset over the Cartesian productS×U time. An element
+(s,τ)∈S×Utime is written ass@τ, indicating that the elementsbecomes available at
+timeτ.
+Definition 2.2.2(Variables and Expressions).LetVbe a set of typed variables. We
+define the set of all expressions that can be evaluated using variables fromVasEXPR V .
+The type of an expressionexp∈EXPRV is denoted byType(exp). For expressions not
+containing any free variables, we use EXPR∅.
+Definition 2.2.3(Timed Colored Petri Net).A timed CPN is a nine-tuple
+N= (P,T,F,Σ,V,C,G,E,I), where:
+1.Pis a finite set of places.
+2.Tis a finite set of transitions such thatP∩T=∅.
+3.F⊆(P×T)∪(T×P) is a set of directed arcs.
+4. Σ is a finite set of non-empty color sets. A color set can be either untimed or
+timed.
+5.Vis a finite set of typed variables such thatType(v)∈Σ for allv∈V.
+6.C∈P→Σ is a color set function that assigns a color set to each place. A place
+pis timed ifC(p) is timed, otherwise,pis untimed.
+7.G∈T→EXPRV is a guard function that assigns a boolean expression to each
+transitiont∈Tsuch thatType(G(t)) =Bool.
+8.E∈F→EXPRV is an arc expression function that assigns an expression to each
+arcf∈F. For any arcfconnected to a placep, the following holds:
+•Type(E(f)) =B(C(p)) ifpis untimed.
+•Type(E(f)) =B(C(p)×U time) ifpis timed.
+9.I∈P→EXPR∅is an initialization function that assigns an initialization expres-
+sion to each placep∈Psuch that:
+•Type(I(p)) =B(C(p)) ifpis untimed.
+•Type(I(p)) =B(C(p)×U time) ifpis timed.
+The initial markingM 0 is a state defined over the places of the CPN. It is obtained by
+evaluating the initialization expressions for all places, i.e.,M 0(p) =I(p) for allp∈P.
+7
+
+2 Preliminaries and Background
+2.3 Mapping OCEL 2.0 Concepts to CPN Semantics
+Having defined OCEL 2.0 for data representation and CPNs for operational modeling,
+we now describe the mapping between them.
+Conceptually, an object token combines an object identifier with its current attribute
+values. Let
+Cobj =U obj×(Uattr̸→Uval)
+denote this abstract representation, where the partial mapping contains the attributes
+applicable to the respective object type. The concrete CPN model implements this
+representation through typed product color sets, which are introduced in Section 4.1.2.
+When an event modifies an object attribute, this is represented by the occurrence
+of a transitiont∈T. The attribute update is formalized using the function update
+operator⊕. Letc= (o,π)∈Cobj represent the current state of objecto, whereπis its
+attribute mapping. If a transition changes attributeoatov new, the resulting abstract
+token state is
+c′= (o,π⊕{(oa,vnew)}),
+where⊕denotes function update. In the concrete model, the same operation is im-
+plemented by replacing the corresponding component of the typed token tuple. This
+produces a new token holding the updated attribute values, integrating object-centric
+attribute changes into the execution semantics of the CPN.
+2.4 Monte Carlo Simulation
+To capture the stochastic nature of real-world processes, we evaluate the dynamic be-
+havior of our CPN model through Monte Carlo simulation [27].
+Definition 2.4.1(Monte Carlo Simulation).Monte Carlo simulation is a numerical
+method for the quantitative analysis of stochastic systems. It estimates the behavior
+of a model through repeated evaluations, using input parameters randomly sampled
+from predefined probability distributions. Grounded in the Law of Large Numbers,
+this method ensures that the average of the simulated outcomes converges to the true
+expected value as the number of independent trials increases.
+Monte Carlo simulation can be combined with rejection sampling: candidate samples
+are generated and retained only if they satisfy a specified acceptance criterion.
+2.5 Conclusion
+In summary, this chapter establishes the theoretical foundation for our approach. We
+formalize OCEL 2.0, define CPNs as our operational model, and describe their concep-
+tual mapping. Finally, we introduce Monte Carlo simulation as the quantitative method
+for evaluating stochastic system behavior.
+8
+
+3 Related Work
+This chapter contextualizes the proposed methodology by reviewing the existing litera-
+ture. First, we examine approaches to simulating ground operations. Subsequently, we
+discuss applications of PM in the aviation sector, highlighting limitations in the avail-
+ability and granularity of event data. Finally, we explore the emerging shift towards
+object-centric paradigms.
+3.1 Modeling and Simulating Aircraft TAs
+Traditionally, aircraft TAs have been scheduled and analyzed as linear projects using the
+critical path method (CPM). CPM calculates the minimum project duration by isolat-
+ing the critical path, the longest sequence of zero-buffer tasks where any delay extends
+the entire process, thereby pinpointing bottlenecks. These models, however, typically as-
+sume deterministic process times and static resource availability, treating parallel ground
+activities in isolation rather than capturing their dynamic interdependencies [22].
+To systematically assess the complex and uncertain nature of TAs, Schmidt [33] high-
+lights the need for flexible, fine-grained simulation approaches. Several authors have
+utilized advanced Petri nets to represent the concurrency of apron activities and re-
+source constraints. Vidosavljevic and Tosic [35] deploy CPNs to investigate resource
+allocation and schedule disruptions, using daily operational plans and available equip-
+ment as inputs. Sng [34] combines Petri nets with Monte Carlo simulation to identify
+bottlenecks and evaluate process modifications. The model is calibrated using opera-
+tional records, supplemented by observations, aircraft manuals, and expert input where
+empirical data is unavailable. Furthermore, Cui [12] combines time transition Petri nets
+with Bayesian updating to dynamically predict TA times under operational uncertainty.
+These works demonstrate the suitability of Petri nets for representing concurrency,
+synchronization constraints, and stochastic activity durations in ground handling oper-
+ations. Their focus is on performance evaluation, resource allocation, and turnaround-
+time prediction. Building on these capabilities, our approach uses CPN simulation to
+generate candidate traces and systematically maps their events, objects, and relation-
+ships on OCEL 2.0 for subsequent object-centric process analysis.
+3.2 Process Mining in Aviation and the Data Gap
+Recent research applies PM to improve transparency and analyze operational perfor-
+mance in aviation. B¨ ohm et al. [11] describe the introduction of commercial PM soft-
+ware at Lufthansa CityLine to support punctuality and reliability in ground operations
+9
+
+3 Related Work
+and maintenance. Event logs are constructed by integrating heterogeneous operational
+information systems, including ERP systems. However, some ground handling activities
+are not recorded in these systems, limiting the coverage of the resulting logs.
+Other approaches address TA performance at a more aggregated level. Halmesaari [15]
+uses machine learning to predict overall TA times without relying on explicit sub-process
+timestamps. Such predictions address a different analytical objective from examining the
+internal sequence and interaction of ground handling activities.
+Rott et al. [29] apply PM to A-CDM milestone data from Munich Airport, revealing
+performance differences and data quality issues. Inaccurate or inconsistent timestamps
+can produce implausible recorded sequences, such as going off-block before boarding has
+concluded. The analysis therefore depends on the availability, granularity, and quality
+of the recorded milestones. Our approach instead uses IBT and OBT as temporal an-
+chors, supplemented by domain knowledge, activity-duration distributions, and resource
+assumptions, to generate candidate executions without requiring a A-CDM event log.
+The CPN constrains process variants that violate the encoded business rules.
+3.3 Object-Centric Paradigms
+Linear process descriptions for the TA often fail to accurately reflect TA realities because
+they ignore the complex interactions between shared resources across the apron. De L´ ıger
+et al. [19] emphasize that TA operations must handle the synchronization of competing
+resources, a complexity that models such as CPMs cannot manage.
+To accurately capture these dynamics, it is necessary to adopt an interacting object-
+centric paradigm, where resources and aircraft are treated as independent yet tightly
+coupled entities. Luo et al. [20] demonstrate the value of this approach by utilizing a
+digital twin to represent aircraft and ground support equipment as distinct, interacting
+entities rather than treating the TA linearly as a single flight case. Their results confirm
+that modeling the autonomous interactions of multiple resources yields a more accurate
+reflection of ground handling dynamics. Building on the utility of such simulations,
+another study by Luo et al. [21] successfully leveraged generative modeling. By creating
+a synthetic dataset of 30,000 TA records to train predictive machine learning models,
+they validated that simulating ground operations is a robust methodological approach
+to overcome the limitations of incomplete empirical datasets.
+Collectively, these studies demonstrate the value of modeling interacting resources and
+generating synthetic operational data through simulation. Our approach builds on these
+principles by mapping CPN transition firings and token values to events, objects, quali-
+fied relationships, and object attribute changes in OCEL 2.0. This makes the simulated
+interactions between aircraft, jobs, and resources explicitly accessible for object-centric
+process analysis.
+10
+
+3.4 Conclusion
+3.4 Conclusion
+The reviewed literature establishes Petri-net-based simulation as a means of capturing
+TA dependencies and uncertainty, and demonstrates the value of PM for analyzing
+recorded operations. Building on these foundations, we connect TA simulation with
+object-centric process analysis through an integrated pipeline combining CPNs, Monte
+Carlo simulation, and OCEL 2.0. By generating synthetic event data from limited
+observations and domain knowledge, the approach supports the development of object-
+centric analytical workflows before detailed operational event logs become available.
+11
+
+
+
+4 Method
+This chapter introduces an approach for reconstructing candidate TA traces. The core
+challenge addressed is the reconstruction of comprehensive process traces when only
+high-level constraints, such as in-block time (IBT) and off-block time (OBT), and basic
+duration distributions for individual activities are available. To solve this, we propose a
+threefold pipeline, as overviewed in Figure 4.1:
+1.Formalizing the TA (Section 4.1):First, we develop an executable and config-
+urable CPN model of the TA for narrow-body aircraft at FRA usingcpn-py. To
+build it, we use domain knowledge on the process and duration distributions from
+literature. Additionally, we integrate practical insights gained from interviewing
+an expert in TA digitalization at FRA [14]. Following established CPN princi-
+ples [17], the architecture is built on a hierarchical design, incremental refinement,
+continuous validation, and formal verification.
+2.Stochastic Execution (Section 4.2):Then, we use real-world timestamps as
+inputs for a Monte Carlo simulation. Here, we generate a pool of plausible process
+traces. Due to boundary constraints, a rejection sampling approach is applied and
+only a fraction of these candidate traces is considered valid and can be applied for
+further analysis.
+3.OCEL 2.0 Extraction (Section 4.3):Taking the simulated token flows as in-
+put, our relational OCEL 2.0 extraction engine dynamically intercepts the state
+changes. By tracking evolving attribute values and capturing object-to-object rela-
+tionships in real-time, the engine synthesizes the raw token flow into an OCEL 2.0,
+establishing a foundation for advanced process mining analysis.
+Figure 4.1: Data and execution flow from domain knowledge and flight schedules to syn-
+thetic OCEL 2.0 event logs through CPN modeling, Monte Carlo simulation,
+and event log extraction.
+13
+
+4 Method
+To clarify the mechanics of each step, we adopt a running example throughout this
+chapter. We track a specific TA of an Airbus A319 parked at a building position, iden-
+tified asTA 8. The real-world inputs for this specific flight are its IBT 04:18:42, and its
+OBT 06:57:57. The following sections demonstrate howTA 8is formally initialized in the
+CPN, how its missing intermediate activities are approximated through simulation, and
+how the aircraft and its associated resources are represented in the resulting OCEL 2.0
+tables.
+4.1 Formalizing the TA in a CPN
+The formalization of the aircraft TA is executed through an iterative approach incpn-py,
+using domain- and expert knowledge as input. Once the underlying process logic is fully
+verified, we extend the model to include temporal aspects. The output of this phase is
+a timed CPN model of the TA process at FRA.
+Let
+NTA = (P,T,F,Σ,V,C,G,E,I) (4.1)
+be the timed CPN representing the TA process, as specified in Definition 2.2.3. The
+following subsections describe its hierarchical structure, color sets, business rules, and
+stochastic timing.
+OnceN TA is fully formalized and semantically validated, its structural correctness is
+formally verified, establishing the foundation for the subsequent Monte Carlo simulation.
+4.1.1 Hierarchical Architecture
+We address the complexity of the aircraft TA using a top-down hierarchical modeling
+strategy [5]. Hierarchical design follows a divide-and-conquer paradigm, decomposing a
+complex system into manageable modules to abstract detailed logic at higher levels [17].
+Guided by Occam’s razor (the principle that “one should not increase, beyond what is
+necessary, the number of entities required to explain anything”) the simulation model
+is designed to be as simple as possible while retaining the process dependencies con-
+sidered essential within the scope of this study [3]. The modular structure supports
+model maintenance and the reuse of subprocess components. Since hierarchical CPNs
+do not increase formal expressive power, any hierarchical model can be unfolded into an
+equivalent non-hierarchical CPN, thereby satisfying our definition ofN TA [17].
+Following an incremental refinement approach [17], we initially modeled the abstract
+TA sequence. Subsequently, we iteratively detailed logically connected modules, such as
+cabin operations, baggage and cargo handling, followed by more independent processes
+like water servicing. After each module integration, the model was visually inspected
+and its execution behavior was checked against the adopted domain rules.
+At the highest level of abstraction, the top-level module establishes the structural
+backbone of the TA, capturing the overarching process from thein-blockto theoff-block
+event (see Figure 4.2). The fine-grained operational dynamics of each subprocess are
+14
+
+4.1 Formalizing the TA in a CPN
+encapsulated within distinct subnets, which are denoted as filled boxes. Figure 4.3, for
+instance, illustrates the detailed boarding process.
+Figure 4.2: Top-level CPN module of the TA process. The overarching control flow is
+depicted, with filled substitution transitions representing the encapsulated
+operational logic of the respective subnets.
+4.1.2 Token Architecture and Initialization
+First, we identify key operational entities for the TA process: aircraft and resources. By
+modeling them as distinct color sets, the simulation tokens represent these real-world
+objects. Rather than attempting to create a complete digital twin with an exhaustive
+list of physical properties, we include an attribute in a token’s color set only if it is
+required by the simulation’s routing guards or stochastic timing logic.
+Aircraft TokensThe central entity on the apron during the TA process is the aircraft
+(AC). To represent its characteristics within the CPN model, we define the color set
+CAC∈Σ:
+Definition 4.1.1(Aircraft Color Set).LetU ID,U Type,U G, andU Pos denote the domains
+of TA identifiers, aircraft types, gate identifiers, and position categories, respectively.
+LetB={false,true}. The aircraft color set is
+CAC =U ID×UType×UG×UPos×B4×R≥0.
+Its components represent, in order, the TA identifier, aircraft type, gate, position, LCC
+status, passenger with reduced mobility (PRM) presence, inbound and outbound cargo
+requirements, and reference TA duration.
+•U ID (Identifier): A unique identifier for the TA. The flight number alone is insuf-
+ficient, as a specific flight number reoccurs daily, and a single aircraft performs
+15
+
+4 Method
+multiple TAs per day under different flight numbers. Consequently, an AC object
+represents one TA instance and does not track a physical aircraft across successive
+flights
+•U Type (Aircraft Type): The specific type of the aircraft. This attribute is retained
+for future scalability, enabling extensions to other aircraft categories.
+•U G (Gate Identifier): The identifier of the assigned gate where the TA is conducted.
+•U Pos (Position): An enumeration defining at which position the TA is conducted,
+represented by the setU Pos ={building,apron}.
+•B LCC (low-cost carrier (LCC)): A boolean domain wheretrueindicates operation
+by a LCC, whereasfalserepresents a full service carrier (FSC). This distinction
+affects the sampled process durations.
+•B PRM (PRM): A boolean domain determining if PRMs are aboard and require
+dedicated services. The specific number of PRMs is abstracted away, as a binary
+state sufficiently represents the process requirements.
+•B Cin /B Cout (Cargo Requirements): Boolean domains indicating whether unload-
+ing for inbound- (cin) or loading (cout) for outbound cargo operations are required.
+•R +
+0 (Duration): The temporal parametert DUR∈R+
+0 represents the duration of the
+related ground-truth (GT) TA, defined ast DUR =t OBT−tIBT. This parameter is
+required to verify trace validity.
+To preserve cross-TA resource dependencies on the apron, the simulation is initialized by
+operational day rather than executing isolated instances. Overnight
+turnarounds are excluded from the simulation scope due to fundamentally different pro-
+cess dynamics and a lack of available reference data [29].
+We define the initial marking of the placep arrival∈Pto represent all scheduled TAs
+for a given simulation day. Initial markings use the timed multiset notation introduced
+in Definition 2.2.1. A token written asc@shas valuecand becomes available for con-
+sumption at simulation times.
+For the running example, letc 8∈CAC denote the aircraft token value:
+c8 = (TA 8,A319,GATE 42,building,false,false,false,true,159.25).
+The initial marking containing only this TA is
+M0(parrival) = [c8@258.70].
+The availability timestamp corresponds to the observed in-block time 04:18:42, expressed
+in minutes since midnight. The reference TA duration is 159.25 minutes.
+16
+
+4.1 Formalizing the TA in a CPN
+Figure 4.3: Boarding subprocess with separate aircraft and job tokens, synchronized at
+start boarding.
+JobsDynamic attribute changes are a core feature of OCEL 2.0. They are utilized in
+our model to capture evolving states, such as the boarding of PRM. To enable concurrent
+task execution without violating state consistency, we introduce dedicated job tokens.
+Duplicating the primary aircraft token for parallel subprocesses would introduce syn-
+chronization issues. If an attribute is modified in one concurrent branch (e.g., updating
+the PRM status), the diverging token states create merge conflicts at the final synchro-
+nization. Further, this ambiguity regarding the true current state of the TA may lead
+to inconsistent process variants.
+The central aircraft state is maintained at theAC parkingplace between transition
+firings and serves as the single source of truth throughout the concurrent subprocess
+execution.
+Definition 4.1.2(Job Color Set).LetC AC be the aircraft color set from Definition 4.1.1,
+and letU JID denote the domain of job identifiers. The job color set is
+CJOB =U JID×CAC.
+A job value consists of its identifier and the aircraft information associated with the job.
+By incorporatingC AC, the job color set reuses the aircraft data structure. Each job
+carries the aircraft information associated with its creation, while the central aircraft
+token remains the authoritative source for mutable TA attributes. Transitions that
+require the current aircraft state or modify its attributes additionally bind the central
+aircraft token and match its TA identifier to that of the job.
+For a given job typej(e.g.,boarding) and an aircraft tokenc AC with TA identifier
+id TA, the job identifier is instantiated as
+id JOB =id TA∥∥j
+This results in identifiers such asTA 8 BOARDINGfor jobs.
+To maintain a semantically correct execution flow, silent routing transitions (τ) create
+these job tokens dynamically at specific process milestones, rather than concurrently at
+simulation start, such as the silent transitionmerge servicesdoes for the boarding job.
+17
+
+4 Method
+Finally, the primary aircraft token only reaches the terminal statep departure∈Ponce all
+its associated job tokens successfully synchronize at theoff-blocktransition.
+Resource TokensGround handling resources (e.g., fueling trucks and catering crews)
+are modeled as individual tokens using the color setCRES. This ensures they are recorded
+as distinct objects in the event log. Although modeling resource-specific attributes (e.g.,
+varying team sizes for the cleaning crew) could provide deeper insights, these resource
+tokens are kept generic and lightweight due to data scarcity. This avoids introducing
+unnecessary model complexity that yields no corresponding improvement in simulation
+quality.
+Definition 4.1.3(Resource Color Set).LetU RID andU RType denote the domains of
+resource identifiers and resource types. LetU ID be the TA identifier domain from Defi-
+nition 4.1.1, and let⊥/∈UID denote an unassigned resource. The generic resource color
+set is
+CRES =U RID×URType×(UID∪{⊥}).
+Note that the referencing of the TA is initially set to⊥. This value is updated to the
+respectiveid TA once the resource is actively allocated to a specific TA. The resources
+are instantiated in their corresponding resource pools and are available from the very
+beginning of the simulation. For example, the initial marking for a fueling truck is
+defined as follows:
+M0(pfueling truck) = [(FUEL TRUCK 1,FUEL TRUCK,⊥)@0]
+4.1.3 Business Rules
+Business rules impose resource, concurrency, and sequential constraints on the TA pro-
+cess. These constraints are encoded in the CPN structure: for example, catering and
+cleaning are mutually exclusive, while boarding follows the completion of all cabin op-
+erations. Resource dependencies follow a resource allocation cycle [25]. At the start
+of an activity, an available resource is claimed and assigned the TA identifier. Upon
+completion, the resource is released and its assignment cleared. This explicit assignment
+enables the extraction of object-to-object relations between resources and aircraft for
+OCEL 2.0.
+Sequential dependencies are enforced through multi-input synchronization [10]: a tran-
+sition can fire only when all required input tokens are available. For transitions com-
+bining tokens associated with a TA, guard conditions additionally require matching TA
+identifiers. This prevents tokens belonging to different turnarounds from being combined
+in the same firing.
+Let ta(c) denote the TA identifier associated with a token valuec. For an aircraft
+token, it returns the TA identifier directly; for a job token, it returns the TA identifier
+stored in the embedded aircraft information. In Figure 4.3, thestart boardingtransi-
+tion binds a boarding job through variablejob band the central aircraft token through
+18
+
+4.2 Stochastic Execution via Monte Carlo
+variableac park. The guard requires their TA identifiers to match:
+ta
+(
+b(job b)
+)
+= ta
+(
+b(ac park)
+)
+.
+Here,bassigns token values to the respective input arc variables.
+4.1.4 Stochastic Timing
+Once the base CPN is constructed and the resources are integrated, the time perspective
+is introduced, following the recommendations of Jensen [16]. To avoid the pitfall of
+assuming constant durations [4], the duration of each event is modeled using probability
+distributions. Consequently, for each simulated turnaround, the activity duration of an
+operational transition is sampled from its respective distribution. Figure 4.3 illustrates,
+withboardingas an example, that each activity consists of astartand anendtransition.
+Thestarttransition samples the duration delay, while the zero-delayendtransition fires
+immediately after this duration concludes, facilitating the subsequent extraction of the
+event log.
+Activity durations are dependent on specific operational factors. For instance, LCC
+generally exhibit shorter process times than FSC [33], and the presence of PRM impacts
+boarding and deboarding durations [15]. Accordingly, the transition activity duration
+is determined by the respective token attributes. The sampled delay is defined asd∼
+Da(cAC), whereD a is the probability distribution for a given taska, parameterized by
+the attributes of the aircraft tokenc AC.
+For our FRA-focused proof of concept, we combine general FSC event durations from
+Asadi et al. [7] with comparable LCC data from Schiphol Airport [20]. Additionally, the
+expert interview revealed that “almost every aircraft carries a PRM” [14].
+4.2 Stochastic Execution via Monte Carlo
+To generate candidate TA traces between observed IBT and OBT, we employ Monte
+Carlo simulation followed by temporal acceptance filtering. Each run jointly simulates
+the turnarounds of one operational day, preserving competition for shared ground han-
+dling resources. Overnight turnarounds are excluded from the simulation scope because
+their process dynamics and data requirements differ from those considered here [29].
+The CPN simulation and OCEL 2.0 extraction operate concurrently, as shown in Fig-
+ure 4.1. All candidate traces are recorded during execution and the acceptance criterion
+is applied subsequently during analysis. The following subsection describes the repeated
+simulation runs and defines the temporal acceptance window.
+Monte Carlo Candidate Generation:Because stochastic CPN delays rarely match the
+true TA durationt DUR on a single execution, we performn∈NMonte Carlo iterations
+to compensate for the inherently high rejection rate and yield a sufficient pool of valid
+traces. For each day-wise initialization, represented by an initial markingM 0 containing
+a set of turnaroundsJ, each runi∈{1,...,n}utilizes an incremented random seed
+19
+
+4 Method
+for reproducibility. Each run advances to a terminal state, generating a candidate trace
+σi,j for each TAj∈J. For the purpose of temporal acceptance, a candidate trace
+σi,j denotes the timestamp-ordered sequence of events in runithat are related to the
+aircraft object representing TAj. Thus,σi,j is a TA-specific projection of the generated
+object-centric event data rather than an independent case-centric event log. Its duration
+is defined as
+dur(σi,j) =time(e off−block
+i,j )−time(ein−block
+i,j ).
+To ensure identifier uniqueness across all iterations, every base entity and event ID
+(id orig) is dynamically prefixed with the run index:
+id run =run ∥i∥∥idorig
+Definition 4.2.1(Temporal Acceptance Window).Letσi,j be the candidate trace gen-
+erated for TAjin simulation runi, and let dur(σ i,j)∈R≥0denote its total duration.
+Furthermore, letdj∈R≥0denote the observed duration of TAj, and letεmin,εmax∈R≥0
+define the lower and upper tolerances.
+The candidate traceσi,j is accepted if and only if
+dj−εmin≤dur(σi,j)≤dj +εmax.
+Otherwise,σi,j is rejected.
+Running Example Application:ForTA 8, the observed TA duration isd TA 8 = 159.25
+minutes. Withεmin =εmax = 10 minutes, Definition 4.2.1 yields the acceptance interval
+[149.25,169.25]. A generated candidate traceσi,TA 8 with dur(σi,TA 8) = 159.25 minutes
+lies within this interval and is therefore accepted.
+4.3 OCEL 2.0 Extraction
+The OCEL 2.0 extraction engine operates as an active listener during the runtime of
+the CPN simulation. Instead of parsing a static, case-centric event log post-simulation,
+it dynamically intercepts token movements and state changes, translating them directly
+into an object-centric relational model.
+Let
+L= (E,O,EA,OA,evtype,time,objtype,eatype,oatype,eaval,oaval,E2O,O2O)
+be the OCEL constructed during simulation, as specified in Definition 2.1.2. The follow-
+ing subsections describe how transition firings and token values are mapped to events,
+objects, and qualified relationships, and how object attribute changes are recorded in
+oaval. A segment of the boarding process for the running exampleTA 8illustrates this
+mapping from CPN execution to the OCEL 2.0 data model.
+20
+
+4.3 OCEL 2.0 Extraction
+4.3.1 Identifying Core Entities
+The foundation of any event log is the identification of what occurred when, and which
+entities were involved. In our CPN, transitions represent executed event types, while
+tokens represent physical or logical entities, as introduced in Section 2.3. Each firing
+of a non-silent transition creates a unique event in the extracted OCEL. Silent routing
+transitions do not generate events.
+Let (t,b) be the executed binding element and lets∈R ≥0denote the current sim-
+ulation time in minutes since midnight of simulation dayD. The extraction creates a
+fresh event identifiere∈Uev\Eand adds it toE. The event type and timestamp are
+assigned as
+evtype(e) = name(t),time(e) = abs D(s).
+Here, name(t)∈Uetype is the exported activity name, and abs D converts relative simu-
+lation time into an absolute timestamp by addingsminutes to midnight of dayD.
+For each executed transition, the consumed and produced tokens determine the in-
+volved objects within the object setO. Leto tok∈Uobj be the unique identifier extracted
+from a token traversing an arc connected tot. This identifier is registered in the object
+setO. The token’s assigned color set determines its object type, utilizing the mapping
+objtype∈O→Uotype to establishobjtype(o tok).
+Running Example Application:Whenstart boardingfires forTA 8, the extraction cre-
+ates an event of typeStartBoardingand records its timestamp. The bound boarding
+job is registered as objectrun 1 TA 8 BOARDINGof typeJOB. Figure 4.4 shows the re-
+sulting event and object records, their relationships are established in the next step.
+Figure 4.4: Relational representation of theStartBoardingevent and its associated
+objects in OCEL 2.0.
+4.3.2 Establishing Relational Links
+The CPN model operates on tokens traversing arcs, whereas OCEL 2.0 requires objects
+and qualified relationships [9]. To facilitate this conceptual transition, the extraction
+engine relies on a static semantic mapping dictionary. This configuration defines how
+specific CPN elements (such as arc paths and token foreign keys) correspond to OCEL 2.0
+qualifiers. During the processing of incoming and outgoing arcs, the extraction engine
+translates token flows intoE2Orelations, and nested token attributes intoO2Orelations.
+21
+
+4 Method
+E2O Linking:Lete∈Ebe the currently instantiated event. When a token traverses
+an arca∈Fconnected to the fired transition, this token represents a specific object
+otok ∈O. The arcadefines the semantic role of the object in this event. Based on
+the mapping dictionary, the extraction engine maps this structural role to a qualifier
+qa∈Uqual. The engine then establishes the relationship by appending the induced tuple
+to the Event-to-Object set:
+E2O:=E2O∪{(e,qa,o tok)}.
+If a relation is not explicitly specified in the mapping dictionary, a default qualifier
+is assigned. Specifically, the engine infers the generic qualifierq a =involved. This
+fallback ensures that the extraction pipeline remains operational even when no explicit
+qualifier mapping is available.
+As graphically depicted in Section 4.3.2, applying this to our running example, the
+token bound to the arc variablevjob b is consumed from the input placeready for boarding.
+Since no explicit qualifier is specified for this arc, the default fallback rule is applied,
+generating the qualifierq a =involved∈Uqual. Conversely, for the token bound to
+vac park originating from the input placeAC parking, a specific relationship is defined in
+the mapping dictionary. Consequently, the extraction engine assigns the explicit qualifier
+qa =aircraft.
+Figure 4.5: Mapping of CPN transition bindings to OCEL 2.0 event-to-object relations,
+with explicit and fallback qualifiers derived from arc bindings.
+O2O Linking:Furthermore, tokens are evaluated for inherent structural dependencies.
+If a token representing an objecto 1∈Opossesses a foreign key attribute referencing an-
+other objecto 2∈O, this relationship is extracted. Letqref∈Uqual represent the specific
+qualifier defined in the mapping configuration. The engine captures this dependency by
+appending the induced tuple to the object-to-object relations set:
+O2O:=O2O∪{(o1,q ref,o 2)}.
+Returning to TA 8 and the eventrun 1 e 19, the engine evaluates the consumed job
+token. As illustrated in Figure 4.6, this token contains a structural foreign key (FK)
+reference to its parent aircraft,o2 =run 1 TA 8of typeAC. By resolving this dependency,
+22
+
+4.3 OCEL 2.0 Extraction
+the engine extracts the corresponding relation and appends it to theO2Oset.
+Figure 4.6: Mapping of internal references in CPN token attributes to qualified OCEL 2.0
+object-to-object relations.
+4.3.3 Tracking State Changes
+The Monte Carlo simulation executes the selected binding element (t,b), thereby induc-
+ing a state change from the current markingMto a new markingM ′. It computes
+M′by subtracting tokens from input places according to the input arc expressions and
+adding new tokens to output places based on the evaluated outgoing arc expressions.
+During this execution, two mechanisms are triggered:
+First, the stochastic timing functions are evaluated. For timed places, newly generated
+tokens are assigned a future availability timestampτ′=τ+d, wheredrepresents the
+sampled duration of the specific activity.
+Secondly, as TAs are dynamic processes, token properties may evolve during tran-
+sition firings. In OCEL 2.0, such lifecycle dynamics are captured by allowing object
+attribute values to change over time [9]. To implement this without redundantly logging
+unchanged data at every step, the extraction engine employs a delta-tracking approach.
+LetLbe the event log constructed so far, before processing the current attribute update,
+and lett ev =time(e). For an objecto∈Oand an applicable attributeoa∈OA, letvnew
+be the value obtained from the output token. Using the latest-value notation introduced
+in the preliminaries, the previously recorded value is
+vprev =oaval tev
+oa (o).
+If no value has been recorded,v prev =⊥. The updated attribute function is defined by
+oaval′=
+
+
+
+oaval⊕{((o,oa,tev),v new)},ifvnew̸=vprev,
+oaval,otherwise.
+Here,⊕denotes the function update operator. Thus, an attribute change is represented
+by a timestamped assignment inoaval; unchanged values are not recorded again. Silent
+routing transitions may modify object attributes without creating events. The extraction
+engine buffers these modifications and records them when a subsequent logged event
+triggers their registration. The corresponding assignment inoavaluses that event’s
+23
+
+4 Method
+timestamp, which may differ from the simulation time at which the attribute actually
+changed.
+Running Example ApplicationConsider a TA with no PRM among the arriving pas-
+sengers, but a PRM requiring assistance during boarding for the departing flight. For air-
+craft objectrun 1 TA 8, the silentmerge servicestransition updates the PRM attribute
+fromfalsetotruebefore boarding begins. The extraction engine records this change
+when the subsequentstart boardingtransition fires, adding an entry toobject -
+ACwithocel changed fieldset toPRM. The recorded timestamp therefore marks the
+registration of the updated value, which may occur later than the state change in the
+simulation.
+4.4 Conclusion
+This chapter outlined a threefold pipeline designed to synthesize OCEL 2.0 from limited
+boundary data. The process begins with the formalization of TA operations in a hier-
+archical CPN, integrating domain knowledge, business rules, and stochastic timing to
+represent the assumed process structure and stochastic timing behavior. In the second
+phase, a Monte Carlo simulation generates a pool of candidate traces, utilizing rejection
+sampling to enforce temporal validity against real-world data. Concurrently, the final
+phase employs a custom extraction engine that intercepts state changes and token flows,
+mapping them into an OCEL 2.0 database. This approach provides an implementation
+for generating synthetic object-centric event data.
+24
+
+5 Implementation
+The chapter first presents the implementation framework, repository structure, and
+adaptation mechanisms. It then explains the performance optimizations introduced in
+cpn-py.
+5.1 Implementation Framework and Adaptability
+This section details the core libraries and repository structure of the trace reconstruction
+pipeline. It then demonstrates the framework’s extensibility for adaptations within the
+TA context and its broader domain generalizability.
+5.1.1 Implementation Framework
+The implementation relies on three core Python libraries that drive the trace reconstruc-
+tion pipeline:
+•cpn-pyas a dependency serves as the foundational framework to programmatically
+construct the CPN and enable the Monte Carlo Simulation.
+•pandasutilized for essential data structuring and preprocessing. It transforms the
+raw token flows into structured DataFrames.
+•pm4pyemployed for the final process mining integration. It converts the DataFrames
+into an OCEL 2.0 object and exports the synthetic event log into a relational
+SQLite database.
+The trace reconstruction pipeline, including a detailed documentation, is publicly
+available athttps://github.com/rwth-pads/trace-reconstruction-pipeline.
+5.1.2 Adaptability
+To illustrate the pipeline’s extensibility, consider the addition of a new subprocess, such
+astechnical maintenance. Integrating this extension requires a systematic update to the
+CPN model:
+1.Topology Definition:Create a new subnet module (e.g.,ta maintenance) within
+thecpnsdirectory, defining all required places, transitions, and resource pools
+based on the underlying business rules.
+25
+
+5 Implementation
+2.Main Integration:Link the newly created subnet to the top-level module
+(ta main) at the correct execution stage.
+3.Color Set Extension:Append any newly required resources (e.g., atech truck)
+to theREScolor set within thecolorsetsdefinition.
+4.Stochastic Parameters:Define the temporal behavior incpns.durationsand
+adjust transition guards to ensure correct token routing.
+5.Validation:Execute the visualization to semantically verify the token flow, fol-
+lowed by the formal verification to ensure the extended state space remains sound.
+By following this modular approach, domain-specific adaptations can be seamlessly
+implemented without requiring any alterations to the core pipeline.
+To apply the trace reconstruction pipeline to an entirely different domain, we recom-
+mend first evaluating which existing CPN structures can be reused. For the remaining
+modeling tasks, users should follow the hierarchical iterative refinement approach de-
+scribed in Chapter 4. Detailed execution instructions, configuration guidelines, and
+concrete examples for domain adaptation are provided in an interactive Jupyter Note-
+book.
+As one of the core strengths of our pipeline is its high adaptability and easy integration
+with Python’s process mining ecosystem, a workflow without a graphical user interface
+provides the most effective environment to access all its advantages. Although suitable
+for demonstrations, a website, Streamlit visualization, or standalone executable would
+limit these possibilities.
+5.2 Performance Optimization incpn-py
+The implementation of the simulation pipeline relies on thecpn-pylibrary as a core
+dependency. Whilecpn-pyprovides a comprehensive tool for modeling CPNs, execut-
+ing Monte Carlo simulations introduces specific computational demands. To make this
+pipeline feasible, we extended the architecture with targeted performance optimizations.
+The following section details the algorithmic modifications summarized in Table 5.1.
+It outlines the computational challenges encountered and explains how these adaptations
+enablecpn-pyto resolve the state space explosion inherent to our specific use case.
+5.2.1 Execution Optimization: Callable Guards vs. String Evaluation
+Eliminating execution overhead requires shifting from dynamic text interpretation to
+native code execution. Below, we examine the performance implications of replacing
+string-evaluated guards with reusable, compiled callables.
+String-Based EvaluationThe original implementation represented guards and arc ex-
+pressions as strings and evaluated them using Python’seval()function. This design
+26
+
+5.2 Performance Optimization incpn-py
+Table 5.1: Computational bottlenecks in thecpnpy.cpn.cpn impmodule, implemented
+optimizations, and their effects on simulation performance.
+Component Bottleneck Optimization Impact
+EvaluationContext
+&Transition
+String-based
+guard evaluation
+viaeval()creates
+overhead.
+Introduce callable
+functions for
+guard execution.
+Improves
+simulation speed
+and
+maintainability.
+CPNState space
+explosion during
+binding causes
+high
+computational
+cost.
+Implement early
+pruning for
+callable guards.
+Prevents
+combinatorial
+explosion, making
+the simulation
+computationally
+feasible.
+provides a flexible interface: expressions can be stored directly in the CPN model and
+evaluated generically against the current variable binding without requiring a dedicated
+Python function for each transition or arc. However, this flexibility introduces consider-
+able overhead during simulation. Each call toeval()must process the string expression
+before executing it for the supplied binding. Since guard and arc expressions are evalu-
+ated repeatedly for a large number of candidate bindings during binding search, the same
+expression is processed many times although only its input values change. This repeated
+work becomes a major performance bottleneck in large CPN models. To eliminate this
+repeated processing while preserving the expressiveness of guards and arc inscriptions,
+the implementation was extended to support pre-defined callable functions.
+Callable FunctionsTo resolve this bottleneck, the execution model was shifted towards
+usingcallable functions(such as lambda expressions). By utilizing callables, the parsing
+and compilation steps occur exactly once when the module is initially imported. The
+guards are cached in memory as ready-to-execute bytecode.
+When the simulation verifies a binding, it simply passes the binding dictionary to
+the pre-compiled function. This skips the costly runtime parsing entirely and saves
+expensive CPU cycles. Furthermore, encapsulating the rules into callable functions
+improves code maintainability and testability. This adaptation significantly reduces the
+total simulation time and enables the use of functions as guards. Importantly, we ensure
+backward compatibility: it retains support for string-based expressions as a fallback, as
+well as transitions without any defined guards.
+Quantitative ImpactConsider the silent transitionmerge servicesin Figure 5.1, which
+synchronizes tokens from four input places. With five candidate tokens per place, the
+27
+
+5 Implementation
+Figure 5.1: The silentmerge servicestransition synchronizes tokens across multiple in-
+puts by matching TA identifiers, motivating callable functions and early
+pruning to reduce binding evaluation costs.
+Cartesian product contains 54 = 625 candidate combinations. An exhaustive search that
+evaluates the guard once for every complete combination therefore performs 625 guard
+evaluations. Repeating this search once in each of 1,000 simulation runs would result in
+625,000 evaluations.
+Reusing callable guards avoids repeatedly parsing the same guard expression during
+these evaluations. This changes the cost of individual guard checks, while the early-
+pruning mechanism described in the following section reduces the number of candidate
+combinations explored. The example illustrates the potential accumulation of evaluation
+overhead; it does not quantify the achieved runtime improvement.
+5.2.2 Early Pruning
+The efficiency of the simulation relies on the search strategy used to map tokens to
+variables. Below, we discuss the limitations of the original depth-first approach and
+demonstrate how applying early pruning to partial bindings resolves severe memory and
+runtime bottlenecks.
+State Space Explosion in Token BindingThe originalBacktrackBindingalgorithm
+utilizes a recursive depth-first search to systematically bind tokens to variables. How-
+ever, it operates without intermediate filtering. It recursively builds complete dictionary
+combinations, only evaluating the transition’s guard once a full binding is reached at
+a leaf node of the search tree. Returning to themerge servicesexample in Figure 5.1:
+assuming five tokens per input place, the unmodified code sequentially constructs and
+evaluates these full combinations. In a worst-case scenario, it must traverse all 625 per-
+mutations. In large-scale scenarios with numerous tokens, this late evaluation causes a
+combinatorial explosion, leading to severe computational overhead.
+The Early Pruning MechanismTo resolve this computational bottleneck, the search
+architecture was rebuilt using a two-step approach. First, the execution mechanism
+was modified to continuously evaluate the intermediate state (partial binding) at ev-
+ery step of the backtracking process. Second, utilizing the partial-safe callable guards
+introduced earlier,cpn-pycan verify conditions on incomplete dictionaries immediately.
+28
+
+5.3 Conclusion
+Impact on the ModelThis architecture enables immediate branch termination. If the
+engine bindsjob fandjob clbut detects a mismatch in their TA identifiers (TA ID), the
+callable guard instantly returnsFalse. The engine immediately prunes this branch, dis-
+carding the invalid path beforejob catorac parkare even considered. By preventing the
+combinatorial explosion and resolving the memory overflow, early pruning constitutes the
+most significant performance optimization of the engine. Early pruning rejects partial
+bindings as soon as an evaluable guard condition is violated, avoiding the construction
+and evaluation of their remaining extensions. Furthermore, this approach preserves a
+clean architecture: the core engine remains universally applicable and domain-agnostic,
+while all specific business logic remains firmly encapsulated within the transition defini-
+tions.
+5.3 Conclusion
+This chapter detailed the technical realization and practical adaptability of the trace
+reconstruction pipeline. The pipeline’s modular architecture allows to accommodate
+changing processes and be generalized to other domains. Furthermore, the algorithmic
+enhancements introduced tocpn-pyresolved computational bottlenecks. By actively
+preventing combinatorial state space explosions during token binding, these optimiza-
+tions significantly reduced the simulation overhead. This implementation provides the
+necessary computational foundation to create comprehensive synthetic OCEL 2.0. The
+following chapter proceeds to evaluate the pipeline and real-world fidelity of the simu-
+lated traces.
+29
+
+
+
+6 Evaluation
+This chapter evaluates the proposed pipeline for generating synthetic object-centric event
+data for narrow-body aircraft turnarounds at FRA. The evaluation examines the comple-
+tion and routing properties of the CPN through state-space analysis, compares simulated
+activity durations with a limited ground-truth dataset, and checks the exported database
+against the OCEL 2.0 relational requirements. A scenario comparison with an additional
+baggage loader demonstrates how the generated event and object relationships support
+the analysis of shared-resource interactions. Finally, the chapter discusses the limitations
+affecting the interpretation of these results.
+6.1 State-Space-Based Verification
+This section examines the completion and routing properties of the CPN using state-
+space analysis. The verification is guided by the classical workflow-net soundness criteria
+of option to complete, proper completion, and absence of dead transitions [1]. These cri-
+teria are adapted to the present model, in which resource tokens remain after completion
+and aircraft attributes may distinguish multiple admissible final markings. Completion
+is assessed separately for each cargo configuration, while transition coverage is evaluated
+across configurations.
+6.1.1 Experimental Setup
+The analysis uses theStateSpaceAnalyzerprovided bycpn-py. Transition delays are
+set to zero, and initial tokens are created without availability timestamps. This abstrac-
+tion reduces the computational cost of state-space exploration by avoiding additional
+state distinctions caused by token timestamps. It allows the analysis to focus on com-
+pletion, synchronization, and resource release rather than temporal performance. The
+resulting time-neutralized model retains the guards, synchronization constraints, token
+transformations, and resource allocation logic. The verification results therefore apply
+to this abstraction and do not establish the correctness of the timed execution.
+Each initial marking contains one aircraft token representing a FSC at a building
+position, together with the resource tokens required by the model. A fixed random seed
+is used to make the initialization reproducible. The analysis covers all four combinations
+of inbound and outbound cargo requirements, denoted byC 00,C 01,C 10, andC 11. The
+first and second indices indicate whetherc in andc out are false or true, respectively.
+31
+
+6 Evaluation
+6.1.2 Verification Criteria
+For each configurationc∈C={C00,C 01,C 10,C 11}, letGc = (Vc,Ec) denote the reacha-
+bility graph obtained from its initial markingM 0,c. LetF c⊆Vc be the set of admissible
+final markings. A marking is admissible if exactly one aircraft token with the original
+turnaround identifier is located in the departure place, every resource pool contains its
+initial multiset of resource tokens, and all remaining places are empty. Restoring the
+resource multisets also requires preserving resource identities and resetting turnaround
+assignments. Admissible final aircraft values may differ in the attributes.
+Option to CompleteEvery reachable marking must retain a path to at least one
+admissible final marking:
+∀M∈Vc∃Mf∈Fc :M ∗− →Gc Mf.
+This condition is checked by traversing the graph backwards from all admissible final
+markings and verifying that every reachable marking is visited.
+Proper and Terminal CompletionEvery reachable marking containing a token in the
+departure place must satisfy the final-marking conditions:
+∀M∈Vc :M(p departure)̸=∅ ⇒M∈Fc.
+Additionally, letD c denote the markings without enabled transitions. The requirement
+Dc =F c ensures that all dead markings represent successful completion and that every
+admissible final marking is terminal.
+Cargo Routing and Transition CoverageThe enabled and dead cargo transitions are
+compared with the expected operational and skip branches for each configuration. Let
+T enabled
+c contain the transitions enabled in at least one reachable marking of configuration
+c. Coverage across the four configurations requires
+⋃
+c∈C
+T enabled
+c =T.
+Transitions intentionally excluded by a configuration’s cargo attributes may therefore
+be dead within that configuration.
+BoundednessThe minimum and maximum token counts are determined for each place
+over the reachable markings. Finite upper bounds establish boundedness for the analyzed
+initial marking, provided that the reachability graph has been explored completely.
+6.1.3 Results
+The analysis yields the following results:
+32
+
+6.2 Empirical Validity
+•Option to complete:Every reachable marking has a path to an admissible final
+marking.
+•Proper and terminal completion:Every departure marking satisfies the final-
+marking conditions, including complete resource release. Each configuration con-
+tains exactly two dead markings, both admissible and differing only in the final
+PRM value. PRM is the only aircraft attribute that may change during execution.
+•Boundedness:Operational and intermediate places contain at most one token.
+The gate and passenger boarding equipment pools contain at most two tokens; all
+other resource pools contain at most one.
+•Cargo routing and transition coverage:Operational and skip branches match
+the cargo attributes in every configuration. All modeled transitions are enabled
+somewhere across the four configurations; configuration-specific dead transitions
+occur only in intentionally excluded branches.
+These results support the specified completion, routing, and boundedness properties
+for the analyzed time-neutralized model and initial markings. They do not establish
+these properties for arbitrary configurations or for multiple turnarounds competing con-
+currently for shared resources.
+6.2 Empirical Validity
+In this phase, we evaluate the empirical quality of the reconstructed turnaround traces
+against a real-world GT dataset.
+6.2.1 Experimental Setup
+Our evaluation uses a manually validated GT dataset of 13 turnarounds at FRA, recorded
+by the computer-vision toolseer. Initially, the pipeline filters the dataset to remove un-
+modeled events before extracting the necessary simulation parameters and timestamps.
+During the Monte Carlo simulation, each iteration initializes all 13 turnarounds based
+on these parameters and defined probabilities. The OCEL 2.0 extraction engine continu-
+ously logs the simulated data and exports it to a SQLite database. Finally, an evaluation
+script filters the traces based on an acceptance window around the true duration, bench-
+marks the valid subset against the GT data, and exports the results into a comprehensive
+spreadsheet file.
+Simulation Parameters
+The selected parameters, summarized in Table 6.1, aim to balance computational feasi-
+bility with accuracy. A high number of Monte Carlo runsNis required to counteract
+the anticipated high rejection rate, ensuring a sufficient yield of valid candidate traces.
+33
+
+6 Evaluation
+Table 6.1: Configuration of the empirical evaluation, including the number of Monte
+Carlo runs, the temporal acceptance window, and the additional PRM delay.
+Parameter Value Description
+Monte Carlo Runs (N) 1000 The number of simulation iterations to gener-
+ate a pool of candidate traces.
+Acceptance Window [−5,+10] min The acceptance window for the simulated
+OBT. Traces are only accepted if their comple-
+tion time falls within this timeframe around
+the real-world OBT.
+PRM Delay +5 min A constant delay applied to specific processes
+when a PRM is present.
+These generated traces are subsequently filtered using an asymmetric acceptance window
+around the actual OBT, reflecting real-world aviation scheduling buffers [20].
+The accepted simulated durations are summarized by a central empirical 95 % interval,
+bounded by the 2.5th and 97.5th percentiles. This coverage level captures most of the
+simulated variability while limiting the influence of extreme tail values on the compari-
+son. The interval provides a descriptive reference for assessing whether the corresponding
+GT duration falls within the central simulated range.
+Table 6.2: Probabilities and supporting rationale for assigning unknown flight attributes
+in the initial simulation markings.
+Attribute (X)P(X=True) Reason
+LCC0 (ifbuilding), else 0.04 LCCs account for only a fraction of pas-
+senger flights at FRA and utilize apron
+positions to reduce operational costs and
+accelerate turnarounds [14].
+PRM0.85 On most flights, at least one PRM re-
+quires specialized assistance during the
+turnaround [14].
+c inandc out0 (ifLCC), else 0.85 To minimize ground time, LCCs typically
+avoid cargo, whereas the vast majority of
+FSC flights handle at least some volume
+of cargo [24].
+34
+
+6.2 Empirical Validity
+6.2.2 Results
+Of the 13,000 candidate turnarounds, 1,843 satisfied the temporal acceptance criterion,
+corresponding to a rejection rate of 85.82%, as detailed in Table 6.3. The subsequent
+activity-duration analysis considers this accepted subset.
+Across all candidate turnarounds, the mean deviation between simulated and ob-
+served duration was−15.43 minutes, indicating that the simulation tended to complete
+turnarounds earlier than observed. This discrepancy may reflect omitted operational de-
+lays, such as resource travel times, as well as differences between the assumed duration
+distributions and the observed turnaround conditions.
+Activity Duration Analysis
+To assess whether agreement in total turnaround duration also extends to individual
+activities, we compare simulated activity durations with their corresponding GT ob-
+servations. For each pair of TA and activity, the activity durations from temporally
+accepted simulation candidates are pooled, and their mean, and number of observations
+are calculated.
+The comparison uses the central empirical 95% interval of these durations. Each
+pair is assigned one category:Matchif the observed duration lies within the interval,
+underestimationif it exceeds the upper bound, andoverestimationif it falls below the
+lower bound. Thus, the classification evaluates the position of a single ground-truth
+observation relative to the corresponding simulated duration distribution. The results
+per activity are visualized in Figure 6.1.
+It is important to note that the activityunload cargois excluded from this activity-level
+assessment due to lack of GT data. The number of simulated observations underlying
+each interval varies across turnaround–activity pairs and intervals based on few obser-
+vations are less stable. Nevertheless, each evaluated pair receives equal weight in the
+aggregated classification counts.
+Table 6.3: Acceptance statistics for 13,000 simulated turnarounds under the predefined
+temporal window and mean temporal deviation from observed execution
+times.
+Metric Value
+Total Simulated TAs 13,000
+Valid TAs 1,843
+Rejection Rate 85.82 %
+∅∆ (Simulated - Real) -15.43 minutes
+The simulation plausibly approximates real-world dynamics for specific processes,
+while exhibiting systematic deviations for others:
+•Accurate Estimations:For fueling and catering, the observed durations fre-
+35
+
+6 Evaluation
+quently fall within the corresponding empirical intervals. This indicates compati-
+bility with the simulated duration ranges for the evaluated reference turnarounds.
+However, interval inclusion alone does not establish close agreement with the sim-
+ulated mean, particularly when the intervals are wide.
+•Systematic Deviations:For the remaining activities, the model exhibits system-
+atic temporal deviations. Processes such ascleaningandload cargoare predom-
+inantly underestimated andboardingdurations are systematically overestimated.
+These discrepancies suggest that the baseline duration distributions utilized in the
+simulation do not accurately reflect the specific execution times present in this
+limited ground truth sample.
+Figure 6.1: Activity duration classifications across reference turnarounds. Each
+turnaround–activity pair contributes one count: a match if the observed
+duration lies within the central empirical 95% interval of simulated dura-
+tions, overestimation if below, and underestimation if above.
+The results show that temporal acceptance at the turnaround level does not ensure
+agreement for every activity. These findings identify activity-specific discrepancies in the
+accepted candidate traces. Their interpretation remains limited by the small number of
+reference turnarounds, unequal simulation sample sizes, and the width of the empirical
+intervals.
+6.3 OCEL 2.0 Conformity
+In the final evaluation phase, we assess whether the reconstructed event log conforms
+to the relational implementation of OCEL 2.0. This ensures the structural integrity
+of the database for downstream process mining applications. The conformity check is
+conducted using the relational integrity tests defined in the official OCEL 2.0 specifica-
+tion [9]. For this validation, we utilize the same SQLite event log generated and evaluated
+36
+
+6.4 Object-Centric What-if Analysis
+during the Monte Carlo simulation in Section 6.2, assessing both its data architecture
+and the presence of formal database constraints.
+Results:The exported database contains 290,742 events and 15,300 objects, connected
+through 920,097 event-to-object and 222,595 object-to-object relations. Of the 24 vali-
+dation checks, 13 passed and 11 failed. The passed checks concern the presence of the
+required tables and columns. The failed checks concern missing explicit primary and
+foreign key declarations in the SQLite schema. The database therefore does not pass
+the complete relational validation suite.
+Explanation of the Deviation:The export procedure creates the required tables and
+columns but does not explicitly declare primary and foreign keys in the SQLite schema.
+These declarations specify which identifiers must be unique and which references must
+point to existing records. Their absence accounts for the 11 failed validation checks.
+This schema-level deviation does not necessarily mean that the stored data contain
+duplicate identifiers or invalid references. However, the passed checks do not verify
+these properties, so separate checks of the database contents are necessary to establish
+data consistency. The export therefore satisfies the tested table-structure requirements
+but does not pass the complete relational validation suite.
+The resource analysis in the following section demonstrates that the exported relation-
+ships support the queries used in that analysis. This confirms their practical usability
+for the demonstrated task, but does not establish full OCEL 2.0 conformity.
+6.4 Object-Centric What-if Analysis
+This analysis examines how an additional baggage loader changes resource assignments
+and turnaround timing. It demonstrates an analytical use of the exported OCEL 2.0:
+linking baggage jobs, turnaround instances, and loader objects makes shared-resource
+assignments observable across multiple turnarounds.
+6.4.1 Experimental Setup
+We compare a baseline configuration with one baggage loader against a scenario with
+two baggage loaders. Both configurations use the same 13 reference turnarounds, input
+distributions, initialization rules, and remaining resource capacities. Only the number of
+available baggage loaders changes. Each configuration comprises 1,000 simulation runs.
+The analysis includes all 13,000 completed turnaround candidates per scenario. In
+contrast to the empirical reconstruction assessment, the acceptance window does not
+apply: filtering by agreement with observed completion times could exclude earlier com-
+pletions arising in the two-loader scenario and thereby distort the comparison.
+We evaluate three timing metrics, each measured from the start of the turnaround:
+turnaround duration, time tostart baggage, and time toend baggage. The model requires
+37
+
+6 Evaluation
+boarding to finish before baggage loading can finish. Baggage completion therefore also
+depends on the progress of another subprocess.
+For each metric, we first average the values over the 13 turnarounds within each run
+and then over the 1,000 runs, giving each run equal weight. Let ¯x 1 and ¯x2 denote the
+resulting means for one and two loaders, respectively. Absolute and relative changes are:
+∆x= ¯x2−¯x1,∆x rel = ¯x2−¯x1
+¯x1
+×100 %.
+Negative values indicate shorter elapsed times.
+6.4.2 Results
+Table 6.4 shows that the additional loader substantially advances the start of baggage
+handling, while baggage completion and total turnaround duration change only slightly.
+Table 6.4: Mean turnaround and baggage handling timing metrics across 1,000 runs per
+scenario. Changes are relative to the one-loader baseline.
+Metric 1 Loader (min) 2 Loaders (min) ∆ (min) ∆ (%)
+Turnaround Duration 58.09 57.14−0.95−1.64
+Time to Baggage Start 6.52 1.99−4.53−69.48
+Time to Baggage End 54.09 53.12−0.97−1.79
+Figure 6.2 illustrates resource assignments in the first run of each scenario. With
+one loader,TA 6begins baggage handling after the assignment toTA 15ends. With
+two loaders, their assignment intervals overlap on separate resources, allowing baggage
+handling for both turnarounds to proceed concurrently. The additional capacity thus
+removes the need for these turnarounds to use the same loader sequentially. The timing
+results show that earlier access to a loader primarily advances baggage handling start,
+while dependencies on other subprocesses limit the improvement in overall completion
+time.
+The event-to-object and object-to-object relationships connect each assignment to its
+loader and turnaround, making resource sharing and concurrent assignments observ-
+able alongside the timing results. This demonstrates an analytical use of the exported
+OCEL 2.0. The findings remain conditional on the model rules and stochastic inputs
+and do not establish the benefit of an additional loader in real airport operations.
+6.5 Threats to Validity
+The internal validity of this study is primarily subject to threats arising from data
+quality, modeling assumptions, and the limited scope of the evaluation dataset.
+38
+
+6.5 Threats to Validity
+BAGGAGE_CONVEYOR_1 8 15 6 11 9 10 13 7 14 17 16 12 3
+1 loader
+06:00 08:00 10:00 12:00 14:00 16:00 18:00 20:00
+event time [UTC]
+BAGGAGE_CONVEYOR_1
+BAGGAGE_CONVEYOR_2
+8 6 9 13 14 16 3
+15 11 10 7 17 12
+2 loaders
+Figure 6.2: Baggage loader assignments in the first simulation run of the one-loader
+(top) and two-loader (bottom) scenarios. Each bar represents an assignment
+interval labeled with the corresponding turnaround ID.
+•Data Quality:The reliability of the input data poses a significant threat. Base-
+line event duration distributions derived from literature, such as those provided
+by Asadi et al. [7], may no longer reflect current operational realities. Addition-
+ally, the adopted LCC durations were originally recorded at Amsterdam Airport
+Schiphol [20]. Therefore, these specific process speeds might not align with opera-
+tions at Frankfurt Airport. Furthermore, these distributions partly rely on manual
+time-tracking, which is susceptible to human error. These combined inaccuracies
+could distort the empirical foundation of the turnaround simulation.
+•Modeling Assumptions:Guided by Occam’s razor, the simulation model is de-
+signed to be as simple as possible [3]. Consequently, structural simplifications were
+applied to generalize typical TA behavior into higher-level activities (e.g., aggre-
+gating granular tasks like vacuuming, etc. into a singleCleaningactivity). Fur-
+thermore, the model abstracts the spatial topology of the apron, reduces stochastic
+variance in PRM handling to a deterministic delay, and mitigates resource com-
+plexity by assuming that the impact of varying team sizes is implicitly captured by
+the underlying probability distributions. However, these abstractions limit the sim-
+ulation’s capacity to fully reflect real-world volatility, such as exceptional weather
+events or fluctuating passenger volumes. Finally, the assumptions defining the
+initial markings introduce a residual degree of uncertainty, as they rely solely on
+domain knowledge.
+•Sample Size Limitation:The empirical evaluation is constrained by a limited
+ground truth dataset of only 13 reference cases. Because the volume of real-world
+data is restricted, the reliability of the validation process itself remains uncer-
+39
+
+6 Evaluation
+tain. Consequently, this limits the overall statistical confidence for confirming the
+simulation’s validity.
+6.6 Conclusion
+The evaluation assesses completion properties of the time-neutralized model, activity-
+duration agreement with limited ground-truth observations, and the exported database
+against OCEL 2.0 validation checks. The analyzed configurations satisfy the specified
+completion, routing, and boundedness criteria. Empirical results show mixed agreement
+within the temporally accepted candidates, while the database passes the table-structure
+checks but fails checks requiring explicit primary and foreign key declarations. No pa-
+rameters are tuned to the small ground-truth sample.
+The what-if analysis demonstrates how the exported object relationships support the
+investigation of shared-resource assignments and timing differences. An additional bag-
+gage loader enables concurrent assignments and advances baggage handling start, with
+only a small reduction in overall turnaround duration. Together, these findings demon-
+strate the pipeline’s ability to generate and analyze synthetic turnaround candidates,
+while limiting conclusions to the examined configurations, model assumptions, and avail-
+able observations.
+40
+
+7 Discussion
+In this chapter, we begin by discussing fundamental design decisions that shape our
+approach. Subsequently, we assess the practical value offered to stakeholders and explore
+its potential to scale across different airports and generalize to other domains. Finally,
+an examination of the model’s limitations ensures a transparent understanding of the
+boundaries of the approach.
+7.1 Methodological Design Choices
+This section discusses the main methodological choices underlying the proposed pipeline,
+including the selection of input data, the representation of jobs and resources, the inte-
+gration of CPN simulation with OCEL 2.0, and the use of Monte Carlo simulation to
+generate temporally plausible synthetic event data.
+Data SelectionThe overarching goal of our approach is to generate TA event data
+from sparse observations without relying on frameworks like A-CDM. As discussed in
+Chapter 3, relying on A-CDM for PM exposes vulnerabilities: it lacks the granularity
+required for detailed analyses, remains prone to manual entry errors and case-centricity,
+and limits generalizability. The decision to bypass this framework and instead build a
+trace reconstruction pipeline based on universally available milestones (IBT and OBT)
+reduces dependence on a specific input format and remains a system-agnostic approach.
+Modeling and Data ExtractionTo achieve fine-grained process reconstruction, we
+chose CPNs as our modeling formalism. They provide the expressiveness required to
+represent complex, concurrent processes, such as aircraft TAs, as emphasized in Sec-
+tion 1.1. A CPN simulation serves as an executable specification and takes aforward-
+lookingperspective, generating possible process executions under assumed conditions [3].
+PM complements this perspective through thebackward-lookinganalysis of recorded ex-
+ecutions [2]. To enable this analysis for the simulated behavior, we extract the token
+flow into an object-centric representation based on OCEL 2.0. This representation cap-
+tures dynamic attribute changes and explicit relationships between events, resources,
+and TA instances, making shared-resource assignments observable across multiple TAs.
+As demonstrated by the what-if analysis, these relationships support the investigation
+of resource contention and concurrency alongside their timing implications. Since the
+analyzed executions are synthetic, the findings describe the modeled system; interpreting
+them as evidence about actual airport operations requires further empirical validation.
+41
+
+7 Discussion
+Job and Resource TypingA generic job color set simplifies model maintenance: in
+our implementation, changes to the aircraft color set before simulation initialization are
+automatically reflected in the corresponding job structures. Similarly, a generic resource
+color set provided flexibility during model development, when resource assignments were
+not yet fully specified. While sufficient for this proof of concept, it groups heterogeneous
+resources under a single object type in the exported OCEL 2.0. Resource categories
+remain distinguishable through attribute filtering, but are not directly represented as
+separate object types. Future implementations should therefore use dedicated color sets
+for distinct resource types, with properties tailored to each type, to support more explicit
+object-centric analysis.
+Simulation via Monte CarloBecause of the stochastic nature of the simulation, single
+simulation runs rarely match the temporal boundary between IBT and OBT exactly. A
+naive linear rescaling of event durations would align the simulation with actual Off-Block
+Times, but this would distort variances and invalidate the empirical data’s integrity.
+Alternatively, Bayesian Inference could compute posterior event durations based on the
+observed total TA time [23, 36]. However, TAs rely on synchronization points where
+progression is dictated by themaximumduration of parallel paths. These lack a closed-
+form solution for conditional probabilities of non-normal random variables [28] and would
+make the model too complex to scale.
+Therefore, our approach of choice is the Monte Carlo method with rejection sampling.
+It preserves the stochastic integrity of the model while providing enough plausible traces
+within the temporal boundaries through a high number of iterations. This approach
+entails high computational costs, as reflected in the 85.82% rejection rate in Chapter 6.
+However, performance optimizations forcpn-py, such as callable guard functions and
+early pruning introduced in Chapter 5, make this approach feasible.
+Value of Synthetic DataGiven the scarcity of detailed event data, the proposed recon-
+struction uses IBT and OBT as temporal anchors, supplemented by domain knowledge,
+activity-duration distributions, and resource assumptions. Building on the simulation
+approaches in Chapter 3 [7, 34], it generates candidate executions for unobserved ac-
+tivities between these boundaries. The resulting object-centric data support the de-
+velopment and testing of analytical workflows without comprehensive empirical event
+logs.
+The evaluation nevertheless shows that agreement with the overall TA duration does
+not imply agreement for individual activities. Observed fueling and catering durations
+frequently fall within the simulated intervals, whereas other activities exhibit systematic
+deviations. Accepted traces therefore represent possible executions consistent with the
+modeled constraints and temporal acceptance criterion, without establishing accurate
+reconstruction of internal behavior. Their value lies in supporting object-centric analysis
+and exposing discrepancies that warrant further investigation of model assumptions. No
+parameters were tuned to the small ground-truth sample, reducing the risk of tailoring
+the model to these observations while leaving the discrepancies unresolved.
+42
+
+7.2 Practical Applicability
+7.2 Practical Applicability
+Highlighting the value of the proposed pipeline, we detail its low-barrier accessibility, its
+role as a bridging technology, and its capacity for predictive what-if analyses.
+Accessible Process AnalysisUnlike PM applications based on A-CDM data, which de-
+mand organizational integration, the proposed pipeline offers an accessible, low-barrier
+entry point for TA analysis. Because it relies on data points that are universally avail-
+able via airport databases, airline schedules, or public APIs such as the OpenSky Net-
+work [32], airlines and ground handlers can readily reconstruct fine-granular process
+traces. While the underlying stochastic distributions and resource availabilities must be
+calibrated to local airport characteristics to ensure maximum accuracy, the methodology
+offers a potential basis for operational analysis, subject to local calibration and further
+evaluation.
+Bridging TechnologyStrategically, this synthetic data reconstruction acts as a bridg-
+ing technology. It allows stakeholders to develop and test PM workflows, such as perfor-
+mance dashboards, without data being available yet. Once high-resolution, automated
+tracking technologies (e.g., with computer vision or IoT apron sensors) become univer-
+sally deployed in the future, the analytical workflow can subsequently be adapted to
+empirical event data, provided that event and object semantics are aligned.
+What-If analysesBeyond retrospective diagnosis, the pipeline supports predictivewhat-
+ifanalyses, as demonstrated in Section 6.4. By manipulating the parameters and re-
+source constraints within the CPN model, such as simulating the availability of an addi-
+tional baggage loader, airports, airlines, and ground handlers can prospectively evaluate
+different optimization strategies. This gives decision-makers a method to quantify the
+impact of infrastructural changes on the overall TA duration and resilience.
+7.3 Extensibility and Generalizability
+Beyond the initial proof of concept, the following evaluates the pipeline’s structural
+extensibility and its potential application to other industries.
+7.3.1 Extensibility
+As a proof of concept, this approach focuses on a case study at FRA, modeling one apron
+and one building position for narrow-body aircraft. The proposed method is designed
+to be scalable and the pipeline is best suited for specific positions, where the typical
+durations of ground operations are well-documented. Although the current simulation
+is tailored to the specific operational constraints of FRA, the pipeline can be adapted
+to other airports, provided that the In-Block and Off-Block Times of the TAs, as well
+as the duration distributions for the respective ground operations, are available.
+43
+
+7 Discussion
+While scaling the model increases computational demands and execution times, the
+underlying CPN architecture allows for comprehensive structural extensions. As de-
+tailed in Chapter 5, the simulation can be adapted to incorporate the physical apron
+topology, expand to additional aircraft and positions, increase subprocess granularity, or
+integrate entirely new subprocess modules. The current day-wise initialization captures
+shared-resource dependencies between TAs within each operational day. Extending the
+simulation across multiple days would additionally require preserving ongoing activi-
+ties and resource states across day boundaries and adapting time-dependent guards and
+duration functions where applicable.
+7.3.2 Generalizability
+Beyond aviation ground operations, the underlying methodology extends to a broad
+spectrum of business processes. The combination of CPN, Monte Carlo simulation, and
+OCEL 2.0 may be transferable to other domains facing a similar “black box” problem.
+This requires three core prerequisites:
+•Knowledge of the logical process structure and resource dependencies.
+•Empirical or estimated probability distributions for individual activity durations.
+•Reliable boundary timestamps indicating (at least) the start and end of the overall
+process instance.
+To apply this methodology, domain experts first translate the process logic, business
+rules, and involved object types into a CPN model. After configuring the stochastic
+duration parameters, the Monte Carlo simulation creates a pool of process variants.
+The extraction engine then transforms these simulated interactions into OCEL 2.0. By
+applying boundary timestamps as an acceptance window, TA-specific candidates satis-
+fying the temporal acceptance criterion are retained for analysis. As demonstrated in
+our evaluation in Section 6.2, this pipeline should initially be validated against a subset
+of manually recorded GT data to confirm that the pipeline approximates reality.
+This synthetic OCEL 2.0 recreation is particularly valuable for manual and concur-
+rent manufacturing environments, such as final assembly lines. Similar to an aircraft
+TA, these assembly processes are bounded by start and end times, involve multiple
+interacting resources (e.g., mechanics, specialized tools, components), and often lack
+granular, sensor-based tracking during execution. By bridging this data gap, the pro-
+posed approach enables OCPM in domains that previously lacked the necessary event
+data infrastructure.
+7.4 Limitations
+While the proposed approach successfully recreates process traces, several limitations
+regarding the pipeline must be acknowledged:
+44
+
+7.5 Conclusion
+•Underrepresentation of Edge Cases:Stochastic simulations based on prob-
+ability distributions excel at representing standard operations. However, they
+structurally struggle to replicate anomalies, such as technical breakdowns, medical
+emergencies, or extreme weather events, if they are not explicitly modeled.
+•Context Blindness:Currently, multivariate dependencies are abstracted into
+general probability distributions. In reality, activity durations correlate with dy-
+namic external factors like weather conditions or workforce schedules. Integrating
+these would require higher context-awareness within the CPN model.
+•Distribution Decay:The empirical plausibility of the generated OCEL 2.0 re-
+lies heavily on the quality of input durations. Structural changes at an airport,
+such as new aircraft types or altered handling procedures, render the underlying
+distributions outdated and necessitate re-calibration.
+•Evaluation Constraints:Finally, we did not perform quantitative conformance
+checking (e.g., measuring fitness and precision) [31]. This decision stems from
+the scarcity of high-resolution, publicly available event logs in the aviation sector.
+Evaluating the pipeline against our single dataset would provide limited evidence.
+•Internal Trace Validation:While the pipeline adheres to the overall temporal
+boundaries, this primarily demonstrates that the simulation can be conditioned
+on the total TA duration. It does not inherently guarantee that the duration of
+internal activities are correctly reconstructed. Accurately calibrating the internal
+mechanics of the TA process requires further expert validation and the integration
+of reliable intermediate milestones.
+7.5 Conclusion
+In conclusion, the proposed methodology demonstrates how the integration of CPNs,
+Monte Carlo simulation, and the OCEL 2.0 data model can help illuminate the op-
+erational black box of aircraft TAs. By reducing dependence on frameworks such as
+A-CDM, this approach provides a pathway to OCPM based on boundary timestamps,
+domain knowledge, and stochastic process parameters. While the reliance on synthetic
+data requires careful calibration and limits conclusions about actual operations, the
+framework offers practical value for developing analytical workflows and exploring re-
+source interactions throughwhat-ifanalyses. It also serves as a bridging technology,
+enabling the development and testing of process mining applications before detailed
+empirical event data become available.
+The modular architecture supports extensions to additional subprocesses, resource
+types, and operational settings. However, the challenges of distribution decay, context
+blindness, and incomplete relational export conformity must be acknowledged. The
+implementation demonstrates feasibility for the investigated case study, while computa-
+tional scalability and transferability require further evaluation. Beyond aviation ground
+45
+
+7 Discussion
+operations, the underlying principles may be applicable to other domains facing similar
+data gaps, provided that sufficient process knowledge, suitable parameters, and reliable
+temporal boundaries are available.
+46
+
+8 Conclusion
+Delays lead to operational and financial losses for both airlines and airports. While
+industry interest in optimizing the turnaround process is high, its execution remains
+largely an operational black box.
+Existing process mining applications often rely on manual, error-prone inputs that
+are case-centric. Conversely, domain knowledge and reliable high-level timestamps are
+available. Previous research has successfully employed CPNs to simulate turnaround
+processes and their dynamic constraints. Building on these approaches, this thesis uses
+CPN simulation as a generative engine for object-centric event data.
+Addressing how turnaround activities and their resource dependencies can be formally
+reconstructed based on sparse data (RQ1), we developed a trace reconstruction pipeline
+that synthesizes qualitative domain knowledge with quantitative temporal boundaries
+and stochastic activity durations. The configurable CPN model captures the process
+logic and shared-resource dependencies. State-space analysis supports the specified com-
+pletion, routing, and boundedness properties for the investigated time-neutralized con-
+figurations.
+To translate this conceptual model into object-centric event data (RQ2), we executed
+a Monte Carlo simulation with temporal acceptance filtering. This allowed us to select
+candidate traces consistent with the observed turnaround durations and extract simu-
+lated events, objects, relationships, and attribute changes using OCEL 2.0. The resulting
+SQLite database supports downstream process analysis.
+To determine how the quality of these synthetic event logs can be assessed against
+limited empirical data (RQ3), we compared simulated activity durations with a sparse
+ground-truth dataset. The analysis revealed that while temporally accepted traces were
+successfully generated for reference turnarounds, agreement varied across internal ac-
+tivities. These findings highlight the dependence of the reconstruction on the assumed
+duration distributions and show that agreement with the overall turnaround duration
+alone does not establish accurate reconstruction of its internal execution.
+Beyond this empirical assessment, the what-if analysis demonstrates how the gener-
+ated object relationships support the investigation of resource sharing and concurrent
+assignments across turnarounds. It illustrates the pipeline’s practical use for exploring
+resource configurations and their timing implications within the modeled system.
+Finally, we outlined how the modular pipeline can be extended to additional subpro-
+cesses, resources, and operational settings. The proposed trace reconstruction methodol-
+ogy may also be transferable to other domains characterized by manual processes lacking
+automated event tracking, provided that reliable temporal boundaries, suitable process
+parameters, and sufficient domain knowledge are available. Computational scalability
+and transferability require further evaluation.
+47
+
+8 Conclusion
+Ultimately, we propose an approach for bridging the persistent data gap in aviation.
+The generated object-centric event data provide a basis for developing and testing ana-
+lytical workflows and exploring turnaround behavior under explicit model assumptions.
+In this way, the pipeline serves as a bridging technology for process mining applications
+while more comprehensive empirical event data remain unavailable.
+8.1 Future Work
+This thesis presents a viable trace reconstruction pipeline and highlights several promis-
+ing areas for further investigation. We recommend subsequent work to focus on empiri-
+cally validating the event logs, refining the CPN model, enhancing the usability through
+artificial intelligence, and exploring real-time applications.
+Evaluation and ValidationFirst, future research could benefit from prioritizing more
+extensive evaluations using larger ground truth datasets to assess the pipeline’s accu-
+racy. Once empirical event data becomes available for specific positions (e.g., through
+advanced tracking systems likeseer), formal conformance checking techniques [30] can
+be employed. By calculating metrics such as fitness and precision, structural deviations
+between the generative model and real-world operations can be uncovered.
+Since the airport-wide deployment of hardware-intensive tracking systems remains a
+long-term industry goal, it does not obsolete the need for advanced trace reconstruction.
+Building on the demonstrated what-if analysis, future work could investigate a broader
+range of resource configurations and assess the sensitivity of the results to duration
+distributions and allocation rules. Finally, validating these synthetic OCEL 2.0 against
+defined object-centric declarative constraints [18] will ensure that all reconstructed traces
+adhere to domain rules and cross-object interactions.
+Model Refinements and ScalabilityTo increase the fidelity of the simulation, the CPN
+model can be enhanced. Currently, the choice for resources of which aircraft to serve next
+is random. Future iterations could introduce priority-based token routing, ensuring, for
+example, that an aircraft that has already received catering is prioritized by the cleaning
+crew. Additionally, the static duration distributions could be transitioned to dynamic,
+machine-learning-driven parameters. By employing regression models or context-aware
+neural networks, exact task durations could be predicted per token based on complex
+feature sets (e.g., weather conditions, aircraft type, or exact passenger loads). Finally,
+conducting a comprehensive case study with an airport operator using the pipeline would
+validate the scalability of the approach in a real-world setting.
+Usability and large language model (LLM) IntegrationTo increase the accessibility
+of the pipeline, integrating LLMs offers significant potential. LLM support could act as
+an interface to simplify structural changes to the process model, allowing domain experts
+to adjust it without Python knowledge. Furthermore, LLMs could automatically infer
+48
+
+8.1 Future Work
+OCEL 2.0 qualifiers from contextual operational data, translating implicit real-world
+interactions into semantically rich event-to-object relationship types.
+Advanced Applications: Digital TwinStrategically, the trace reconstruction pipeline
+can be evolved from a retrospective tool into a prospective digital twin. By feeding live
+API data (e.g., real-time trajectories from the OpenSky Network [32]) into the simula-
+tion engine, the pipeline could provide real-time, object-centric forecasts and bottleneck
+predictions for ongoing turnarounds.
+49
+
+
+
+A Expert Interview Transcript
+This appendix presents an English translation of the German transcript of the expert
+interview on turnaround operations conducted on 6 February 2026.
+Interview date:6 February 2026
+Interviewee:Expert in turnaround operations at Fraport AG
+Speaker labels:I = Interviewer; E = Expert
+Thesis Context and Problem Statement
+I:This interview is being recorded exclusively for scientific purposes, and participation
+is voluntary. Do you consent to the recording and the use of the data as described in
+the consent document?
+E:Yes.
+I:To briefly explain the background of my bachelor’s thesis: the main objective is to
+combine different data sources to build a simulation of the turnaround process that is
+as accurate as possible. Individual sources are available, such as timestamps from the
+A-CDM framework or GPS data for determining positions. My goal is to represent these
+data in a colored Petri net . One advantage is its mathematical precision in representing
+resource dependencies. The simulation is intended to generate event logs for process
+mining, for example to identify bottlenecks. This is still uncommon in turnaround oper-
+ations because data are missing and activities such as baggage handling are performed
+manually. The simulation is intended to address this gap.
+Realism of Manufacturer Manuals
+I:My current data sources include aircraft manuals, such as the A320 Aircraft Charac-
+teristics / Airport and Maintenance Planning document, as well as location data. For
+passenger handling, this document assumes a boarding rate of 12 passengers per minute
+for 180 passengers. This would imply a boarding duration of 15 minutes. How realistic
+are such figures?
+E:The figures in these documents are highly idealized. They assume that two sets of
+stairs are used, one at the front and one at the rear. Low-cost carriers place considerable
+emphasis on short turnarounds, and they do mostly board passengers using two sets
+of stairs simultaneously. Such a rate is more achievable under those conditions. For a
+51
+
+A Expert Interview Transcript
+network airline such as Lufthansa at a contact stand, usually only one passenger boarding
+bridge is connected at the front. Under these circumstances, 15 minutes is unrealistically
+fast.
+It also depends on the definition: does boarding begin when a passenger enters the
+aircraft, or already at the gate? At a remote stand, passengers travel to the aircraft
+by bus. Even if two sets of stairs are available at the aircraft and the rate is briefly
+achieved, there are waiting times of five to six minutes between buses.
+Minimum Turnaround Time and Process Boundaries
+I:Do you use these manuals in practice?
+E:We rarely use manufacturer manuals in day-to-day operations. What we do use is the
+Minimum Turnaround Time (MTT). This depends on the aircraft type and the airline.
+It defines the minimum time an aircraft must remain at the stand. However, these times
+also represent best-case scenarios and are calculated very optimistically.
+I:Are these MTT values stored in the system in a standardized form?
+E:Yes, the values are stored in our system as master data for each aircraft type and
+airline. They are supplied by the airlines, and from an operational perspective, we can
+only assess how realistic they are. An overseas long-haul flight, for example, requires
+considerably more extensive catering, which makes the processes take longer.
+Another factor is passengers with reduced mobility (PRM), who are present on most
+flights. They usually board first. If only one or two people pass through the door at
+the beginning, the process has formally started, even though the nominal boarding rate
+per minute is very low at that point. It is therefore a question of definition whether the
+start is tied to the first passenger scan at the gate or to a continuous flow of passengers.
+A-CDM Applications and Operational Disruptions
+I:There are publicly available applications in the App Store, such as the A-CDM App.
+Are these suitable as data sources?
+E:You can view a lot of information on individual flights there. You would need to
+check whether structured bulk data can be exported.
+I:How frequently do unforeseen disruptions occur in practice, such as full overhead bins,
+unavailable fuel trucks, or technical checks?
+E:A turnaround in which absolutely everything goes according to plan is rather excep-
+tional. Typical disruptions include carry-on baggage having to be loaded into the hold;
+passengers failing to show up and their baggage having to be unloaded; maintenance staff
+having to perform checks at short notice; additional catering supplies being required; or
+staffing shortages in ground handling.
+52
+
+Nevertheless, not every irregularity immediately causes a flight delay. Often, the Target
+Off-Block Time (TOBT) is adjusted in the system. If an aircraft requires more time,
+the TOBT is moved to a later time. This is a standard procedure.
+Time Buffers and Seasonal Flight Schedules
+I:Do airlines routinely include time buffers in the MTT?
+E:As far as I know, the MTT itself contains no buffers; it represents only the theoretical
+minimum. Buffers arise from the seasonal flight schedule. Many aircraft have longer
+ground times than the MTT requires; some remain on the ground for several hours or
+overnight. With a ground time of six or seven hours, delays in the inbound process have
+little operational impact on the outbound flight.
+Capacity Limits and Resource Conflicts in Ground Handling
+I:How many turnarounds can take place simultaneously? Where are the bottlenecks?
+E:We have approximately 80 stands. How many of these can be served simultaneously
+by the ground handlers depends on the contracts. The teams work sequentially: a
+team places the chocks, connects the ground power unit, secures the passenger boarding
+bridge, and then moves on to the next stand.
+A frequent bottleneck is the availability of loading crew members and load supervisors.
+According to the prescribed procedure, the team must be ready at the stand before the
+aircraft arrives so that the chocks can be placed immediately. Often, the crew is not yet
+there. In such cases, the marshallers or follow-me drivers often place the chocks so that
+the aircraft can be reported as on-block before the ground handling crew arrives.
+Simulation Requirements, Predictions, and Data Quality
+I:What would an ideal simulation need to achieve from an airport operations perspec-
+tive?
+E:In an ideal world, it would represent all exceptional disruptive events, such as baggage
+offloading, medical incidents, contamination, or technical defects. Realistically, however,
+the most important task would be to model the core processes reliably and calculate a
+dependable Predicted Ready Time (PRDT): when will the aircraft actually be ready for
+departure?
+Current predictions at the airport often become accurate only 10 to 15 minutes before
+off-block. For operational planning, a reliable prediction one to two hours in advance,
+or directly at on-block, would be extremely valuable.
+I:Are publicly accessible A-CDM data sufficient for this?
+53
+
+A Expert Interview Transcript
+E:A-CDM provides useful milestones such as TSAT or TOBT. However, the level of
+detail is insufficient for the internal turnaround processes. Reports such as Ground
+Handling Completed or Actual Ready Time (ARDT) are partly based on manual entries
+by staff at the stand and are not always accurate. This is often referred to as the
+“turnaround black box. ” For this reason, computer vision systems are being adopted in
+many places to capture timestamps for individual activities automatically.
+Computer Vision Data and Outlook
+I:Do you use computer vision, and would it be possible to obtain a data extract for
+modeling?
+E:We are currently evaluating computer vision systems. I will ask and get back to you.
+I:Thank you very much; that would be a great help.
+54
+
+Bibliography
+[1] W. M. P. van der Aalst. “Verification of Workflow Nets.” In:Application
+and Theory of Petri Nets 1997. Vol. 1248. Lecture Notes in Computer Science.
+Berlin, Heidelberg: Springer, 1997, pp. 407–426.doi:10 . 1007 / 3 - 540 - 63139 -
+9_48.
+[2] W. M. P. van der Aalst.Process Mining. Springer Berlin Heidelberg, 2016.doi:
+10.1007/978-3-662-49851-4.
+[3] W. M. P. van der Aalst. “Process Mining and Simulation: A Match Made in
+Heaven!” In:Proceedings of the 50th Computer Simulation Conference (Summer-
+Sim). 2018, pp. 1–4.doi:10.22360/summersim.2018.scsc.005.
+[4] W. M. P. van der Aalst, J. Nakatumba, A. Rozinat, and N. Russell. “Business Pro-
+cess Simulation: How to Get It Right?” In:Handbook on Business Process Man-
+agement 1. Ed. by J. Vom Brocke and M. Rosemann. Springer Berlin Heidelberg,
+2010, pp. 313–338.doi:10.1007/978-3-642-00416-2_15.
+[5] W. M. P. van der Aalst, C. Stahl, and M. Westergaard. “Strategies for Modeling
+Complex Processes Using Colored Petri Nets.” In:Transactions on Petri Nets and
+Other Models of Concurrency VII. Vol. 7480. Springer Berlin Heidelberg, 2013,
+pp. 6–55.doi:10.1007/978-3-642-38143-0_2.
+[6] W. M. P. v. d. Aalst and A. Berti.Discovering Object-Centric Petri Nets. Oct.
+2020.doi:10.48550/arXiv.2010.02047.
+[7] E. Asadi. “Robust Turnaround Management: Ground Operations Under Uncer-
+tainty.” PhD thesis. Technische Universit¨ at Dresden, 2024.
+[8] A. Berti. “CPN-Py: A Python-Based Tool for Modeling and Analyzing Colored
+Petri Nets.” In:arXiv preprint arXiv:2506.12238(2025).doi:10.48550/arXiv.
+2506.12238.
+[9] A. Berti, I. Koren, J. N. Adams, G. Park, B. Knopp, N. Graves, M. Rafiei, L.
+Liß, L. T. G. Unterberg, Y. Zhang, C. Schwanen, M. Pegoraro, and W. M. P.
+van der Aalst.OCEL (Object-Centric Event Log) 2.0 Specification. arXiv preprint
+2403.01975. 2024.doi:10.48550/arXiv.2403.01975.
+[10] A. Bobbio. “System Modelling with Petri Nets.” In:Systems Reliability Assess-
+ment. Ed. by A. G. Colombo and A. S. De Bustamante. Vol. 6. Dordrecht: Springer
+Netherlands, 1990, pp. 103–143.doi:10.1007/978-94-009-0649-5_6.
+55
+
+Bibliography
+[11] M. B¨ ohm, J. Rott, J. Eggers, P. Grindemann, J. Nakladal, M. Hoffmann, and H.
+Krcmar. “Process Mining at Lufthansa CityLine: The Path to Process Excellence.”
+In:Journal of Information Technology Teaching Cases12.2 (2022), pp. 135–145.
+doi:10.1177/20438869211022369.
+[12] Y. Cui, L. Ma, Q. Ding, X. He, F. Xiao, and B. Cheng. “Aircraft Turnaround Time
+Dynamic Prediction Based on Time Transition Petri Net.” In:PLOS ONE19.7
+(2024), e0305237.doi:10.1371/journal.pone.0305237.
+[13] P. De Falco, J. Kubat, V. Kuran, J. Rodriguez Varela, S. Plutino, and A. Leonardi.
+“Probabilistic Prediction of Aircraft Turnaround Time and Target Off-Block Time.
+Case Studies for Prague, Geneve, Arlanda and Fiumicino International Airports
+Using Operational Data.” In:Proceedings of the 13th SESAR Innovation Days
+(Seville, Spain). 2023.
+[14] Expert.Aircraft Turnaround Operations. Personal Interview, Transcript included
+in Appendix A. 2026.
+[15] E. Halmesaari. “Interpretable Machine Learning for Prediction of Aircraft
+Turnaround Times.” Master’s thesis. Aalto University, 2020.
+[16] K. Jensen. “Coloured Petri Nets and the Invariant-Method.” In:Theoretical Com-
+puter Science14.3 (1981), pp. 317–336.doi:10.1016/0304-3975(81)90049-9.
+[17] K. Jensen and L. M. Kristensen.Coloured Petri Nets: Modelling and Validation
+of Concurrent Systems. Berlin, Heidelberg: Springer Berlin Heidelberg, 2009.doi:
+10.1007/b95112.
+[18] A. K¨ usters and W. M. P. van der Aalst. “OCPQ: Object-Centric Process Querying
+and Constraints.” In:Research Challenges in Information Science. Ed. by J. Gra-
+bis, T. E. J. Vos, M. J. Escalona, and O. Pastor. Vol. 547. Cham: Springer Nature
+Switzerland, 2025, pp. 383–400.doi:10.1007/978-3-031-92474-3_23.
+[19] F. F. de L´ ıger, M. A. P. Eroles, and J. Nosedal. “Use of Coloured Petri Nets to
+Model Aircraft Turnaround at an Airport.” In:Proceedings of the 26th European
+Simulation and Modelling Conference. 2012, pp. 25–32.
+[20] M. Luo, H. Fricke, B. Desart, S. R. Zapata, and M. Schultz. “High-Fidelity Digi-
+tal Twin Applied Agent-Based Model for Supporting Predictable Airport Ground
+Operations.” In:SSRN Electronic Journal(2024).doi:10.2139/ssrn.4806351.
+[21] M. Luo, M. Schultz, H. Fricke, B. Desart, F. Herrema, and R. Barrag´ an Montes.
+“Agent-Based Simulation for Aircraft Stand Operations to Predict Ground Time
+Using Machine Learning.” In:2021 IEEE/AIAA 40th Digital Avionics Systems
+Conference (DASC)(2021), pp. 1–8.doi:10.1109/DASC52595.2021.9594325.
+[22] M. A. A. Makhloof, M. E. Waheed, and U. A. E.-R. Badawi. “Real-Time Aircraft
+Turnaround Operations Manager.” In:Production Planning & Control25.1 (2014),
+pp. 2–25.doi:10.1080/09537287.2012.655800.
+56
+
+Bibliography
+[23] K. Ogunsina, M. Papamichalis, and D. DeLaurentis.Relational Dynamic Bayesian
+Network Modeling for Uncertainty Quantification and Propagation in Airline Dis-
+ruption Management. arXiv preprint 2102.05147. 2022.doi:10 . 48550 / arXiv .
+2102.05147.
+[24] B. Oreschko, M. Schultz, J. Elflein, and H. Fricke. “Significant Turnaround Process
+Variations Due to Airport Characteristics.” In:Proceedings of the 4th International
+Conference on Research in Air Transportation. 2010, pp. 1–8.
+[25] S. P. Orlov, S. V. Susarev, and R. A. Uchaikin. “Application of Hierarchical Col-
+ored Petri Nets for Technological Facilities’ Maintenance Process Evaluation.” In:
+Applied Sciences11.11 (2021), p. 5100.doi:10.3390/app11115100.
+[26] Performance Review Commission.Performance Review Report of the European Air
+Traffic Management System in 2025. Tech. rep. EUROCONTROL, Mar. 2026.
+[27] C. P. Robert and G. Casella. “Monte Carlo Integration.” In:Monte Carlo Statistical
+Methods. New York, NY: Springer, 2004, pp. 79–122.doi:10.1007/978-1-4757-
+4145-2_3.
+[28] A. Rogge-Solti, R. S. Mans, W. M. P. van der Aalst, and M. Weske. “Repairing
+Event Logs Using Timed Process Models.” In:On the Move to Meaningful Inter-
+net Systems: OTM 2013 Workshops. Vol. 8186. Springer Berlin, Heidelberg, 2013,
+pp. 705–708.doi:10.1007/978-3-642-41033-8_89.
+[29] J. Rott, F. K¨ onig, H. H¨ afke, M. Schmidt, M. B¨ ohm, W. Kratsch, and H. Krcmar.
+“Process Mining for Resilient Airport Operations: A Case Study of Munich Air-
+port’s Turnaround Process.” In:Journal of Air Transport Management112 (2023),
+p. 102451.doi:10.1016/j.jairtraman.2023.102451.
+[30] A. Rozinat. “Process Mining: Conformance and Extension.” PhD thesis. Technis-
+che Universiteit Eindhoven, 2010.doi:10.6100/IR690060.
+[31] A. Rozinat and W. M. P. van der Aalst. “Conformance Checking of Processes
+Based on Monitoring Real Behavior.” In:Information Systems33.1 (2008), pp. 64–
+95.doi:10.1016/j.is.2007.07.001.
+[32] M. Sch¨ afer, M. Strohmeier, V. Lenders, I. Martinovic, and M. Wilhelm. “Bringing
+Up OpenSky: A Large-Scale ADS-B Sensor Network for Research.” In:IPSN-14
+Proceedings of the 13th International Symposium on Information Processing in
+Sensor Networks. Berlin, Germany: IEEE, 2014, pp. 83–94.doi:10.1109/IPSN.
+2014.6846743.
+[33] M. Schmidt. “A Review of Aircraft Turnaround Operations and Simulations.” In:
+Progress in Aerospace Sciences92 (2017), pp. 25–38.doi:10.1016/j.paerosci.
+2017.05.002.
+[34] Z. Y. Sng and R. J. Hansman.A Petri Net Framework for the Representation and
+Analysis of Aircraft Turnaround Operations. Tech. rep. ICAT-2019-05. Cambridge,
+MA, USA: Massachusetts Institute of Technology, International Center for Air
+Transportation, June 2019.
+57
+
+Bibliography
+[35] A. Vidosavljevic and V. Tosic. “Modeling of Turnaround Process Using Petri Nets.”
+In:Proceedings of the 14th Air Transport Research Society World Conference. 2010.
+[36] A. G. Wilson and K. M. Fronczyk. “Bayesian Reliability: Combining Information.”
+In:Quality Engineering29.1 (2017), pp. 119–129.doi:10.1080/08982112.2016.
+1211889.
+58

@@ -1,0 +1,51 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+Aircraft turnaround is the period between an aircraft's arrival at a parking position and its departure for the next flight. During this period, several teams prepare the aircraft by unloading baggage, cleaning the cabin, refueling and boarding passengers. These activities follow different dependencies. Some can take place at the same time, while others can start only after preceding work has finished. Aircraft also share stands, service vehicles and ground teams. As a result, the availability of one resource can affect several turnarounds.
+
+Understanding these interactions requires information about both the activities and the resources involved. However, the available operational records do not describe every ground service. They mainly provide information about flight movements and selected departure milestones. This creates a gap between the process we want to study and the behavior we can directly observe.
+
+This thesis investigates how an object-centric simulation can support turnaround analysis under these conditions. The primary empirical analysis uses departure records from the Berlin Brandenburg Airport (BER) A-CDM application, with OpenSky serving as an independent departure-time cross-check. Separately, we document an earlier simulation pilot that adapted an existing airport model using an auxiliary OpenSky reconstruction. The two studies retain their actual data origins. The reported results concern the completed pilot study. Further empirical evaluation is required before the model can support conclusions about actual BER performance.
+
+\section{Background}
+Airport Collaborative Decision Making (A-CDM) supports information exchange among airport partners and the Network Manager, with particular attention to turnaround and pre-departure processes \cite{eurocontrol_acdm}. This information helps partners coordinate their activities. Nevertheless, an A-CDM-related application does not necessarily provide the start and end times of every ground service. A time interval between two milestones may contain several activities, waiting and parking. Its total duration is therefore insufficient to determine how long each internal activity took.
+
+Object-centric event logs provide a way to retain the relationships between these activities and the objects involved. An event can be linked to a turnaround, an aircraft and a service resource. OCEL 2.0 supports these relationships, their qualifiers and changes in object attributes \cite{ocel2}. This is useful when a cleaning team or a fueling vehicle serves several aircraft during the same day.
+
+The simulation used in this thesis is based on the \emph{Airport Ground Handling (Extended)} model provided by the supervisor, Istv\'an Koren, in OCPN Studio \cite{ocpn_studio}. Its original process structure and resource logic are retained as attributed prior work. Our modifications concern the empirical demand, aircraft pairing, selected activity timings, analysis procedures and controlled experiments.
+
+\section{Motivation}
+A departure time alone does not explain why an aircraft was ready late. The aircraft may have been waiting for a resource, receiving a service or waiting for another parallel activity to finish. These explanations require different operational responses. For example, increasing the number of fueling units can reduce the fuel queue without substantially shortening turnaround if boarding is still in progress.
+
+Simulation allows us to examine these relationships under defined conditions. It also allows assumptions to be changed individually while keeping other inputs fixed. However, the resulting events remain synthetic. Their detail must not be mistaken for additional observations of real ground handling. The motivation of this study is therefore twofold: to investigate dependencies within the model and to make clear which conclusions the available evidence supports.
+
+\section{Problem Statement}
+The research objective is to use A-CDM information to support the calibration of an object-centric turnaround simulation and the evaluation of resource allocation. The collected data do not contain reliable internal service start/end times or measured block times. The primary departure study therefore keeps A-CDM as the source of every empirical row and uses OpenSky only to cross-check its takeoff observations. The earlier OpenSky-demand simulation remains an auxiliary pilot. Literature and explicitly stated assumptions supply that pilot's missing service inputs.
+
+The problem is to construct an executable and traceable model from these sources without treating assumed durations as measured values. A second challenge is to interpret its outputs correctly. Changes in simulated turnaround may result from service timing, resource availability or policy logic. These effects must be examined separately before drawing conclusions about calibration or allocation.
+
+\section{Research Questions}
+The following research questions guide the study:
+\begin{description}
+\item[RQ1:] How can A-CDM Data be used to calibrate activity durations and temporal dependencies in an OCPN Simulation?
+\item[RQ2:] How do dependencies between aircraft, stands, and shared ground-service resources contribute to waiting times and delay propagation at terminal stands and remote stands in an OCPN simulation?
+\item[RQ3:] How can the calibrated simulation be used to evaluate resource-allocation strategies and identify configurations that reduce turnaround delays and resource contention?
+\end{description}
+
+The current work addresses these questions to different extents. For RQ1, we examine which inputs the primary A-CDM observations can support and which remain unavailable. For RQ2, the auxiliary simulation analyzes resource waiting and the synchronization of parallel activities. A controlled comparison of terminal and remote stands, and a quantified analysis of delay propagation between flights, remain open. For RQ3, the auxiliary pilot evaluates selected capacity changes under fixed assumptions. Predictive accuracy is relevant to the evaluation of the model as a whole; it does not replace the dependency-focused meaning of RQ2.
+
+\section{Research Goals and Contributions}
+The current primary contribution is an audited collection of 1,322 A-CDM departures and its external timestamp cross-check. The earlier 10,940 rows originate in OpenSky and remain auxiliary. They cannot be described as A-CDM observations by changing labels.
+
+The study aims to prepare aircraft-linked input records, adapt the existing model, export analyzable object-centric logs and compare selected scenarios. The completed contributions are:
+\begin{enumerate}
+\item A preparation procedure that retains source references, candidate aircraft pairings and the meaning of each timestamp.
+\item Daily OCPN models with finite empirical demand and persistent aircraft identities, with observed inputs separated from assumptions.
+\item An analysis of the exported logs in Promenade, including resource queues, parallel completion and the effect of case definitions.
+\item A controlled pilot of 60 simulation runs examining service timing, inherited policy and resource capacity.
+\end{enumerate}
+
+These contributions extend the use and evaluation of the supplied model. They do not include the development of its original six-thread process structure. Nor do they establish a validated BER digital twin or an optimal staffing plan.
+
+\section{Thesis Structure}
+Chapter~\ref{ch:related} reviews the methodological background and related work. Chapter~\ref{ch:methods} defines the primary A-CDM data and departure cross-check. Chapter~\ref{ch:results} presents its empirical findings. Appendices~\ref{app:auxmethods} and~\ref{app:auxresults} preserve the separate OCPN/Promenade pilot and repeated simulation results. Chapter~\ref{ch:discussion} relates the findings to the research questions and discusses their limitations. Finally, Chapter~\ref{ch:conclusion} summarizes the work and identifies the next evaluation steps.

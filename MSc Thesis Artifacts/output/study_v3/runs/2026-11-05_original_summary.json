@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-05",
+  "scenario": "original",
+  "replication": 1,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3\\models\\BER_MSc_2026-11-05_original.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3\\runs\\2026-11-05_original",
+  "model_sha256": "17999d8f59a5ed0da97c8497847dbb9c72b7cc7e90c533ae6cf5f6baa430ac33",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 10856,
+  "cases": 219,
+  "complete": true,
+  "elapsed_seconds": 41.460194200000004,
+  "mean_block_min": 74.55555555555553,
+  "median_block_min": 61.45,
+  "p90_block_min": 79.00333333333339,
+  "mean_fuel_wait_min": 0.5947488584474885,
+  "p90_fuel_wait_min": 2.1333333333333346,
+  "mean_clean_wait_min": 0.03789954337899544,
+  "mean_tug_wait_min": 11.400913242009135,
+  "long_approval_cases": 2,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 1
+}

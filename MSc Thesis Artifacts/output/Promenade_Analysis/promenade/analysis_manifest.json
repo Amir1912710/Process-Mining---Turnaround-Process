@@ -1,0 +1,121 @@
+{
+  "analysis_date": "2026-11-13",
+  "promenade_workspace": "Turnaround Flights",
+  "url": "https://app.promenade.run/",
+  "input_logs": [
+    {
+      "file": "output\\ocpn\\BER_MSc_2026-11-01.ocel.json",
+      "sha256": "7f80656f0c7cc0162f761c4a883a3a29207cff2e77238b6ccb0e860a5f3725fe",
+      "events": 10288,
+      "objects": 1247
+    },
+    {
+      "file": "output\\ocpn\\BER_MSc_2026-11-08.ocel.json",
+      "sha256": "888c06d19ac20988bd3cc09336891287e375d8c74b080ffc908c9bdf6ddc17da",
+      "events": 9046,
+      "objects": 1123
+    },
+    {
+      "file": "output\\ocpn\\BER_MSc_timing_baseline.ocel.json",
+      "sha256": "bf39ed7a317b603bb6651cc2ca5b23255d63aff269e8617c1729d4641f1d68aa",
+      "events": 10298,
+      "objects": 1255
+    }
+  ],
+  "images": [
+    {
+      "file": "01_simulated_turnaround_comparison.png",
+      "sha256": "eb90452b199c97dc2700ce48594881f9a4255c6121dc27e1f1b44927c7cbfcf8",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "02_service_duration_comparison.png",
+      "sha256": "2b95d08e33cbf5746a545bb7da96b0e8a965058fd2ff911ce6b2e88161cbd819",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "03_resource_waiting.png",
+      "sha256": "548498f35b044d0d09db5924998c57efe1c1cb6e82a2c410375524d1dcdfd730",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "04_observed_proxy_vs_simulation.png",
+      "sha256": "1933a1cb41e78ff2b3294638d95c9160765828f05badb282b0f824b14e2afb1d",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "05_inherited_policy_diagnostic.png",
+      "sha256": "75559a9eec131f723e359d3dcd513243fd3bdf453e1f1bcd63bdcbe8ef5e3683",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "06_aircraft_identity_release_delay.png",
+      "sha256": "6fb62aca46cfe3bb6387a790ccb91caae6e800e9f4eb45b2feccf106c5f63948",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "06a_shared_resource_workload.png",
+      "sha256": "f2eab425784c218dc85be8c2c5eec31732f59aa0faa996c0d5fe2cd5dbb01afd",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "06b_last_ready_handling_branch.png",
+      "sha256": "ca299369b5f60911695e13364a2afd52bf85337329fd6da2ea58b11d0c1ed01c",
+      "source": "supplementary Python calculation"
+    },
+    {
+      "file": "07_promenade_nov1_overview.jpg",
+      "sha256": "9a5c37ef38ff3e0576f487303b6b860c55c867581052bb8c4f2fd0d44b942013",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "08_promenade_turnaround_variants.jpg",
+      "sha256": "d74d0f88eee293e14b5f20dc4e2f22269325d9e55b77afa654be1069b4597866",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "09_promenade_turnaround_performance_spectrum.jpg",
+      "sha256": "3c51c695c267f344ef2888580e597c8af870f5b5a285fb10e25b1a1c161810e5",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "10_promenade_nov1_block_turnaround.jpg",
+      "sha256": "eebb8497c05b0a675c398734d991040d46767014ceb253bde85b6f789b29b467",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "11_promenade_nov1_block_turnaround_export.png",
+      "sha256": "a7bcce08bfd045d05c69c71f16b1d7394be9acdf3a7256aa688066e60752e4a5",
+      "source": "Promenade native image export"
+    },
+    {
+      "file": "12_promenade_fueling_duration.jpg",
+      "sha256": "af5d357c30257a19bd7cf52f728bc3fddc906b14e1f0fb9af59448edd2660629",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "13_promenade_fueling_duration_export.png",
+      "sha256": "18e32397555e288036929827c5835245a393faf74c0dbcacd8c07150b8d6af11",
+      "source": "Promenade native image export"
+    },
+    {
+      "file": "14_promenade_nov8_block_turnaround.jpg",
+      "sha256": "9f703140ec3fde54bfc129287110060d79b35e6dbea5e4a3a3fa2d12f66455c3",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "15_promenade_original_timing_block_turnaround.jpg",
+      "sha256": "f21e35b9fad5fe670d08b26add72a31ae21a4312d6dd0a815bdb50a253275d32",
+      "source": "Promenade screenshot"
+    },
+    {
+      "file": "16_promenade_discovered_ocdfg.jpg",
+      "sha256": "c916ddc084416cd879dcd051d29eed5b709fafb2991211e51f2b0303bda1dd98",
+      "source": "Promenade screenshot"
+    }
+  ],
+  "full_10940_case_simulation_included": false,
+  "completed_period_cases": 509,
+  "comparison_cases": 271,
+  "interpretation": "Single stochastic run per scenario; descriptive simulation results, not observed BER services."
+}

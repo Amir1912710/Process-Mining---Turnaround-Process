@@ -1,0 +1,31 @@
+{
+  "design": "v3 study: carrier-specific service times on the full 10k-turnaround demand (single trace-driven run per day).\n\nDesign (frozen 2026-11-20 before execution):\n  * demand: all in-scope OpenSky candidate turnarounds, one model per arrival day (30 Sep - 9 Nov 2026)\n  * every scenario uses observed BER weather, BER local-time night ban at pushback, schedule binding to\n    A-CDM STD where a departure is linked, carrier-dependent passenger loads\n  * scenarios differ only in the service-time functions: original (baseline), literature (carrier-agnostic),\n    carrier (low-cost vs full-service)\n  * one run per day and scenario (trace-driven, no Monte Carlo replication); run-to-run variability is\n    reported separately from the v2.2 replications\n",
+  "dates": [
+    "2026-11-01"
+  ],
+  "max_steps": 60000,
+  "baseline_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2",
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "original",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\models\\BER_MSc_2026-11-01_original.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\runs\\2026-11-01_original"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\models\\BER_MSc_2026-11-01_literature.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\runs\\2026-11-01_literature"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "carrier",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\models\\BER_MSc_2026-11-01_carrier.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\study_v3_smoke\\runs\\2026-11-01_carrier"
+    }
+  ]
+}

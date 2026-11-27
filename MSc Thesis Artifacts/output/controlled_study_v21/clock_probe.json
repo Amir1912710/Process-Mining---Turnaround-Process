@@ -1,0 +1,8 @@
+{
+  "runtime": "cpnsim 0.6.2",
+  "epoch": "2026-11-01T00:00:00Z",
+  "simulation_ms": 0,
+  "observed_hour_of_day": 0,
+  "berlin_local_hour": 1,
+  "utc_clock_confirmed": true
+}
