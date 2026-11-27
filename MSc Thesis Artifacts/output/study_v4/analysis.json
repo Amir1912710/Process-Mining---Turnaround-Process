@@ -1,0 +1,298 @@
+{
+  "n_cases_per_scenario": {
+    "carrier": 10212
+  },
+  "tta_vs_ready": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 259,
+      "obs_p5_25_50_75": [
+        45.9,
+        52.6,
+        59.1,
+        70.1
+      ],
+      "sim_p5_25_50_75": [
+        40.5,
+        48.9,
+        60.0,
+        71.2
+      ],
+      "mae_quantiles": 2.78
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 52,
+      "obs_p5_25_50_75": [
+        47.9,
+        67.1,
+        79.8,
+        87.3
+      ],
+      "sim_p5_25_50_75": [
+        29.1,
+        35.7,
+        46.9,
+        55.8
+      ],
+      "mae_quantiles": 28.65
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 266,
+      "obs_p5_25_50_75": [
+        36.1,
+        44.5,
+        52.7,
+        65.1
+      ],
+      "sim_p5_25_50_75": [
+        29.6,
+        36.4,
+        47.0,
+        58.5
+      ],
+      "mae_quantiles": 6.72
+    }
+  ],
+  "p1": [
+    {
+      "scenario": "carrier",
+      "bin": "<=30",
+      "n": 85,
+      "observed": 0.988,
+      "simulated": 0.953
+    },
+    {
+      "scenario": "carrier",
+      "bin": "30-45",
+      "n": 87,
+      "observed": 0.54,
+      "simulated": 0.667
+    },
+    {
+      "scenario": "carrier",
+      "bin": "45-60",
+      "n": 213,
+      "observed": 0.268,
+      "simulated": 0.413
+    },
+    {
+      "scenario": "carrier",
+      "bin": "60-90",
+      "n": 154,
+      "observed": 0.227,
+      "simulated": 0.11
+    },
+    {
+      "scenario": "carrier",
+      "bin": ">90",
+      "n": 50,
+      "observed": 0.1,
+      "simulated": 0.02
+    }
+  ],
+  "ground": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 3426,
+      "obs_ground_q": [
+        55.4,
+        64.2,
+        71.6,
+        83.8
+      ],
+      "sim_ground_q": [
+        54.6,
+        61.5,
+        70.4,
+        82.2
+      ],
+      "sim_block_q": [
+        40.6,
+        47.1,
+        54.2,
+        64.9
+      ],
+      "sim_ready_q": [
+        38.3,
+        44.5,
+        52.0,
+        63.6
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 789,
+      "obs_ground_q": [
+        68.5,
+        80.6,
+        89.5,
+        103.9
+      ],
+      "sim_ground_q": [
+        44.0,
+        49.6,
+        55.8,
+        68.8
+      ],
+      "sim_block_q": [
+        30.5,
+        35.7,
+        40.8,
+        52.4
+      ],
+      "sim_ready_q": [
+        27.6,
+        32.9,
+        38.2,
+        49.9
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 4017,
+      "obs_ground_q": [
+        48.6,
+        57.2,
+        66.6,
+        82.6
+      ],
+      "sim_ground_q": [
+        44.3,
+        50.0,
+        56.3,
+        69.1
+      ],
+      "sim_block_q": [
+        30.5,
+        35.7,
+        40.9,
+        51.8
+      ],
+      "sim_ready_q": [
+        28.2,
+        33.1,
+        38.2,
+        50.3
+      ]
+    },
+    {
+      "scenario": "carrier",
+      "cls": "other",
+      "n": 230,
+      "obs_ground_q": [
+        31.6,
+        53.1,
+        71.2,
+        110.1
+      ],
+      "sim_ground_q": [
+        53.6,
+        60.3,
+        68.4,
+        79.2
+      ],
+      "sim_block_q": [
+        39.8,
+        45.5,
+        52.8,
+        62.3
+      ],
+      "sim_ready_q": [
+        37.3,
+        43.5,
+        50.8,
+        62.0
+      ]
+    }
+  ],
+  "mechanism": [
+    {
+      "scenario": "carrier",
+      "cls": "full-service",
+      "n": 3993,
+      "mean_block": 59.93,
+      "median_block": 54.17,
+      "fuel_wait": 1.12,
+      "clean_wait": 0.0,
+      "tug_wait": 2.75,
+      "last_ready": {
+        "Cabin / boarding": 0.783,
+        "Baggage hold": 0.141,
+        "Fuel": 0.062,
+        "Catering": 0.008,
+        "Water / lavatory": 0.006,
+        "Cabin / boarding + Baggage hold": 0.0,
+        "Baggage hold + Water / lavatory": 0.0
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "leisure",
+      "n": 928,
+      "mean_block": 51.44,
+      "median_block": 41.24,
+      "fuel_wait": 0.96,
+      "clean_wait": 0.0,
+      "tug_wait": 7.69,
+      "last_ready": {
+        "Cabin / boarding": 0.758,
+        "Water / lavatory": 0.172,
+        "Fuel": 0.038,
+        "Baggage hold": 0.032
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "low-cost",
+      "n": 4963,
+      "mean_block": 50.17,
+      "median_block": 40.97,
+      "fuel_wait": 1.08,
+      "clean_wait": 0.0,
+      "tug_wait": 5.89,
+      "last_ready": {
+        "Cabin / boarding": 0.757,
+        "Water / lavatory": 0.168,
+        "Fuel": 0.04,
+        "Baggage hold": 0.033,
+        "Cabin / boarding + Water / lavatory": 0.0,
+        "Cabin / boarding + Fuel": 0.0
+      }
+    },
+    {
+      "scenario": "carrier",
+      "cls": "other",
+      "n": 328,
+      "mean_block": 66.76,
+      "median_block": 52.98,
+      "fuel_wait": 1.11,
+      "clean_wait": 0.0,
+      "tug_wait": 8.65,
+      "last_ready": {
+        "Cabin / boarding": 0.753,
+        "Baggage hold": 0.165,
+        "Fuel": 0.067,
+        "Catering": 0.009,
+        "Water / lavatory": 0.006
+      }
+    }
+  ],
+  "daily_corr": {
+    "carrier": {
+      "mean_block": 1.0,
+      "fuel_wait": 0.01,
+      "cases": -0.23,
+      "temp_min": -0.53,
+      "precip": -0.08,
+      "gust_max": -0.16
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "full": {
+    "cases": 383,
+    "variants": 382,
+    "top5_share": 0.016
+  },
+  "low": {
+    "cases": 330,
+    "variants": 316,
+    "top5_share": 0.039
+  }
+}

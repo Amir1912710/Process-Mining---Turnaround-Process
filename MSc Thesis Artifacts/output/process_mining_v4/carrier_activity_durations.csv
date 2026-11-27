@@ -1,0 +1,13 @@
+service,carrier,n,median,p90
+deplaning,full,383,7.2,15.88
+deplaning,low,330,8.43,17.21
+cleaning,full,383,14.6,20.81
+cleaning,low,330,10.8,16.26
+catering,full,334,17.47,27.51
+catering,low,114,12.26,16.18
+refuelling,full,383,13.65,31.88
+refuelling,low,330,14.68,24.82
+boarding,full,383,18.4,28.64
+boarding,low,330,14.83,23.42
+ground_handling,full,383,45.67,62.84
+ground_handling,low,330,40.08,54.95

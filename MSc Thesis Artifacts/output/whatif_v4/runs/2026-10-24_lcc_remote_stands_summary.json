@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-24",
+  "scenario": "lcc_remote_stands",
+  "replication": 1,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v4\\models\\BER_MSc_2026-10-24_lcc_remote_stands.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v4\\runs\\2026-10-24_lcc_remote_stands",
+  "model_sha256": "2b94fa1ec525026b54144968070e360296a04bd50c68e2608e131b775d37c973",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 11935,
+  "cases": 242,
+  "complete": true,
+  "elapsed_seconds": 67.20657740000001,
+  "mean_block_min": 59.50392561983474,
+  "median_block_min": 53.925,
+  "p90_block_min": 67.015,
+  "mean_fuel_wait_min": 1.931473829201102,
+  "p90_fuel_wait_min": 6.785000000000007,
+  "mean_clean_wait_min": 0,
+  "mean_tug_wait_min": 0,
+  "long_approval_cases": 4,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.8140495867768595
+}

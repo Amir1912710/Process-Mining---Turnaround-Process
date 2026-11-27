@@ -1,0 +1,33 @@
+{
+  "max_steps": 60000,
+  "jobs": [
+    {
+      "date": "2026-11-15",
+      "scenario": "calibrated",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\models\\BER_MSc_2026-11-15_calibrated.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\runs\\2026-11-15_calibrated"
+    },
+    {
+      "date": "2026-11-15",
+      "scenario": "uncalibrated",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\models\\BER_MSc_2026-11-15_uncalibrated.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\runs\\2026-11-15_uncalibrated"
+    },
+    {
+      "date": "2026-11-16",
+      "scenario": "calibrated",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\models\\BER_MSc_2026-11-16_calibrated.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\runs\\2026-11-16_calibrated"
+    },
+    {
+      "date": "2026-11-16",
+      "scenario": "uncalibrated",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\models\\BER_MSc_2026-11-16_uncalibrated.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\validation_nov15_16_v4\\runs\\2026-11-16_uncalibrated"
+    }
+  ]
+}
