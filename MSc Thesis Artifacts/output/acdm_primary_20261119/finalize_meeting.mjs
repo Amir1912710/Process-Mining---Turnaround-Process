@@ -1,0 +1,11 @@
+import {pathToFileURL} from 'node:url';
+import fs from 'node:fs/promises';
+process.env.RUNTIME_NODE_MODULES='C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-737-0_26.1112.737.0_x64__3k8sg7r9htsxt/dependencies/node/node_modules';
+const root='C:/Users/amira/Documents/ChatGPT/Thesis Project';
+const skill='C:/Users/amira/.codex/plugins/cache/openai-primary-runtime/presentations/26.1112.11217/skills/presentations';
+const out=root+'/output/acdm_primary_20261119';
+await fs.mkdir(root+'/tmp/meeting_finalization',{recursive:true});
+const {finalizePresentation}=await import(pathToFileURL(skill+'/container_tools/artifact_tool_utils.mjs').href);
+const tables=[2,4,5,6,7,8,10,11,14,15,18];
+const result=await finalizePresentation({workspaceDir:root,candidatePath:out+'/Professor_Meeting_2026-11-20.pptx',finalPath:out+'/Professor_Meeting_2026-11-20_Final.pptx',pythonExecutable:'C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-737-0_26.1112.737.0_x64__3k8sg7r9htsxt/dependencies/python/python.exe',integrityValidatorPath:skill+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:skill+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit'],requiredNativeTableOwnerSlides:[],requiredNativeChartOwnerSlides:[],materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:['Arial']},verifyArtifactToolImport:true,receiptPath:root+'/tmp/meeting_finalization/validation.json'});
+console.log(JSON.stringify(result));

@@ -1,0 +1,18 @@
+{
+  "date_berlin": "2026-11-06",
+  "direction": "departure",
+  "airport": "EDDB",
+  "query_begin_utc": "2026-11-05T23:00:00+00:00",
+  "query_end_utc": "2026-11-06T23:00:00+00:00",
+  "url": "https://opensky-network.org/api/flights/departure?airport=EDDB&begin=1793919600&end=1794006000",
+  "attempted_utc": "2026-11-12T21:06:52.860876+00:00",
+  "timestamp_semantics": "firstSeen/lastSeen inferred flight boundaries; not actual block times",
+  "rate_headers": {
+    "X-Rate-Limit-Remaining": "1630"
+  },
+  "status": "collected",
+  "http_status": 200,
+  "rows": 273,
+  "sha256": "da00449e41c315f210e3a6bf1c45ab9e415ddd128a4c6ecb98262bc59d933163",
+  "finished_utc": "2026-11-12T21:06:53.627933+00:00"
+}

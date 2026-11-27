@@ -1,0 +1,43 @@
+
+A1 linked turnarounds: n=610
+              n  share_tobt_late_gt5  median_tobt_shift
+bin                                                    
+(-300, 30]   88                 0.99               35.0
+(30, 45]     90                 0.53                7.5
+(45, 60]    216                 0.26                0.0
+(60, 90]    159                 0.23                0.0
+(90, 360]    57                 0.14                0.0
+Spearman(buffer, TOBT-STD) = -0.54  95% bootstrap CI [-0.60, -0.46]
+
+A2 landing-proxy -> TOBT (minutes)
+                      count    5%   25%   50%
+seg       tight                              
+FSC/other buffer<45    65.0  37.1  44.6  52.3
+          buffer>=45  269.0  47.7  55.4  64.0
+LCC       buffer<45   113.0  33.7  39.7  44.7
+          buffer>=45  163.0  41.9  51.3  61.0
+
+A3 departures with TSAT within +-15 min vs ATOT-TSAT
+         count  median   mean
+lb                           
+(-1, 2]     27   10.18   9.19
+(2, 4]      90   11.51  11.69
+(4, 6]     251   11.45  12.22
+(6, 8]     283   11.23  12.39
+(8, 40]    632   12.86  13.08
+Spearman = 0.14  95% CI [0.08, 0.19]
+
+A4 same-aircraft consecutive BER departures: n=154
+Spearman(prev departure delay, next departure delay) = 0.27 95% CI [0.11, 0.42]
+
+A5 stand area (letter prefix of parking_pos)
+      tobt_minus_std_min  atot_minus_tsat_min  dep_delay    n
+area                                                         
+A                    0.0                 11.3       14.6  253
+B                    0.0                 12.9       17.3  580
+C                    0.0                 11.4       15.5  337
+D                    0.0                 11.6       18.1   28
+E                    7.5                  6.6       51.8    6
+P                  -10.0                  7.7        3.9   11
+V                    0.0                  9.4       12.5   57
+W                   10.0                 15.7       27.4    5

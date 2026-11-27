@@ -1,0 +1,92 @@
+\chapter{Data and Experiment Details}
+\label{app:details}
+
+This appendix documents details of the data preparation and of the simulation experiments that are needed to reproduce the results, but that would interrupt the main text.
+
+\section{A-CDM Fields Used}
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lp{8.5cm}}\hline
+Field & Meaning and use\\\hline
+\texttt{callsign}, \texttt{flight\_number} & Flight identification; the normalized callsign is used for the OpenSky linkage.\\
+\texttt{aircraft\_reg}, \texttt{aircraft\_icao} & Registration and ICAO type; type is passed to the simulation where available, registration is used for P4.\\
+\texttt{airline\_icao} & Operator; basis of the carrier classification.\\
+\texttt{parking\_pos}, \texttt{gates}, \texttt{runway} & Stand, boarding gate and departure runway (descriptive).\\
+\texttt{std}, \texttt{eobt} & Scheduled departure and estimated off-block time; STD is used for schedule binding.\\
+\texttt{tobt}, \texttt{tsat} & Target off-block and target start-up approval time (last published value).\\
+\texttt{atot} & Actual takeoff time.\\
+\texttt{flight\_status} & OFF (departed), XLD (canceled), SKD (scheduled), COM (other).\\\hline
+\end{tabular}
+\caption{A-CDM fields used in this thesis. Timestamps are published without timezone and interpreted as UTC (Section~\ref{sec:eval-data}).}
+\end{table}
+
+Across the 1,322 records, the collection contains 1,286 departed, 15 canceled, 17 scheduled and four other records. Registration is missing in 14 records, stand in 19 and runway in 24. Of the 10,940 OpenSky candidate turnarounds, 826 have a candidate A-CDM link; the full candidate table before screening contains 11,203 rows.
+
+\section{Carrier Classification}
+
+Table~\ref{tab:carriers} lists the classification of the most frequent airlines. Airlines recorded in the February--April collection keep the class assigned there (Ryanair, easyJet, Eurowings, Pegasus, Wizz Air, Vueling and Norwegian as low-cost; Lufthansa, Austrian, Swiss, KLM, British Airways, Turkish Airlines, Air France, SAS, Brussels Airlines, Finnair, Iberia, LOT, Qatar Airways and Aer Lingus as full-service). Subsidiaries follow their parent brand; charter and holiday carriers form the leisure class. Excluded are military flights (German Air Force), business aviation (for example NetJets and VistaJet, and all business-jet aircraft types) and cargo operators.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lp{10.5cm}}\hline
+Class & Airlines (ICAO designators, most frequent first)\\\hline
+Low-cost (4,963) & RYR, EJU, EWG, PGT, WZZ, EZY, WMT, VLG, NOZ, NSZ, TKJ, TVF, EZS, RUK, VOE\\
+Full-service (3,993) & DLH, AUA, SWR, KLM, BAW, THY, AFR, SAS, BEL, CFE, FIN, IBE, TAP, LOT, AEE, QTR, LHX, BTI, EIN, LGL, UAL, ICE and others\\
+Leisure (928) & SXS, CFG, SDR, FHY, MSC, BBG, CXI, CAI, LBT, ISR, NIA, TVS, ENT\\
+Other (328) & commercial airlines not listed above\\\hline
+\end{tabular}
+\caption{Carrier classes of the 10,212 in-scope turnarounds.}
+\label{tab:carriers}
+\end{table}
+
+\section{Simulation Inputs and Assumptions}
+
+The daily simulation models contain all in-scope candidate turnarounds of the arrival day, including intervals longer than six hours. Movements without an accepted pair are not part of the model, so simulated queues describe competition within this cohort, not with all BER traffic. Further assumptions are:
+\begin{itemize}
+\item passenger count from the baseline's load-factor profile for the carrier class, month, weekday and hour; no passengers with reduced mobility; sector duration of 120~minutes;
+\item Schengen stand segregation disabled because route context is incomplete, while physical size compatibility is retained;
+\item departure-planning steps of the baseline are retained as modeled assumptions and not replaced by observed TOBT or TSAT values;
+\item synthetic outstation travel is bypassed; landing, runway contention and taxi-in remain simulated;
+\item hourly temperature and precipitation are taken from the Open-Meteo archive for BER (52.37\,N, 13.50\,E);
+\item the 25-stand geometry and the resource fleets are inherited from the baseline.
+\end{itemize}
+The runtime's Weibull and Gamma functions take the scale before the shape parameter; the service functions in Table~\ref{tab:servicetimes} are implemented accordingly.
+
+\section{Calibration Grid}
+
+Table~\ref{tab:grid} lists the best grid points of the calibration on 1 and 5~November.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{rrr}\hline
+$s_{\mathrm{LCC}}$ & $s_{\mathrm{FSC}}$ & Loss (min)\\\hline
+1.3 & 1.1 & 2.03\\
+1.3 & 1.0 & 2.06\\
+1.4 & 1.0 & 2.23\\
+1.2 & 1.1 & 2.46\\
+1.1 & 1.1 & 2.54\\
+1.3 & 1.2 & 3.05\\
+1.0 & 1.0 & 4.84\\\hline
+\end{tabular}
+\caption{Calibration loss (Eq.~\ref{eq:loss}) for the best grid points and the uncalibrated reference.}
+\label{tab:grid}
+\end{table}
+
+\section{Monte Carlo Comparison}
+
+An earlier configuration of the model (literature timing, BER local night restriction, with and without schedule binding, two capacity variants and original timing) was replicated ten times per scenario on 1 and 8~November. Table~\ref{tab:mc} reports the replication means. The 95\% intervals are between $\pm0.3$ and $\pm1.7$~minutes, which is small compared with the scenario effects and with the variation between days.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lrr}\hline
+Scenario (10 replications) & 1 Nov.\ mean block [95\% CI] & 8 Nov.\ mean block [95\% CI]\\\hline
+Literature, no schedule binding & 78.79 [78.11, 79.47] & 73.19 [71.49, 74.88]\\
+Literature, schedule binding & 84.93 [84.45, 85.40] & 92.98 [92.27, 93.69]\\
+\quad six cleaning teams & 85.05 [84.69, 85.42] & 92.99 [92.42, 93.55]\\
+\quad six+six fuel units & 84.57 [84.13, 85.00] & 93.08 [91.87, 94.29]\\
+Original timing, schedule binding & 90.15 [89.80, 90.49] & 97.85 [97.46, 98.23]\\\hline
+\end{tabular}
+\caption{Monte Carlo replications of single days (archived in \texttt{controlled\_study\_v22}).}
+\label{tab:mc}
+\end{table}
+
+\section{How Turnaround Durations Are Measured in the Logs}
+
+In an object-centric log, there is no single case notion. A natural way to measure the duration of a turnaround would be to start from the turnaround object and collect all events that are connected to it, directly or through other objects. In the simulated logs this does not work: shared resources connect the turnarounds of a day with each other. On 1~November, for example, Promenade shows that almost all objects of the day belong to one connected component, because the same buses, tankers and loaders serve many aircraft. Collecting the connected events of one turnaround would therefore also collect the events of many other turnarounds. All durations in this thesis are thus measured only between events that are directly related to the same turnaround object, either from its own milestones or in the log flattened on the turnaround type.

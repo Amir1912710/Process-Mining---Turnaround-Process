@@ -1,0 +1,6 @@
+date,records,eligible_atot,complete_target_triples,unique_opensky_candidates,median_signed_proxy_delta_min
+2026-11-01,289,283,283,280,-0.166667
+2026-11-05,257,251,250,244,-0.133333
+2026-11-08,264,250,249,243,-0.133333
+2026-11-15,254,249,249,242,-0.116667
+2026-11-16,258,253,252,248,-0.033333

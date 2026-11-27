@@ -1,0 +1,54 @@
+{
+  "design": "Pilot fixed before new simulation results; two dates, six scenarios, five independent replications per cell. No parameter fitting.",
+  "dates": [
+    "2026-11-01"
+  ],
+  "replications": 1,
+  "max_steps": 18000,
+  "randomization": "Runtime RNG; seeds not exposed; independent unpaired replications, not common random numbers.",
+  "interpretation": "Disabled curfew is a policy sensitivity, not verified BER law. Capacities and passenger loads are assumed.",
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_inherited_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_inherited",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_inherited.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_inherited_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "literature_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_literature_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_literature_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "original_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_original_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_original_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "cleaning_6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_cleaning_6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_cleaning_6_no_curfew_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "fuel_6plus6_no_curfew",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-01_fuel_6plus6_no_curfew.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-01_fuel_6plus6_no_curfew_r01"
+    }
+  ]
+}

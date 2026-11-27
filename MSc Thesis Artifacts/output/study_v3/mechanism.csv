@@ -1,0 +1,13 @@
+scenario,cls,n,mean_block,median_block,fuel_wait,clean_wait,tug_wait,last_ready
+carrier,full-service,3993,60.4,54.05,1.18,0.0,3.08,"{'Cabin / boarding': 0.857, 'Fuel': 0.065, 'Baggage hold': 0.062, 'Catering': 0.009, 'Water / lavatory': 0.006}"
+carrier,leisure,928,52.05,41.72,0.93,0.0,7.61,"{'Cabin / boarding': 0.561, 'Baggage hold': 0.333, 'Water / lavatory': 0.088, 'Fuel': 0.016, 'Cabin / boarding + Baggage hold': 0.001}"
+carrier,low-cost,4963,50.92,41.67,1.09,0.0,5.58,"{'Cabin / boarding': 0.541, 'Baggage hold': 0.35, 'Water / lavatory': 0.089, 'Fuel': 0.018, 'Cabin / boarding + Baggage hold': 0.001, 'Baggage hold + Water / lavatory': 0.001, 'Cabin / boarding + Water / lavatory': 0.0, 'Water / lavatory + Baggage hold': 0.0}"
+carrier,other,328,66.89,53.88,1.51,0.0,8.76,"{'Cabin / boarding': 0.814, 'Fuel': 0.095, 'Baggage hold': 0.082, 'Catering': 0.006, 'Water / lavatory': 0.003}"
+literature,full-service,3993,63.18,55.65,2.52,0.0,2.98,"{'Cabin / boarding': 0.925, 'Fuel': 0.064, 'Baggage hold': 0.01, 'Cabin / boarding + Fuel': 0.001, 'Water / lavatory': 0.0}"
+literature,leisure,928,65.81,54.68,2.37,0.0,7.17,"{'Cabin / boarding': 0.927, 'Fuel': 0.073}"
+literature,low-cost,4963,67.42,55.48,2.51,0.0,6.25,"{'Cabin / boarding': 0.93, 'Fuel': 0.07, 'Cabin / boarding + Fuel': 0.0}"
+literature,other,328,68.63,55.47,2.34,0.0,8.63,"{'Cabin / boarding': 0.905, 'Fuel': 0.088, 'Baggage hold': 0.003, 'Water / lavatory': 0.003}"
+original,full-service,3993,73.78,62.88,0.57,0.04,4.31,"{'Cabin / boarding': 0.995, 'Baggage hold': 0.005}"
+original,leisure,928,66.52,55.62,0.57,0.04,7.05,{'Cabin / boarding': 1.0}
+original,low-cost,4963,71.32,55.9,0.54,0.02,7.66,{'Cabin / boarding': 1.0}
+original,other,328,77.09,61.41,0.72,0.06,9.43,{'Cabin / boarding': 1.0}

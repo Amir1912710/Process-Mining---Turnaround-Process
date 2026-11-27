@@ -1,0 +1,106 @@
+\chapter{Foundations: Object-Centric Event Data, Petri Nets and A-CDM}
+\label{ch:prelim}
+
+This chapter introduces the concepts on which the rest of the thesis builds: the event data the simulation produces, the Petri nets that produce them, the milestones they are compared with, and the techniques used to analyze and compare them.
+
+\section{Object-Centric Event Logs (OCEL 2.0)}
+\label{sec:prelim-ocel}
+
+Traditional event logs assign every event to exactly one case. In a turnaround, however, a single event such as \emph{start fueling} concerns an aircraft, a turnaround, a fuel truck and a stand at the same time. Forcing such data into one case notion leads to convergence and divergence problems~\cite{berti2023ocpmreview}. OCEL~2.0 avoids this by relating each event to any number of objects~\cite{koren2024ocel2}. We use the following simplified definition, which follows the OCEL~2.0 specification.
+
+\begin{definition}[Universes]
+Let $\mathcal{U}_{ev}$, $\mathcal{U}_{etype}$, $\mathcal{U}_{obj}$, $\mathcal{U}_{otype}$, $\mathcal{U}_{attr}$, $\mathcal{U}_{val}$, $\mathcal{U}_{qual}$ be pairwise disjoint universes of event identifiers, event types, object identifiers, object types, attribute names, attribute values and relationship qualifiers. $\mathcal{U}_{time}$ denotes the universe of timestamps.
+\end{definition}
+
+\begin{definition}[Object-centric event log]
+\label{def:ocel}
+An object-centric event log is a tuple
+\[
+L=(E,O,\mathit{evtype},\mathit{time},\mathit{objtype},\mathit{eaval},\mathit{oaval},E2O,O2O)
+\]
+where
+\begin{itemize}
+\item $E\subseteq\mathcal{U}_{ev}$ and $O\subseteq\mathcal{U}_{obj}$ are finite sets of events and objects,
+\item $\mathit{evtype}:E\to\mathcal{U}_{etype}$ and $\mathit{objtype}:O\to\mathcal{U}_{otype}$ assign types,
+\item $\mathit{time}:E\to\mathcal{U}_{time}$ assigns a timestamp to each event,
+\item $\mathit{eaval}:E\times\mathcal{U}_{attr}\not\to\mathcal{U}_{val}$ assigns event attribute values,
+\item $\mathit{oaval}:O\times\mathcal{U}_{attr}\times\mathcal{U}_{time}\not\to\mathcal{U}_{val}$ assigns object attribute values that may change over time,
+\item $E2O\subseteq E\times\mathcal{U}_{qual}\times O$ is the set of qualified event-to-object relations, and
+\item $O2O\subseteq O\times\mathcal{U}_{qual}\times O$ is the set of qualified object-to-object relations.
+\end{itemize}
+\end{definition}
+
+For example, the event \emph{start fueling} of a turnaround $ta$ can be related to $ta$ with the qualifier \texttt{turnaround}, to the aircraft with \texttt{aircraft} and to a fuel tanker with \texttt{fueller}. An O2O relation records the stand at which the turnaround is \texttt{parked at}. Since resources are objects of their own, their whole lifecycle across many turnarounds becomes visible in the log.
+
+\section{Timed Colored Petri Nets and Object-Centric Models}
+\label{sec:prelim-cpn}
+
+We model the operational behavior with timed colored Petri nets (CPNs)~\cite{jensen2009cpn}. Tokens carry data values (\emph{colors}) and timestamps, which makes it possible to represent individual aircraft and resources as distinguishable tokens.
+
+\begin{definition}[Timed colored Petri net]
+\label{def:cpn}
+A timed CPN is a tuple $N=(P,T,F,\Sigma,V,C,G,E,I)$, where $P$ and $T$ are finite disjoint sets of places and transitions, $F\subseteq(P\times T)\cup(T\times P)$ is a set of arcs, $\Sigma$ is a finite set of (possibly timed) color sets, $V$ is a set of typed variables, $C:P\to\Sigma$ assigns a color set to every place, $G$ assigns a Boolean guard expression to every transition, $E$ assigns an arc expression to every arc, and $I$ assigns an initial timed multiset of tokens to every place.
+\end{definition}
+
+A token $c@\tau$ has value $c$ and becomes available at time $\tau$. A transition is enabled when every input place contains tokens that satisfy the arc expressions and the guard, and all of these tokens are available. When it fires, it consumes these tokens and produces new tokens whose timestamps may be increased by a delay. Stochastic delays are obtained by sampling from probability distributions in the arc or transition expressions.
+
+\paragraph{Object-centric interpretation.}
+Object-centric Petri nets associate places with object types and allow transitions to consume and produce several objects of different types at once~\cite{vanderaalst2020ocpn}. The model used in this thesis is built in OCPN Studio~\cite{ocpn_studio} and executed by the CPNsim runtime~\cite{cpnsim}. It follows this interpretation: each color set of record type corresponds to an object type, such as \texttt{Aircraft}, \texttt{Turnaround}, \texttt{Stand} or \texttt{Fueller}, and each token of such a color set represents one object. Color sets of simple types, such as integers or strings, carry auxiliary values and do not define object types. A transition firing therefore corresponds to an event that relates all objects it consumes or produces. This correspondence is the basis of the OCEL export in Section~\ref{sec:method-ocel}.
+
+\paragraph{Synchronization.}
+A turnaround splits into parallel handling branches that must all be completed before the aircraft can leave. In a Petri net, this is a join transition that requires one token from every branch. We call the branch whose token becomes available last the \emph{last-ready branch} of a turnaround. It determines when the join can fire, and it is the object-centric counterpart of the critical path in a project schedule.
+
+\section{A-CDM Milestones}
+\label{sec:prelim-acdm}
+
+A-CDM defines a sequence of milestones that partners share about each flight~\cite{eurocontrol_acdm}. For a departure $d$ we write:
+\begin{itemize}
+\item $\mathrm{STD}_d$, the scheduled time of departure from the timetable,
+\item $\mathrm{EOBT}_d$, the estimated off-block time from the flight plan,
+\item $\mathrm{TOBT}_d$, the target off-block time, that is, the time at which the aircraft operator or ground handler expects the aircraft to be ready, with doors closed and boarding bridge removed,
+\item $\mathrm{TSAT}_d$, the target start-up approval time issued by the pre-departure sequencer, and
+\item $\mathrm{ATOT}_d$, the actual takeoff time.
+\end{itemize}
+TOBT and TSAT are \emph{targets}: they are set and updated during the turnaround, and the published value is typically the last one. ATOT is an \emph{actual} time. In-block (AIBT) and off-block (AOBT) times are part of the full milestone concept but are not published by the BER application used in this thesis.
+
+\begin{definition}[Turnaround observation]
+\label{def:taobs}
+A turnaround observation is a pair $(a,d)$ of an inbound flight $a$ and the next departure $d$ of the same aircraft from the same airport. Let $t_a^{\mathrm{land}}$ be an observed landing time of $a$. We define the \emph{scheduled buffer}
+\[
+B_{(a,d)}=\mathrm{STD}_d-t_a^{\mathrm{land}}
+\]
+and the \emph{target turnaround time} $\mathrm{TTA}_{(a,d)}=\mathrm{TOBT}_d-t_a^{\mathrm{land}}$. The \emph{target shift} $\Delta^{\mathrm{TOBT}}_d=\mathrm{TOBT}_d-\mathrm{STD}_d$ measures by how much the operator expects to be late.
+\end{definition}
+
+A small or negative buffer means that the inbound aircraft has little time to be turned around before its scheduled departure. If the target shift grows as the buffer shrinks, inbound delay is being transferred to the outbound flight. Chapter~\ref{ch:methods} uses this relation as a calibration target.
+
+\section{Object-Centric Process Discovery and Conformance}
+\label{sec:prelim-pm}
+
+Process discovery constructs a process model from an event log, and conformance checking measures how well a log and a model agree~\cite{vanderaalst2016pm}. For object-centric logs, two families of models are used in this thesis.
+
+\paragraph{Object-centric directly-follows graph (OC-DFG).}
+For every object type $ot$, the events related to each object of that type are ordered by time. An edge $(a,b)$ of type $ot$ exists if some object of type $ot$ is related to an event of activity $a$ that is directly followed by an event of activity $b$. Each edge is annotated with its frequency or with the time between the two events. Because every object type contributes its own edges, the OC-DFG shows the lifecycle of aircraft, turnarounds and resources in one picture~\cite{vanderaalst2020ocpn,berti2023ocpmreview}.
+
+\paragraph{Object-centric Petri net (OCPN).}
+An OCPN is discovered by flattening the log per object type, discovering a Petri net for each type with the inductive miner and merging the nets at shared activities~\cite{vanderaalst2020ocpn}.
+
+\paragraph{Flattening and conformance.}
+\emph{Flattening} a log on object type $ot$ produces a traditional event log in which each object of type $ot$ is a case. Given a flattened log and a Petri net, token-based replay measures \emph{fitness} (the share of observed behavior the model can replay) and \emph{precision} (how little behavior the model allows beyond what is observed)~\cite{rozinat2008conformance}. Both lie in $[0,1]$.
+
+\section{Trace-Driven Simulation and Statistical Comparison}
+\label{sec:prelim-stats}
+
+The simulation in this thesis is \emph{trace-driven}. A conventional simulation generates arrivals from a random process. Here, the input of each simulated day is instead the list of aircraft that were actually observed arriving at BER on that day, each with its landing time, airline and aircraft type. We call this list the \emph{observed arrival demand} of the day. Every scenario is executed once per day on the same arrival demand and the same observed weather, so that two scenarios differ only in the change that defines them.
+
+\begin{definition}[Paired daily comparison]
+Let $m_{s,d}$ be the mean of a metric over all turnarounds of day $d$ in scenario $s$. The effect of scenario $s$ relative to a reference $s_0$ is the mean paired difference $\bar\Delta_s=\frac{1}{D}\sum_{d=1}^{D}(m_{s,d}-m_{s_0,d})$ over $D$ days. Its 95\% confidence interval is $\bar\Delta_s\pm t_{0.975,D-1}\cdot \mathit{sd}/\sqrt{D}$, where $\mathit{sd}$ is the standard deviation of the $D$ daily differences and $t_{0.975,D-1}$ the quantile of Student's $t$-distribution with $D-1$ degrees of freedom~\cite{law2015simulation}.
+\end{definition}
+
+Using the operational day as the statistical unit accounts for the dependence between turnarounds that share resources within a day~\cite{law2015simulation}. Pairing by day removes the variation between days in demand and weather, so that a difference reflects the scenario. Monte Carlo replication, that is, repeating the same day many times with new random numbers, is used only as a comparison to quantify the run-to-run variability of the stochastic model. Two sets of replications are compared with a Welch interval, which does not assume equal variances~\cite{welch1947}.
+
+For observed data we use rank-based and resampling methods, because delays are skewed and contain outliers. The Spearman rank correlation $\rho$ measures monotone association. Confidence intervals are obtained by the nonparametric bootstrap: observations, or whole days where observations within a day are dependent, are resampled with replacement, the statistic is recomputed, and the 2.5th and 97.5th percentiles form a 95\% interval~\cite{efron1993bootstrap}. Classifiers for early delay detection are evaluated by the area under the ROC curve (AUC), which equals the probability that a randomly chosen delayed case receives a higher score than a randomly chosen punctual one.
+
+\section{Summary}
+
+This chapter formalized object-centric event logs and the timed colored Petri nets that underlie the simulation model. It introduced the A-CDM milestones and the buffer and target-shift quantities that connect them to the turnaround, the object-centric discovery and conformance techniques used to analyze the generated logs, and the paired daily comparison and resampling statistics used in the evaluation. The next chapter reviews how these concepts have been used in earlier work on aircraft turnarounds.

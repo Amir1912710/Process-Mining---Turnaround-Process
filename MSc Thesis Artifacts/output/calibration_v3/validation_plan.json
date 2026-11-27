@@ -1,0 +1,23 @@
+{
+  "max_steps": 60000,
+  "jobs": [
+    {
+      "date": "2026-11-08",
+      "scenario": "val_low1.0_full1.0",
+      "sl": 1.0,
+      "sf": 1.0,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-08_low1.0_full1.0_val.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-08_low1.0_full1.0_val"
+    },
+    {
+      "date": "2026-11-08",
+      "scenario": "val_low1.3_full1.1",
+      "sl": 1.3,
+      "sf": 1.1,
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\models\\BER_MSc_2026-11-08_low1.3_full1.1_val.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\calibration_v3\\runs\\2026-11-08_low1.3_full1.1_val"
+    }
+  ]
+}

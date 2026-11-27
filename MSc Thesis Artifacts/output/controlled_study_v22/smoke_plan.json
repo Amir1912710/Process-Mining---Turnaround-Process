@@ -1,0 +1,26 @@
+{
+  "design": "v2.2 frozen 2026-11-20 before execution: BER 00:00-05:00 local night ban at pushback only; schedule binding to A-CDM STD for linked cases; ten independent replications per cell.",
+  "dates": [
+    "2026-11-01"
+  ],
+  "replications": 1,
+  "max_steps": 30000,
+  "randomization": "Runtime RNG; seeds not exposed; independent unpaired replications.",
+  "baseline_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2",
+  "jobs": [
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_free",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_free.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\smoke_2026-11-01_lit_berlocal_free_r01"
+    },
+    {
+      "date": "2026-11-01",
+      "scenario": "lit_berlocal_std",
+      "replication": 1,
+      "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std.ocpn",
+      "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\smoke_2026-11-01_lit_berlocal_std_r01"
+    }
+  ]
+}

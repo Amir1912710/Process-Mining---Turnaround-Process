@@ -1,0 +1,22 @@
+\chapter{Reproducibility and Artifacts}
+\label{app:repro}
+\sloppy
+
+\section{Data}
+\todo[inline]{Add the location of the archive (repository URL or attached medium).}
+The data and scripts are archived in the thesis repository, in the following files:
+\begin{itemize}
+\item \texttt{ACDM\_Berlin\_Primary\_With\_}\allowbreak\texttt{OpenSky\_Check.csv}: the 1,322 A-CDM records with their eligibility flags and the outcome of the OpenSky cross-check; raw responses and daily manifests with SHA-256 hashes are archived per collection day;
+\item \texttt{BER\_Combined\_Turnaround\_Pairs.csv}: the 10,940 candidate turnarounds with source references for every value;
+\item \texttt{cleaned\_dataset.csv}: the 2,070 February--April records;
+\item \texttt{BER\_ACDM\_Observed\_Departures\_}\allowbreak\texttt{UTC\_Hypothesis.ocel.json}: an observed object-centric departure log with one takeoff event for each of the 1,257 matched departures.
+\end{itemize}
+
+\section{Analyses}
+The empirical properties are computed by \texttt{new\_empirical\_analyses.py}, the held-out delay-transfer model by \texttt{febapr\_propagation.py}, and the delay drivers, early-warning classifiers and disruption screening by \texttt{delay\_drivers\_early\_warning.py}. The A-CDM collector is \texttt{acdm\_collect.py}; the linkage is performed by \texttt{prepare\_turnaround\_linkage.py} and \texttt{link\_acdm\_opensky.py}, and the enrichment by \texttt{enrich\_turnarounds.py}. The timing comparison is run by \texttt{run\_v3\_study.py}, the calibration by \texttt{calibrate\_v3.py}, the additional validation days by \texttt{build\_validation\_days.py}, \texttt{validate\_new\_days.py} and \texttt{validate\_nov8\_refs.py}, the what-if study by \texttt{run\_whatif\_v3.py} and the process-mining analysis by \texttt{process\_mining\_v3.py}. All analysis scripts use fixed random seeds, so their output is reproducible.
+
+\section{Models and Experiments}
+The baseline model~\cite{ocpn_studio} is archived unchanged as \texttt{airport-extended.ocpn}; its SHA-256 hash is recorded in the archive manifest, so that any change to the file can be detected. The source attribution and MIT license of the Studio-derived material are retained with the model package. The controlled-study archive contains the twelve built models, the case lists and manifests, the frozen experiment plan, sixty per-case result files, replication metrics, scenario summaries, contrasts and validation results.
+
+\section{Software Versions}
+Simulation requires Node.js (version 24.21) and \texttt{@rwth-pads/cpnsim} 0.6.2. The analyses were run with Python 3.14 and NumPy 2.3.4, pandas 2.3.3, SciPy 1.16.3, scikit-learn 1.7.2, PM4Py 2.7.19 and Matplotlib 3.10.7. Because the simulation runtime does not expose seed control, repeated simulation runs produce new stochastic outcomes.

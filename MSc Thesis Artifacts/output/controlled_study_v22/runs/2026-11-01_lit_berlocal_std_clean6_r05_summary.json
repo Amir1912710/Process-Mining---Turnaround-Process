@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-01",
+  "scenario": "lit_berlocal_std_clean6",
+  "replication": 5,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\models\\BER_MSc_2026-11-01_lit_berlocal_std_clean6.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v22\\runs\\2026-11-01_lit_berlocal_std_clean6_r05",
+  "model_sha256": "9ba54580aae7a47c689db7e2402b44a5555bcf739e6a199741e83b5c9df16782",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 13281,
+  "cases": 271,
+  "complete": true,
+  "elapsed_seconds": 42.5474343,
+  "mean_block_min": 84.68856088560887,
+  "median_block_min": 62.96666666666667,
+  "p90_block_min": 109.85,
+  "mean_fuel_wait_min": 2.4506150061500613,
+  "p90_fuel_wait_min": 9.666666666666666,
+  "mean_clean_wait_min": 0.14784747847478474,
+  "mean_tug_wait_min": 17.167343173431732,
+  "long_approval_cases": 8,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.9040590405904059
+}

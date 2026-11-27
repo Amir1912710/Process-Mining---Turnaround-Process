@@ -1,0 +1,46 @@
+\chapter{Empirical A-CDM Analysis}
+\label{ch:results}
+This chapter presents findings from the A-CDM primary collection. We distinguish source coverage, correspondence with OpenSky and descriptive target intervals. The historical simulation results remain a separate exploratory study in the appendices.
+
+\section{Snapshot Coverage}
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lrrr}\hline
+Source date & Records & Eligible ATOT & Unique OpenSky candidates\\\hline
+1 November & 289 & 283 & 280\\
+5 November & 257 & 251 & 244\\
+8 November & 264 & 250 & 243\\
+15 November & 254 & 249 & 242\\
+16 November & 258 & 253 & 248\\\hline
+Total & 1,322 & 1,286 & 1,257\\\hline
+\end{tabular}
+\caption{A-CDM primary records and departure cross-check coverage. Dates describe the source snapshots rather than continuous period coverage.}\label{tab:acdmcoverage}
+\end{table}
+The collection includes 1,286 OFF, 15 XLD, 17 SKD and four COM source statuses. The primary record count includes canceled and unfinished departures. Across all 1,322 rows, registration is missing in 14, stand in 19 and runway in 24. These omissions restrict analyses requiring those fields but do not invalidate every departure metric. The data contain no observed full-turnaround pairs with both arrival and departure/block milestones.
+
+\section{Departure-Time Correspondence}
+Of the 1,286 eligible actual takeoffs, 1,257 have a unique callsign/time candidate, corresponding to 97.7\%. The remaining 29 have no candidate within the specified tolerance. All retained candidates support the UTC interpretation rather than Europe/Berlin under this rule.
+
+Among the retained candidates, the median signed OpenSky-minus-A-CDM difference is $-0.117$ minutes, approximately seven seconds earlier. The median absolute difference is 0.133 minutes, approximately eight seconds. Mean absolute difference is 0.224 minutes. There are 1,237 matches within one minute and all 1,257 within five minutes. The signed range is approximately $[-3.12,4.00]$ minutes.
+
+These results provide evidence of close departure-time correspondence for the matched subset. They do not establish exact takeoff ground truth from OpenSky, complete airport coverage or the identity of every physical aircraft. Because the matching procedure selects candidates within 30 minutes, the reported difference distribution is conditional on that selection. Missing matches are not automatically operational failures.
+
+\section{Target-to-Takeoff Descriptions}
+For the 1,283 complete eligible triples, Table~\ref{tab:acdmmetrics} summarizes the source-value differences. Negative values remain in the analysis and are available for review.
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lrr}\hline
+Difference (minutes) & Mean & Median\\\hline
+TSAT minus TOBT & 1.30 & 0.00\\
+ATOT minus TSAT & 12.58 & 12.12\\
+ATOT minus TOBT & 13.88 & 12.93\\\hline
+\end{tabular}
+\caption{Descriptive target/actual differences for complete eligible A-CDM departure triples, $n=1,283$. These are not service or queue durations.}\label{tab:acdmmetrics}
+\end{table}
+The nonnegative sensitivity subset contains 1,261 records. Thus, 22 complete triples fail at least one nonnegative-sequence requirement. This does not prove that all such records are erroneous. Target revisions and different milestone meanings can affect ordering, and the current snapshots do not preserve a full target-update history.
+
+\section{Relation to the Earlier 10,940-Row Table}
+The 10,940 pairing-screened rows are an auxiliary reconstruction from OpenSky inbound/outbound observations. Only 826 have a candidate A-CDM reference link in the frozen build. Their existence does not enlarge the primary A-CDM collection to 10,940 rows. The full candidate table has 11,203 rows before the earlier screening rules.
+
+The auxiliary table approximates an aircraft's arrival-to-next-departure interval. It is neither a measured A-CDM turnaround table nor measured AIBT--AOBT. The earlier 60 simulation runs reuse 509 of those interval candidates across scenarios and replications. Their 15,270 generated executions are not additional empirical observations.
+
+\section{Model Readiness}
+The A-CDM collection supports departure-level descriptions and an independent timestamp correspondence check. It does not identify cleaning, fueling or boarding distributions, inbound release times or measured block duration. The next calibration step requires additional arrival/block observations or an agreed, explicitly assumed scope. The retained exploratory simulation results remain useful for studying dependencies under stated assumptions.

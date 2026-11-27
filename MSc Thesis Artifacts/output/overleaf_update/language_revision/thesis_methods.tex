@@ -1,0 +1,67 @@
+\chapter{Data and Simulation Methodology}
+\label{ch:methods}
+
+This chapter describes how the available observations are converted into simulation inputs. We first define the data sources and the daily cohorts. We then explain the changes to the supplied model, the service-time assumptions and the OCEL export. Finally, we present the controlled experiment, its metrics and the technical checks. The procedure keeps observed values, literature inputs and generated events separate.
+
+\section{Data provenance and cohort construction}
+The prepared OpenSky movement table contains 22,635 records: 11,316 arrivals and 11,319 departures. Candidate BER ground intervals link an observed arrival to the following observed BER departure of the same ICAO24 identifier. The prepared core cohort contains 10,940 interval rows: 8,951 in the 15-minute to six-hour band and 1,989 in the six-to-24-hour band. Each row represents a candidate aircraft-linked interval, not a certified aircraft rotation.
+
+The intended collection begins on 1 October 2026. The core file also includes 54 arrivals on 30 September paired to departures entering the requested period. Arrival observations in the file extend through 9 November. Accordingly, this version does not claim complete data coverage through 13 November. Temporal coverage, API availability and filtering must be distinguished from the number of interval rows retained.
+
+We use the term boundary proxy for the interval between the last observation of the inbound flight and the first observation of the outbound flight. For case $i$, this interval is defined as
+\begin{equation}
+G_i^{\mathrm{proxy}}=t_{i,\mathrm{outbound\ firstSeen}}-t_{i,\mathrm{inbound\ lastSeen}}.
+\end{equation}
+Both timestamps are observation boundaries, as described by the OpenSky API \cite{opensky_rest}. The interval may include unobserved approach/taxi segments, parking and timetable buffers. It is not measured actual in-block time (AIBT) to actual off-block time (AOBT). Source identifiers, pairing basis, review flags and timezone-aware UTC/Berlin representations are retained.
+
+A-CDM reference records provide candidate aircraft/airline/stand context and departure-time cross-checks where a candidate match exists. Their naive timestamps are retained alongside the UTC timezone hypothesis used during reconciliation. They are references rather than complete service-event ground truth. Credentials and API secrets are not included in the thesis or its analysis artifacts.
+
+\section{Daily experimental inputs}
+The daily models use 271 cases and 235 distinct aircraft on 1 November, and 238 cases and 212 aircraft on 8 November. Supported candidate aircraft types exist for 216 and 180 input rows, respectively. This row-level coverage does not mean every final aircraft configuration is observed: the first case establishes a persistent model configuration, and missing or unsupported types fall back to an assumed A320 configuration. Later conflicting candidates have not been reconciled.
+
+The two cohorts include 39 and 44 intervals longer than six hours. A long interval may include parking or a timetable buffer rather than continuous ground handling. In addition, movements without an accepted pair are excluded. The simulated queues therefore describe competition within the selected cohort. They cannot be interpreted as queues caused by all BER traffic.
+
+\section{Baseline attribution and study modifications}
+The supervisor's original extended model is preserved unchanged. Its six parallel handling threads, resource interaction logic, vehicle positions, fuel supply mechanisms and process dependencies are inherited contributions. A same-demand original-timing comparator retains the original service functions within the adapted demand model; it is not the untouched example.
+
+We replace the original continuous generation of synthetic flights with a finite set of timed arrivals. Each case is released using its observed arrival boundary proxy. The paired arrival and departure require the same aircraft identity, which becomes available again after simulated takeoff. If a later case requires that aircraft while it is still in the model, the case must wait. Synthetic outstation travel and the inherited inbound curfew/extra approach delay are bypassed; landing roll, runway contention and taxi-in remain simulated. Observed outbound times are retained outside the model as evaluation references and do not force simulated departures.
+
+Schengen stand segregation is disabled because route context is incomplete; physical size compatibility remains. Departure-planning steps are labeled as assumptions rather than observed TOBT/TSAT values. Simulated weather, remaining durations and illustrative geometry are retained as assumptions.
+
+\section{Service-time assumptions}
+For narrowbody aircraft, the transferred reference functions, in minutes, are \cite{schultz2012dynamic}:
+\begin{align}
+D_{\mathrm{clean}} &=5+\mathrm{Weibull}(\mathrm{shape}=2.16,\mathrm{scale}=6.76),\\
+D_{\mathrm{fuel}} &=2+\mathrm{Gamma}(\mathrm{shape}=1.64,\mathrm{scale}=9.12),\\
+D_{\mathrm{board}} &=2.3+0.075P,
+\end{align}
+where $P$ is the assumed passenger count. Boarding uses a deterministic mean reference, not a full distribution. Vehicle travel/access time is additional where specified by the inherited model. The order of distribution arguments is checked against the runtime implementation. Its functions take scale before shape, so the calls are \texttt{weibull(6.76,2.16)} and \texttt{gamma(9.12,1.64)} before converting minutes to milliseconds. Other aircraft-size categories retain inherited timing functions.
+
+Passenger counts are assumed at 85\% of scenario seating capacity, PRM demand is zero, and sector duration is 120 minutes. Carrier class remains unknown. No measured passenger load or justified budget/full-service timing coefficient is available. The original timing comparator's unknown-carrier branch also needs to be considered when interpreting the comparison.
+
+The inherited 25-stand geometry, runway dimensions, resource capacities, taxi assumptions and optional-service probabilities are not verified BER infrastructure. Models begin each daily run with free stands and resources, without calibrated overnight occupancy or a warm-up history. These choices restrict interpretation of queues and resource experiments.
+
+\section{OCEL export and Promenade procedure}
+Exports use Studio's object decomposition and relationship logic, then normalize primitive CPN types to OCEL types. Integrity checks cover identifier uniqueness, case coverage, typed values and non-dangling event--object/object--object links. These custom checks are not an official OCEL JSON-schema validation or empirical process conformance test.
+
+Three completed pilot logs were imported into Promenade: 1 November literature timings (10,288 events, 1,247 objects), 8 November literature timings (9,046 events, 1,123 objects), and the 1 November original-timing comparator (10,298 events, 1,255 objects). Views include Overview, Cases and variants, Turnaround-restricted Performance Spectrum and Object Dynamics/Activity Timing. In-block/off-block statistics use next-after one-to-one pairs within the same Turnaround object and were checked independently against exported events.
+
+These three logs precede the controlled experiment below. The 60 later replications were analyzed headlessly; they have not all been imported into Promenade. The all-core model containing 10,940 cases was load-tested but not fully executed, so no full-period simulation log is claimed.
+
+\section{Controlled experiment}
+Six scenarios are run on each date, with five independent replications per cell: 60 runs across 12 date/scenario cells. Four scenarios cross literature/original timing with inherited/disabled curfew. Two further scenarios use literature timings and disabled curfew, reducing cleaning teams from nine to six or increasing fuel units from four hydrants plus four tankers to six plus six. Demand and remaining assumptions are held fixed within each date.
+
+The earlier exploratory analysis informed this design. We fixed the scenario settings before executing the new runs, but the study was not independently preregistered. The installed WebAssembly API does not expose seed control; replications use fresh runtime randomness and comparisons are unpaired. All 15,270 turnaround executions reuse 509 empirical cases across scenarios and replications. They are not 15,270 independent observed flights.
+
+For each metric $m$, we first calculate a mean within each simulation run, denoted by $\bar m_r$. We then use the five run means to calculate the scenario mean and its Student-$t$ 95\% confidence interval. Thus, the statistical unit is a simulation replication rather than an individual flight. Differences use independent-run Welch 95\% intervals. No multiplicity correction is applied; comparisons are exploratory. These intervals quantify simulation sampling variation conditional on fixed inputs, not uncertainty in load factors, capacities, transferred distributions or model structure.
+
+\section{Metrics and verification}
+Simulated block turnaround is pushback start/off-block minus in-block. Fuel waiting is handling start to fuel dispatch, excluding subsequent travel; cleaning waiting is deplaning completion to cleaning start; tug waiting is aircraft-ready to tug allocation. These definitions are retained when comparing scenarios.
+
+For each turnaround, we record when the output of each of the six handling branches becomes available at the join. These times include delays on the arcs after transitions. The branch arriving last determines when this part of the process can synchronize in that run. A high last-ready frequency is descriptive evidence, however; it does not alone show how much the overall turnaround would improve if that branch changed. We therefore also test changes in resource counts.
+
+Technical verification requires all expected cases to depart, the timed-demand queue to be empty, aircraft to return to their availability pool, relevant resources to return and metrics to be finite/nonnegative. All 60 runs pass these checks, including model-hash and unique-case coverage audits. Technical completion does not establish predictive accuracy.
+
+
+\section{Summary}
+The method combines observed demand with a model whose missing service inputs are stated explicitly. The daily cohorts allow timing and resource assumptions to be compared under the same arrival demand. Completion and resource-return checks verify the executed runs, while empirical accuracy remains a separate question. The next chapter presents the generated outputs and the scenario comparisons.

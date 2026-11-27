@@ -1,0 +1,11 @@
+date,scenario,ground_bias,ground_mae,ground_median_err,takeoff_bias,takeoff_mae
+2026-11-01,lit_berlocal_free,-3.2,27.47,1.27,-3.46,27.54
+2026-11-01,lit_berlocal_std,25.26,35.23,16.77,25.15,35.21
+2026-11-01,lit_berlocal_std_clean6,28.54,38.48,18.39,28.45,38.48
+2026-11-01,lit_berlocal_std_fuel6plus6,24.83,34.42,16.72,24.73,34.39
+2026-11-01,orig_berlocal_std,71.9,78.64,34.03,71.98,78.81
+2026-11-08,lit_berlocal_free,-1.43,19.55,1.12,-1.57,19.61
+2026-11-08,lit_berlocal_std,25.25,29.55,13.73,24.79,29.17
+2026-11-08,lit_berlocal_std_clean6,29.24,33.39,13.48,29.2,33.38
+2026-11-08,lit_berlocal_std_fuel6plus6,27.72,31.64,13.56,27.47,31.42
+2026-11-08,orig_berlocal_std,57.29,60.13,24.68,57.25,60.13

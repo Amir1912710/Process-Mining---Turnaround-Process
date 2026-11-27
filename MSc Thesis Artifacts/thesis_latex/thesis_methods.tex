@@ -1,0 +1,201 @@
+\chapter{From Sparse Milestones to a Calibrated Object-Centric Simulation}
+\label{ch:methods}
+
+This chapter introduces the proposed approach for a data-driven object-centric turnaround simulation. The core challenge is that the available observations describe the boundaries of the turnaround (the arrival of the aircraft and the departure milestones), but not the ground services between them. We therefore do not try to reconstruct every service from these boundaries. Instead, we derive turnaround properties that the boundaries \emph{do} reveal, use them to calibrate a detailed simulation model with carrier-specific service times, and analyze the generated object-centric event logs with process mining. The approach is a five-step pipeline, shown in Figure~\ref{fig:pipeline}:
+
+\begin{enumerate}
+\item \textbf{Data acquisition, linkage and enrichment (Section~\ref{sec:method-data}):} We collect departure milestones from the BER A-CDM application and surveillance observations from the OpenSky Network, link each departure to the inbound flight of the same aircraft, and enrich every turnaround with airline, carrier class, aircraft type and observed weather.
+\item \textbf{Empirical turnaround properties and early warning (Section~\ref{sec:method-targets}):} From the linked observations we derive properties that characterize how BER turnarounds absorb or transfer delay, estimate the drivers of delay, and build classifiers that flag a late departure when the inbound aircraft lands.
+\item \textbf{Object-centric simulation (Section~\ref{sec:method-model}):} We adapt the extended airport OCPN to BER: observed arrivals, carrier-specific service times, observed weather, the BER night regulation and schedule-bound departures.
+\item \textbf{Calibration and experiments (Section~\ref{sec:method-calibration}):} Two carrier-specific multipliers are calibrated against observed A-CDM targets on two days and validated on a third; the calibrated model is then run on all 41 days for timing and resource scenarios.
+\item \textbf{OCEL~2.0 export and process mining (Section~\ref{sec:method-ocel}):} Simulated days are exported as object-centric event logs, analyzed with PM4Py (discovery and conformance) and explored in Promenade.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  inp/.style={draw, rectangle, minimum width=20mm, minimum height=8mm, align=center},
+  db/.style={draw, cylinder, shape border rotate=90, aspect=0.15, minimum width=18mm, minimum height=10mm, align=center},
+  dev/.style={draw, rectangle, fill=blue!12, minimum width=22mm, minimum height=9mm, align=center},
+  art/.style={draw, rectangle, fill=blue!5, minimum width=20mm, minimum height=9mm, align=center},
+  tgt/.style={draw, dashed, rectangle, minimum width=20mm, minimum height=8mm, align=center},
+  arr/.style={-{Latex[length=2mm]}}]
+\node[db] (acdm) at (0,2.1) {BER\\A-CDM};
+\node[db] (osky) at (0,0.7) {OpenSky};
+\node[db] (wx) at (0,-0.7) {Weather};
+\node[db] (man) at (0,-2.1) {Feb--Apr\\turnarounds};
+\node[dev] (link) at (3.3,1.2) {Linkage \&\\enrichment};
+\node[dev] (props) at (3.3,-1.0) {Properties \&\\early warning};
+\node[inp] (base) at (6.9,2.6) {Extended\\airport OCPN};
+\node[dev] (sim) at (6.9,1.2) {BER OCPN\\simulation};
+\node[dev] (exp) at (6.9,-1.0) {Calibration \&\\experiments};
+\node[art] (ocel) at (10.3,1.2) {OCEL 2.0};
+\node[tgt] (pm) at (10.3,2.6) {PM4Py \&\\Promenade};
+\node[art] (kpi) at (10.3,-1.0) {What-if\\KPIs};
+\draw[arr] (acdm) -- (link);
+\draw[arr] (osky) -- (link);
+\draw[arr] (wx) -- (link);
+\draw[arr] (link) -- (props);
+\draw[arr] (man) -- (props);
+\draw[arr] (link) -- node[above]{demand} (sim);
+\draw[arr] (base) -- (sim);
+\draw[arr] (sim) -- (ocel);
+\draw[arr] (ocel) -- (pm);
+\draw[arr] (sim) -- (exp);
+\draw[arr] (props) -- node[below]{targets} (exp);
+\draw[arr] (exp) -- (kpi);
+\end{tikzpicture}
+\caption{Data and execution flow of the proposed pipeline. Feb--Apr turnarounds: the manually recorded turnarounds of February to April 2026 (Section~\ref{sec:method-febapr}). Observations are linked, enriched and summarized into empirical properties; observed arrivals drive the simulation; the properties calibrate and evaluate its output, which is exported as OCEL~2.0 for process mining and used for what-if analysis.}
+\label{fig:pipeline}
+\end{figure}
+
+\paragraph{Running example.}
+To make the steps concrete, we follow one turnaround throughout this chapter. On 1 November 2026, a Eurowings Airbus A320neo (registration D-AENB) arrived at BER from London Heathrow and departed as flight EWG43J to Zurich. It was parked at stand B04. Its inbound flight was last observed by OpenSky at 16:42:37~UTC. The following sections show how this aircraft is linked across sources, which properties it contributes to and how it is represented in the simulation and in the event log.
+
+\section{Data Acquisition, Linkage and Enrichment}
+\label{sec:method-data}
+
+\subsection{BER A-CDM Departure Milestones}
+The BER A-CDM application is a live departure board: it shows the current state of each departing flight, and its target times change whenever the airline or the ground handler updates them. We do not record these updates. Instead, a collector retrieves the board once per day, shortly after midnight, for the calendar day that has just ended. At that point every flight of the day has departed, and the board contains the final value of each milestone. The collector stores the raw responses and writes a table filtered to the requested date (Chapter~\ref{ch:implementation}). The collection used in this thesis covers five operational days (1, 5, 8, 15 and 16~November~2026) with 1,322 departure records. Each record contains the callsign, flight number, aircraft registration and type, airline, destination, stand and gate, runway, and the milestones STD, EOBT, TOBT, TSAT and ATOT (Section~\ref{sec:prelim-acdm}). The board does not contain arrival, in-block or off-block milestones, nor any ground-service timestamps.
+
+Records are retained in a master table even when they are canceled or incomplete. A record is \emph{eligible} for departure analysis when it has a valid identifier, date and an actual takeoff, which holds for 1,286 records. A complete TOBT/TSAT/ATOT triple exists for 1,283 of them. The application publishes timestamps without a timezone. We test two interpretations, UTC and Europe/Berlin, in the cross-check below and adopt the one that the independent data support.
+
+For the running example, the A-CDM record of EWG43J gives $\mathrm{STD}=17{:}10$, $\mathrm{TOBT}=\mathrm{TSAT}=17{:}40$ and $\mathrm{ATOT}=17{:}49{:}36$, with stand B04 and runway 06L.
+
+\subsection{OpenSky Surveillance Observations}
+The OpenSky Network provides, for each flight observed by its receivers, the aircraft's ICAO24 transponder address, the callsign, the first and last observation time and the estimated departure and arrival airports~\cite{opensky_rest}. For an arrival at BER, the last observation $t^{\mathrm{last}}_a$ occurs shortly before touchdown or during the landing roll, depending on receiver coverage. We therefore use it as a \emph{landing proxy}. For a departure, the first observation $t^{\mathrm{first}}_d$ occurs shortly after takeoff. The prepared movement table contains 11,316 BER arrivals and 11,319 departures between 30~September and 9~November~2026.
+
+\subsection{Aircraft Pairing and A-CDM Linkage}
+Since the ICAO24 address identifies a physical aircraft, consecutive movements of the same address form candidate turnarounds.
+
+\begin{definition}[Candidate turnaround]
+Let $M_x$ be the time-ordered BER movements of aircraft $x$. Every arrival $a\in M_x$ that is directly followed by a departure $d\in M_x$ forms a candidate turnaround $(a,d)$ with ground interval proxy $G_{(a,d)}=t^{\mathrm{first}}_d-t^{\mathrm{last}}_a$.
+\end{definition}
+
+Candidates are screened for plausibility (for example, implausible airport assignments or competing airport candidates), which yields 10,940 core candidate turnarounds over 41 arrival days. Of these, 8,951 have a ground interval between 15~minutes and six hours, and 1,989 between six and 24~hours. The long intervals usually include overnight parking or timetable gaps rather than continuous handling.
+
+An A-CDM departure is linked to an OpenSky departure if the normalized callsigns agree and the OpenSky first observation lies within 30~minutes of the interpreted ATOT. A link is retained only if it is unique in both directions. Through the OpenSky departure, the A-CDM record inherits the inbound flight of the same aircraft. This produces the linked dataset used for the empirical properties: 610 turnarounds with a complete A-CDM triple, a ground interval below six hours and an inbound landing proxy, on the three days covered by both sources (1, 5 and 8~November).
+
+In the running example, the OpenSky departure of ICAO24 \texttt{3c55c2} was first observed 2~seconds before the A-CDM ATOT. The same aircraft's previous flight, from London Heathrow, was last observed at 16:42:37. The candidate turnaround therefore has a ground interval proxy of $66.95$~minutes and a scheduled buffer of $B=17{:}10-16{:}42{:}37=27.4$~minutes.
+
+\subsection{Enrichment: Airline, Carrier Class, Aircraft Type and Weather}
+Every candidate turnaround is enriched with four attributes.
+\begin{itemize}
+\item \textbf{Airline.} The ICAO designator is taken from the outbound callsign (available for 99\% of turnarounds).
+\item \textbf{Carrier class.} Airlines are classified as \emph{low-cost}, \emph{full-service} or \emph{leisure} (charter and holiday carriers). Where an airline appears in the February--April collection (Section~\ref{sec:method-febapr}), the class recorded there is used; the remaining airlines are classified by business model (Appendix~\ref{app:details}). Military flights, business aviation and cargo operators are excluded from the scope.
+\item \textbf{Aircraft type.} The type is taken from the linked A-CDM record or, otherwise, from the OpenSky aircraft database (77\% coverage); unknown types fall back to an A320 configuration.
+\item \textbf{Weather.} Hourly observed weather at BER (temperature, precipitation, snowfall, wind speed and gusts, cloud cover) is retrieved from the Open-Meteo historical archive~\cite{openmeteo}, which is based on the ERA5 reanalysis~\cite{hersbach2020era5}, and joined to each turnaround by the hour of arrival.
+\end{itemize}
+After exclusion, 10,212 turnarounds are in scope: 4,963 low-cost, 3,993 full-service, 928 leisure and 328 other commercial turnarounds.
+
+\subsection{Second Dataset: February to April 2026}
+\label{sec:method-febapr}
+Before the A-CDM collector was available, turnarounds were recorded manually from the BER A-CDM application on twenty days: 21~February to 4~March and 17 to 24~April~2026. Each of the 2,070 records pairs an inbound and an outbound flight number of the same airline at the same gate. It contains the scheduled and actual landing time of the inbound flight, the scheduled and actual departure time of the outbound flight, the gate and an airline class (full-service or low-cost). Three records with an actual ground time below 15~minutes or a delay above 300~minutes are excluded as transcription errors, which leaves 2,067. In contrast to the linked November data, the inbound and outbound flights are paired by flight number rather than by aircraft identity.
+
+\section{Empirical Turnaround Properties and Early Warning}
+\label{sec:method-targets}
+
+The observations do not show when cleaning or fueling took place. They do show how the turnaround as a whole reacts to time pressure. We derive four properties that the simulation should reproduce if its services, resources and dependencies are represented adequately.
+
+\paragraph{P1: Buffer-dependent delay transfer (RQ1, RQ2).}
+For each linked turnaround we relate the target shift $\Delta^{\mathrm{TOBT}}$ to the scheduled buffer $B$ (Definition~\ref{def:taobs}). The share of turnarounds with $\Delta^{\mathrm{TOBT}}>5$~minutes, as a function of $B$, is the empirical delay-transfer curve.
+
+\paragraph{P2: Target turnaround time (RQ1).}
+The target turnaround time $\mathrm{TTA}=\mathrm{TOBT}-t^{\mathrm{last}}_a$ measures how long the operator expects to need from landing until the aircraft is ready, including taxi-in. Its quantiles by carrier class are the main calibration target: the simulated time from arrival to \emph{Aircraft Ready} should have the same distribution. Under time pressure ($B<45$~minutes), its lower percentiles estimate the minimum feasible turnaround.
+
+\paragraph{P3: Runway-bank contention (RQ2).}
+For every departure we count the other departures whose TSAT lies within $\pm15$~minutes and relate this load to $\mathrm{ATOT}-\mathrm{TSAT}$.
+
+\paragraph{P4: Delay carry-over along rotations (RQ2).}
+When the same aircraft departs BER twice on one day, we relate the departure delay $\mathrm{ATOT}-\mathrm{STD}$ of the first departure to that of the second.
+
+\paragraph{Delay drivers.}
+On the February--April data, the outbound delay is related to the inbound delay, the carrier class, the time of day and the weather at landing (precipitation $\ge0.1$~mm/h, gusts $\ge40$~km/h, temperature $\le1\,^{\circ}$C), both as a linear model of the delay in minutes and as a logistic model of a delay above 15~minutes. Turnarounds of the same day are not independent observations: weather and traffic change during a day, but turnarounds close in time experience similar conditions, and a disruption affects many turnarounds of the same day. Confidence intervals are therefore obtained by resampling whole days rather than individual turnarounds, which keeps any dependence within a day intact.
+
+\paragraph{Held-out delay-transfer model.}
+To test P1 on independent data, we fit a reactionary-delay model on the February--March records and evaluate it on the April records. For a turnaround $i$ with inbound delay $\delta^{\mathrm{in}}_i$, scheduled ground time $S_i$ and an unknown minimum turnaround time $\mathrm{MTT}$, only the part of the inbound delay that exceeds the slack $S_i-\mathrm{MTT}$ should be transferred:
+\begin{equation}
+\delta^{\mathrm{out}}_i=\beta_0+\beta_1\max\bigl(0,\;\delta^{\mathrm{in}}_i-(S_i-\mathrm{MTT})\bigr)+\varepsilon_i.
+\label{eq:transfer}
+\end{equation}
+MTT is estimated per airline class by a grid search, and the model is compared on the test period with full transfer and with a constant prediction.
+
+\paragraph{Early warning.}
+To detect delays early, we train classifiers that use only information available when the inbound aircraft lands: the scheduled buffer, carrier class, aircraft size, hour, the number of arrivals within $\pm60$~minutes and the weather. On the linked November data, the target is a late TOBT ($\Delta^{\mathrm{TOBT}}>5$~minutes) and the evaluation is leave-one-day-out; on the February--April data, the target is an outbound delay above 15~minutes, trained on February--March and tested on April. We compare logistic regression with gradient-boosted trees~\cite{pedregosa2011sklearn} and report the AUC and the precision when as many turnarounds are flagged as are actually late.
+
+\paragraph{Disruption screening.}
+To detect operational disruptions such as strikes, holiday peaks or weather events, daily indicators of the 10,940 OpenSky turnarounds (number of turnarounds, median ground time of short stays) are compared with a baseline for the same weekday and flight-schedule season. Days whose robust $z$-score exceeds 3 are flagged and checked against observed weather and public information.
+
+For the running example, $B=27.4$~minutes and $\Delta^{\mathrm{TOBT}}=+30$~minutes, so the turnaround falls into the lowest buffer class of P1. Its target turnaround time is $17{:}40-16{:}42{:}37=57.4$~minutes.
+
+\section{Object-Centric Simulation Model}
+\label{sec:method-model}
+
+\subsection{Baseline Model}
+The simulation is based on the \emph{Airport Ground Handling (Extended)} model, which is published as an example model of OCPN Studio~\cite{ocpn_studio}. It represents a medium-sized European airport in six hierarchical nets: \emph{Airport}, \emph{Flight Schedule}, \emph{Approach, Landing \& Taxi In}, \emph{Turnaround: Cabin \& PRM}, \emph{Turnaround: Ramp, Fuel \& Services} and \emph{Departure, Pushback \& Take Off}. In total it contains 97 places, 66 transitions, 223 arcs and 37 color sets. Aircraft, stands, runways, taxi segments and ground resources are tokens of their own types. Six handling branches (cabin, catering, hold, fuel, cabin service and departure planning) split after in-block and synchronize at a join before pushback. The model already distinguishes low-cost and full-service carriers in its cleaning time and passenger load factor. We use its process structure, resource logic and functions unchanged unless stated below.
+
+\subsection{Adaptation to BER Demand}
+The baseline generates synthetic flights continuously. We replace this generator with a finite list of timed arrivals taken from the in-scope candidate turnarounds of one operational day (on average 249 per day). Each arrival is released into the model at its observed landing proxy and carries its airline, carrier class and aircraft type. The passenger count follows the baseline's load-factor profile for the carrier class, month, weekday and hour.
+
+Aircraft are persistent objects. The arrival and the departure of a turnaround require the same aircraft token, which becomes available again only after the simulated takeoff. If the next turnaround of that aircraft is released while the aircraft is still in the model, it waits; delay can therefore propagate along an aircraft's rotations inside the simulation.
+
+\subsection{Carrier-Specific Service Times}
+For narrow-body aircraft, the service times of deboarding, cleaning, catering, fueling and boarding are replaced with carrier-specific distributions from the literature (Table~\ref{tab:servicetimes}). Full-service distributions are taken from Schultz et al.~\cite{schultz2012dynamic} and Asadi~\cite{asadi2024robust}; low-cost distributions were measured at Amsterdam Schiphol by Luo et al.~\cite{luo2024digitaltwin}. Both sets are used as parameterized in Tkacenko's implementation~\cite{tkacenko2026}. For low-cost cleaning, the fixed five-minute part of the full clean is omitted, following the baseline model's distinction between a crew tidy and a full cabin clean. Leisure carriers use the full-service profile (Section~\ref{sec:eval-rq1}). Two multipliers $s_{\mathrm{LCC}}$ and $s_{\mathrm{FSC}}$ scale all five service times of the respective class; they are calibrated in Section~\ref{sec:method-calibration}.
+
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lp{3.6cm}p{3.6cm}}\hline
+Service (min) & Full-service & Low-cost\\\hline
+Deboarding & $\Gamma(k{=}2.71,\theta{=}1.46)$; mean 4.0 & $\Gamma(49.83,0.21)-5.29$; mean 5.2\\
+Cleaning & $5+\mathrm{Weib}(k{=}2.16,\lambda{=}6.76)$; mean 11.0 & $\mathrm{Weib}(2.16,6.76)$; mean 6.0\\
+Catering & $\mathrm{Weib}(k{=}2.18,\lambda{=}17.37)$; mean 15.4 & $\mathcal{N}(7.0,2.8^2)$; mean 7.0\\
+Fueling & $2+\Gamma(k{=}1.64,\theta{=}9.12)$; mean 17.0 & $\Gamma(21.32,1.1)-11.75$; mean 11.7\\
+Boarding & $\Gamma(k{=}11.0,\theta{=}1.45)$; mean 16.0 & $\Gamma(30.7,0.63)-10.61$; mean 8.7\\\hline
+\end{tabular}
+\caption{Carrier-specific narrow-body service times before calibration ($k$ shape, $\theta$/$\lambda$ scale). Sources:~\cite{schultz2012dynamic,asadi2024robust} (full-service),~\cite{luo2024digitaltwin} (low-cost), as parameterized in~\cite{tkacenko2026}. Lower bounds of 1--3 minutes prevent non-positive samples.}
+\label{tab:servicetimes}
+\end{table}
+
+We compare three timing configurations on the same demand: \emph{original} (the baseline's functions), \emph{literature} (carrier-agnostic narrow-body functions from Schultz et al.~\cite{schultz2012dynamic,schultz2018boarding}) and \emph{carrier} (Table~\ref{tab:servicetimes}).
+
+\subsection{Observed Weather}
+The baseline generates temperature and precipitation synthetically and triggers de-icing when precipitation meets freezing temperatures. We replace both generators with the observed hourly BER weather of the simulated day, so that de-icing and every weather-dependent rule follow real conditions.
+
+\subsection{Operational Policy and Schedule Binding}
+The baseline's night curfew helper evaluates the hour in UTC and also delays cabin preparation. We replace it with the BER core night restriction from 00:00 to 05:00 \emph{local} time~\cite{ber_night}, applied only at the movement boundary (pushback clearance). In addition, an aircraft that is ready before its scheduled departure waits on stand until its STD before requesting start-up; this applies to turnarounds whose departure is linked to an A-CDM record. Observed actual departure times are never used inside the model.
+
+\paragraph{Running example in the model.}
+In the calibrated model, the A320neo of EWG43J is released at its landing proxy and reaches in-block after 6.7~minutes on a remote stand. Deplaning by bus, catering, water service, baggage unloading and the fuel tanker start together 1~minute later. Cleaning starts when deplaning ends (24.3~minutes after landing) and boarding by bus when cleaning ends (35.9~minutes); fueling ends at 37.3~minutes and boarding at 59.8~minutes. Boarding is the last service; the aircraft is ready after 62.1~minutes and takes off after 78.6~minutes. Compared with the observation, the simulated ready time is 4.7~minutes later than the target turnaround time of 57.4~minutes. The same aircraft object also appears in two other simulated turnarounds that day, at 11:01 and 21:10~UTC, which shows how the aircraft carries its state from rotation to rotation.
+
+\section{Calibration and Experiment Design}
+\label{sec:method-calibration}
+
+\paragraph{Calibration.}
+For every linked turnaround of a calibration day, the simulated time from arrival release to \emph{Aircraft Ready} is compared with the observed target turnaround time (P2). The loss is the mean absolute difference between the 25th, 50th and 75th percentiles of the simulated and observed distributions, averaged over the two carrier profiles:
+\begin{equation}
+\mathcal{L}(s_{\mathrm{LCC}},s_{\mathrm{FSC}})=\frac{1}{2}\sum_{c\in\{\mathrm{LCC},\mathrm{FSC}\}}\frac{1}{3}\sum_{q\in\{25,50,75\}}\bigl|Q_q(\mathrm{ready}^{\mathrm{sim}}_c)-Q_q(\mathrm{TTA}^{\mathrm{obs}}_c)\bigr|.
+\label{eq:loss}
+\end{equation}
+The multipliers are chosen by grid search over $\{0.7,0.8,\ldots,1.3\}^2$ on 1 and 5~November, extended to $s_{\mathrm{LCC}}\in\{1.4,1.5,1.6\}$ because the first optimum lay on the edge of the grid, and validated on three held-out days: 8~November and the two most recent collection days, 15 and 16~November, whose turnarounds are reconstructed from the raw OpenSky lists with the same pairing and linkage rules.
+
+\paragraph{Timing comparison.}
+The three timing configurations are each run once on every one of the 41 days (10,212 turnarounds per configuration) and compared with the observed properties.
+
+\paragraph{What-if experiments (RQ3).}
+The calibrated model is run on all 41 days for a reference and five scenarios that change one lever each: (i) six instead of four hydrant dispensers and fuel tankers, (ii) twelve instead of eight apron buses, (iii) 24 instead of 19 baggage loaders, (iv) 15\% faster boarding as a process change, for example through an improved boarding procedure~\cite{schultz2018boarding}, and (v) an allocation strategy that assigns low-cost turnarounds to remote stands and all others to contact stands. Effects are paired daily differences (Section~\ref{sec:prelim-stats}).
+
+\paragraph{Monte Carlo comparison.}
+Because each scenario is run only once per day, we need to know how much a single run can vary by chance. To quantify this run-to-run variability, an earlier configuration of the model is replicated ten times per scenario on 1 and 8~November (Monte Carlo replication). These replications are used only for this purpose; they are evaluated in Section~\ref{sec:eval-integrity} and listed in Appendix~\ref{app:details}.
+
+\section{OCEL 2.0 Export and Process Mining}
+\label{sec:method-ocel}
+
+Each simulated day can be exported as an OCEL~2.0 log (Definition~\ref{def:ocel}). Every transition firing becomes an event of the transition's type with the firing time as timestamp. The objects carried by the consumed and produced tokens become related objects, with a qualifier that describes their role in the event (for example \texttt{aircraft}, \texttt{stand} or \texttt{fueller}). The logs contain 19 object types: \texttt{Aircraft}, \texttt{Flight}, \texttt{Turnaround}, \texttt{Stand}, \texttt{Runway} and \texttt{TaxiSegment} for the airside entities, \texttt{ULD} and \texttt{PRMPax} for loads and passengers with reduced mobility, and eleven resource types: \texttt{Fueller}, \texttt{Bus}, \texttt{Ambulift}, \texttt{PRMAgent}, \texttt{CateringTruck}, \texttt{CleaningTeam}, \texttt{Loader}, \texttt{RampTeam}, \texttt{ServiceTruck}, \texttt{PushbackTug} and \texttt{DeicingTruck}. O2O relations connect a turnaround with its inbound and outbound flights and with the stand at which it is \texttt{parked at}.
+
+The generated logs are analyzed with object-centric process mining (Section~\ref{sec:prelim-pm}). Discovery shows the lifecycles of turnarounds and shared resources, flattening on the turnaround object gives the service durations by carrier class, and conformance checking measures how differently low-cost and full-service turnarounds behave. Performance and waiting-time views show where the generated process loses time. The tools and their settings are described in Chapter~\ref{ch:implementation} and Section~\ref{sec:eval-promenade}.
+
+For the running example, the event \emph{Dispatch Fuel Tanker} of its turnaround relates the turnaround, the aircraft \texttt{ICAO24-3c55c2}, both flights, the remote stand \texttt{R26} and the tanker \texttt{TNK-3}. The model assigned a remote stand with bus boarding, whereas the real aircraft used contact stand B04. BER's stand layout is not part of the published data, so the model keeps the illustrative stand geometry of the baseline.
+
+\section{Summary}
+
+This chapter presented the five-step pipeline of the approach. Observed departures from A-CDM and surveillance observations from OpenSky are linked into candidate turnarounds and enriched with carrier class, aircraft type and weather. From them we derive empirical properties, delay drivers and early-warning classifiers. The extended airport OCPN is adapted to BER with carrier-specific service times, observed weather, the local night regulation and schedule binding, calibrated against observed targets, run on all 41 days, and its logs are analyzed with object-centric process mining. The next chapter describes how this pipeline is implemented.

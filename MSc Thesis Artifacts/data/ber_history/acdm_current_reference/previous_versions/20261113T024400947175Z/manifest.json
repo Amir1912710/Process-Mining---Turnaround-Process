@@ -1,0 +1,38 @@
+{
+  "purpose": "current reference snapshot; not complete daily archive",
+  "pages": [
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_001.json",
+      "sha256": "a72e648b6d897fc1d1e01d12ee41e57aa2b6bc5befbe51446b514fe2efea128d",
+      "fetched_at_utc": "2026-11-12T21:09:06.467934+00:00"
+    },
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_002.json",
+      "sha256": "db2d9d18630def27f90ce6b16951b39690c2e04cd686312d5a4b09d32ea0ed27",
+      "fetched_at_utc": "2026-11-12T21:09:06.874048+00:00"
+    },
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_003.json",
+      "sha256": "9a56c268d8640e051ba0b7407818f9d9c086761e71a808d7898d08a021faae6d",
+      "fetched_at_utc": "2026-11-12T21:09:07.317454+00:00"
+    },
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_004.json",
+      "sha256": "43f16ada4878bbadb0a7fb5db0eecedb0f58977e5cfe1d381c62fef25c377c74",
+      "fetched_at_utc": "2026-11-12T21:09:07.676370+00:00"
+    },
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_005.json",
+      "sha256": "13e480109edd324af633464ef3385bf6bcc86b3b96daff3ab9e86de4c9d3fdc5",
+      "fetched_at_utc": "2026-11-12T21:09:08.045001+00:00"
+    },
+    {
+      "path": "data\\ber_history\\acdm_current_reference\\page_006.json",
+      "sha256": "bab88d515f76a37ad5a5883cd682b7693b435d3a871a25c07538f36088b84612",
+      "fetched_at_utc": "2026-11-12T21:09:08.370128+00:00"
+    }
+  ],
+  "rows": 580,
+  "rows_with_atot": 247,
+  "finished_utc": "2026-11-12T21:09:08.370393+00:00"
+}

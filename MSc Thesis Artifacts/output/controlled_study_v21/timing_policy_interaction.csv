@@ -1,0 +1,3 @@
+date,interaction_minutes,ci95_low,ci95_high,definition,interpretation
+2026-11-01,-17.464280442804437,-19.957860288558873,-14.97070059705,(literature-original under inherited policy) minus (literature-original with curfew disabled),Additional exploratory contrast; conditional interaction in model output
+2026-11-08,-6.477492997198851,-9.875025273741073,-3.0799607206566293,(literature-original under inherited policy) minus (literature-original with curfew disabled),Additional exploratory contrast; conditional interaction in model output

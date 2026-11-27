@@ -1,0 +1,73 @@
+\chapter{Implementing the Simulation Pipeline}
+\label{ch:implementation}
+
+This chapter describes how the pipeline of Chapter~\ref{ch:methods} is implemented, and how the data collection, the model builds and the experiments are made reproducible.
+
+\section{Software Architecture}
+
+The implementation combines a visual modeling environment with Python scripts for data processing and a headless simulation runner. Figure~\ref{fig:architecture} shows the components in the order in which the data pass through them, from collection on the left to analysis on the right.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\footnotesize,
+  box/.style={draw, rectangle, rounded corners=2pt, text width=26mm, minimum height=9mm, align=center},
+  lbl/.style={font=\scriptsize},
+  hdr/.style={font=\footnotesize\itshape, text=black!60},
+  arr/.style={-{Latex[length=2mm]}}]
+% column headers
+\node[hdr] at (0,2.3) {Collection};
+\node[hdr] at (3.9,2.3) {Preparation};
+\node[hdr] at (7.8,2.3) {Simulation};
+\node[hdr] at (11.7,2.3) {Analysis};
+% collection
+\node[box] (col) at (0,1.0) {A-CDM collector\\(Python)};
+\node[box] (os) at (0,-0.7) {OpenSky retrieval\\(Python)};
+\node[box] (wx) at (0,-2.4) {Weather retrieval\\(Open-Meteo)};
+% preparation
+\node[box] (prep) at (3.9,-0.7) {Linkage, enrichment \& properties\\(pandas)};
+% simulation
+\node[box] (studio) at (7.8,1.0) {Baseline model\\(OCPN Studio)};
+\node[box] (build) at (7.8,-0.7) {Model builder\\(Python)};
+\node[box] (run) at (7.8,-2.4) {Runner \&\\OCEL export\\(Node.js, CPNsim)};
+% analysis
+\node[box] (pm) at (11.7,-2.4) {Process mining\\(PM4Py,\\Promenade)};
+\node[box] (exp) at (11.7,-4.1) {Experiment summary\\(NumPy, SciPy)};
+% arrows
+\draw[arr] (col.east) -- ++(0.45,0) |- (prep.west);
+\draw[arr] (os) -- (prep);
+\draw[arr] (wx.east) -- ++(0.45,0) |- (prep.west);
+\draw[arr] (prep) -- node[lbl,above]{arrivals} (build);
+\draw[arr] (studio) -- (build);
+\draw[arr] (build) -- (run);
+\draw[arr] (run) -- node[lbl,above]{OCEL} (pm);
+\draw[arr] (run.south) |- (exp.west);
+\draw[arr] (prep.south) -- node[lbl,right]{targets} (prep.south |- exp.west) -- (exp.west);
+\end{tikzpicture}
+\caption{Implementation components and data flow, from data collection (left) to analysis (right).}
+\label{fig:architecture}
+\end{figure}
+
+\paragraph{Data collection.}
+The A-CDM collector is a Python script that uses only the standard library. A scheduled task starts it every day at 00:15 Berlin time. It requests the departure board of the previous calendar day page by page from the web interface of the BER A-CDM application, with the filter set so that departed flights are included. It checks that every record has an identifier and a scheduled time, removes records that appear twice across pages, and keeps only records whose scheduled departure falls on the requested day. Each raw response is saved together with its SHA-256 hash, and the records are written to a CSV and a JSON table with a reference to the response they come from. An early version of the collector used the application's default filter, which hides departed flights, and returned only six records for 1~November; with the corrected filter the same day contains 289 records. OpenSky arrivals and departures of BER are retrieved through the OpenSky REST interface~\cite{opensky_rest}, and hourly weather through the Open-Meteo archive interface~\cite{openmeteo}.
+
+\paragraph{Linkage and empirical properties.}
+The linkage is implemented in Python with pandas. A first script builds one movement table from the OpenSky responses, sorts the movements of each ICAO24 address by time and pairs every arrival with the directly following departure (Section~\ref{sec:method-data}). A second script normalizes the callsigns of both sources and links each A-CDM departure to the OpenSky departure with the same callsign whose first observation lies within 30~minutes of the ATOT; links that are not unique in both directions are discarded. An enrichment script adds the airline (from the callsign), the carrier class (from a lookup table, Appendix~\ref{app:details}), the aircraft type (from A-CDM or the OpenSky aircraft database) and the hourly weather. Every derived table keeps the source file, row and record key of each value. The empirical properties, the held-out delay-transfer model and the early-warning classifiers are computed by separate scripts; the classifiers use scikit-learn~\cite{pedregosa2011sklearn}. Appendix~\ref{app:repro} lists all scripts.
+
+\paragraph{Model builder.}
+The model builder is a Python script that reads the unchanged baseline \texttt{.ocpn} file, inserts the arrival list of one day as the initial marking and applies the selected options: timing configuration and calibration multipliers, observed weather, night policy, schedule binding, resource counts, boarding speed and stand-allocation policy. All options are off by default, so that the baseline can be rebuilt exactly. For every model it writes, the builder also records which options were applied.
+
+\paragraph{Headless execution.}
+Models are executed with the CPNsim runtime~\cite{cpnsim} in its WebAssembly build (version 0.6.2) from Node.js, without the graphical interface. The runner executes the model until all released turnarounds have departed, then records the per-turnaround timestamps (release, in-block, handling start, service starts and ends, ready, off-block and takeoff) and exports the run as OCEL~2.0. One run of a daily model with about 250 turnarounds takes 45--60~seconds and produces approximately 9,000--10,000 events and 1,100--1,200 objects. Seven runs are executed in parallel, so that a scenario covering all 41 days completes in about five minutes.
+
+\paragraph{Analysis.}
+Paired daily contrasts and calibration losses are computed with NumPy, pandas and SciPy. The OCEL logs are analyzed with PM4Py~\cite{berti2023pm4py}. It discovers the OC-DFG and the OCPN and flattens the logs on the \texttt{Turnaround} type. For conformance checking, a Petri net is discovered with the inductive miner (noise threshold 0.2) separately for low-cost and full-service turnarounds, and each net is replayed with token-based replay on the turnarounds of both classes. The calibrated logs of 1, 5 and 8~November and an original-timing log of 8~November are imported into Promenade~\cite{promenade}, where we use the performance spectrum, the process friction topography and the event-log comparison.
+
+\section{Reproducibility}
+
+Each step writes a manifest with input hashes, parameters and output counts. The controlled experiment is defined in a plan file that is fixed before execution, and every run is validated automatically: all released turnarounds must depart, the arrival queue must be empty, all aircraft and resource tokens must have returned to their pools, and all metrics must be finite and nonnegative. The 1,322 A-CDM records, the linked turnarounds and the February--April records are archived together with the scripts that produce every table and figure in Chapter~\ref{ch:evaluation} (Appendix~\ref{app:repro}).
+
+One limitation concerns randomness. The installed CPNsim WebAssembly interface does not expose control of the random seed, so repeating a simulation run produces a new stochastic outcome. We therefore make scenarios comparable through the input instead: every scenario of a day uses the same arrivals and the same weather. How much the remaining randomness changes the results is measured with the Monte Carlo replications described in Section~\ref{sec:method-calibration}; they show a run-to-run variability of at most $\pm1.7$~minutes (Section~\ref{sec:eval-integrity}).
+
+\section{Summary}
+
+The pipeline is implemented as a set of Python and Node.js tools around an unchanged OCPN Studio baseline and the CPNsim runtime. Hashes, manifests and automatic run validation make every result traceable to its inputs. The next chapter uses this implementation to evaluate the approach.

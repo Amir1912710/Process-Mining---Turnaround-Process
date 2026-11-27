@@ -1,0 +1,55 @@
+\chapter{Discussion: Findings, Design Choices and Limits}
+\label{ch:discussion}
+
+This chapter answers the research questions, reflects on the main design choices, in particular in comparison with the reconstruction approach of Tkacenko~\cite{tkacenko2026}, and considers what the approach can and cannot be used for.
+
+\section{Answers to the Research Questions}
+
+\paragraph{RQ1: To what extent can linked A-CDM milestones calibrate the service times of an OCPN turnaround simulation?}
+A-CDM departure milestones do not contain service durations, but once they are linked to the arrival of the same aircraft they yield the planned target turnaround time of every turnaround. Its quantiles by carrier class are a calibration target for the simulated time from arrival to readiness. Using them, we (i) selected between timing models, where carrier-specific service times reduced the error for low-cost turnarounds from 13.5 (original) and 10.6 (literature) to 5.8~minutes, (ii) discovered that leisure carriers need the full-service profile, and (iii) calibrated two multipliers, which showed that the literature service times are about 30\% (low-cost) and 10\% (full-service) too short for BER and reduced the held-out error from 8.6 to 2.4~minutes on 8~November and from 6.1 to 3.9~minutes on 15--16~November, where it was, however, no better than the carrier-agnostic literature timing. The buffer-dependent delay-transfer curve (P1) further tests the temporal dependencies: the calibrated model reproduces transfer at short buffers but transfers too much at intermediate buffers, which identifies the missing compression of turnarounds under pressure. A-CDM data thus support calibration at the level of carrier classes and whole turnarounds; activity-level calibration would require service timestamps.
+
+\paragraph{RQ2: How do dependencies between aircraft, stands and shared resources contribute to waiting times and delay propagation at terminal and remote stands?}
+The observations show three propagation channels at BER: through the turnaround (inbound delay is passed on when the buffer is below about 45~minutes, and each inbound minute adds 0.43~outbound minutes on average), through the aircraft (delay carries over to its next departure, $\rho=0.27$) and through the airside (departure banks increase runway waiting). The simulation explains how the turnaround contributes. Readiness is determined by the cabin and boarding branch for most turnarounds; for low-cost turnarounds, whose cabin services are short, the baggage hold becomes critical in 13\% of the cases, and Promenade's friction analysis independently places the main point of friction at \emph{Hold Closed}. Remote stands add about 19~minutes to the time until readiness, because deplaning and boarding by bus make the cabin branch critical in 99\% of these turnarounds. Waiting for a shared resource matters only when it occurs on the last-ready branch: fuel dispatch has the longest queue, but removing it shortens the turnaround by little more than one minute.
+
+\paragraph{RQ3: How can the calibrated simulation be used to evaluate resource-allocation strategies?}
+Running each scenario on the 41 observed days and comparing it day by day with the reference gives precise effects without Monte Carlo replication. In the modeled airport, a process change that shortens boarding by 15\% is the most effective lever ($-2.2$~minutes to readiness), additional fuel capacity helps less ($-1.3$~minutes, more for low-cost turnarounds), and additional buses or loaders have no measurable effect. The allocation strategy that sends all low-cost flights to remote stands shortens full-service turnarounds by 9~minutes but overloads the remote apron, so that low-cost aircraft wait almost 90~minutes longer. Resource decisions should therefore target the branch that is critical for the respective carrier class, and stand allocation must respect remote-stand capacity. Because the infrastructure is inherited from a generic airport, the transferable results are the direction and ranking of the effects, not their absolute size.
+
+\paragraph{Early detection.}
+Beyond the research questions, the linked data allow a delay to be detected early. At landing, a late target off-block time is predicted with an AUC of about 0.8 on held-out days, mainly from the scheduled buffer; about an hour remains to react. The actual departure delay could not be predicted from the information available at landing in the February--April data, and the weather effects remained uncertain. The disruption screening flagged the start of the autumn holidays as a period of slower turnarounds.
+
+\section{Methodological Design Choices}
+
+\paragraph{Calibration targets instead of trace filtering.}
+Tkacenko generates many candidate traces and accepts only those whose off-block time falls within a window around the observed one~\cite{tkacenko2026}. We instead run the model freely on observed demand and compare its \emph{distributions} with empirical targets. This keeps every run, keeps the resource interactions between the turnarounds of a day consistent, and turns disagreement into information: the leisure-carrier mismatch and the missing compression under pressure would have been hidden by filtering.
+
+\paragraph{Trace-driven simulation instead of Monte Carlo.}
+Each scenario is executed once on each of the 41 observed days, and scenarios are compared day by day. The 41 days provide a large and realistic sample of demand and weather, and pairing removes the variation between days. Ten Monte Carlo replications of single days showed that the run-to-run variability is small ($\pm0.3$ to $\pm1.7$~minutes), so repeating the same day adds little information compared with simulating more days.
+
+\paragraph{Object-centric process mining on simulated logs.}
+Discovery and conformance checking on the generated OCEL logs add a perspective that the simulation statistics alone do not give. The OC-DFG shows the lifecycles of shared resources, and conformance checking quantifies how differently low-cost and full-service turnarounds behave. Two limitations are instructive: the inductive miner represents the highly concurrent handling phase as a flower-like structure with low precision, and almost every turnaround has its own variant. Object-centric discovery for strongly concurrent processes therefore benefits from domain knowledge, such as the known join structure of the OCPN model.
+
+\paragraph{Extending an existing model.}
+We extended the airport model published with OCPN Studio~\cite{ocpn_studio} rather than rebuilding the turnaround. This preserves a rich structure (six handling branches and eleven resource types) and keeps every change traceable to a builder option that reproduces the original model when disabled. The price is less control over the runtime, most notably the missing seed control.
+
+\section{Practical Applicability}
+
+\paragraph{A bridge to real object-centric event data.}
+The most important practical use of the approach is as a bridging technology. Airports and ground handlers that want to apply object-centric process mining to the turnaround today face a chicken-and-egg problem: they cannot justify recording service events before they know what the analysis would show, and they cannot show it without the events. The calibrated simulation breaks this circle. Its OCEL logs have the structure that real logs would have, with the same object types, relations and activities, and their timing is anchored to the operator's own milestones. Analysts can therefore build and test discovery, conformance and performance workflows now. Once ground handlers record service events, the same workflows can be applied to real data unchanged, and the simulation can be recalibrated at the level of individual activities.
+
+\paragraph{Monitoring and early warning.}
+The empirical properties and the early-warning classifier can be computed daily from the A-CDM board and OpenSky without access to ground-handling systems. A delay-transfer curve shows which scheduled buffers are too short, and the classifier flags at landing the turnarounds whose departure target is likely to slip.
+
+\paragraph{What-if analysis.}
+The calibrated simulation allows airport and ground-handling managers to compare process changes, capacities and allocation rules before implementing them. The object-centric logs explain each result, because every waiting time is related to the resource and to the turnaround branch involved.
+
+\section{Extensibility and Generalizability}
+
+The pipeline can be extended in three directions. First, service times can depend on the remaining buffer, so that the model compresses turnarounds under pressure; P1 provides the target. Second, BER's stand layout and resource fleets can replace the generic geometry, which would turn the relative what-if results into absolute ones. Third, a longer and continuous A-CDM collection would allow seasonal calibration and a more precise estimate of weather effects. The approach transfers to any airport that publishes A-CDM milestones and is covered by OpenSky, and more generally to processes whose boundaries are observable but whose internal activities are not.
+
+\section{Limitations}
+
+The threats to validity of the individual results were discussed in Section~\ref{sec:threats}. Taken together, they set three limits on what the approach can claim. First, it calibrates what operators \emph{plan}, not what actually happens: the calibration target is the target off-block time, because actual in-block and off-block times were not available, and it rests on two calibration days and three held-out days. Second, it calibrates at the level of carrier classes, not individual services. The carrier-specific distributions come from other airports and are only scaled for BER, and leisure carriers remain poorly reproduced. Third, its what-if results are relative. The stand layout and resource fleets are those of a generic airport, so the absolute size of an effect is specific to the model, while its direction and its rank among the scenarios are not. None of these limits is inherent to the method: each disappears when the corresponding data become available.
+
+\section{Summary}
+
+The evaluation answers RQ1 with a calibration of carrier-specific service times against linked A-CDM targets, RQ2 with the propagation channels, the critical branches by carrier class and stand type and the process-mining analysis, and RQ3 with paired 41-day comparisons of process, capacity and allocation scenarios. The main next steps are pressure-dependent service times and BER's actual infrastructure.

@@ -1,0 +1,7 @@
+﻿id,flight_id,dep_airport_iata,dep_airport_icao,std,flight_number,flight_number_trim,callsign,aircraft_reg,dest_iata,dest_icao,eobt,ctot,tobt,tsat,atot,parking_pos,taxitime,runway,flight_status,gates,airline_iata,airline_icao,aircraft_iata,aircraft_icao,deicing_request,eczt,edit,deicing_pos,sid,verified,updated_from_import_income,updated_at,flight_status_label
+9179985,501660464,BER,EDDB,2026-11-01 05:00:00,EW 1150,EW1150,EWG1M,,DXB,OMDB,,,,,,,10,,XLD,,EW,EWG,32N,A20N,,,0,,,True,91436076,2026-11-01 06:01:32,Canceled
+9180039,501667743,BER,EDDB,2026-11-01 05:55:00,EW 6952,EW6952,EWG6952,,PMI,LEPA,,,,,,,10,,XLD,,EW,EWG,32A,A320,,,0,,KISUC1N,True,91437537,2026-11-01 06:55:54,Canceled
+9180879,501660939,BER,EDDB,2026-11-01 11:40:00,6K  806,6K806,TAH806,,AYT,LTAI,,,,,,,10,,XLD,,6K,TAH,73H,B738,,,0,,,True,91448691,2026-11-01 12:41:23,Canceled
+9183873,501669598,BER,EDDB,2026-11-01 14:30:00,EJU9040,EJU9040,EJU9040,,SOF,LBSF,,,,,,,10,,XLD,,EC,EJU,32A,A320,,,0,,,True,91455567,2026-11-01 15:30:33,Canceled
+9185433,501670291,BER,EDDB,2026-11-01 17:05:00,HCR 010,HCR010,HCR10,SERMA,FAB,EGLF,2026-11-01 17:05:00,,,,,W5,10,,SKD,GAT,,HCR,CL3,CL30,,,0,,SUKIP4K,True,91446060,2026-11-01 11:30:34,Scheduled
+9184905,501660331,BER,EDDB,2026-11-01 20:40:00,EJU4634,EJU4634,EJU31DR,,CDG,LFPG,,,,,,,10,,XLD,,EC,EJU,320,A320,,,0,,KISUC1N,True,91468992,2026-11-01 22:56:08,Canceled

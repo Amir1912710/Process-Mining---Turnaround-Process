@@ -1,0 +1,22 @@
+\chapter{Related work and methodological basis}
+\label{ch:related}
+
+\section{Turnaround dependencies and service timing}
+Schultz et al. describe stochastic turnaround processes and the role of the critical path in disturbance propagation \cite{schultz2012dynamic}. This supports representing concurrent ground services and their synchronization explicitly. It does not imply that a duration distribution fitted elsewhere transfers unchanged to BER.
+
+This study transfers reference assumptions for narrowbody cleaning, fueling and boarding from that work. Their implementation is detailed in Chapter~\ref{ch:methods}. These are literature-informed scenario inputs, not estimates recovered from the Berlin boundary intervals. No universal low-cost versus full-service multiplier is inferred from those observations.
+
+Schultz's later study develops and evaluates a calibrated stochastic passenger-boarding model \cite{schultz2018boarding}. It motivates treating boarding as an important and variable turnaround component. The present implementation uses a passenger-dependent mean reference; it does not reproduce that detailed stochastic boarding model or its empirical validation.
+
+\section{A-CDM and available observations}
+EUROCONTROL describes A-CDM as a collaboration and information-sharing approach involving airport operators, aircraft operators, ground handlers, air traffic control and the Network Manager \cite{eurocontrol_acdm}. This provides the operational context for milestone-based analysis. The current dataset's actual field coverage is a separate empirical question. In particular, A-CDM departure references do not provide internal service labels merely because the broader A-CDM concept includes turnaround coordination.
+
+The OpenSky REST API documents aircraft identifiers, first/last observation timestamps and estimated airports for flight records \cite{opensky_rest}. These fields enable candidate pairing and boundary-proxy construction. They are not direct observations of stand arrival or departure. The thesis therefore reports discrepancies against an airborne-boundary proxy separately from simulated in-block to off-block duration.
+
+\section{Object-centric simulation and analysis}
+OCEL 2.0 represents events, objects, typed attributes and relationships \cite{ocel2}. In the study, the executable OCPN model generates the internal events and the exported OCEL preserves their object associations. Promenade is used for exploratory object-centric views and timing analysis \cite{promenade}. Those analyses describe generated behavior; they do not independently validate the assumptions that generated it.
+
+OCPN Studio provides the modeling environment and the extended airport example \cite{ocpn_studio}. The official CPNsim runtime supports simulation of colored Petri nets \cite{cpnsim}. The study runs the installed version 0.6.2 through its WebAssembly interface. Software citations document the tools used and are distinct from empirical evidence about BER operations.
+
+\section{Position of the present work}
+The contribution lies in connecting a traceable empirical demand cohort to an existing object-centric model and making the resulting analyses auditable. It combines evidence separation, case-definition diagnostics, repeated timing/policy comparisons and resource sensitivity. It does not claim a replication of a particular LAX study, a JFK evaluation, a trained machine-learning duration predictor or empirical conformance checking: these have not been completed in the reported work.

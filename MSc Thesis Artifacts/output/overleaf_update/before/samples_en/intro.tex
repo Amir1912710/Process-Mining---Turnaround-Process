@@ -1,0 +1,53 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+Aircraft turnaround is the period between an aircraft arriving at its parking position and leaving for its next flight. During this time, ground teams unload baggage, clean and refuel the aircraft, and prepare it for boarding. Some activities happen in parallel, while others must wait. Flights also share resources, so a cleaning team or pushback tug may still be serving another aircraft when needed. \\
+
+This study focuses on understanding how these activities and shared resources affect turnaround performance. My aim is to develop a data-driven, object-centric simulation that represents the aircraft, its ground services, and the resources involved. This approach links operational events to several objects, helping to show where waiting happens and how delays may affect other activities. \\
+
+OCPN Studio will be used to model the turnaround process and run the simulation. The model will represent activities such as passenger deboarding, cleaning, refuelling, boarding, and pushback. Aircraft, gates, ground teams, and service vehicles will be represented as interacting objects. Their availability and the order of activities will determine when each service can start and when an aircraft is ready to depart. \\
+
+Available operational data from A-CDM Application will support the preparation and calibration of the model. Python will be used to clean the data, connect arrival and departure records, and prepare relevant features. Where sufficient observations are available, regression or machine learning will help estimate durations using factors such as airline, aircraft type, and gate position. Generated values and modelling assumptions will be identified separately from verified observations. \\
+
+Simulation events will be exported in the Object-Centric Event Log (OCEL) 2.0 format. Object-centric process mining will be used to examine activity sequences, waiting times, and resource interactions. Conformance checking will be applied where suitable event data are available to assess whether recorded behaviour follows the process model. \\ 
+
+The simulation will also support what-if experiments involving resource availability, service priorities, and aircraft delays. Turnaround duration, departure delay, waiting time, and resource utilisation will be used to assess the results. The goal is to identify bottlenecks and understand which operational changes could help aircraft complete their turnaround more efficiently.
+
+\section{Background}
+
+Airport operations involve several teams working together to prepare aircraft for their next flights. Each team has its own responsibilities, but the completion of one task may affect when another task can begin. For example, boarding depends on the aircraft being prepared for passengers, while departure preparation depends on the required ground services being completed. Understanding these connections is necessary when analysing turnaround performance.
+
+Airport Collaborative Decision Making (A-CDM) supports coordination by sharing operational information between airport partners. It links an incoming flight to its following departure and tracks progress through important events called milestones. These milestones help partners update their expectations as the flight moves through arrival, turnaround, and departure.
+
+For this study, milestone timestamps provide a basis for examining the time between different stages of airport operations. However, a milestone interval does not always represent the duration of one ground activity. Several activities may take place within the same interval, and some waiting periods may not be recorded separately. Therefore, the available data must be examined carefully before they are used to estimate activity durations or explain delays.
+
+An object-centric approach provides a way to represent the different entities involved in this process. Instead of examining each flight separately, the model can also follow the resources that serve several aircraft. For example, a pushback activity involves both an aircraft and a tug. Keeping these connections makes it possible to examine how the availability of a shared resource affects different flights. OCEL 2.0 supports recording events together with their related objects and relationships.
+
+Within this thesis, these ideas will be brought together in an OCPN Studio simulation. Available operational observations will guide the model, while assumptions will describe activities and resource behaviour that cannot be measured directly. This provides a basis for studying turnaround performance while keeping the limits of the available data clear.
+
+
+\section{Motivation}
+
+My motivation for this study is to understand what happens behind an aircraft’s departure delay. A final delay value shows the outcome, but it does not explain which activities took longer, where the aircraft waited, or whether another flight was using a required resource. I want to examine these connections and understand how individual problems may develop into wider operational delays.
+
+Using the same duration assumptions for every turnaround may overlook differences between flights. Aircraft type, airline, and operating conditions may influence the time required to prepare an aircraft. Where the available data support these differences, they should be considered in the simulation. This motivates the use of operational observations to calibrate the model and assess how well it represents recorded behaviour.
+
+Another motivation is to investigate how shared resources influence performance. Adding more resources may help in some situations, while changing service priorities may help in others. Simulation allows these alternatives to be explored under defined conditions. Comparing the results can help identify where additional capacity is useful and where delays are mainly caused by activity dependencies.
+
+The study also connects my interests in data science and process mining. Data preparation and duration estimation will support the simulation, while object-centric event logs will help analyse its behaviour. My aim is to develop a model whose results can be explained through the activities, objects, and resource interactions represented within it.
+
+Finally, I want the study to provide a clear basis for further investigation. Verified observations, generated values, and modelling assumptions will be identified separately. This distinction will help explain which findings are supported by operational data and which depend on the simulation design.
+
+\section{Problem Statement}
+
+Aircraft turnaround involves connected activities and shared resources, but the available A-CDM data do not record every ground service or resource assignment. Milestone timestamps show flight progress, but they do not always explain whether an aircraft was receiving a service or waiting. Fixed activity durations may also overlook differences between flights and operating conditions. The problem addressed in this thesis is how to use A-CDM data to calibrate an object-centric turnaround simulation in OCPN Studio while handling missing information through clearly stated assumptions. The model will be assessed against available observations to understand how well it represents turnaround performance. It will then support experiments to identify bottlenecks and evaluate how resource availability and service priorities affect waiting times and departure delays.
+
+\section{Research Questions}
+Building on these challenges, we define the following Research Questions (RQ) to guide
+our approach:\\
+RQ1: How can A-CDM Data be used to calibrate activity durations and temporal dependencies in an OCPN Simulation?\\
+RQ2: How do dependencies between aircraft, stands, and shared ground-service resources contribute to waiting times and delay propagation at terminal stands and remote stands in an OCPN simulation?\\
+RQ3: How can the calibrated simulation be used to evaluate resource-allocation strategies and identify configurations that reduce turnaround delays and resource contention?
+
+
+% Aliquam suscipit dignissim tempor. Praesent tortor libero, feugiat et tellus porttitor, malesuada eleifend felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus \cite{cormen2009algorithms,krasner1988mvc}. Nullam eleifend imperdiet lorem, sit amet imperdiet metus pellentesque vitae. Donec nec ligula urna. Aliquam bibendum tempor diam, sed lacinia eros dapibus id. Donec sed vehicula turpis. Aliquam hendrerit sed nulla vitae convallis. Etiam libero quam, pharetra ac est nec, sodales placerat augue. \citeauthor{dijkstra1979goto} praesent eu consequat purus \cite{dijkstra1979goto}. 

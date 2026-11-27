@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-08",
+  "scenario": "cleaning_6_no_curfew",
+  "replication": 2,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\models\\BER_MSc_2026-11-08_cleaning_6_no_curfew.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\controlled_study_v21\\runs\\2026-11-08_cleaning_6_no_curfew_r02",
+  "model_sha256": "aed0007f27baa52b0761d1b74c91b2795ae60f398bd24596f1261a0555e1b5a5",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 11660,
+  "cases": 238,
+  "complete": true,
+  "elapsed_seconds": 28.7632416,
+  "mean_block_min": 59.04292717086836,
+  "median_block_min": 56.675,
+  "p90_block_min": 71.56,
+  "mean_fuel_wait_min": 1.2166666666666668,
+  "p90_fuel_wait_min": 3.7516666666666683,
+  "mean_clean_wait_min": 0.17429971988795517,
+  "mean_tug_wait_min": 0.017717086834733893,
+  "long_approval_cases": 0,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.8403361344537815
+}

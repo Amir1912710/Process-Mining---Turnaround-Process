@@ -1,0 +1,54 @@
+\chapter{Discussion and Threats to Validity}
+\label{ch:discussion}
+\section{Primary and Auxiliary Evidence}
+The primary empirical findings use 1,322 A-CDM departure records, of which 1,286 contain eligible ATOT. OpenSky provides 1,257 unique departure correspondence candidates. The 10,940 aircraft-pair rows and all previously reported OCPN/Promenade results belong to the separate auxiliary reconstruction. Their numbers and limitations remain available in the appendices. No model-only result is relabeled as an observed A-CDM service duration.
+
+
+This chapter explains what the results contribute to the research questions. We then discuss the inherited policy and the main limitations of the data, model and analysis. The aim is to distinguish findings supported by the experiment from conclusions that still require further observations or experiments.
+
+\section{Answers supported by the current evidence}
+\subsection{RQ1: data-informed calibration}
+The auxiliary OpenSky observations supported a finite arrival schedule and candidate aircraft pairing. The primary A-CDM collection supports departure targets, actual takeoffs and selected flight attributes, but does not supply measured inbound release times. They do not provide enough information to estimate cleaning, fueling or boarding durations separately. Several activities and waiting periods can occur within the same boundary interval. We can therefore use the data to construct demand, but the internal services still require literature inputs and assumptions. Service start/end records, passenger counts and reliable block timestamps would be needed for stronger activity-level calibration.
+
+\subsection{RQ2: dependencies, queues and propagation}
+The following dependency findings concern the auxiliary simulation. The new departure-only empirical log cannot by itself recover ground-service queues or full turnaround propagation.
+
+Object-linked logs show how shared resource availability and parallel branches contribute to simulated waiting and readiness. Fuel dispatch has the clearest local queue in the initial runs, yet cabin/boarding is usually the final handling branch. The capacity intervention supports the interpretation that removing fuel waiting can have limited effect on final completion because work overlaps.
+
+The answer to RQ2 remains partial. Aircraft identities and reusable resources allow contention across turnarounds, but we have not measured how an imposed delay passes from one flight to another. We also have not isolated differences between terminal and remote stands. Such a comparison requires reliable stand classifications and explicit assumptions for bus and access time. It must also control the demand and initial resource state so that the source of a difference can be explained.
+
+\subsection{RQ3: conditional resource evaluation}
+The capacity scenarios remain conditional pilot experiments using auxiliary demand. We have not recalibrated them from the five A-CDM departure snapshots.
+
+Repeated capacity comparisons demonstrate how to evaluate local queues alongside overall turnaround and uncertainty. The findings favor reporting both levels rather than selecting a configuration using queue length alone. However, only two capacity alternatives were tested, with assumed resources and no cost objective. The current evidence cannot establish an optimal resource configuration or real staffing recommendation.
+
+\section{Policy and clock semantics}
+BER's official guidance describes a core night-flight restriction from 00:00 to 05:00 and constraints in the adjacent 23:00--24:00 and 05:00--06:00 windows \cite{ber_night}. The inherited model instead applies its helper before pre-boarding and pushback clearance. Those applications do not constitute a complete operational movement-eligibility model.
+
+The installed CPNsim runtime was probed at epoch \texttt{2026-11-01T00:00:00Z}: its hour helper returns zero, while Berlin local hour is one. Engine source also uses UTC \cite{cpnsim}. Thus the inherited 00:00--05:00 condition corresponds to 01:00--06:00 local time on both study dates. This mismatch is confirmed, rather than a possible explanation inferred solely from plotted tails.
+
+The controlled experiment deliberately retains the inherited implementation in its policy cells and disables the entire helper in the diagnostic cells. Neither is presented as a verified BER replacement. A subsequent version must use Europe/Berlin time, including daylight-saving changes across the full collection, and distinguish movement restrictions, shoulder windows, exceptions and independent cabin work. The present analysis does not make a legal-compliance determination.
+
+\section{Data and construct validity}
+ICAO24 adjacency provides candidate rotations rather than certified ground movements. Missing flights, airport-estimation errors or identifier issues may affect pairing. OpenSky observation boundaries and simulated block milestones are different constructs. A-CDM reference matches and a timezone hypothesis do not remove these differences. The observed-proxy discrepancies should therefore be reported without calling them block-time prediction errors.
+
+Long stays, planned departure buffers and overnight parking are not modeled. The selected cohort also omits competing traffic, and every daily run begins with free resources. These choices can materially alter queues. Fictitious geometry, passenger load, PRM demand, carrier class, optional services and non-narrowbody functions further restrict transfer to real BER operations.
+
+\section{Statistical and analytical validity}
+The confidence intervals describe variation across five replications under fixed model assumptions. They do not include uncertainty in passenger loads, capacities or the process structure. The runs are unpaired because the runtime does not expose seed control. Repeating the procedure will therefore generate new stochastic outputs. We also report several exploratory comparisons without a multiple-comparison adjustment. An interval containing zero is not proof of no effect, while an interval that only narrowly excludes zero should be interpreted cautiously.
+
+The timing comparison changes cleaning, fueling and boarding together. It therefore cannot determine which individual service explains the difference. It also cannot separate the effect of a changed mean duration from that of changed variability. November 8 is a later-date scenario with no outcome-based tuning in this pilot, but is not a completed held-out predictive validation. Formal empirical conformance, contact/remote stratification, resource time utilization, cost analysis and external replication remain incomplete.
+
+The scope of an extracted execution also affects interpretation. A shared resource connects several rotations, so an expanded graph can include events outside the focal turnaround. We use one-to-one milestone pairs to calculate block duration and inspect the graph separately. This prevents a long expanded execution from being reported as a measured turnaround interval.
+
+\section{Relation to the Trace-Reconstruction Study}
+Tkacenko's evaluation shows that traces selected using total turnaround boundaries can still disagree with observed internal activity durations \cite[Section~6.2]{tkacenko2026}. Our results identify a related limitation from another direction: a simulated median close to an observed proxy median can coexist with a large mean discrepancy. In both cases, an aggregate duration provides only limited evidence about the internal process.
+
+The evaluation settings are different. Tkacenko uses limited activity-level ground truth and temporal acceptance filtering, whereas our current Berlin analysis has no comparable internal service observations. Her state-space checks also concern a time-neutralized model abstraction. Our completed-run checks do not reproduce that analysis or establish the same properties. Keeping these differences explicit avoids transferring validation claims between studies.
+
+\section{Remaining Work Before Stronger Conclusions}
+The next model version should correct local-time movement policy, resolve aircraft-type candidates and distinguish operational turnarounds from long stays. Evaluation should then use independently selected dates and matching observable quantities, without forcing observed departures. RQ2 additionally requires terminal/remote stratification and controlled delay-propagation experiments. RQ3 needs broader input/capacity sensitivity and a declared operational or cost objective. These tasks should precede claims of validated calibration or optimal allocation.
+
+
+\section{Summary}
+The completed pilot provides evidence about dependencies and assumption sensitivity within the adapted model. Its main limits concern missing service observations, incomplete operational context and the inherited policy. Further work should address these limits before extending the findings to actual BER operations. The distinction between technical completion and empirical validity remains central to that evaluation.

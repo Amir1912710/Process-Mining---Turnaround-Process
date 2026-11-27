@@ -1,0 +1,6 @@
+{
+  "verified_pairs": 11203,
+  "verified_core_pairs": 10940,
+  "unique_reference_candidates": 897,
+  "checks": "source aircraft/airport/time links, interval arithmetic, no invented actual timestamps, cohort membership, reference uniqueness, coverage and departure reconciliation"
+}

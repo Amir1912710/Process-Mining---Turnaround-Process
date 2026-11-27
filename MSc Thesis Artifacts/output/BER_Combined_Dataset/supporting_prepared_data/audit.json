@@ -1,0 +1,46 @@
+{
+  "requested_start": "2026-10-01",
+  "requested_end": "2026-11-13",
+  "date_basis": "Europe/Berlin",
+  "unique_movement_records": 22635,
+  "movement_counts": {
+    "arrival": 11316,
+    "departure": 11319
+  },
+  "support_boundary_movement_records": 1104,
+  "unusable_movement_records": 0,
+  "candidate_proxy_intervals": 11203,
+  "core_proxy_intervals": 10940,
+  "unpaired_departures": 116,
+  "exact_landing_to_takeoff_intervals": 0,
+  "acdm_finalized_reference_records": 810,
+  "acdm_reference_records_including_supplemental": 1230,
+  "acdm_observed_takeoff_records": 1204,
+  "acdm_finalized_crosscheck_status": {
+    "unique_callsign_time_candidate_not_identity_verification": 767,
+    "no_actual_takeoff": 26,
+    "no_correspondence_within_30min": 17
+  },
+  "acdm_crosscheck_status": {
+    "unique_callsign_time_candidate_not_identity_verification": 897,
+    "no_actual_takeoff": 26,
+    "no_correspondence_within_30min": 307
+  },
+  "acdm_unique_candidate_timezone_hypotheses": {
+    "ACDM_is_UTC": 897
+  },
+  "intervals_with_candidate_acdm_reference": 858,
+  "acdm_unique_candidate_median_delta_min": -0.15,
+  "pair_review_flags": {
+    "consecutive_arrivals_coverage_or_identity_review": 32,
+    "over_24h_parking_or_missing_rotation_review": 219,
+    "incomplete_day_coverage": 14,
+    "sparse_day_coverage_review": 6,
+    "under_15min_review": 2,
+    "source_record_flag": 1
+  },
+  "dates_with_both_queries_successful": 42,
+  "dates_without_low_count_or_missing_query_flags": 40,
+  "build_script_sha256": "f933d0b44e0cb1014c3fdc044336d8dbf2d3cff814fd8dc124f6d5cb19f7d534",
+  "warning": "Core means no listed pairing review flags, not ground-truth landing/block times or verified full coverage."
+}

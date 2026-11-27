@@ -1,0 +1,95 @@
+{
+  "days": [
+    {
+      "day": "2026-11-01",
+      "records": 289,
+      "atot_present": 283
+    },
+    {
+      "day": "2026-11-05",
+      "records": 257,
+      "atot_present": 251
+    },
+    {
+      "day": "2026-11-08",
+      "records": 264,
+      "atot_present": 250
+    }
+  ],
+  "total_rows": 810,
+  "unique_id": 810,
+  "missing": {
+    "std": 0,
+    "tobt": 27,
+    "tsat": 27,
+    "atot": 26,
+    "ctot": 644,
+    "aircraft_reg": 11,
+    "parking_pos": 13,
+    "taxitime": 0,
+    "runway": 21
+  },
+  "intervals": {
+    "tsat_minus_tobt": {
+      "n": 783,
+      "mean": 1.35,
+      "median": 0.0,
+      "p10": 0.0,
+      "p90": 5.0,
+      "min": -0.42,
+      "max": 57.0,
+      "negative": 7
+    },
+    "atot_minus_tsat": {
+      "n": 782,
+      "mean": 12.97,
+      "median": 12.68,
+      "p10": 7.48,
+      "p90": 19.05,
+      "min": -22.38,
+      "max": 44.82,
+      "negative": 1
+    },
+    "atot_minus_tobt": {
+      "n": 782,
+      "mean": 14.32,
+      "median": 13.46,
+      "p10": 7.97,
+      "p90": 21.13,
+      "min": -22.38,
+      "max": 63.62,
+      "negative": 1
+    },
+    "tobt_minus_std": {
+      "n": 783,
+      "mean": 9.66,
+      "median": 0.0,
+      "p10": -10.0,
+      "p90": 33.62,
+      "min": -145.0,
+      "max": 215.0,
+      "negative": 183
+    },
+    "atot_minus_ctot": {
+      "n": 166,
+      "mean": 1.47,
+      "median": 0.97,
+      "p10": -3.88,
+      "p90": 7.45,
+      "min": -5.28,
+      "max": 10.25,
+      "negative": 66
+    }
+  },
+  "taxitime_reported": {
+    "n": 810,
+    "mean": 10.32,
+    "median": 10.0,
+    "min": 7.0,
+    "max": 31.0
+  },
+  "ctot_with_atot_window": {
+    "n": 166,
+    "within_minus5_plus10": 163
+  }
+}

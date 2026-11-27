@@ -1,0 +1,16 @@
+scenario,bin,n,observed,simulated
+carrier,<=30,85,0.988,1.0
+carrier,30-45,87,0.54,0.782
+carrier,45-60,213,0.268,0.385
+carrier,60-90,154,0.227,0.149
+carrier,>90,50,0.1,0.02
+literature,<=30,85,0.988,1.0
+literature,30-45,87,0.54,0.931
+literature,45-60,213,0.268,0.676
+literature,60-90,154,0.227,0.286
+literature,>90,50,0.1,0.0
+original,<=30,85,0.988,1.0
+original,30-45,87,0.54,0.989
+original,45-60,213,0.268,0.732
+original,60-90,154,0.227,0.383
+original,>90,50,0.1,0.08

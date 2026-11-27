@@ -1,0 +1,9 @@
+{
+  "replications_completed": 60,
+  "scenario_date_cells": 12,
+  "turnaround_executions": 15270,
+  "all_completed": true,
+  "all_model_hashes_match": true,
+  "all_case_counts_unique_and_complete": true,
+  "baseline_original_sha256": "b83e78fbdaa2289c406e359cffc080935bd3ba586bae2f6a1858c77fa8f379d2"
+}

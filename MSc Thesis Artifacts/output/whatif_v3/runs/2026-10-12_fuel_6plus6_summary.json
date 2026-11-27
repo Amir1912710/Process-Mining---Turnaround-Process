@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-12",
+  "scenario": "fuel_6plus6",
+  "replication": 1,
+  "model": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v3\\models\\BER_MSc_2026-10-12_fuel_6plus6.ocpn",
+  "output": "C:\\Users\\amira\\Documents\\ChatGPT\\Thesis Project\\output\\whatif_v3\\runs\\2026-10-12_fuel_6plus6",
+  "model_sha256": "9fa7e7e367d8544758d167843d8c6e927efe0c5e41f5bd2a65759e909147a3b4",
+  "runtime": "cpnsim 0.6.2",
+  "steps": 13758,
+  "cases": 279,
+  "complete": true,
+  "elapsed_seconds": 39.4258255,
+  "mean_block_min": 53.03924731182799,
+  "median_block_min": 50.71666666666667,
+  "p90_block_min": 68.74000000000001,
+  "mean_fuel_wait_min": 0.16583034647550773,
+  "p90_fuel_wait_min": 0,
+  "mean_clean_wait_min": 0.0008363201911589009,
+  "mean_tug_wait_min": 0.013859020310633213,
+  "long_approval_cases": 0,
+  "long_preboard_cases": 0,
+  "cabin_last_share": 0.8279569892473119
+}
